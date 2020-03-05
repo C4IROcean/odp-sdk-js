@@ -1,4 +1,4 @@
-import * as types from "../types/timeseries";
+import * as types from "./types/timeseries";
 import { DatapointsGetAggregateDatapoint, DatapointsGetDatapoint, TimeSeriesList } from "@cognite/sdk";
 
 export const converter = (
