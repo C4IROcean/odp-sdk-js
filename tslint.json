@@ -1,0 +1,18 @@
+{
+	"extends": "tslint:latest",
+	"rules": {
+		"prefer-conditional-expression": false,
+		"object-literal-key-quotes": [true, "as-needed"],
+		"ordered-imports": [false],
+		"object-literal-sort-keys": false,
+		"variable-name": [false],
+		"array-type": [true, "generic"],
+		"indent": [true, "tabs"],
+		"member-ordering": [
+			true,
+			{
+				"order": "fields-first"
+			}
+		]
+	}
+}
