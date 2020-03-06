@@ -20,6 +20,9 @@ export const getSeaSurfaceTemperature = async (
 		limit: 100,
 	};
 	const timeseries = await client.timeseries.search(query);
-	const dataPoints = await timeseries.getAllDatapoints({ limit: 100 });
-	return converter(timeseries, dataPoints);
+	const [assets, dataPoints] = await Promise.all([
+		timeseries.getAllAssets(),
+		timeseries.getAllDatapoints({ limit: 100 }),
+	]);
+	return converter(timeseries, dataPoints, assets);
 };

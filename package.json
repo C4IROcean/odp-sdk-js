@@ -1,8 +1,9 @@
 {
 	"name": "odp-cognite",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
-	"main": "index.js",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"scripts": {
 		"build": "npm run format-code && npm run tslint && tsc && npm test",
 		"build:ci": "npm run tslint && tsc --sourceMap false",
