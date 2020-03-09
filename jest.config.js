@@ -1,5 +1,5 @@
 process.env.COGNITE_PROJECT = "odp";
-process.env.COGNITE_KEY = "key";
+process.env.COGNITE_KEY = "NWVhODFiNGUtNzgwMy00MjA1LWI2MDctYzExZjcxOTk2OWQ0";
 
 module.exports = {
 	testEnvironment: "node",
