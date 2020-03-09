@@ -14,7 +14,11 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
-
+- task: npmAuthenticate@0
+  inputs:
+    workingFile: '.npmrc'
+  displayName: "Npm authenticate"
+  
 - script: |
     npm install
     npm run build
