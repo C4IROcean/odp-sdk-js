@@ -1,6 +1,6 @@
 {
 	"name": "odp-cognite",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
