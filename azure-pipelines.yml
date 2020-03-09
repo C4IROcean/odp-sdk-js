@@ -18,5 +18,4 @@ steps:
 - script: |
     npm install
     npm run build
-    npm publish
-  displayName: 'npm install, build and publish'
+  displayName: 'npm install and build'
