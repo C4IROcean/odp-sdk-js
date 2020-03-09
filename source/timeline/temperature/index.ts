@@ -31,6 +31,14 @@ export const getSeaSurfaceTemperature = async (
 	return converter(timeseries, dataPoints, assets);
 };
 
+/**
+ * Get the latest sea surface temperature for a given location, zoom level and source. Returns a list of ITimeSeries
+ *
+ * @param lat
+ * @param long
+ * @param zoomLevel
+ * @param source
+ */
 export const getLatestSeaSurfaceTemperature = async (
 	lat,
 	long,
