@@ -1,18 +1,18 @@
-import { getClient, converter } from "../../";
+import { getClient, converter } from "../..";
 import * as types from "../../types/timeseries";
 import { TimeSeriesSearchDTO } from "@cognite/sdk";
 
 export const getSeaSurfaceTemperature = async (
 	lat,
 	long,
-	zoomLevel,
+	zoomLevel = "1",
 	timestamp?,
 	source?,
 ): Promise<Array<types.ITimeSeries>> => {
 	const client = getClient();
 	const query: TimeSeriesSearchDTO = {
 		filter: {
-			unit: "celsius",
+			unit: types.UnitType.CELSIUS,
 			metadata: {
 				geo_key: zoomLevel,
 			},

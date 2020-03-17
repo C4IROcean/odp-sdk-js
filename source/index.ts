@@ -1,5 +1,5 @@
 import { getClient } from "./client";
 import { converter } from "./converter";
-import * as timelines from "./timeline";
+import * as timeseries from "./timeseries";
 
-export { getClient, converter, timelines };
+export { getClient, converter, timeseries };
