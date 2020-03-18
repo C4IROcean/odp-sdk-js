@@ -41,15 +41,15 @@ The SDK is written in native typescript, so no extra types needs to be defined.
 Get temperatures for a given provider
 
 ```js
-import { ODPClient } from "@odp/sdk";
+import { ODPClient, UnitType, ITimeSeriesFilter } from "@odp/sdk";
 
 async function quickstart() {
 	const odp = new ODPClient({ appId: "YOUR APPLICATION NAME" });
 	odp.loginWithOAuth({
 		project: "odp",
 	});
-	const filter: types.timeseries.ITimeSeriesFilter = {
-		unit: types.timeseries.UnitType.CELSIUS,
+	const filter: ITimeSeriesFilter = {
+		unit: UnitType.CELSIUS,
 		provider: ["simulated"],
 	};
 	const temperatures = await odp.timeSeries.temperature.get(filter);
@@ -60,7 +60,7 @@ quickstart();
 ### Backend
 
 ```js
-const { ODPClient } = require("@odp/sdk");
+const { ODPClient, UnitType, ITimeSeriesFilter } = require("@odp/sdk");
 
 async function quickstart() {
 	const client = new ODPClient({ appId: "YOUR APPLICATION NAME" });
@@ -69,8 +69,8 @@ async function quickstart() {
 		apiKey: "YOUR_SECRET_API_KEY",
 	});
 
-	const filter: types.timeseries.ITimeSeriesFilter = {
-		unit: types.timeseries.UnitType.CELSIUS,
+	const filter: ITimeSeriesFilter = {
+		unit: UnitType.CELSIUS,
 		provider: ["simulated"],
 	};
 	const temperatures = await odp.timeSeries.temperature.get(filter);
