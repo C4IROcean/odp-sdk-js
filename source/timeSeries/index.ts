@@ -1,5 +1,5 @@
 import { Temperature } from "./temperature";
-import { default as ODPClient } from "../ODPClient";
+import { ODPClient, ITimeSeries, ITimeSeriesFilter, TimeSeriesType, UnitType, INumberFilter, IBoundingBox } from "../";
 import {
 	DatapointsGetAggregateDatapoint,
 	DatapointsGetDatapoint,
@@ -7,7 +7,6 @@ import {
 	AssetList,
 	TimeSeriesSearchDTO,
 } from "@cognite/sdk";
-import * as types from "../types/timeseries";
 
 export class TimeSeries {
 	private _client: ODPClient;
@@ -33,8 +32,8 @@ export class TimeSeries {
 		timeseries: TimeSeriesList,
 		dataPoints: Array<DatapointsGetAggregateDatapoint> | Array<DatapointsGetDatapoint>,
 		assets: AssetList,
-	): Array<types.ITimeSeries> => {
-		const returnValue: Array<types.ITimeSeries> = [];
+	): Array<ITimeSeries> => {
+		const returnValue: Array<ITimeSeries> = [];
 		for (const dp of dataPoints) {
 			const ts = timeseries.find((item) => item.id === dp.id);
 			const at = assets.find((item) => item.id === ts.assetId);
@@ -49,8 +48,8 @@ export class TimeSeries {
 					depth: parseInt(ts.metadata.geo_dept, 10),
 					zoomLevel: parseInt(ts.metadata.geo_key, 10),
 				},
-				type: types.TimeSeriesType.TEMPERATURE,
-				unit: types.UnitType.CELSIUS,
+				type: TimeSeriesType.TEMPERATURE,
+				unit: UnitType.CELSIUS,
 				id: ts.id,
 				externalId: ts.externalId,
 				assetId: at.id,
@@ -62,7 +61,7 @@ export class TimeSeries {
 	/**
 	 * Build cognite query from a ODP filter
 	 */
-	public queryBuilder = (filter: types.ITimeSeriesFilter): Array<TimeSeriesSearchDTO> => {
+	public queryBuilder = (filter: ITimeSeriesFilter): Array<TimeSeriesSearchDTO> => {
 		const queries: Array<TimeSeriesSearchDTO> = [];
 		const baseQuery: TimeSeriesSearchDTO = {
 			filter: {
@@ -103,13 +102,13 @@ export class TimeSeries {
 		return queries;
 	};
 
-	private depthExpander = (depthFilter: types.INumberFilter) => {
+	private depthExpander = (depthFilter: INumberFilter) => {
 		if (!depthFilter || (!depthFilter.max && !depthFilter.min)) {
 			return [];
 		}
 	};
 
-	private boundingBoxExpander = (boundingBoxFilter: types.IBoundingBox) => {
+	private boundingBoxExpander = (boundingBoxFilter: IBoundingBox) => {
 		if (!boundingBoxFilter) {
 			return [];
 		}

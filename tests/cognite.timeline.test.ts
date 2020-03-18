@@ -1,5 +1,4 @@
-import { ODPClient } from "../source/";
-import * as types from "../source/types";
+import { ODPClient, ITimeSeriesFilter, UnitType } from "../source/";
 
 describe("temperature", () => {
 	let odp: ODPClient;
@@ -16,24 +15,20 @@ describe("temperature", () => {
 	});
 
 	test("get readings for a specific region", async () => {
-		const filter: types.timeseries.ITimeSeriesFilter = {
-			unit: types.timeseries.UnitType.CELSIUS,
+		const filter: ITimeSeriesFilter = {
+			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
 		};
 		const temps = await odp.timeSeries.temperature.get(filter);
-		// tslint:disable-next-line: no-console
-		console.log(JSON.stringify(temps));
 		expect(temps.length).toBe(36);
 	});
 
 	test("get latest readings for a specific region", async () => {
-		const filter: types.timeseries.ITimeSeriesFilter = {
-			unit: types.timeseries.UnitType.CELSIUS,
+		const filter: ITimeSeriesFilter = {
+			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
 		};
 		const temps = await odp.timeSeries.temperature.getLatest(filter);
-		// tslint:disable-next-line: no-console
-		console.log(JSON.stringify(temps));
 		expect(temps.length).toBe(36);
 	});
 });

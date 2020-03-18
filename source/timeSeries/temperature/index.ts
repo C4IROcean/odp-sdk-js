@@ -1,5 +1,4 @@
-import * as types from "../../types/timeseries";
-import { default as ODPClient } from "../../ODPClient";
+import { ODPClient, ITimeSeriesFilter, ITimeSeries } from "../../";
 
 import { TimeSeries } from "../";
 
@@ -15,7 +14,7 @@ export class Temperature {
 	 * Get temperature datapoints from timelines that matches the provided filter
 	 * @param filter
 	 */
-	public get = async (filter: types.ITimeSeriesFilter): Promise<Array<types.ITimeSeries>> => {
+	public get = async (filter: ITimeSeriesFilter): Promise<Array<ITimeSeries>> => {
 		const queries = this._timeSeries.queryBuilder(filter);
 		const timeseries = await this._client.cognite.timeseries.search(queries[0]);
 		const [assets, dataPoints] = await Promise.all([
@@ -29,7 +28,7 @@ export class Temperature {
 	 * Get the latest sea surface temperature for a given location, zoom level and source. Returns a list of ITimeSeries
 	 * @param filter
 	 */
-	public getLatest = async (filter: types.ITimeSeriesFilter): Promise<Array<types.ITimeSeries>> => {
+	public getLatest = async (filter: ITimeSeriesFilter): Promise<Array<ITimeSeries>> => {
 		const queries = this._timeSeries.queryBuilder(filter);
 		const timeseries = await this._client.cognite.timeseries.search(queries[0]);
 		const assets = await timeseries.getAllAssets();

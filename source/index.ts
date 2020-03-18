@@ -1,3 +1,3 @@
 import { default as ODPClient } from "./ODPClient";
-export * from "./types";
+export * from "./types/types";
 export { ODPClient };
