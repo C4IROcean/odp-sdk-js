@@ -63,5 +63,5 @@ export interface ITimeSeriesFilter {
 	zoomLevel?: ZoomLevel;
 	time?: ITimeFilter;
 	provider?: Array<string>;
-	limit: number;
+	limit?: number;
 }

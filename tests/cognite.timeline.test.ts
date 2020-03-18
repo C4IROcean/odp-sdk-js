@@ -1,4 +1,5 @@
 import { ODPClient } from "../source/";
+import * as types from "../source/types";
 
 describe("temperature", () => {
 	let odp: ODPClient;
@@ -15,7 +16,11 @@ describe("temperature", () => {
 	});
 
 	test("get readings for a specific region", async () => {
-		const temps = await odp.timeSeries.temperature.seaSurface("", "", "1", "", "simulated");
+		const filter: types.timeseries.ITimeSeriesFilter = {
+			unit: types.timeseries.UnitType.CELSIUS,
+			provider: ["simulated"],
+		};
+		const temps = await odp.timeSeries.temperature.seaSurface(filter);
 		// tslint:disable-next-line: no-console
 		console.log(JSON.stringify(temps));
 		expect(temps.length).toBe(36);

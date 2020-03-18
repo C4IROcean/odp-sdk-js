@@ -27,7 +27,7 @@ export class TimeSeries {
 	}
 
 	/**
-	 *
+	 * Convert cognite response to a ODP response
 	 */
 	public convert = (
 		timeseries: TimeSeriesList,
@@ -59,24 +59,61 @@ export class TimeSeries {
 		return returnValue;
 	};
 
+	/**
+	 * Build cognite query from a ODP filter
+	 */
 	public queryBuilder = (filter: types.ITimeSeriesFilter): Array<TimeSeriesSearchDTO> => {
 		const queries: Array<TimeSeriesSearchDTO> = [];
-		const query: TimeSeriesSearchDTO = {
+		const baseQuery: TimeSeriesSearchDTO = {
 			filter: {
 				unit: filter.unit,
-				metadata: {
-					geo_key: filter.zoomLevel.toString(),
-				},
+				metadata: {},
 			},
-			limit: filter.limit,
+			limit: filter.limit ? filter.limit : 100,
 		};
 
-		if (filter.provider) {
-			query.filter.metadata.source = filter.provider[0];
+		if (filter.depth) {
+			baseQuery.filter.metadata.geo_key = filter.zoomLevel.toString();
+		}
+		if (filter.time && filter.time.min) {
+			baseQuery.filter.lastUpdatedTime = { min: filter.time.min };
+		}
+		const depths = this.depthExpander(filter.depth);
+		if (depths.length === 1) {
+			baseQuery.filter.metadata.geo_dept = depths[0];
+		} else if (depths.length > 1) {
+			throw new Error("Multiple depths is not supported yet");
+		}
+		const boundingBoxes = this.boundingBoxExpander(filter.boundingBox);
+		if (boundingBoxes.length === 1) {
+			baseQuery.filter.metadata.geo_dept = depths[0];
+		} else if (boundingBoxes.length > 1) {
+			throw new Error("Multiple bounding boxes is not supported yet");
+		}
+
+		if (filter.provider.length === 1) {
+			baseQuery.filter.metadata.source = filter.provider[0];
+		} else if (filter.provider.length > 1) {
+			throw new Error("Multiple providers is not supported yet");
+		}
+
+		if (queries.length === 0) {
+			queries.push(baseQuery);
 		}
 		return queries;
 	};
 
+	private depthExpander = (depthFilter: types.INumberFilter) => {
+		if (!depthFilter || (!depthFilter.max && !depthFilter.min)) {
+			return [];
+		}
+	};
+
+	private boundingBoxExpander = (boundingBoxFilter: types.IBoundingBox) => {
+		if (!boundingBoxFilter) {
+			return [];
+		}
+	};
 	private init = () => {
 		this._temperature = new Temperature(this);
 	};

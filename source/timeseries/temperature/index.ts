@@ -16,7 +16,8 @@ export class Temperature {
 	 * @param
 	 */
 	public seaSurface = async (filter: types.ITimeSeriesFilter): Promise<Array<types.ITimeSeries>> => {
-		const timeseries = await this._client.cognite.timeseries.search(query);
+		const queries = this._timeSeries.queryBuilder(filter);
+		const timeseries = await this._client.cognite.timeseries.search(queries[0]);
 		const [assets, dataPoints] = await Promise.all([
 			timeseries.getAllAssets(),
 			timeseries.getAllDatapoints({ limit: 100 }),
