@@ -7,6 +7,7 @@
 	"scripts": {
 		"build": "npm run format-code && npm run tslint && tsc && npm test",
 		"build:ci": "npm run tslint && tsc --sourceMap false",
+		"docs": "typedoc --options typedoc.js --tsconfig tsconfig.json",
 		"tslint": "tslint -e \"**/*.d.ts\" -e \"node_modules/**/*ts\" \"**/*.ts\"",
 		"format-code": "prettier package.json index.ts \"source/**/*.ts\" --write",
 		"test": "jest"
@@ -33,6 +34,8 @@
 		"ts-jest": "^24.2.0",
 		"ts-node": "^8.5.2",
 		"tslint": "^5.20.1",
-		"typescript": "^3.7.2"
+		"typescript": "^3.7.2",
+		"typedoc": "^0.13.0",
+		"typedoc-plugin-markdown": "^1.1.19"
 	}
 }
