@@ -1,5 +1,5 @@
-import { getClient } from "./client";
 import { converter } from "./converter";
-import * as timeseries from "./timeseries";
+import { TimeSeries } from "./timeSeries";
+import { default as ODPClient } from "./ODPClient";
 
-export { getClient, converter, timeseries };
+export { ODPClient, converter, TimeSeries };

@@ -8,6 +8,7 @@
 		"variable-name": [false],
 		"array-type": [true, "generic"],
 		"indent": [true, "tabs"],
+		"semicolon": [true, "always", "strict-bound-class-methods"],
 		"member-ordering": [
 			true,
 			{
