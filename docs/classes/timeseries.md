@@ -32,7 +32,7 @@
 
 ⊕ **new TimeSeries**(client: *[ODPClient](odpclient.md)*): [TimeSeries](timeseries.md)
 
-*Defined in timeSeries/index.ts:14*
+*Defined in timeSeries/index.ts:13*
 
 **Parameters:**
 
@@ -52,7 +52,7 @@ ___
 
 **client**: 
 
-*Defined in timeSeries/index.ts:21*
+*Defined in timeSeries/index.ts:20*
 
 ___
 <a id="temperature"></a>
@@ -61,7 +61,7 @@ ___
 
 **temperature**: 
 
-*Defined in timeSeries/index.ts:25*
+*Defined in timeSeries/index.ts:24*
 
 ___
 
@@ -71,9 +71,9 @@ ___
 
 ###  convert
 
-▸ **convert**(timeseries: *`TimeSeriesList`*, dataPoints: *`Array`<`DatapointsGetAggregateDatapoint`> \| `Array`<`DatapointsGetDatapoint`>*, assets: *`AssetList`*): `Array`<`types.ITimeSeries`>
+▸ **convert**(timeseries: *`TimeSeriesList`*, dataPoints: *`Array`<`DatapointsGetAggregateDatapoint`> \| `Array`<`DatapointsGetDatapoint`>*, assets: *`AssetList`*): `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
-*Defined in timeSeries/index.ts:32*
+*Defined in timeSeries/index.ts:31*
 
 **Parameters:**
 
@@ -83,22 +83,22 @@ ___
 | dataPoints | `Array`<`DatapointsGetAggregateDatapoint`> \| `Array`<`DatapointsGetDatapoint`> |
 | assets | `AssetList` |
 
-**Returns:** `Array`<`types.ITimeSeries`>
+**Returns:** `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
 ___
 <a id="querybuilder"></a>
 
 ###  queryBuilder
 
-▸ **queryBuilder**(filter: *`types.ITimeSeriesFilter`*): `Array`<`TimeSeriesSearchDTO`>
+▸ **queryBuilder**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Array`<`TimeSeriesSearchDTO`>
 
-*Defined in timeSeries/index.ts:65*
+*Defined in timeSeries/index.ts:64*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| filter | `types.ITimeSeriesFilter` |
+| filter | [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md) |
 
 **Returns:** `Array`<`TimeSeriesSearchDTO`>
 

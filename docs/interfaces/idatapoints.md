@@ -23,7 +23,7 @@
 
 **● timestamp**: *`Date`*
 
-*Defined in types/timeseries.ts:20*
+*Defined in types/types.ts:20*
 
 ___
 <a id="value"></a>
@@ -32,7 +32,7 @@ ___
 
 **● value**: *`number`*
 
-*Defined in types/timeseries.ts:19*
+*Defined in types/types.ts:19*
 
 ___
 

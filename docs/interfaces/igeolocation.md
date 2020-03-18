@@ -23,7 +23,7 @@
 
 **● lan**: *`number`*
 
-*Defined in types/timeseries.ts:46*
+*Defined in types/types.ts:46*
 
 ___
 <a id="lat"></a>
@@ -32,7 +32,7 @@ ___
 
 **● lat**: *`number`*
 
-*Defined in types/timeseries.ts:45*
+*Defined in types/types.ts:45*
 
 ___
 

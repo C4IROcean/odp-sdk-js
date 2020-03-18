@@ -18,7 +18,7 @@
 
 **CELSIUS**:  = "celsius"
 
-*Defined in types/timeseries.ts:28*
+*Defined in types/types.ts:28*
 
 ___
 

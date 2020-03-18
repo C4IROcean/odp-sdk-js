@@ -23,7 +23,7 @@
 
 **● max**: *`Date`*
 
-*Defined in types/timeseries.ts:56*
+*Defined in types/types.ts:56*
 
 ___
 <a id="min"></a>
@@ -32,7 +32,7 @@ ___
 
 **● min**: *`Date`*
 
-*Defined in types/timeseries.ts:55*
+*Defined in types/types.ts:55*
 
 ___
 

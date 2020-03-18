@@ -28,7 +28,7 @@
 
 **● boundingBox**: *[IBoundingBox](iboundingbox.md)*
 
-*Defined in types/timeseries.ts:61*
+*Defined in types/types.ts:61*
 
 ___
 <a id="depth"></a>
@@ -37,7 +37,7 @@ ___
 
 **● depth**: *[INumberFilter](inumberfilter.md)*
 
-*Defined in types/timeseries.ts:62*
+*Defined in types/types.ts:62*
 
 ___
 <a id="limit"></a>
@@ -46,7 +46,7 @@ ___
 
 **● limit**: *`number`*
 
-*Defined in types/timeseries.ts:66*
+*Defined in types/types.ts:66*
 
 ___
 <a id="provider"></a>
@@ -55,7 +55,7 @@ ___
 
 **● provider**: *`Array`<`string`>*
 
-*Defined in types/timeseries.ts:65*
+*Defined in types/types.ts:65*
 
 ___
 <a id="time"></a>
@@ -64,7 +64,7 @@ ___
 
 **● time**: *[ITimeFilter](itimefilter.md)*
 
-*Defined in types/timeseries.ts:64*
+*Defined in types/types.ts:64*
 
 ___
 <a id="unit"></a>
@@ -73,7 +73,7 @@ ___
 
 **● unit**: *[UnitType](../enums/unittype.md)*
 
-*Defined in types/timeseries.ts:60*
+*Defined in types/types.ts:60*
 
 ___
 <a id="zoomlevel"></a>
@@ -82,7 +82,7 @@ ___
 
 **● zoomLevel**: *[ZoomLevel](../enums/zoomlevel.md)*
 
-*Defined in types/timeseries.ts:63*
+*Defined in types/types.ts:63*
 
 ___
 
