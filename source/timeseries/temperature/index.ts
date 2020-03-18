@@ -12,26 +12,10 @@ export class Temperature {
 		this._timeSeries = timeSeries;
 	}
 
-	public seaSurface = async (
-		lat?,
-		long?,
-		zoomLevel = "1",
-		timestamp?,
-		source?,
-	): Promise<Array<types.ITimeSeries>> => {
-		const query: TimeSeriesSearchDTO = {
-			filter: {
-				unit: types.UnitType.CELSIUS,
-				metadata: {
-					geo_key: zoomLevel,
-				},
-			},
-			limit: 100,
-		};
-
-		if (source) {
-			query.filter.metadata.source = source;
-		}
+	/**
+	 * @param
+	 */
+	public seaSurface = async (filter: types.ITimeSeriesFilter): Promise<Array<types.ITimeSeries>> => {
 		const timeseries = await this._client.cognite.timeseries.search(query);
 		const [assets, dataPoints] = await Promise.all([
 			timeseries.getAllAssets(),

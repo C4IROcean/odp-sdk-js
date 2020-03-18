@@ -1,6 +1,12 @@
 import { Temperature } from "./temperature";
 import { default as ODPClient } from "../ODPClient";
-import { DatapointsGetAggregateDatapoint, DatapointsGetDatapoint, TimeSeriesList, AssetList } from "@cognite/sdk";
+import {
+	DatapointsGetAggregateDatapoint,
+	DatapointsGetDatapoint,
+	TimeSeriesList,
+	AssetList,
+	TimeSeriesSearchDTO,
+} from "@cognite/sdk";
 import * as types from "../types/timeseries";
 
 export class TimeSeries {
@@ -20,6 +26,9 @@ export class TimeSeries {
 		return this._temperature;
 	}
 
+	/**
+	 *
+	 */
 	public convert = (
 		timeseries: TimeSeriesList,
 		dataPoints: Array<DatapointsGetAggregateDatapoint> | Array<DatapointsGetDatapoint>,
@@ -48,6 +57,24 @@ export class TimeSeries {
 			});
 		}
 		return returnValue;
+	};
+
+	public queryBuilder = (filter: types.ITimeSeriesFilter): Array<TimeSeriesSearchDTO> => {
+		const queries: Array<TimeSeriesSearchDTO> = [];
+		const query: TimeSeriesSearchDTO = {
+			filter: {
+				unit: filter.unit,
+				metadata: {
+					geo_key: filter.zoomLevel.toString(),
+				},
+			},
+			limit: filter.limit,
+		};
+
+		if (filter.provider) {
+			query.filter.metadata.source = filter.provider[0];
+		}
+		return queries;
 	};
 
 	private init = () => {
