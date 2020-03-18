@@ -1,16 +1,18 @@
-import { converter } from "../..";
 import * as types from "../../types/timeseries";
 import { default as ODPClient } from "../../ODPClient";
 
 import { TimeSeriesSearchDTO } from "@cognite/sdk";
+import { TimeSeries } from "../";
 
 export class Temperature {
-	private _client;
-	constructor(client: ODPClient) {
-		this._client = client;
+	private _client: ODPClient;
+	private _timeSeries: TimeSeries;
+	constructor(timeSeries: TimeSeries) {
+		this._client = timeSeries.client;
+		this._timeSeries = timeSeries;
 	}
 
-	public seaSurfaceTemperature = async (
+	public seaSurface = async (
 		lat?,
 		long?,
 		zoomLevel = "1",
@@ -35,7 +37,7 @@ export class Temperature {
 			timeseries.getAllAssets(),
 			timeseries.getAllDatapoints({ limit: 100 }),
 		]);
-		return converter(timeseries, dataPoints, assets);
+		return this._timeSeries.convert(timeseries, dataPoints, assets);
 	};
 
 	/**
@@ -46,12 +48,7 @@ export class Temperature {
 	 * @param zoomLevel
 	 * @param source
 	 */
-	public latestSeaSurfaceTemperature = async (
-		lat?,
-		long?,
-		zoomLevel?,
-		source?,
-	): Promise<Array<types.ITimeSeries>> => {
+	public latestSeaSurface = async (lat?, long?, zoomLevel?, source?): Promise<Array<types.ITimeSeries>> => {
 		const query: TimeSeriesSearchDTO = {
 			filter: {
 				unit: "celsius",
@@ -65,7 +62,7 @@ export class Temperature {
 		if (source) {
 			query.filter.metadata.source = source;
 		}
-		const timeseries = await this._client.timeseries.search(query);
+		const timeseries = await this._client.cognite.timeseries.search(query);
 		const assets = await timeseries.getAllAssets();
 		const promises = [];
 		for (const ts of timeseries) {
@@ -75,6 +72,6 @@ export class Temperature {
 		for (const dp of await Promise.all(promises)) {
 			dataPoints.push(dp[0]);
 		}
-		return converter(timeseries, dataPoints, assets);
+		return this._timeSeries.convert(timeseries, dataPoints, assets);
 	};
 }
