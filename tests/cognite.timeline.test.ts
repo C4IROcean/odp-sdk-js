@@ -20,18 +20,20 @@ describe("temperature", () => {
 			unit: types.timeseries.UnitType.CELSIUS,
 			provider: ["simulated"],
 		};
-		const temps = await odp.timeSeries.temperature.seaSurface(filter);
+		const temps = await odp.timeSeries.temperature.get(filter);
 		// tslint:disable-next-line: no-console
 		console.log(JSON.stringify(temps));
 		expect(temps.length).toBe(36);
 	});
 
-	/*
 	test("get latest readings for a specific region", async () => {
-		const temps = await timeseries.temperature.latestSeaSurfaceTemperature("47.91", "0.34", "1", "simulated");
+		const filter: types.timeseries.ITimeSeriesFilter = {
+			unit: types.timeseries.UnitType.CELSIUS,
+			provider: ["simulated"],
+		};
+		const temps = await odp.timeSeries.temperature.getLatest(filter);
 		// tslint:disable-next-line: no-console
 		console.log(JSON.stringify(temps));
 		expect(temps.length).toBe(36);
 	});
-	*/
 });
