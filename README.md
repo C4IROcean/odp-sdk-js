@@ -57,9 +57,6 @@ async function quickstart() {
 quickstart();
 ```
 
-> For more details about SDK authentication see this [document](./guides/authentication.md).  
-> Also, more comprehensive intro guide with a demo app can be found [here](https://github.com/cognitedata/javascript-getting-started/tree/master/sdk-auth-and-fetch-data)
-
 ### Backend
 
 ```js
@@ -68,7 +65,7 @@ const { ODPClient } = require("@odp/sdk");
 async function quickstart() {
 	const client = new ODPClient({ appId: "YOUR APPLICATION NAME" });
 	client.loginWithApiKey({
-		project: "publicdata",
+		project: "odp",
 		apiKey: "YOUR_SECRET_API_KEY",
 	});
 
