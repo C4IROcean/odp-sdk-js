@@ -8,7 +8,9 @@ import {
 	TimeSeriesSearchDTO,
 	DatapointsMultiQueryBase,
 	LatestDataPropertyFilter,
+	IdEither,
 } from "@cognite/sdk";
+import { IDatapointFilter } from "../types/types";
 
 /**
  *
@@ -75,7 +77,6 @@ export class TimeSeries {
 			},
 			limit: filter.limit ? filter.limit : 100,
 		};
-
 		if (filter.depth) {
 			baseQuery.filter.metadata.geo_key = filter.zoomLevel.toString();
 		}
@@ -107,10 +108,16 @@ export class TimeSeries {
 		return queries;
 	};
 
+	public stringToIdEither = (ids: Array<string>): Array<IdEither> => {
+		return ids.map((id) => {
+			return { externalId: id };
+		});
+	};
+
 	/**
 	 * Build a Cognite datapoint filter from filter
 	 */
-	public datapointFilter = (filter: ITimeSeriesFilter): DatapointsMultiQueryBase => {
+	public datapointFilter = (filter: IDatapointFilter): DatapointsMultiQueryBase => {
 		const datapointFilter: DatapointsMultiQueryBase = {
 			limit: filter.limit ? filter.limit : 100,
 		};

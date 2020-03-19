@@ -63,16 +63,17 @@ export interface IAggregation {
 	granularity: string;
 }
 
-export interface ITimeSeriesFilter {
+export interface IDatapointFilter {
+	time?: ITimeFilter;
+	aggregation?: IAggregation;
+	limit?: number;
+}
+export interface ITimeSeriesFilter extends IDatapointFilter {
 	unit: UnitType;
 	boundingBox?: IBoundingBox;
 	depth?: INumberFilter;
 	zoomLevel?: ZoomLevel;
-	time?: ITimeFilter;
 	provider?: Array<string>;
-	limit?: number;
-	aggregation?: IAggregation;
-	externalId?: Array<string>;
 }
 
 export interface IAssetsFilter {

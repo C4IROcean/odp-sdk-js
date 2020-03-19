@@ -1,4 +1,4 @@
-import { ODPClient, ITimeSeriesFilter, ITimeSeries } from "../../";
+import { ODPClient, ITimeSeriesFilter, ITimeSeries, IDatapointFilter } from "../../";
 import { TimeSeries } from "../";
 
 /**
@@ -59,6 +59,20 @@ export class Temperature {
 		for (const dp of await Promise.all(promises)) {
 			dataPoints.push(dp[0]);
 		}
+		// Convert Cognite data to ODP data model
+		return this._timeSeries.convert(timeseries, dataPoints, assets);
+	};
+
+	public get = async (externalIds: Array<string>, filter: IDatapointFilter) => {
+		const timeseries = await this._client.cognite.timeseries.retrieve(
+			this._timeSeries.stringToIdEither(externalIds),
+		);
+		const dataPointFilter = this._timeSeries.datapointFilter(filter);
+
+		const [assets, dataPoints] = await Promise.all([
+			timeseries.getAllAssets(),
+			timeseries.getAllDatapoints(dataPointFilter),
+		]);
 		// Convert Cognite data to ODP data model
 		return this._timeSeries.convert(timeseries, dataPoints, assets);
 	};
