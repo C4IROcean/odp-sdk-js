@@ -14,7 +14,7 @@
 
 ### Methods
 
-* [get](temperature.md#get)
+* [getAll](temperature.md#getall)
 * [getLatest](temperature.md#getlatest)
 
 ---
@@ -27,13 +27,13 @@
 
 ⊕ **new Temperature**(timeSeries: *[TimeSeries](timeseries.md)*): [Temperature](temperature.md)
 
-*Defined in timeSeries/temperature/index.ts:7*
+*Defined in timeSeries/temperature/index.ts:9*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| timeSeries | [TimeSeries](timeseries.md) |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| timeSeries | [TimeSeries](timeseries.md) |   |
 
 **Returns:** [Temperature](temperature.md)
 
@@ -41,13 +41,13 @@ ___
 
 ## Methods
 
-<a id="get"></a>
+<a id="getall"></a>
 
-###  get
+###  getAll
 
-▸ **get**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
+▸ **getAll**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
 
-*Defined in timeSeries/temperature/index.ts:17*
+*Defined in timeSeries/temperature/index.ts:24*
 
 **Parameters:**
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **getLatest**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
 
-*Defined in timeSeries/temperature/index.ts:31*
+*Defined in timeSeries/temperature/index.ts:44*
 
 **Parameters:**
 

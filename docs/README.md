@@ -17,7 +17,9 @@
 
 ### Interfaces
 
+* [IAggregation](interfaces/iaggregation.md)
 * [IApiKeyLoginOptions](interfaces/iapikeyloginoptions.md)
+* [IAssetsFilter](interfaces/iassetsfilter.md)
 * [IBoundingBox](interfaces/iboundingbox.md)
 * [IClientOptions](interfaces/iclientoptions.md)
 * [IDataPoints](interfaces/idatapoints.md)

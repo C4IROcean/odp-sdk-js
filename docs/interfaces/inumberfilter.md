@@ -23,7 +23,7 @@
 
 **● max**: *`number`*
 
-*Defined in types/types.ts:51*
+*Defined in types/types.ts:53*
 
 ___
 <a id="min"></a>
@@ -32,7 +32,7 @@ ___
 
 **● min**: *`number`*
 
-*Defined in types/types.ts:50*
+*Defined in types/types.ts:52*
 
 ___
 

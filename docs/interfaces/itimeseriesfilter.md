@@ -10,8 +10,10 @@
 
 ### Properties
 
+* [aggregation](itimeseriesfilter.md#aggregation)
 * [boundingBox](itimeseriesfilter.md#boundingbox)
 * [depth](itimeseriesfilter.md#depth)
+* [externalId](itimeseriesfilter.md#externalid)
 * [limit](itimeseriesfilter.md#limit)
 * [provider](itimeseriesfilter.md#provider)
 * [time](itimeseriesfilter.md#time)
@@ -22,13 +24,22 @@
 
 ## Properties
 
+<a id="aggregation"></a>
+
+### `<Optional>` aggregation
+
+**● aggregation**: *[IAggregation](iaggregation.md)*
+
+*Defined in types/types.ts:74*
+
+___
 <a id="boundingbox"></a>
 
 ### `<Optional>` boundingBox
 
 **● boundingBox**: *[IBoundingBox](iboundingbox.md)*
 
-*Defined in types/types.ts:61*
+*Defined in types/types.ts:68*
 
 ___
 <a id="depth"></a>
@@ -37,7 +48,16 @@ ___
 
 **● depth**: *[INumberFilter](inumberfilter.md)*
 
-*Defined in types/types.ts:62*
+*Defined in types/types.ts:69*
+
+___
+<a id="externalid"></a>
+
+### `<Optional>` externalId
+
+**● externalId**: *`Array`<`string`>*
+
+*Defined in types/types.ts:75*
 
 ___
 <a id="limit"></a>
@@ -46,7 +66,7 @@ ___
 
 **● limit**: *`number`*
 
-*Defined in types/types.ts:66*
+*Defined in types/types.ts:73*
 
 ___
 <a id="provider"></a>
@@ -55,7 +75,7 @@ ___
 
 **● provider**: *`Array`<`string`>*
 
-*Defined in types/types.ts:65*
+*Defined in types/types.ts:72*
 
 ___
 <a id="time"></a>
@@ -64,7 +84,7 @@ ___
 
 **● time**: *[ITimeFilter](itimefilter.md)*
 
-*Defined in types/types.ts:64*
+*Defined in types/types.ts:71*
 
 ___
 <a id="unit"></a>
@@ -73,7 +93,7 @@ ___
 
 **● unit**: *[UnitType](../enums/unittype.md)*
 
-*Defined in types/types.ts:60*
+*Defined in types/types.ts:67*
 
 ___
 <a id="zoomlevel"></a>
@@ -82,7 +102,7 @@ ___
 
 **● zoomLevel**: *[ZoomLevel](../enums/zoomlevel.md)*
 
-*Defined in types/types.ts:63*
+*Defined in types/types.ts:70*
 
 ___
 

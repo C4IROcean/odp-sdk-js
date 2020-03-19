@@ -20,6 +20,8 @@
 ### Methods
 
 * [convert](timeseries.md#convert)
+* [datapointFilter](timeseries.md#datapointfilter)
+* [datapointLatestFilter](timeseries.md#datapointlatestfilter)
 * [queryBuilder](timeseries.md#querybuilder)
 
 ---
@@ -32,7 +34,7 @@
 
 ⊕ **new TimeSeries**(client: *[ODPClient](odpclient.md)*): [TimeSeries](timeseries.md)
 
-*Defined in timeSeries/index.ts:13*
+*Defined in timeSeries/index.ts:18*
 
 **Parameters:**
 
@@ -52,7 +54,7 @@ ___
 
 **client**: 
 
-*Defined in timeSeries/index.ts:20*
+*Defined in timeSeries/index.ts:25*
 
 ___
 <a id="temperature"></a>
@@ -61,7 +63,7 @@ ___
 
 **temperature**: 
 
-*Defined in timeSeries/index.ts:24*
+*Defined in timeSeries/index.ts:29*
 
 ___
 
@@ -73,7 +75,7 @@ ___
 
 ▸ **convert**(timeseries: *`TimeSeriesList`*, dataPoints: *`Array`<`DatapointsGetAggregateDatapoint`> \| `Array`<`DatapointsGetDatapoint`>*, assets: *`AssetList`*): `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
-*Defined in timeSeries/index.ts:31*
+*Defined in timeSeries/index.ts:36*
 
 **Parameters:**
 
@@ -86,13 +88,47 @@ ___
 **Returns:** `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
 ___
+<a id="datapointfilter"></a>
+
+###  datapointFilter
+
+▸ **datapointFilter**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `DatapointsMultiQueryBase`
+
+*Defined in timeSeries/index.ts:113*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| filter | [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md) |
+
+**Returns:** `DatapointsMultiQueryBase`
+
+___
+<a id="datapointlatestfilter"></a>
+
+###  datapointLatestFilter
+
+▸ **datapointLatestFilter**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `LatestDataPropertyFilter`
+
+*Defined in timeSeries/index.ts:140*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| filter | [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md) |
+
+**Returns:** `LatestDataPropertyFilter`
+
+___
 <a id="querybuilder"></a>
 
 ###  queryBuilder
 
 ▸ **queryBuilder**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Array`<`TimeSeriesSearchDTO`>
 
-*Defined in timeSeries/index.ts:64*
+*Defined in timeSeries/index.ts:69*
 
 **Parameters:**
 

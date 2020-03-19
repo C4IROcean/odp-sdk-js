@@ -1,3 +1,5 @@
+import { Aggregate, GetAggregateDatapoint, GetStringDatapoint, GetDoubleDatapoint } from "@cognite/sdk";
+
 export interface ITimeSeries {
 	type: TimeSeriesType;
 	unit: UnitType;
@@ -12,7 +14,7 @@ export interface ITimeSeries {
 	};
 	lastTimestamp: Date;
 	firstTimestamp: Date;
-	dataPoints: Array<any>;
+	dataPoints: Array<GetAggregateDatapoint> | Array<GetStringDatapoint> | Array<GetDoubleDatapoint>;
 }
 
 export interface IDataPoints {
@@ -56,6 +58,11 @@ export interface ITimeFilter {
 	max?: Date;
 }
 
+export interface IAggregation {
+	aggregationFunctions: Array<Aggregate>;
+	granularity: string;
+}
+
 export interface ITimeSeriesFilter {
 	unit: UnitType;
 	boundingBox?: IBoundingBox;
@@ -64,4 +71,10 @@ export interface ITimeSeriesFilter {
 	time?: ITimeFilter;
 	provider?: Array<string>;
 	limit?: number;
+	aggregation?: IAggregation;
+	externalId?: Array<string>;
+}
+
+export interface IAssetsFilter {
+	externalId?: Array<string>;
 }

@@ -6,8 +6,13 @@ import {
 	TimeSeriesList,
 	AssetList,
 	TimeSeriesSearchDTO,
+	DatapointsMultiQueryBase,
+	LatestDataPropertyFilter,
 } from "@cognite/sdk";
 
+/**
+ *
+ */
 export class TimeSeries {
 	private _client: ODPClient;
 	private _temperature: Temperature;
@@ -26,7 +31,7 @@ export class TimeSeries {
 	}
 
 	/**
-	 * Convert cognite response to a ODP response
+	 * Convert Cognite response to a ODP response
 	 */
 	public convert = (
 		timeseries: TimeSeriesList,
@@ -102,6 +107,45 @@ export class TimeSeries {
 		return queries;
 	};
 
+	/**
+	 * Build a Cognite datapoint filter from filter
+	 */
+	public datapointFilter = (filter: ITimeSeriesFilter): DatapointsMultiQueryBase => {
+		const datapointFilter: DatapointsMultiQueryBase = {
+			limit: filter.limit ? filter.limit : 100,
+		};
+
+		if (filter.time) {
+			if (filter.time.min) {
+				datapointFilter.start = filter.time.min;
+			}
+			if (filter.time.max) {
+				datapointFilter.end = filter.time.max;
+			}
+		}
+
+		if (
+			filter.aggregation &&
+			filter.aggregation.aggregationFunctions &&
+			filter.aggregation.aggregationFunctions.length > 0
+		) {
+			datapointFilter.aggregates = filter.aggregation.aggregationFunctions;
+			datapointFilter.granularity = filter.aggregation.granularity
+				? filter.aggregation.granularity
+				: this.defaultGranularity();
+		}
+		return datapointFilter;
+	};
+
+	public datapointLatestFilter = (filter: ITimeSeriesFilter): LatestDataPropertyFilter => {
+		const datapointLatestFilter: LatestDataPropertyFilter = {};
+
+		if (filter.time && filter.time.max) {
+			datapointLatestFilter.before = filter.time.max;
+		}
+		return datapointLatestFilter;
+	};
+
 	private depthExpander = (depthFilter: INumberFilter) => {
 		if (!depthFilter || (!depthFilter.max && !depthFilter.min)) {
 			return [];
@@ -113,6 +157,12 @@ export class TimeSeries {
 			return [];
 		}
 	};
+
+	private defaultGranularity = () => {
+		// Set up some automagic to choose a fitting granularity
+		return "2h";
+	};
+
 	private init = () => {
 		this._temperature = new Temperature(this);
 	};

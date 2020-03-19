@@ -1,4 +1,4 @@
-import { ODPClient, ITimeSeriesFilter, UnitType } from "../source/";
+import { ODPClient, ITimeSeriesFilter, UnitType } from "../source";
 
 describe("temperature", () => {
 	let odp: ODPClient;
@@ -19,7 +19,7 @@ describe("temperature", () => {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
 		};
-		const temps = await odp.timeSeries.temperature.get(filter);
+		const temps = await odp.timeSeries.temperature.getAll(filter);
 		expect(temps.length).toBe(36);
 	});
 

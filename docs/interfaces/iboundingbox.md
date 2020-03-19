@@ -23,7 +23,7 @@
 
 **● bottomRight**: *[IGeoLocation](igeolocation.md)*
 
-*Defined in types/types.ts:41*
+*Defined in types/types.ts:43*
 
 ___
 <a id="topleft"></a>
@@ -32,7 +32,7 @@ ___
 
 **● topLeft**: *[IGeoLocation](igeolocation.md)*
 
-*Defined in types/types.ts:40*
+*Defined in types/types.ts:42*
 
 ___
 
