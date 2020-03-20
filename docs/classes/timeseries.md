@@ -23,6 +23,7 @@
 * [datapointFilter](timeseries.md#datapointfilter)
 * [datapointLatestFilter](timeseries.md#datapointlatestfilter)
 * [queryBuilder](timeseries.md#querybuilder)
+* [stringToIdEither](timeseries.md#stringtoideither)
 
 ---
 
@@ -34,7 +35,7 @@
 
 ⊕ **new TimeSeries**(client: *[ODPClient](odpclient.md)*): [TimeSeries](timeseries.md)
 
-*Defined in timeSeries/index.ts:18*
+*Defined in timeSeries/index.ts:20*
 
 **Parameters:**
 
@@ -54,7 +55,7 @@ ___
 
 **client**: 
 
-*Defined in timeSeries/index.ts:25*
+*Defined in timeSeries/index.ts:27*
 
 ___
 <a id="temperature"></a>
@@ -63,7 +64,7 @@ ___
 
 **temperature**: 
 
-*Defined in timeSeries/index.ts:29*
+*Defined in timeSeries/index.ts:31*
 
 ___
 
@@ -75,7 +76,7 @@ ___
 
 ▸ **convert**(timeseries: *`TimeSeriesList`*, dataPoints: *`Array`<`DatapointsGetAggregateDatapoint`> \| `Array`<`DatapointsGetDatapoint`>*, assets: *`AssetList`*): `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
-*Defined in timeSeries/index.ts:36*
+*Defined in timeSeries/index.ts:38*
 
 **Parameters:**
 
@@ -92,15 +93,15 @@ ___
 
 ###  datapointFilter
 
-▸ **datapointFilter**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `DatapointsMultiQueryBase`
+▸ **datapointFilter**(filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `DatapointsMultiQueryBase`
 
-*Defined in timeSeries/index.ts:113*
+*Defined in timeSeries/index.ts:120*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| filter | [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md) |
+| filter | [IDatapointFilter](../interfaces/idatapointfilter.md) |
 
 **Returns:** `DatapointsMultiQueryBase`
 
@@ -111,7 +112,7 @@ ___
 
 ▸ **datapointLatestFilter**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `LatestDataPropertyFilter`
 
-*Defined in timeSeries/index.ts:140*
+*Defined in timeSeries/index.ts:147*
 
 **Parameters:**
 
@@ -128,7 +129,7 @@ ___
 
 ▸ **queryBuilder**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Array`<`TimeSeriesSearchDTO`>
 
-*Defined in timeSeries/index.ts:69*
+*Defined in timeSeries/index.ts:71*
 
 **Parameters:**
 
@@ -137,6 +138,23 @@ ___
 | filter | [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md) |
 
 **Returns:** `Array`<`TimeSeriesSearchDTO`>
+
+___
+<a id="stringtoideither"></a>
+
+###  stringToIdEither
+
+▸ **stringToIdEither**(ids: *`Array`<`string`>*): `Array`<`IdEither`>
+
+*Defined in timeSeries/index.ts:111*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| ids | `Array`<`string`> |
+
+**Returns:** `Array`<`IdEither`>
 
 ___
 

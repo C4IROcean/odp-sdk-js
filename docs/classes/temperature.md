@@ -14,6 +14,7 @@
 
 ### Methods
 
+* [get](temperature.md#get)
 * [getAll](temperature.md#getall)
 * [getLatest](temperature.md#getlatest)
 
@@ -41,6 +42,24 @@ ___
 
 ## Methods
 
+<a id="get"></a>
+
+###  get
+
+▸ **get**(externalIds: *`Array`<`string`>*, filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `Promise`<[ITimeSeries](../interfaces/itimeseries.md)[]>
+
+*Defined in timeSeries/temperature/index.ts:66*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| externalIds | `Array`<`string`> |
+| filter | [IDatapointFilter](../interfaces/idatapointfilter.md) |
+
+**Returns:** `Promise`<[ITimeSeries](../interfaces/itimeseries.md)[]>
+
+___
 <a id="getall"></a>
 
 ###  getAll

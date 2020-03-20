@@ -23,6 +23,7 @@
 * [IBoundingBox](interfaces/iboundingbox.md)
 * [IClientOptions](interfaces/iclientoptions.md)
 * [IDataPoints](interfaces/idatapoints.md)
+* [IDatapointFilter](interfaces/idatapointfilter.md)
 * [IGeoLocation](interfaces/igeolocation.md)
 * [INumberFilter](interfaces/inumberfilter.md)
 * [IOAuthLoginOptions](interfaces/ioauthloginoptions.md)
