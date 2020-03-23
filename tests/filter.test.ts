@@ -20,13 +20,13 @@ describe("filter", () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			limit: 500,
-			boundingBox: { bottomLeft: { lat: 67, lon: 11 }, topRight: { lat: 70, lon: 13 } },
+			boundingBox: { bottomLeft: { lat: 67, lon: 11 }, topRight: { lat: 68, lon: 12 } },
 			zoomLevel: 3,
 		};
 		const query = timeSeries.queryBuilder(filter);
-		expect(query.length).toBe(651);
+		expect(query.length).toBe(100);
 		expect(query[0].filter.metadata.geo_key).toBe("N67.0_E11.0");
-		expect(query[query.length - 1].filter.metadata.geo_key).toBe("N70.0_E13.0");
+		expect(query[query.length - 1].filter.metadata.geo_key).toBe("N67.9_E11.9");
 		expect(query[0].limit).toBe(500);
 		expect(query[0].filter.unit).toBe(UnitType.CELSIUS);
 	});

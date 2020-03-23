@@ -28,7 +28,7 @@ describe("temperature", () => {
 		expect(temps.length).toBe(112);
 	});
 
-	test("get latest readings for a specific region", async () => {
+	test.skip("get latest readings for a specific region", async () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],

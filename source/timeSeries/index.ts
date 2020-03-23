@@ -181,13 +181,13 @@ export class TimeSeries {
 		const lastLon = this.nFloor(boundingBoxFilter.topRight.lon, decimals);
 		let currentLat = firstLat;
 		let currentLon = firstLon;
-		while (currentLat <= lastLat) {
-			while (currentLon <= lastLon) {
+		while (currentLat < lastLat) {
+			while (currentLon < lastLon) {
 				geo_key.push(`N${currentLat.toFixed(decimals)}_E${currentLon.toFixed(decimals)}`);
-				currentLon = this.nIncrement(currentLon, decimals);
+				currentLon = this.nRound(this.nIncrement(currentLon, decimals), decimals);
 			}
 			currentLon = firstLon;
-			currentLat = this.nIncrement(currentLat, decimals);
+			currentLat = this.nRound(this.nIncrement(currentLat, decimals), decimals);
 		}
 
 		// TODO need to exclude tiles that don't have any water
@@ -197,6 +197,11 @@ export class TimeSeries {
 	private nFloor = (num, decimals) => {
 		const a = Math.pow(10, decimals);
 		return Math.floor((num + Number.EPSILON) * a) / a;
+	};
+
+	private nRound = (num, decimals) => {
+		const a = Math.pow(10, decimals);
+		return Math.round((num + Number.EPSILON) * a) / a;
 	};
 
 	private nIncrement = (num, decimals) => {
