@@ -3,6 +3,8 @@ import { ODPClient, ITimeSeriesFilter, UnitType } from "../source";
 describe("temperature", () => {
 	let odp: ODPClient;
 	beforeAll(() => {
+		jest.setTimeout(30000);
+
 		odp = new ODPClient({ appId: "SDKTests" });
 		odp.loginWithApiKey({
 			project: process.env.COGNITE_PROJECT,
@@ -18,9 +20,12 @@ describe("temperature", () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
+			boundingBox: { bottomLeft: { lat: 67.99, lon: 11.99 }, topRight: { lat: 68.01, lon: 12.01 } },
+			zoomLevel: 8,
+			limit: 500,
 		};
 		const temps = await odp.timeSeries.temperature.getAll(filter);
-		expect(temps.length).toBe(36);
+		expect(temps.length).toBe(112);
 	});
 
 	test("get latest readings for a specific region", async () => {

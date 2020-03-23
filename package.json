@@ -24,7 +24,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@cognite/sdk": "^2.22.0"
+		"@cognite/sdk": "^2.22.0",
+		"lodash": "^4.17.15"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.9.1",

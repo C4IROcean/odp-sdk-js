@@ -1,4 +1,4 @@
-import { Aggregate, GetAggregateDatapoint, GetStringDatapoint, GetDoubleDatapoint } from "@cognite/sdk";
+import { Aggregate, GetAggregateDatapoint, GetStringDatapoint, GetDoubleDatapoint, Metadata } from "@cognite/sdk";
 
 export interface ITimeSeries {
 	type: TimeSeriesType;
@@ -39,13 +39,13 @@ export enum ZoomLevel {
 }
 
 export interface IBoundingBox {
-	topLeft: IGeoLocation;
-	bottomRight: IGeoLocation;
+	bottomLeft: IGeoLocation;
+	topRight: IGeoLocation;
 }
 
 export interface IGeoLocation {
 	lat: number;
-	lan: number;
+	lon: number;
 }
 
 export interface INumberFilter {
@@ -72,10 +72,14 @@ export interface ITimeSeriesFilter extends IDatapointFilter {
 	unit: UnitType;
 	boundingBox?: IBoundingBox;
 	depth?: INumberFilter;
-	zoomLevel?: ZoomLevel;
+	zoomLevel?: ZoomLevel; // mapbox zoom levels 0 (the earth) - 22 (very close)
 	provider?: Array<string>;
 }
 
 export interface IAssetsFilter {
 	externalId?: Array<string>;
+}
+
+export interface ICogniteGeo extends Metadata {
+	geo_key?: string;
 }

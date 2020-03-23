@@ -11,6 +11,7 @@ import {
 	IdEither,
 } from "@cognite/sdk";
 import { IDatapointFilter } from "../types/types";
+import { cloneDeep } from "lodash";
 
 /**
  *
@@ -77,8 +78,8 @@ export class TimeSeries {
 			},
 			limit: filter.limit ? filter.limit : 100,
 		};
-		if (filter.depth) {
-			baseQuery.filter.metadata.geo_key = filter.zoomLevel.toString();
+		if (filter.zoomLevel) {
+			baseQuery.filter.metadata.geo_dec = this.getZoomDecimals(filter.zoomLevel).toString();
 		}
 		if (filter.time && filter.time.min) {
 			baseQuery.filter.lastUpdatedTime = { min: filter.time.min };
@@ -89,17 +90,23 @@ export class TimeSeries {
 		} else if (depths.length > 1) {
 			throw new Error("Multiple depths is not supported yet");
 		}
-		const boundingBoxes = this.boundingBoxExpander(filter.boundingBox);
+		const boundingBoxes = this.boundingBoxExpander(filter.boundingBox, filter.zoomLevel);
 		if (boundingBoxes.length === 1) {
-			baseQuery.filter.metadata.geo_dept = depths[0];
+			baseQuery.filter.metadata.geo_dept = boundingBoxes[0];
 		} else if (boundingBoxes.length > 1) {
-			throw new Error("Multiple bounding boxes is not supported yet");
+			for (const boundingBox of boundingBoxes) {
+				const query = cloneDeep(baseQuery);
+				query.filter.metadata.geo_key = boundingBox;
+				queries.push(query);
+			}
 		}
 
-		if (filter.provider.length === 1) {
-			baseQuery.filter.metadata.source = filter.provider[0];
-		} else if (filter.provider.length > 1) {
-			throw new Error("Multiple providers is not supported yet");
+		if (filter.provider) {
+			if (filter.provider.length === 1) {
+				baseQuery.filter.metadata.source = filter.provider[0];
+			} else if (filter.provider.length > 1) {
+				throw new Error("Multiple providers is not supported yet");
+			}
 		}
 
 		if (queries.length === 0) {
@@ -159,15 +166,60 @@ export class TimeSeries {
 		}
 	};
 
-	private boundingBoxExpander = (boundingBoxFilter: IBoundingBox) => {
-		if (!boundingBoxFilter) {
-			return [];
+	private boundingBoxExpander = (boundingBoxFilter: IBoundingBox, zoomLevel: number) => {
+		const geo_key = [];
+		if (!boundingBoxFilter || zoomLevel === 0) {
+			return geo_key;
 		}
+		const decimals = this.getZoomDecimals(zoomLevel);
+		// get bottom left tile
+		// N68.000_E12.000
+		// Lat = N, Lon = E
+		const firstLat = this.nFloor(boundingBoxFilter.bottomLeft.lat, decimals);
+		const firstLon = this.nFloor(boundingBoxFilter.bottomLeft.lon, decimals);
+		const lastLat = this.nFloor(boundingBoxFilter.topRight.lat, decimals);
+		const lastLon = this.nFloor(boundingBoxFilter.topRight.lon, decimals);
+		let currentLat = firstLat;
+		let currentLon = firstLon;
+		while (currentLat <= lastLat) {
+			while (currentLon <= lastLon) {
+				geo_key.push(`N${currentLat.toFixed(decimals)}_E${currentLon.toFixed(decimals)}`);
+				currentLon = this.nIncrement(currentLon, decimals);
+			}
+			currentLon = firstLon;
+			currentLat = this.nIncrement(currentLat, decimals);
+		}
+
+		// TODO need to exclude tiles that don't have any water
+		return geo_key;
 	};
 
+	private nFloor = (num, decimals) => {
+		const a = Math.pow(10, decimals);
+		return Math.floor((num + Number.EPSILON) * a) / a;
+	};
+
+	private nIncrement = (num, decimals) => {
+		const a = Math.pow(10, decimals);
+		return num + 1 / a;
+	};
 	private defaultGranularity = () => {
-		// Set up some automagic to choose a fitting granularity
-		return "2h";
+		// Set up some auto-magic to choose a fitting granularity
+		return "24h";
+	};
+
+	private getZoomDecimals = (zoomLevel: number) => {
+		if (zoomLevel < 2) {
+			return 0;
+		} else if (zoomLevel < 4) {
+			return 1;
+		} else if (zoomLevel < 8) {
+			return 2;
+		} else if (zoomLevel < 12) {
+			return 3;
+		} else {
+			return 4;
+		}
 	};
 
 	private init = () => {
