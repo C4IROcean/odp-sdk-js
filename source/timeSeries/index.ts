@@ -85,32 +85,43 @@ export class TimeSeries {
 			baseQuery.filter.lastUpdatedTime = { min: filter.time.min };
 		}
 		const depths = this.depthExpander(filter.depth);
-		if (depths.length === 1) {
-			baseQuery.filter.metadata.geo_dept = depths[0];
-		} else if (depths.length > 1) {
-			throw new Error("Multiple depths is not supported yet");
-		}
 		const boundingBoxes = this.boundingBoxExpander(filter.boundingBox, filter.zoomLevel);
-		if (boundingBoxes.length === 1) {
+		const providers = this.providerExpander(filter.provider);
+
+		if (depths.length === 1 && depths[0]) {
+			baseQuery.filter.metadata.geo_dept = depths[0];
+			depths[0] = null;
+		}
+		if (boundingBoxes.length === 1 && boundingBoxes[0]) {
 			baseQuery.filter.metadata.geo_dept = boundingBoxes[0];
-		} else if (boundingBoxes.length > 1) {
-			for (const boundingBox of boundingBoxes) {
-				const query = cloneDeep(baseQuery);
-				query.filter.metadata.geo_key = boundingBox;
-				queries.push(query);
-			}
+			boundingBoxes[0] = null;
+		}
+		if (providers.length === 1 && providers[0]) {
+			baseQuery.filter.metadata.source = providers[0];
+			providers[0] = null;
 		}
 
-		if (filter.provider) {
-			if (filter.provider.length === 1) {
-				baseQuery.filter.metadata.source = filter.provider[0];
-			} else if (filter.provider.length > 1) {
-				throw new Error("Multiple providers is not supported yet");
+		for (const depth of depths) {
+			let depthClone = baseQuery;
+			if (depth) {
+				depthClone = cloneDeep(baseQuery);
+				depthClone.filter.metadata.depth = depth;
 			}
-		}
-
-		if (queries.length === 0) {
-			queries.push(baseQuery);
+			for (const bb of boundingBoxes) {
+				let bbClone = depthClone;
+				if (bb) {
+					bbClone = cloneDeep(depthClone);
+					bbClone.filter.metadata.geo_key = bb;
+				}
+				for (const provider of providers) {
+					let providerClone = bbClone;
+					if (provider) {
+						providerClone = cloneDeep(bbClone);
+						providerClone.filter.metadata.source = provider;
+					}
+					queries.push(providerClone);
+				}
+			}
 		}
 		return queries;
 	};
@@ -161,15 +172,26 @@ export class TimeSeries {
 	};
 
 	private depthExpander = (depthFilter: INumberFilter) => {
+		const depths = [];
 		if (!depthFilter || (!depthFilter.max && !depthFilter.min)) {
-			return [];
+			return [null];
 		}
+		for (let index = depthFilter.min; index < depthFilter.max; index += 100) {
+			depths.push(index);
+		}
+		return depths;
 	};
 
+	private providerExpander = (providers) => {
+		if (!providers || providers.length === 0) {
+			return [null];
+		}
+		return providers;
+	};
 	private boundingBoxExpander = (boundingBoxFilter: IBoundingBox, zoomLevel: number) => {
 		const geo_key = [];
 		if (!boundingBoxFilter || zoomLevel === 0) {
-			return geo_key;
+			return [null];
 		}
 		const decimals = this.getZoomDecimals(zoomLevel);
 		// get bottom left tile

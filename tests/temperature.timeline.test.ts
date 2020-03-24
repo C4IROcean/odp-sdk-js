@@ -16,7 +16,7 @@ describe("temperature", () => {
 		expect(odp.project).toBe(process.env.COGNITE_PROJECT);
 	});
 
-	test("get readings for a specific region", async () => {
+	test.skip("get readings for a specific region", async () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
