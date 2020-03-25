@@ -6,9 +6,9 @@ import {
 	TimeSeriesList,
 	AssetList,
 	TimeSeriesSearchDTO,
-	DatapointsMultiQueryBase,
 	LatestDataPropertyFilter,
 	IdEither,
+	DatapointsMultiQueryBase,
 } from "@cognite/sdk";
 import { IDatapointFilter } from "../types/types";
 import { cloneDeep } from "lodash";
@@ -162,7 +162,7 @@ export class TimeSeries {
 		return datapointFilter;
 	};
 
-	public datapointLatestFilter = (filter: ITimeSeriesFilter): LatestDataPropertyFilter => {
+	public datapointLatestFilter = (filter: IDatapointFilter): LatestDataPropertyFilter => {
 		const datapointLatestFilter: LatestDataPropertyFilter = {};
 
 		if (filter.time && filter.time.max) {

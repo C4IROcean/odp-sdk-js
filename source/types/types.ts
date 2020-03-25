@@ -67,6 +67,7 @@ export interface IDatapointFilter {
 	time?: ITimeFilter;
 	aggregation?: IAggregation;
 	limit?: number;
+	latestValue?: boolean;
 }
 export interface ITimeSeriesFilter extends IDatapointFilter {
 	unit: UnitType;

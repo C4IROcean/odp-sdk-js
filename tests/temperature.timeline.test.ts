@@ -16,7 +16,7 @@ describe("temperature", () => {
 		expect(odp.project).toBe(process.env.COGNITE_PROJECT);
 	});
 
-	test.skip("get readings for a specific region", async () => {
+	test("get readings for a specific region", async () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
@@ -28,12 +28,12 @@ describe("temperature", () => {
 		expect(temps.length).toBe(112);
 	});
 
-	test.skip("get latest readings for a specific region", async () => {
+	test("get latest readings for a specific region", async () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
 		};
 		const temps = await odp.timeSeries.temperature.getLatest(filter);
-		expect(temps.length).toBe(36);
+		expect(temps.length).toBe(100);
 	});
 });
