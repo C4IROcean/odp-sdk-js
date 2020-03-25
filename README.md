@@ -54,7 +54,7 @@ async function quickstart() {
 		unit: UnitType.CELSIUS,
 		provider: ["simulated"],
 	};
-	const temperatures = await odp.timeSeries.temperature.get(filter);
+	const temperatures = await odp.timeSeries.temperature.getAll(filter);
 }
 quickstart();
 ```
@@ -75,7 +75,7 @@ async function quickstart() {
 		unit: UnitType.CELSIUS,
 		provider: ["simulated"],
 	};
-	const temperatures = await odp.timeSeries.temperature.get(filter);
+	const temperatures = await odp.timeSeries.temperature.getAll(filter);
 }
 quickstart();
 ```
