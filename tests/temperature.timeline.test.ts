@@ -63,4 +63,18 @@ describe("temperature", () => {
 		expect(temps[0].dataPoints[0].timestamp.getTime()).toBe(1577318400000);
 		expect((temps[0].dataPoints[3] as GetAggregateDatapoint).average).toBe(9.65999999999999);
 	});
+
+	test("get time specific readings from a specific timeline", async () => {
+		const filter: ITimeSeriesFilter = {
+			unit: UnitType.CELSIUS,
+			provider: ["simulated"],
+			time: { max: new Date(1579500679000), min: new Date(1578204679000) },
+		};
+
+		const temps = await odp.timeSeries.temperature.get(["sim_N68.0_E11.8_0_temprature"], filter);
+		expect(temps.length).toBe(1);
+		expect(temps[0].dataPoints.length).toBe(15);
+		expect(temps[0].dataPoints[0].timestamp.getTime()).toBe(1578265200000);
+		expect((temps[0].dataPoints[0] as GetDoubleDatapoint).value).toBe(9.379999999999995);
+	});
 });

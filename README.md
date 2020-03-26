@@ -79,3 +79,42 @@ async function quickstart() {
 }
 quickstart();
 ```
+
+## Documentation
+
+-   [SDK documentation](./docs)
+-   [API documentation](https://doc.cognitedata.com)
+-   [API reference documentation](https://doc.cognitedata.com/api/v1)
+
+## Development
+
+Run all tests:
+
+```bash
+$ yarn
+$ yarn test
+```
+
+We use `jest` to run tests, see [their documentation](https://github.com/facebook/jest) for more information.
+
+## Versioning
+
+The library follow [Semantic Versioning](https://semver.org/).
+
+## Contributing
+
+Contributions welcome! See the [code of conduct](./CODE_OF_CONDUCT.md).
+
+## Release
+
+Our releases are fully [automated](https://github.com/semantic-release/semantic-release).
+Only basic steps are needed:
+
+1. Create a new branch
+2. Commit changes (if any) and remember about [proper commit messages](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
+3. Create a new pull request
+4. A new version will be published when the PR is merged
+
+## CHANGELOG
+
+You can find it [here](./CHANGELOG.md).
