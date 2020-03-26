@@ -1,4 +1,4 @@
-import { ODPClient, ITimeSeriesFilter, UnitType } from "../source";
+import { ODPClient, ITimeSeriesFilter, UnitType, GetDoubleDatapoint, GetAggregateDatapoint } from "../source";
 
 describe("temperature", () => {
 	let odp: ODPClient;
@@ -35,5 +35,32 @@ describe("temperature", () => {
 		};
 		const temps = await odp.timeSeries.temperature.getLatest(filter);
 		expect(temps.length).toBe(100);
+	});
+
+	test("get readings from a specific timeline", async () => {
+		const filter: ITimeSeriesFilter = {
+			unit: UnitType.CELSIUS,
+			provider: ["simulated"],
+		};
+
+		const temps = await odp.timeSeries.temperature.get(["sim_N68.0_E11.8_0_temprature"], filter);
+		expect(temps.length).toBe(1);
+		expect(temps[0].dataPoints.length).toBe(31);
+		expect(temps[0].dataPoints[0].timestamp.getTime()).toBe(1577833200000);
+		expect((temps[0].dataPoints[0] as GetDoubleDatapoint).value).toBe(9.299999999999997);
+	});
+
+	test("get aggregate readings from a specific timeline", async () => {
+		const filter: ITimeSeriesFilter = {
+			unit: UnitType.CELSIUS,
+			provider: ["simulated"],
+			aggregation: { aggregationFunctions: ["average"], granularity: "7d" },
+		};
+
+		const temps = await odp.timeSeries.temperature.get(["sim_N68.0_E11.8_0_temprature"], filter);
+		expect(temps.length).toBe(1);
+		expect(temps[0].dataPoints.length).toBe(6);
+		expect(temps[0].dataPoints[0].timestamp.getTime()).toBe(1577318400000);
+		expect((temps[0].dataPoints[3] as GetAggregateDatapoint).average).toBe(9.65999999999999);
 	});
 });

@@ -1,5 +1,7 @@
 import { Aggregate, GetAggregateDatapoint, GetStringDatapoint, GetDoubleDatapoint, Metadata } from "@cognite/sdk";
 
+export { GetStringDatapoint, GetDoubleDatapoint, GetAggregateDatapoint };
+
 export interface ITimeSeries {
 	type: TimeSeriesType;
 	unit: UnitType;

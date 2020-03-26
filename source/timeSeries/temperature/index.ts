@@ -36,7 +36,7 @@ export class Temperature {
 			const timelines = await throttleActions(promises, this._concurrency);
 			return [].concat(...timelines);
 		} catch (error) {
-			return [];
+			throw error;
 		}
 	};
 
@@ -45,25 +45,9 @@ export class Temperature {
 	 * @param filter
 	 */
 	public getLatest = async (filter: ITimeSeriesFilter): Promise<Array<ITimeSeries>> => {
-		// Get Cognite time series query from filter
-		const queries = this._timeSeries.queryBuilder(filter);
-		// Get Cognite datapoint filter from filter
-		const dataPointLatestFilter = this._timeSeries.datapointLatestFilter(filter);
-		// Get time series from Cognite
-		const timeseries = await this._client.cognite.timeseries.search(queries[0]);
-		// Get assets involved
-		const assets = await timeseries.getAllAssets();
-		const promises = [];
-		for (const ts of timeseries) {
-			// Get latest datapoint from each time series
-			promises.push(ts.getLatestDatapoints(dataPointLatestFilter));
-		}
-		const dataPoints = [];
-		for (const dp of await Promise.all(promises)) {
-			dataPoints.push(dp[0]);
-		}
-		// Convert Cognite data to ODP data model
-		return this._timeSeries.convert(timeseries, dataPoints, assets);
+		// set filter to get only latest value
+		filter.latestValue = true;
+		return this.getAll(filter);
 	};
 
 	public get = async (externalIds: Array<string>, filter: IDatapointFilter) => {
@@ -92,9 +76,7 @@ export class Temperature {
 		if (timeseries.length === 0) {
 			return [];
 		}
-		// Get Cognite datapoint filter from filter
-		// const dataPointFilter = this._timeSeries.datapointFilter(filter);
-		// Get assets and datapoints from Cognite
+		// Get assets from Cognite
 		try {
 			assets = await timeseries.getAllAssets();
 		} catch (error) {
@@ -111,7 +93,7 @@ export class Temperature {
 				}
 			} else {
 				for (const ts of timeseries) {
-					// Get latest datapoint from each time series
+					// Get all datapoint from each time series (seems to be a bug in the typings)
 					promises.push(() => ts.getDatapoints(this._timeSeries.datapointFilter(filter) as any));
 				}
 			}
