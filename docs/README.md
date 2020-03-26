@@ -11,6 +11,7 @@
 
 ### Classes
 
+* [Assets](classes/assets.md)
 * [ODPClient](classes/odpclient.md)
 * [Temperature](classes/temperature.md)
 * [TimeSeries](classes/timeseries.md)
@@ -22,6 +23,7 @@
 * [IAssetsFilter](interfaces/iassetsfilter.md)
 * [IBoundingBox](interfaces/iboundingbox.md)
 * [IClientOptions](interfaces/iclientoptions.md)
+* [ICogniteGeo](interfaces/icognitegeo.md)
 * [IDataPoints](interfaces/idatapoints.md)
 * [IDatapointFilter](interfaces/idatapointfilter.md)
 * [IGeoLocation](interfaces/igeolocation.md)
@@ -32,5 +34,30 @@
 * [ITimeSeries](interfaces/itimeseries.md)
 * [ITimeSeriesFilter](interfaces/itimeseriesfilter.md)
 
+### Functions
+
+* [throttleActions](#throttleactions)
+
 ---
+
+## Functions
+
+<a id="throttleactions"></a>
+
+### `<Const>` throttleActions
+
+▸ **throttleActions**(listOfCallableActions: *`any`*, limit: *`any`*): `Promise`<`any`[]>
+
+*Defined in utils/index.ts:1*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| listOfCallableActions | `any` |
+| limit | `any` |
+
+**Returns:** `Promise`<`any`[]>
+
+___
 

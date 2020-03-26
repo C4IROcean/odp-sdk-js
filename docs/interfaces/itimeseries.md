@@ -30,7 +30,7 @@
 
 **● assetId**: *`number`*
 
-*Defined in types/types.ts:8*
+*Defined in types/types.ts:10*
 
 ___
 <a id="datapoints"></a>
@@ -39,7 +39,7 @@ ___
 
 **● dataPoints**: *`Array`<`GetAggregateDatapoint`> \| `Array`<`GetStringDatapoint`> \| `Array`<`GetDoubleDatapoint`>*
 
-*Defined in types/types.ts:17*
+*Defined in types/types.ts:19*
 
 ___
 <a id="externalid"></a>
@@ -48,7 +48,7 @@ ___
 
 **● externalId**: *`string`*
 
-*Defined in types/types.ts:7*
+*Defined in types/types.ts:9*
 
 ___
 <a id="firsttimestamp"></a>
@@ -57,7 +57,7 @@ ___
 
 **● firstTimestamp**: *`Date`*
 
-*Defined in types/types.ts:16*
+*Defined in types/types.ts:18*
 
 ___
 <a id="id"></a>
@@ -66,7 +66,7 @@ ___
 
 **● id**: *`number`*
 
-*Defined in types/types.ts:6*
+*Defined in types/types.ts:8*
 
 ___
 <a id="lasttimestamp"></a>
@@ -75,7 +75,7 @@ ___
 
 **● lastTimestamp**: *`Date`*
 
-*Defined in types/types.ts:15*
+*Defined in types/types.ts:17*
 
 ___
 <a id="location"></a>
@@ -84,7 +84,7 @@ ___
 
 **● location**: *`object`*
 
-*Defined in types/types.ts:9*
+*Defined in types/types.ts:11*
 
 #### Type declaration
 
@@ -95,7 +95,7 @@ ___
 
 **● type**: *[TimeSeriesType](../enums/timeseriestype.md)*
 
-*Defined in types/types.ts:4*
+*Defined in types/types.ts:6*
 
 ___
 <a id="unit"></a>
@@ -104,7 +104,7 @@ ___
 
 **● unit**: *[UnitType](../enums/unittype.md)*
 
-*Defined in types/types.ts:5*
+*Defined in types/types.ts:7*
 
 ___
 

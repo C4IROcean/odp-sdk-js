@@ -23,7 +23,7 @@
 
 **● max**: *`Date`*
 
-*Defined in types/types.ts:58*
+*Defined in types/types.ts:60*
 
 ___
 <a id="min"></a>
@@ -32,7 +32,7 @@ ___
 
 **● min**: *`Date`*
 
-*Defined in types/types.ts:57*
+*Defined in types/types.ts:59*
 
 ___
 

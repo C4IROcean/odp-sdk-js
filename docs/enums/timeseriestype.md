@@ -18,7 +18,7 @@
 
 **TEMPERATURE**:  = "temperature"
 
-*Defined in types/types.ts:26*
+*Defined in types/types.ts:28*
 
 ___
 
