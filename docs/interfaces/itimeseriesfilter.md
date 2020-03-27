@@ -15,6 +15,7 @@
 * [aggregation](itimeseriesfilter.md#aggregation)
 * [boundingBox](itimeseriesfilter.md#boundingbox)
 * [depth](itimeseriesfilter.md#depth)
+* [latestValue](itimeseriesfilter.md#latestvalue)
 * [limit](itimeseriesfilter.md#limit)
 * [provider](itimeseriesfilter.md#provider)
 * [time](itimeseriesfilter.md#time)
@@ -33,7 +34,7 @@
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[aggregation](idatapointfilter.md#aggregation)*
 
-*Defined in types/types.ts:68*
+*Defined in types/types.ts:70*
 
 ___
 <a id="boundingbox"></a>
@@ -42,7 +43,7 @@ ___
 
 **● boundingBox**: *[IBoundingBox](iboundingbox.md)*
 
-*Defined in types/types.ts:73*
+*Defined in types/types.ts:76*
 
 ___
 <a id="depth"></a>
@@ -51,7 +52,18 @@ ___
 
 **● depth**: *[INumberFilter](inumberfilter.md)*
 
-*Defined in types/types.ts:74*
+*Defined in types/types.ts:77*
+
+___
+<a id="latestvalue"></a>
+
+### `<Optional>` latestValue
+
+**● latestValue**: *`boolean`*
+
+*Inherited from [IDatapointFilter](idatapointfilter.md).[latestValue](idatapointfilter.md#latestvalue)*
+
+*Defined in types/types.ts:72*
 
 ___
 <a id="limit"></a>
@@ -62,7 +74,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[limit](idatapointfilter.md#limit)*
 
-*Defined in types/types.ts:69*
+*Defined in types/types.ts:71*
 
 ___
 <a id="provider"></a>
@@ -71,7 +83,7 @@ ___
 
 **● provider**: *`Array`<`string`>*
 
-*Defined in types/types.ts:76*
+*Defined in types/types.ts:79*
 
 ___
 <a id="time"></a>
@@ -82,7 +94,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[time](idatapointfilter.md#time)*
 
-*Defined in types/types.ts:67*
+*Defined in types/types.ts:69*
 
 ___
 <a id="unit"></a>
@@ -91,7 +103,7 @@ ___
 
 **● unit**: *[UnitType](../enums/unittype.md)*
 
-*Defined in types/types.ts:72*
+*Defined in types/types.ts:75*
 
 ___
 <a id="zoomlevel"></a>
@@ -100,7 +112,7 @@ ___
 
 **● zoomLevel**: *[ZoomLevel](../enums/zoomlevel.md)*
 
-*Defined in types/types.ts:75*
+*Defined in types/types.ts:78*
 
 ___
 

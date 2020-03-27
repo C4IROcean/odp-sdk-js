@@ -47,4 +47,19 @@ describe("filter", () => {
 		expect(query[0].limit).toBe(500);
 		expect(query[0].filter.unit).toBe(UnitType.CELSIUS);
 	});
+
+	test("datapointFilter", () => {
+		const filter: ITimeSeriesFilter = {
+			unit: UnitType.CELSIUS,
+			limit: 500,
+			aggregation: { aggregationFunctions: ["average"], granularity: "1d" },
+			time: { max: new Date(1585203079000), min: new Date(1582697479000) },
+		};
+		const DPFilter = timeSeries.datapointFilter(filter);
+		expect(DPFilter.limit).toBe(500);
+		expect(DPFilter.aggregates.length).toBe(1);
+		expect(DPFilter.granularity).toBe("1d");
+		expect((DPFilter.start as Date).getTime()).toBe(1582697479000);
+		expect((DPFilter.end as Date).getTime()).toBe(1585203079000);
+	});
 });

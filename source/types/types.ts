@@ -1,5 +1,7 @@
 import { Aggregate, GetAggregateDatapoint, GetStringDatapoint, GetDoubleDatapoint, Metadata } from "@cognite/sdk";
 
+export { GetStringDatapoint, GetDoubleDatapoint, GetAggregateDatapoint };
+
 export interface ITimeSeries {
 	type: TimeSeriesType;
 	unit: UnitType;
@@ -67,6 +69,7 @@ export interface IDatapointFilter {
 	time?: ITimeFilter;
 	aggregation?: IAggregation;
 	limit?: number;
+	latestValue?: boolean;
 }
 export interface ITimeSeriesFilter extends IDatapointFilter {
 	unit: UnitType;

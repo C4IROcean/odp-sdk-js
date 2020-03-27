@@ -35,7 +35,7 @@
 
 ⊕ **new TimeSeries**(client: *[ODPClient](odpclient.md)*): [TimeSeries](timeseries.md)
 
-*Defined in timeSeries/index.ts:20*
+*Defined in timeSeries/index.ts:21*
 
 **Parameters:**
 
@@ -55,7 +55,7 @@ ___
 
 **client**: 
 
-*Defined in timeSeries/index.ts:27*
+*Defined in timeSeries/index.ts:28*
 
 ___
 <a id="temperature"></a>
@@ -64,7 +64,7 @@ ___
 
 **temperature**: 
 
-*Defined in timeSeries/index.ts:31*
+*Defined in timeSeries/index.ts:32*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **convert**(timeseries: *`TimeSeriesList`*, dataPoints: *`Array`<`DatapointsGetAggregateDatapoint`> \| `Array`<`DatapointsGetDatapoint`>*, assets: *`AssetList`*): `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
-*Defined in timeSeries/index.ts:38*
+*Defined in timeSeries/index.ts:39*
 
 **Parameters:**
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **datapointFilter**(filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `DatapointsMultiQueryBase`
 
-*Defined in timeSeries/index.ts:120*
+*Defined in timeSeries/index.ts:138*
 
 **Parameters:**
 
@@ -110,15 +110,15 @@ ___
 
 ###  datapointLatestFilter
 
-▸ **datapointLatestFilter**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `LatestDataPropertyFilter`
+▸ **datapointLatestFilter**(filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `LatestDataPropertyFilter`
 
-*Defined in timeSeries/index.ts:147*
+*Defined in timeSeries/index.ts:165*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| filter | [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md) |
+| filter | [IDatapointFilter](../interfaces/idatapointfilter.md) |
 
 **Returns:** `LatestDataPropertyFilter`
 
@@ -129,7 +129,7 @@ ___
 
 ▸ **queryBuilder**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Array`<`TimeSeriesSearchDTO`>
 
-*Defined in timeSeries/index.ts:71*
+*Defined in timeSeries/index.ts:72*
 
 **Parameters:**
 
@@ -146,7 +146,7 @@ ___
 
 ▸ **stringToIdEither**(ids: *`Array`<`string`>*): `Array`<`IdEither`>
 
-*Defined in timeSeries/index.ts:111*
+*Defined in timeSeries/index.ts:129*
 
 **Parameters:**
 

@@ -79,3 +79,36 @@ async function quickstart() {
 }
 quickstart();
 ```
+
+## Documentation
+
+-   [SDK documentation](./docs/README.md)
+-   [API documentation](https://doc.cognitedata.com)
+-   [API reference documentation](https://doc.cognitedata.com/api/v1)
+
+## Development
+
+Run all tests:
+
+```bash
+$ yarn
+$ yarn test
+```
+
+We use `jest` to run tests, see [their documentation](https://github.com/facebook/jest) for more information.
+
+## Versioning
+
+The library follow [Semantic Versioning](https://semver.org/).
+
+## Contributing
+
+Contributions welcome! See the [code of conduct](./CODE_OF_CONDUCT.md).
+
+## Release
+
+We follow the git flow methodology and a release branch will automatically trigger a new version
+
+## CHANGELOG
+
+You can find it [here](./CHANGELOG.md).

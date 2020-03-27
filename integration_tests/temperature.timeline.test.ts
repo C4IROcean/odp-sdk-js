@@ -1,6 +1,6 @@
 import { ODPClient, ITimeSeriesFilter, UnitType, GetDoubleDatapoint, GetAggregateDatapoint } from "../source";
 
-describe.skip("temperature", () => {
+describe("temperature", () => {
 	let odp: ODPClient;
 	beforeAll(() => {
 		jest.setTimeout(30000);
