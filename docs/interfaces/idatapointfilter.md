@@ -13,6 +13,7 @@
 ### Properties
 
 * [aggregation](idatapointfilter.md#aggregation)
+* [latestValue](idatapointfilter.md#latestvalue)
 * [limit](idatapointfilter.md#limit)
 * [time](idatapointfilter.md#time)
 
@@ -26,7 +27,16 @@
 
 **● aggregation**: *[IAggregation](iaggregation.md)*
 
-*Defined in types/types.ts:68*
+*Defined in types/types.ts:70*
+
+___
+<a id="latestvalue"></a>
+
+### `<Optional>` latestValue
+
+**● latestValue**: *`boolean`*
+
+*Defined in types/types.ts:72*
 
 ___
 <a id="limit"></a>
@@ -35,7 +45,7 @@ ___
 
 **● limit**: *`number`*
 
-*Defined in types/types.ts:69*
+*Defined in types/types.ts:71*
 
 ___
 <a id="time"></a>
@@ -44,7 +54,7 @@ ___
 
 **● time**: *[ITimeFilter](itimefilter.md)*
 
-*Defined in types/types.ts:67*
+*Defined in types/types.ts:69*
 
 ___
 

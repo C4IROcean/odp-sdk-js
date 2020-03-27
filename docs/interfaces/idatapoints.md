@@ -23,7 +23,7 @@
 
 **● timestamp**: *`Date`*
 
-*Defined in types/types.ts:22*
+*Defined in types/types.ts:24*
 
 ___
 <a id="value"></a>
@@ -32,7 +32,7 @@ ___
 
 **● value**: *`number`*
 
-*Defined in types/types.ts:21*
+*Defined in types/types.ts:23*
 
 ___
 

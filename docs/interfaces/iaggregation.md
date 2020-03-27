@@ -23,7 +23,7 @@
 
 **● aggregationFunctions**: *`Array`<`Aggregate`>*
 
-*Defined in types/types.ts:62*
+*Defined in types/types.ts:64*
 
 ___
 <a id="granularity"></a>
@@ -32,7 +32,7 @@ ___
 
 **● granularity**: *`string`*
 
-*Defined in types/types.ts:63*
+*Defined in types/types.ts:65*
 
 ___
 

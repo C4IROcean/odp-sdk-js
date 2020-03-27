@@ -10,29 +10,29 @@
 
 ### Properties
 
-* [lan](igeolocation.md#lan)
 * [lat](igeolocation.md#lat)
+* [lon](igeolocation.md#lon)
 
 ---
 
 ## Properties
 
-<a id="lan"></a>
-
-###  lan
-
-**● lan**: *`number`*
-
-*Defined in types/types.ts:48*
-
-___
 <a id="lat"></a>
 
 ###  lat
 
 **● lat**: *`number`*
 
-*Defined in types/types.ts:47*
+*Defined in types/types.ts:49*
+
+___
+<a id="lon"></a>
+
+###  lon
+
+**● lon**: *`number`*
+
+*Defined in types/types.ts:50*
 
 ___
 

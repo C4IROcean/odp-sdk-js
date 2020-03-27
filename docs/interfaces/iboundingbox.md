@@ -10,29 +10,29 @@
 
 ### Properties
 
-* [bottomRight](iboundingbox.md#bottomright)
-* [topLeft](iboundingbox.md#topleft)
+* [bottomLeft](iboundingbox.md#bottomleft)
+* [topRight](iboundingbox.md#topright)
 
 ---
 
 ## Properties
 
-<a id="bottomright"></a>
+<a id="bottomleft"></a>
 
-###  bottomRight
+###  bottomLeft
 
-**● bottomRight**: *[IGeoLocation](igeolocation.md)*
+**● bottomLeft**: *[IGeoLocation](igeolocation.md)*
 
-*Defined in types/types.ts:43*
+*Defined in types/types.ts:44*
 
 ___
-<a id="topleft"></a>
+<a id="topright"></a>
 
-###  topLeft
+###  topRight
 
-**● topLeft**: *[IGeoLocation](igeolocation.md)*
+**● topRight**: *[IGeoLocation](igeolocation.md)*
 
-*Defined in types/types.ts:42*
+*Defined in types/types.ts:45*
 
 ___
 
