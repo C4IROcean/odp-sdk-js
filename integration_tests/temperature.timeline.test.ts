@@ -25,13 +25,16 @@ describe("temperature", () => {
 			limit: 500,
 		};
 		const temps = await odp.timeSeries.temperature.getAll(filter);
-		expect(temps.length).toBe(112);
+		expect(temps.length).toBe(1);
+		expect(typeof temps[0].location.lat).toBe("number");
+		expect(typeof temps[0].location.long).toBe("number");
 	});
 
 	test("get latest readings for a specific region", async () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
+			limit: 100,
 		};
 		const temps = await odp.timeSeries.temperature.getLatest(filter);
 		expect(temps.length).toBe(100);

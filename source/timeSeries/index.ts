@@ -51,8 +51,8 @@ export class TimeSeries {
 				lastTimestamp: dp.datapoints[dp.datapoints.length - 1].timestamp,
 				dataPoints: dp.datapoints,
 				location: {
-					lat: ts.metadata.geo_lat,
-					long: ts.metadata.geo_long,
+					lat: parseFloat(ts.metadata.geo_lat),
+					long: parseFloat(ts.metadata.geo_long),
 					depth: parseInt(ts.metadata.geo_dept, 10),
 					zoomLevel: parseInt(ts.metadata.geo_key, 10),
 				},
@@ -85,7 +85,12 @@ export class TimeSeries {
 			baseQuery.filter.lastUpdatedTime = { min: filter.time.min };
 		}
 		const depths = this.depthExpander(filter.depth);
-		const boundingBoxes = this.boundingBoxExpander(filter.boundingBox, filter.zoomLevel);
+
+		let boundingBoxes = [null];
+		if (filter.zoomLevel && filter.zoomLevel > 3) {
+			boundingBoxes = this.boundingBoxExpander(filter.boundingBox, filter.zoomLevel);
+		}
+
 		const providers = this.providerExpander(filter.provider);
 
 		if (depths.length === 1 && depths[0]) {
@@ -236,13 +241,13 @@ export class TimeSeries {
 	};
 
 	private getZoomDecimals = (zoomLevel: number) => {
-		if (zoomLevel < 2) {
+		if (zoomLevel < 6) {
 			return 0;
-		} else if (zoomLevel < 4) {
-			return 1;
 		} else if (zoomLevel < 8) {
-			return 2;
+			return 1;
 		} else if (zoomLevel < 12) {
+			return 2;
+		} else if (zoomLevel < 16) {
 			return 3;
 		} else {
 			return 4;
