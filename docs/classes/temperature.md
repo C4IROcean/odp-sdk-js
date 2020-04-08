@@ -28,7 +28,7 @@
 
 ⊕ **new Temperature**(timeSeries: *[TimeSeries](timeseries.md)*): [Temperature](temperature.md)
 
-*Defined in timeSeries/temperature/index.ts:12*
+*Defined in timeSeries/temperature/index.ts:13*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ ___
 
 ▸ **get**(externalIds: *`Array`<`string`>*, filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `Promise`<[ITimeSeries](../interfaces/itimeseries.md)[]>
 
-*Defined in timeSeries/temperature/index.ts:53*
+*Defined in timeSeries/temperature/index.ts:54*
 
 **Parameters:**
 
@@ -64,15 +64,16 @@ ___
 
 ###  getAll
 
-▸ **getAll**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
+▸ **getAll**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*, stream?: *`Readable`*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
 
-*Defined in timeSeries/temperature/index.ts:27*
+*Defined in timeSeries/temperature/index.ts:28*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
 | filter | [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md) |   |
+| `Optional` stream | `Readable` |
 
 **Returns:** `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
 
@@ -81,15 +82,16 @@ ___
 
 ###  getLatest
 
-▸ **getLatest**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
+▸ **getLatest**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*, stream?: *`Readable`*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
 
-*Defined in timeSeries/temperature/index.ts:47*
+*Defined in timeSeries/temperature/index.ts:48*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
 | filter | [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md) |   |
+| `Optional` stream | `Readable` |
 
 **Returns:** `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
 

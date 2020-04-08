@@ -1,4 +1,6 @@
 import { ODPClient, ITimeSeriesFilter, UnitType, GetDoubleDatapoint, GetAggregateDatapoint } from "../source";
+import { Readable } from "stream";
+import * as ndjson from "ndjson";
 
 describe("temperature", () => {
 	let odp: ODPClient;
@@ -37,6 +39,28 @@ describe("temperature", () => {
 			limit: 100,
 		};
 		const temps = await odp.timeSeries.temperature.getLatest(filter);
+		expect(temps.length).toBe(100);
+	});
+
+	test("get latest readings for a specific region using stream", async () => {
+		const filter: ITimeSeriesFilter = {
+			unit: UnitType.CELSIUS,
+			provider: ["simulated"],
+			limit: 100,
+		};
+
+		const temps = [];
+		const readableStream = new Readable({
+			read() {
+				// should be empty
+			},
+		})
+			.pipe(ndjson.parse())
+			.on("data", (json) => {
+				temps.push(...json);
+			});
+
+		await odp.timeSeries.temperature.getLatest(filter, readableStream);
 		expect(temps.length).toBe(100);
 	});
 

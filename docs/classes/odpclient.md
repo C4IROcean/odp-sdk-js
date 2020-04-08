@@ -14,6 +14,7 @@
 
 ### Accessors
 
+* [asset](odpclient.md#asset)
 * [cognite](odpclient.md#cognite)
 * [login](odpclient.md#login)
 * [logout](odpclient.md#logout)
@@ -36,7 +37,7 @@
 
 ⊕ **new ODPClient**(options: *[IClientOptions](../interfaces/iclientoptions.md)*): [ODPClient](odpclient.md)
 
-*Defined in ODPClient.ts:35*
+*Defined in ODPClient.ts:37*
 
 **Parameters:**
 
@@ -50,13 +51,22 @@ ___
 
 ## Accessors
 
+<a id="asset"></a>
+
+###  asset
+
+**asset**: 
+
+*Defined in ODPClient.ts:70*
+
+___
 <a id="cognite"></a>
 
 ###  cognite
 
 **cognite**: 
 
-*Defined in ODPClient.ts:53*
+*Defined in ODPClient.ts:55*
 
 ___
 <a id="login"></a>
@@ -65,7 +75,7 @@ ___
 
 **login**: 
 
-*Defined in ODPClient.ts:44*
+*Defined in ODPClient.ts:46*
 
 ___
 <a id="logout"></a>
@@ -74,7 +84,7 @@ ___
 
 **logout**: 
 
-*Defined in ODPClient.ts:47*
+*Defined in ODPClient.ts:49*
 
 ___
 <a id="project"></a>
@@ -83,7 +93,7 @@ ___
 
 **project**: 
 
-*Defined in ODPClient.ts:50*
+*Defined in ODPClient.ts:52*
 
 ___
 <a id="temperatures"></a>
@@ -92,7 +102,7 @@ ___
 
 **temperatures**: 
 
-*Defined in ODPClient.ts:41*
+*Defined in ODPClient.ts:43*
 
 ___
 <a id="timeseries"></a>
@@ -101,7 +111,7 @@ ___
 
 **timeSeries**: 
 
-*Defined in ODPClient.ts:64*
+*Defined in ODPClient.ts:66*
 
 ___
 
@@ -113,7 +123,7 @@ ___
 
 ▸ **loginWithApiKey**(options: *[IApiKeyLoginOptions](../interfaces/iapikeyloginoptions.md)*): `void`
 
-*Defined in ODPClient.ts:56*
+*Defined in ODPClient.ts:58*
 
 **Parameters:**
 
@@ -130,7 +140,7 @@ ___
 
 ▸ **loginWithOAuth**(options: *`any`*): `void`
 
-*Defined in ODPClient.ts:60*
+*Defined in ODPClient.ts:62*
 
 **Parameters:**
 

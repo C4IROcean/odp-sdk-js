@@ -46,7 +46,7 @@
 
 ### `<Const>` throttleActions
 
-▸ **throttleActions**(listOfCallableActions: *`any`*, limit: *`any`*): `Promise`<`any`[]>
+▸ **throttleActions**(listOfCallableActions: *`any`*, limit: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
 
 *Defined in utils/index.ts:1*
 
@@ -56,6 +56,7 @@
 | ------ | ------ |
 | listOfCallableActions | `any` |
 | limit | `any` |
+| `Optional` stream | `any` |
 
 **Returns:** `Promise`<`any`[]>
 

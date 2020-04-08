@@ -1,4 +1,4 @@
-export const throttleActions = (listOfCallableActions, limit) => {
+export const throttleActions = (listOfCallableActions, limit, stream?) => {
 	// We'll need to store which is the next promise in the list.
 	let i = 0;
 	const resultArray = new Array(listOfCallableActions.length);
@@ -15,7 +15,11 @@ export const throttleActions = (listOfCallableActions, limit) => {
 			return Promise.resolve(nextAction())
 				.then((result) => {
 					// Save results to the correct array index.
-					resultArray[actionIndex] = result;
+					if (stream) {
+						stream.push(result);
+					} else {
+						resultArray[actionIndex] = result;
+					}
 					return;
 				})
 				.then(doNextAction);
@@ -28,5 +32,11 @@ export const throttleActions = (listOfCallableActions, limit) => {
 	while (i < limit && i < listOfCallableActions.length) {
 		listOfPromises.push(doNextAction());
 	}
-	return Promise.all(listOfPromises).then(() => resultArray);
+	return Promise.all(listOfPromises).then(() => {
+		if (stream) {
+			// close stream
+			stream.push(null);
+		}
+		return resultArray;
+	});
 };

@@ -25,7 +25,8 @@
 	"license": "ISC",
 	"dependencies": {
 		"@cognite/sdk": "^2.22.0",
-		"lodash": "^4.17.15"
+		"lodash": "^4.17.15",
+		"ndjson": "^1.5.0"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.9.1",

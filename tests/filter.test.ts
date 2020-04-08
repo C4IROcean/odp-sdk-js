@@ -41,7 +41,7 @@ describe("filter", () => {
 			depth: { max: 500, min: 0 },
 		};
 		const query = timeSeries.queryBuilder(filter);
-		expect(query.length).toBe(3800);
+		expect(query.length).toBe(28120);
 		expect(query[0].filter.metadata.geo_key).toBe("N67.90_E11.90");
 		expect(query[query.length - 1].filter.metadata.geo_key).toBe("N68.08_E12.09");
 		expect(query[0].limit).toBe(500);

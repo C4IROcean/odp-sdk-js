@@ -2,6 +2,7 @@ import { ODPClient, ITimeSeriesFilter, ITimeSeries, IDatapointFilter } from "../
 import { TimeSeries } from "../";
 import { throttleActions } from "../../utils";
 import { TimeSeriesList } from "@cognite/sdk";
+import { Readable } from "stream";
 
 /**
  * Class to get all temperature related data from ODP
@@ -24,7 +25,7 @@ export class Temperature {
 	 * Get temperature datapoints from timelines that matches the provided filter. Returns a list of ITimeSeries
 	 * @param filter
 	 */
-	public getAll = async (filter: ITimeSeriesFilter): Promise<Array<ITimeSeries>> => {
+	public getAll = async (filter: ITimeSeriesFilter, stream?: Readable): Promise<Array<ITimeSeries>> => {
 		// Get Cognite time series query from filter
 		const queries = this._timeSeries.queryBuilder(filter);
 		const promises = [];
@@ -33,7 +34,7 @@ export class Temperature {
 			promises.push(() => this.getSingleTimeSeriesQueryResult(query, filter));
 		}
 		try {
-			const timelines = await throttleActions(promises, this._concurrency);
+			const timelines = await throttleActions(promises, this._concurrency, stream);
 			return [].concat(...timelines);
 		} catch (error) {
 			throw error;
@@ -44,10 +45,10 @@ export class Temperature {
 	 * Get the latest temperature for timelines that matches the provided filter. Returns a list of ITimeSeries
 	 * @param filter
 	 */
-	public getLatest = async (filter: ITimeSeriesFilter): Promise<Array<ITimeSeries>> => {
+	public getLatest = async (filter: ITimeSeriesFilter, stream?: Readable): Promise<Array<ITimeSeries>> => {
 		// set filter to get only latest value
 		filter.latestValue = true;
-		return this.getAll(filter);
+		return this.getAll(filter, stream);
 	};
 
 	public get = async (externalIds: Array<string>, filter: IDatapointFilter) => {

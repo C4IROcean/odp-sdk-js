@@ -128,6 +128,9 @@ export class TimeSeries {
 				}
 			}
 		}
+		// debug
+		// tslint:disable-next-line: no-console
+		console.log("Generated " + queries.length + " queries");
 		return queries;
 	};
 
@@ -181,8 +184,18 @@ export class TimeSeries {
 		if (!depthFilter || (!depthFilter.max && !depthFilter.min)) {
 			return [null];
 		}
-		for (let index = depthFilter.min; index < depthFilter.max; index += 100) {
-			depths.push(index);
+		let next = depthFilter.min;
+		while (next <= depthFilter.max) {
+			depths.push(next);
+			if (next < 100) {
+				next += 5;
+			} else if (next < 500) {
+				next += 25;
+			} else if (next < 2000) {
+				next += 50;
+			} else {
+				next += 100;
+			}
 		}
 		return depths;
 	};

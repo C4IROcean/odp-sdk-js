@@ -27,7 +27,7 @@
 
 **● accessToken**: *`string`*
 
-*Defined in ODPClient.ts:30*
+*Defined in ODPClient.ts:31*
 
 ___
 <a id="onauthenticate"></a>
@@ -36,7 +36,7 @@ ___
 
 **● onAuthenticate**: *`any` \| "REDIRECT" \| "POPUP"*
 
-*Defined in ODPClient.ts:25*
+*Defined in ODPClient.ts:26*
 
 ___
 <a id="ontokens"></a>
@@ -45,7 +45,7 @@ ___
 
 **● onTokens**: *`any`*
 
-*Defined in ODPClient.ts:26*
+*Defined in ODPClient.ts:27*
 
 ___
 <a id="project"></a>
@@ -56,7 +56,7 @@ ___
 
 *Inherited from [IProject](iproject.md).[project](iproject.md#project)*
 
-*Defined in ODPClient.ts:14*
+*Defined in ODPClient.ts:15*
 
 ___
 
