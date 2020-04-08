@@ -9,8 +9,8 @@ export interface ITimeSeries {
 	externalId: string;
 	assetId: number;
 	location: {
-		long: string;
-		lat: string;
+		long: number;
+		lat: number;
 		depth: number;
 		zoomLevel: number;
 	};

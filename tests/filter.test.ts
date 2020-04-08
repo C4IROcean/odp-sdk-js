@@ -21,7 +21,7 @@ describe("filter", () => {
 			unit: UnitType.CELSIUS,
 			limit: 500,
 			boundingBox: { bottomLeft: { lat: 67, lon: 11 }, topRight: { lat: 68, lon: 12 } },
-			zoomLevel: 3,
+			zoomLevel: 6,
 		};
 		const query = timeSeries.queryBuilder(filter);
 		expect(query.length).toBe(100);
@@ -41,9 +41,9 @@ describe("filter", () => {
 			depth: { max: 500, min: 0 },
 		};
 		const query = timeSeries.queryBuilder(filter);
-		expect(query.length).toBe(400000);
-		expect(query[0].filter.metadata.geo_key).toBe("N67.900_E11.900");
-		expect(query[query.length - 1].filter.metadata.geo_key).toBe("N68.099_E12.099");
+		expect(query.length).toBe(28120);
+		expect(query[0].filter.metadata.geo_key).toBe("N67.90_E11.90");
+		expect(query[query.length - 1].filter.metadata.geo_key).toBe("N68.08_E12.09");
 		expect(query[0].limit).toBe(500);
 		expect(query[0].filter.unit).toBe(UnitType.CELSIUS);
 	});

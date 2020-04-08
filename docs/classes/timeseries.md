@@ -95,7 +95,7 @@ ___
 
 ▸ **datapointFilter**(filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `DatapointsMultiQueryBase`
 
-*Defined in timeSeries/index.ts:138*
+*Defined in timeSeries/index.ts:146*
 
 **Parameters:**
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **datapointLatestFilter**(filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `LatestDataPropertyFilter`
 
-*Defined in timeSeries/index.ts:165*
+*Defined in timeSeries/index.ts:173*
 
 **Parameters:**
 
@@ -146,7 +146,7 @@ ___
 
 ▸ **stringToIdEither**(ids: *`Array`<`string`>*): `Array`<`IdEither`>
 
-*Defined in timeSeries/index.ts:129*
+*Defined in timeSeries/index.ts:137*
 
 **Parameters:**
 
