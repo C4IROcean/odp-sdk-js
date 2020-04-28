@@ -26,6 +26,7 @@
 * [ICogniteGeo](interfaces/icognitegeo.md)
 * [IDataPoints](interfaces/idatapoints.md)
 * [IDatapointFilter](interfaces/idatapointfilter.md)
+* [IGeoFilter](interfaces/igeofilter.md)
 * [IGeoLocation](interfaces/igeolocation.md)
 * [INumberFilter](interfaces/inumberfilter.md)
 * [IOAuthLoginOptions](interfaces/ioauthloginoptions.md)
@@ -36,19 +37,37 @@
 
 ### Functions
 
+* [getMRGIDBoundingBox](#getmrgidboundingbox)
 * [throttleActions](#throttleactions)
 
 ---
 
 ## Functions
 
+<a id="getmrgidboundingbox"></a>
+
+### `<Const>` getMRGIDBoundingBox
+
+▸ **getMRGIDBoundingBox**(mrgid: *`number`*): `Promise`<[IBoundingBox](interfaces/iboundingbox.md)>
+
+*Defined in utils/index.ts:47*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| mrgid | `number` |
+
+**Returns:** `Promise`<[IBoundingBox](interfaces/iboundingbox.md)>
+
+___
 <a id="throttleactions"></a>
 
 ### `<Const>` throttleActions
 
 ▸ **throttleActions**(listOfCallableActions: *`any`*, limit: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in utils/index.ts:1*
+*Defined in utils/index.ts:4*
 
 **Parameters:**
 

@@ -8,22 +8,22 @@ describe("filter", () => {
 		timeSeries = new TimeSeries(odp);
 	});
 
-	test("simpleFilter", () => {
+	test("simpleFilter", async () => {
 		const filter: ITimeSeriesFilter = { unit: UnitType.CELSIUS };
-		const query = timeSeries.queryBuilder(filter);
+		const query = await timeSeries.queryBuilder(filter);
 		expect(query.length).toBe(1);
 		expect(query[0].limit).toBe(100);
 		expect(query[0].filter.unit).toBe(UnitType.CELSIUS);
 	});
 
-	test("geoFilter", () => {
+	test("geoFilter", async () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			limit: 500,
-			boundingBox: { bottomLeft: { lat: 67, lon: 11 }, topRight: { lat: 68, lon: 12 } },
+			geoFilter: { boundingBox: { bottomLeft: { lat: 67, lon: 11 }, topRight: { lat: 68, lon: 12 } } },
 			zoomLevel: 6,
 		};
-		const query = timeSeries.queryBuilder(filter);
+		const query = await timeSeries.queryBuilder(filter);
 		expect(query.length).toBe(100);
 		expect(query[0].filter.metadata.geo_key).toBe("N67.0_E11.0");
 		expect(query[query.length - 1].filter.metadata.geo_key).toBe("N67.9_E11.9");
@@ -31,16 +31,31 @@ describe("filter", () => {
 		expect(query[0].filter.unit).toBe(UnitType.CELSIUS);
 	});
 
-	test("advancedFilter", () => {
+	test("mrgidFilter", async () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			limit: 500,
-			boundingBox: { bottomLeft: { lat: 67.9, lon: 11.9 }, topRight: { lat: 68.1, lon: 12.1 } },
+			geoFilter: { mrgid: 48975 },
+			zoomLevel: 6,
+		};
+		const query = await timeSeries.queryBuilder(filter);
+		expect(query.length).toBe(1000);
+		expect(query[0].filter.metadata.geo_key).toBe("N68.0_E-10.5");
+		expect(query[query.length - 1].filter.metadata.geo_key).toBe("N70.4_E-6.6");
+		expect(query[0].limit).toBe(500);
+		expect(query[0].filter.unit).toBe(UnitType.CELSIUS);
+	});
+
+	test("advancedFilter", async () => {
+		const filter: ITimeSeriesFilter = {
+			unit: UnitType.CELSIUS,
+			limit: 500,
+			geoFilter: { boundingBox: { bottomLeft: { lat: 67.9, lon: 11.9 }, topRight: { lat: 68.1, lon: 12.1 } } },
 			zoomLevel: 8,
 			provider: ["provider1", "provider2"],
 			depth: { max: 500, min: 0 },
 		};
-		const query = timeSeries.queryBuilder(filter);
+		const query = await timeSeries.queryBuilder(filter);
 		expect(query.length).toBe(28120);
 		expect(query[0].filter.metadata.geo_key).toBe("N67.90_E11.90");
 		expect(query[query.length - 1].filter.metadata.geo_key).toBe("N68.08_E12.09");

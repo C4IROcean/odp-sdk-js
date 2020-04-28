@@ -1,5 +1,14 @@
 import { Temperature } from "./temperature";
-import { ODPClient, ITimeSeries, ITimeSeriesFilter, TimeSeriesType, UnitType, INumberFilter, IBoundingBox } from "../";
+import {
+	ODPClient,
+	ITimeSeries,
+	ITimeSeriesFilter,
+	TimeSeriesType,
+	UnitType,
+	INumberFilter,
+	IBoundingBox,
+	IGeoFilter,
+} from "../";
 import {
 	DatapointsGetAggregateDatapoint,
 	DatapointsGetDatapoint,
@@ -12,6 +21,7 @@ import {
 } from "@cognite/sdk";
 import { IDatapointFilter } from "../types/types";
 import { cloneDeep } from "lodash";
+import { getMRGIDBoundingBox } from "../utils";
 
 /**
  *
@@ -69,7 +79,7 @@ export class TimeSeries {
 	/**
 	 * Build cognite query from a ODP filter
 	 */
-	public queryBuilder = (filter: ITimeSeriesFilter): Array<TimeSeriesSearchDTO> => {
+	public queryBuilder = async (filter: ITimeSeriesFilter): Promise<Array<TimeSeriesSearchDTO>> => {
 		const queries: Array<TimeSeriesSearchDTO> = [];
 		const baseQuery: TimeSeriesSearchDTO = {
 			filter: {
@@ -86,9 +96,13 @@ export class TimeSeries {
 		}
 		const depths = this.depthExpander(filter.depth);
 
+		if (filter.geoFilter && filter.geoFilter.mrgid) {
+			filter.geoFilter.boundingBox = await getMRGIDBoundingBox(filter.geoFilter.mrgid);
+		}
+
 		let boundingBoxes = [null];
 		if (filter.zoomLevel && filter.zoomLevel > 3) {
-			boundingBoxes = this.boundingBoxExpander(filter.boundingBox, filter.zoomLevel);
+			boundingBoxes = this.boundingBoxExpander(filter.geoFilter, filter.zoomLevel);
 		}
 
 		const providers = this.providerExpander(filter.provider);
@@ -206,11 +220,12 @@ export class TimeSeries {
 		}
 		return providers;
 	};
-	private boundingBoxExpander = (boundingBoxFilter: IBoundingBox, zoomLevel: number) => {
-		const geo_key = [];
-		if (!boundingBoxFilter || zoomLevel === 0) {
+	private boundingBoxExpander = (geoFilter: IGeoFilter, zoomLevel: number) => {
+		if (!geoFilter || !geoFilter.boundingBox || zoomLevel === 0) {
 			return [null];
 		}
+		const boundingBoxFilter: IBoundingBox = geoFilter.boundingBox;
+		const geo_key = [];
 		const decimals = this.getZoomDecimals(zoomLevel);
 		// get bottom left tile
 		// N68.000_E12.000

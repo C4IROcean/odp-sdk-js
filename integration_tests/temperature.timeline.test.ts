@@ -22,7 +22,9 @@ describe("temperature", () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
-			boundingBox: { bottomLeft: { lat: 67.99, lon: 11.99 }, topRight: { lat: 68.01, lon: 12.01 } },
+			geoFilter: {
+				boundingBox: { bottomLeft: { lat: 67.99, lon: 11.99 }, topRight: { lat: 68.01, lon: 12.01 } },
+			},
 			zoomLevel: 8,
 			limit: 500,
 		};

@@ -13,8 +13,8 @@
 ### Properties
 
 * [aggregation](itimeseriesfilter.md#aggregation)
-* [boundingBox](itimeseriesfilter.md#boundingbox)
 * [depth](itimeseriesfilter.md#depth)
+* [geoFilter](itimeseriesfilter.md#geofilter)
 * [latestValue](itimeseriesfilter.md#latestvalue)
 * [limit](itimeseriesfilter.md#limit)
 * [provider](itimeseriesfilter.md#provider)
@@ -34,15 +34,6 @@
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[aggregation](idatapointfilter.md#aggregation)*
 
-*Defined in types/types.ts:70*
-
-___
-<a id="boundingbox"></a>
-
-### `<Optional>` boundingBox
-
-**● boundingBox**: *[IBoundingBox](iboundingbox.md)*
-
 *Defined in types/types.ts:76*
 
 ___
@@ -52,7 +43,16 @@ ___
 
 **● depth**: *[INumberFilter](inumberfilter.md)*
 
-*Defined in types/types.ts:77*
+*Defined in types/types.ts:83*
+
+___
+<a id="geofilter"></a>
+
+### `<Optional>` geoFilter
+
+**● geoFilter**: *[IGeoFilter](igeofilter.md)*
+
+*Defined in types/types.ts:82*
 
 ___
 <a id="latestvalue"></a>
@@ -63,7 +63,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[latestValue](idatapointfilter.md#latestvalue)*
 
-*Defined in types/types.ts:72*
+*Defined in types/types.ts:78*
 
 ___
 <a id="limit"></a>
@@ -74,7 +74,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[limit](idatapointfilter.md#limit)*
 
-*Defined in types/types.ts:71*
+*Defined in types/types.ts:77*
 
 ___
 <a id="provider"></a>
@@ -83,7 +83,7 @@ ___
 
 **● provider**: *`Array`<`string`>*
 
-*Defined in types/types.ts:79*
+*Defined in types/types.ts:85*
 
 ___
 <a id="time"></a>
@@ -94,7 +94,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[time](idatapointfilter.md#time)*
 
-*Defined in types/types.ts:69*
+*Defined in types/types.ts:75*
 
 ___
 <a id="unit"></a>
@@ -103,7 +103,7 @@ ___
 
 **● unit**: *[UnitType](../enums/unittype.md)*
 
-*Defined in types/types.ts:75*
+*Defined in types/types.ts:81*
 
 ___
 <a id="zoomlevel"></a>
@@ -112,7 +112,7 @@ ___
 
 **● zoomLevel**: *[ZoomLevel](../enums/zoomlevel.md)*
 
-*Defined in types/types.ts:78*
+*Defined in types/types.ts:84*
 
 ___
 
