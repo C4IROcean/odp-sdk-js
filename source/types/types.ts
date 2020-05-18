@@ -65,6 +65,12 @@ export interface IAggregation {
 	granularity: string;
 }
 
+export interface IGeoFilter {
+	boundingBox?: IBoundingBox;
+	polygon?: Array<IGeoLocation>;
+	mrgid?: number;
+}
+
 export interface IDatapointFilter {
 	time?: ITimeFilter;
 	aggregation?: IAggregation;
@@ -73,7 +79,7 @@ export interface IDatapointFilter {
 }
 export interface ITimeSeriesFilter extends IDatapointFilter {
 	unit: UnitType;
-	boundingBox?: IBoundingBox;
+	geoFilter?: IGeoFilter;
 	depth?: INumberFilter;
 	zoomLevel?: ZoomLevel; // mapbox zoom levels 0 (the earth) - 22 (very close)
 	provider?: Array<string>;

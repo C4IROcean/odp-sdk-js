@@ -27,7 +27,7 @@
 
 **● geo_key**: *`string`*
 
-*Defined in types/types.ts:87*
+*Defined in types/types.ts:93*
 
 ___
 

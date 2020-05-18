@@ -27,7 +27,7 @@ export class Temperature {
 	 */
 	public getAll = async (filter: ITimeSeriesFilter, stream?: Readable): Promise<Array<ITimeSeries>> => {
 		// Get Cognite time series query from filter
-		const queries = this._timeSeries.queryBuilder(filter);
+		const queries = await this._timeSeries.queryBuilder(filter);
 		const promises = [];
 
 		for (const query of queries) {

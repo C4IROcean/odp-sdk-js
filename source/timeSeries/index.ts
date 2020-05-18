@@ -1,5 +1,14 @@
 import { Temperature } from "./temperature";
-import { ODPClient, ITimeSeries, ITimeSeriesFilter, TimeSeriesType, UnitType, INumberFilter, IBoundingBox } from "../";
+import {
+	ODPClient,
+	ITimeSeries,
+	ITimeSeriesFilter,
+	TimeSeriesType,
+	UnitType,
+	INumberFilter,
+	IBoundingBox,
+	IGeoFilter,
+} from "../";
 import {
 	DatapointsGetAggregateDatapoint,
 	DatapointsGetDatapoint,
@@ -12,6 +21,7 @@ import {
 } from "@cognite/sdk";
 import { IDatapointFilter } from "../types/types";
 import { cloneDeep } from "lodash";
+import { getMRGIDBoundingBox } from "../utils";
 
 /**
  *
@@ -45,23 +55,24 @@ export class TimeSeries {
 		for (const dp of dataPoints) {
 			const ts = timeseries.find((item) => item.id === dp.id);
 			const at = assets.find((item) => item.id === ts.assetId);
-
-			returnValue.push({
-				firstTimestamp: dp.datapoints[0].timestamp,
-				lastTimestamp: dp.datapoints[dp.datapoints.length - 1].timestamp,
-				dataPoints: dp.datapoints,
-				location: {
-					lat: parseFloat(ts.metadata.geo_lat),
-					long: parseFloat(ts.metadata.geo_long),
-					depth: parseInt(ts.metadata.geo_dept, 10),
-					zoomLevel: parseInt(ts.metadata.geo_key, 10),
-				},
-				type: TimeSeriesType.TEMPERATURE,
-				unit: UnitType.CELSIUS,
-				id: ts.id,
-				externalId: ts.externalId,
-				assetId: at.id,
-			});
+			if (dp.datapoints.length > 0) {
+				returnValue.push({
+					firstTimestamp: dp.datapoints[0].timestamp,
+					lastTimestamp: dp.datapoints[dp.datapoints.length - 1].timestamp,
+					dataPoints: dp.datapoints,
+					location: {
+						lat: parseFloat(ts.metadata.geo_lat),
+						long: parseFloat(ts.metadata.geo_long),
+						depth: parseInt(ts.metadata.geo_dept, 10),
+						zoomLevel: parseInt(ts.metadata.geo_key, 10),
+					},
+					type: TimeSeriesType.TEMPERATURE,
+					unit: UnitType.CELSIUS,
+					id: ts.id,
+					externalId: ts.externalId,
+					assetId: at.id,
+				});
+			}
 		}
 		return returnValue;
 	};
@@ -69,7 +80,7 @@ export class TimeSeries {
 	/**
 	 * Build cognite query from a ODP filter
 	 */
-	public queryBuilder = (filter: ITimeSeriesFilter): Array<TimeSeriesSearchDTO> => {
+	public queryBuilder = async (filter: ITimeSeriesFilter): Promise<Array<TimeSeriesSearchDTO>> => {
 		const queries: Array<TimeSeriesSearchDTO> = [];
 		const baseQuery: TimeSeriesSearchDTO = {
 			filter: {
@@ -86,9 +97,13 @@ export class TimeSeries {
 		}
 		const depths = this.depthExpander(filter.depth);
 
+		if (filter.geoFilter && filter.geoFilter.mrgid) {
+			filter.geoFilter.boundingBox = await getMRGIDBoundingBox(filter.geoFilter.mrgid);
+		}
+
 		let boundingBoxes = [null];
 		if (filter.zoomLevel && filter.zoomLevel > 3) {
-			boundingBoxes = this.boundingBoxExpander(filter.boundingBox, filter.zoomLevel);
+			boundingBoxes = this.boundingBoxExpander(filter.geoFilter, filter.zoomLevel);
 		}
 
 		const providers = this.providerExpander(filter.provider);
@@ -206,11 +221,12 @@ export class TimeSeries {
 		}
 		return providers;
 	};
-	private boundingBoxExpander = (boundingBoxFilter: IBoundingBox, zoomLevel: number) => {
-		const geo_key = [];
-		if (!boundingBoxFilter || zoomLevel === 0) {
+	private boundingBoxExpander = (geoFilter: IGeoFilter, zoomLevel: number) => {
+		if (!geoFilter || !geoFilter.boundingBox || zoomLevel === 0) {
 			return [null];
 		}
+		const boundingBoxFilter: IBoundingBox = geoFilter.boundingBox;
+		const geo_key = [];
 		const decimals = this.getZoomDecimals(zoomLevel);
 		// get bottom left tile
 		// N68.000_E12.000

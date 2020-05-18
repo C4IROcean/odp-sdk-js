@@ -22,7 +22,9 @@ describe("temperature", () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
-			boundingBox: { bottomLeft: { lat: 67.99, lon: 11.99 }, topRight: { lat: 68.01, lon: 12.01 } },
+			geoFilter: {
+				boundingBox: { bottomLeft: { lat: 67.99, lon: 11.99 }, topRight: { lat: 68.01, lon: 12.01 } },
+			},
 			zoomLevel: 8,
 			limit: 500,
 		};
@@ -39,7 +41,7 @@ describe("temperature", () => {
 			limit: 100,
 		};
 		const temps = await odp.timeSeries.temperature.getLatest(filter);
-		expect(temps.length).toBe(100);
+		expect(temps.length).toBe(12);
 	});
 
 	test("get latest readings for a specific region using stream", async () => {
@@ -61,7 +63,7 @@ describe("temperature", () => {
 			});
 
 		await odp.timeSeries.temperature.getLatest(filter, readableStream);
-		expect(temps.length).toBe(100);
+		expect(temps.length).toBe(12);
 	});
 
 	test("get readings from a specific timeline", async () => {
