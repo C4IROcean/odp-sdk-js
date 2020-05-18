@@ -55,23 +55,24 @@ export class TimeSeries {
 		for (const dp of dataPoints) {
 			const ts = timeseries.find((item) => item.id === dp.id);
 			const at = assets.find((item) => item.id === ts.assetId);
-
-			returnValue.push({
-				firstTimestamp: dp.datapoints[0].timestamp,
-				lastTimestamp: dp.datapoints[dp.datapoints.length - 1].timestamp,
-				dataPoints: dp.datapoints,
-				location: {
-					lat: parseFloat(ts.metadata.geo_lat),
-					long: parseFloat(ts.metadata.geo_long),
-					depth: parseInt(ts.metadata.geo_dept, 10),
-					zoomLevel: parseInt(ts.metadata.geo_key, 10),
-				},
-				type: TimeSeriesType.TEMPERATURE,
-				unit: UnitType.CELSIUS,
-				id: ts.id,
-				externalId: ts.externalId,
-				assetId: at.id,
-			});
+			if (dp.datapoints.length > 0) {
+				returnValue.push({
+					firstTimestamp: dp.datapoints[0].timestamp,
+					lastTimestamp: dp.datapoints[dp.datapoints.length - 1].timestamp,
+					dataPoints: dp.datapoints,
+					location: {
+						lat: parseFloat(ts.metadata.geo_lat),
+						long: parseFloat(ts.metadata.geo_long),
+						depth: parseInt(ts.metadata.geo_dept, 10),
+						zoomLevel: parseInt(ts.metadata.geo_key, 10),
+					},
+					type: TimeSeriesType.TEMPERATURE,
+					unit: UnitType.CELSIUS,
+					id: ts.id,
+					externalId: ts.externalId,
+					assetId: at.id,
+				});
+			}
 		}
 		return returnValue;
 	};

@@ -41,7 +41,7 @@ describe("temperature", () => {
 			limit: 100,
 		};
 		const temps = await odp.timeSeries.temperature.getLatest(filter);
-		expect(temps.length).toBe(100);
+		expect(temps.length).toBe(12);
 	});
 
 	test("get latest readings for a specific region using stream", async () => {
@@ -63,7 +63,7 @@ describe("temperature", () => {
 			});
 
 		await odp.timeSeries.temperature.getLatest(filter, readableStream);
-		expect(temps.length).toBe(100);
+		expect(temps.length).toBe(12);
 	});
 
 	test("get readings from a specific timeline", async () => {
