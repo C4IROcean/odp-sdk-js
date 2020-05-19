@@ -79,6 +79,20 @@ describe("temperature", () => {
 		expect((temps[0].dataPoints[0] as GetDoubleDatapoint).value).toBe(9.299999999999997);
 	});
 
+	test.only("get readings from a specific timeline", async () => {
+		const filter: ITimeSeriesFilter = {
+			provider: ["simulated"],
+			limit: 100,
+			unit: UnitType.CELSIUS,
+		};
+		const temps = await odp.timeSeries.temperature.getAll(filter);
+
+		expect(temps.length).toBe(65341);
+		expect(temps[0].dataPoints.length).toBe(2);
+		expect(temps[0].dataPoints[0].timestamp).toBe(1588370400000);
+		expect((temps[0].dataPoints[0] as GetDoubleDatapoint).value).toBe(5.94);
+	});
+
 	test("get aggregate readings from a specific timeline", async () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
