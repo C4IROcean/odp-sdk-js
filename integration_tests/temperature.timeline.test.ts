@@ -89,8 +89,8 @@ describe("temperature", () => {
 
 		expect(temps.length).toBe(65341);
 		expect(temps[0].dataPoints.length).toBe(2);
-		expect(temps[0].dataPoints[0].timestamp).toBe(1588370400000);
-		expect((temps[0].dataPoints[0] as GetDoubleDatapoint).value).toBe(5.94);
+		expect(temps[0].dataPoints[0].timestamp).toBe(1588284000000);
+		expect((temps[0].dataPoints[0] as GetDoubleDatapoint).value).toBe(6.15);
 	});
 
 	test("get aggregate readings from a specific timeline", async () => {

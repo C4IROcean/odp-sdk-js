@@ -287,7 +287,7 @@ export class TimeSeries {
 	};
 
 	private arrayIndex = (array) => {
-		let ret = {};
+		const ret = {};
 		for (let index = 0; index < array.length; index++) {
 			ret[array[index]] = index;
 		}
