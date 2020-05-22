@@ -90,38 +90,37 @@ export class TimeSeries {
 	): Array<ITimeSeries> => {
 		const returnValue: Array<ITimeSeries> = [];
 		const columnIndex: any = this.arrayIndex(columns);
-		const firstTimeStamp = allRows[0][0][columnIndex.time];
-		const lastTimeStamp = allRows[allRows.length - 1][0][columnIndex.time];
-		const asset = assets.find((item) => item.id === sequences[0].assetId);
+		const firstTimeStamp = allRows[0].items[0][columnIndex.time];
+		const lastTimeStamp = allRows[allRows.length - 1].items[0][columnIndex.time];
+		const asset = assets ? assets.find((item) => item.id === sequences[0].assetId) : null;
 
-		for (let rowIndex = 0; rowIndex < allRows[0].length; rowIndex++) {
+		for (let rowIndex = 0; rowIndex < allRows[0].items.length; rowIndex++) {
 			const dataPoints = [];
 			// tslint:disable-next-line: prefer-for-of
 			for (let allRowIndex = 0; allRowIndex < allRows.length; allRowIndex++) {
 				dataPoints.push({
-					timestamp: allRows[allRowIndex][rowIndex][columnIndex.time],
-					value: allRows[allRowIndex][rowIndex][columnIndex.temp],
+					timestamp: allRows[allRowIndex].items[rowIndex][columnIndex.time],
+					value: allRows[allRowIndex].items[rowIndex][columnIndex.temp],
 				});
 			}
-
-			returnValue.push({
+			const obj = {
 				firstTimestamp: firstTimeStamp,
 				lastTimestamp: lastTimeStamp,
 				dataPoints,
 				location: {
-					lat: parseFloat(allRows[0][rowIndex][columnIndex.lat]),
-					long: parseFloat(allRows[0][rowIndex][columnIndex.long]),
-					depth: parseInt(allRows[0][rowIndex][columnIndex.depth], 10),
+					lat: parseFloat(allRows[0].items[rowIndex][columnIndex.lat]),
+					long: parseFloat(allRows[0].items[rowIndex][columnIndex.long]),
+					depth: parseInt(allRows[0].items[rowIndex][columnIndex.depth], 10),
 					zoomLevel: 0,
 				},
 				type: TimeSeriesType.TEMPERATURE,
 				unit: UnitType.CELSIUS,
 				id: sequences[0].id,
 				externalId: sequences[0].externalId,
-				assetId: asset.id,
-			});
+				assetId: asset ? asset.id : undefined,
+			};
+			returnValue.push(obj);
 		}
-
 		return returnValue;
 	};
 
@@ -203,6 +202,7 @@ export class TimeSeries {
 				metadata: {
 					geo_key_from: "S90_W180",
 					geo_key_to: "N90_E180",
+					source: filter.provider[0],
 				},
 			},
 			limit: 1000,

@@ -27,7 +27,7 @@ export class Temperature {
 	 */
 	public getAll = async (filter: ITimeSeriesFilter, stream?: Readable): Promise<Array<ITimeSeries>> => {
 		if (!filter.zoomLevel || filter.zoomLevel < 5) {
-			return this.getSequenceQueryResult(this._timeSeries.sequenceQueryBuilder(filter), filter);
+			return this.getSequenceQueryResult(this._timeSeries.sequenceQueryBuilder(filter), filter, stream);
 		} else {
 			// Get Cognite time series query from filter
 			const queries = await this._timeSeries.queryBuilder(filter);
@@ -119,10 +119,9 @@ export class Temperature {
 		return columns;
 	};
 
-	private getSequenceQueryResult = async (query, filter: ITimeSeriesFilter) => {
+	private getSequenceQueryResult = async (query, filter: ITimeSeriesFilter, stream?: Readable) => {
 		let sequences: Array<Sequence>;
 		let assets;
-		let rows;
 		const columns = this.getSequenceColumns();
 		try {
 			sequences = await this._client.cognite.sequences.search(query);
@@ -142,30 +141,56 @@ export class Temperature {
 			const ids = sequences.map((s) => {
 				return s.assetId;
 			});
-			assets = await this._client.cognite.assets.retrieve(this._timeSeries.numberToIdInternal([...new Set(ids)]));
-		} catch (error) {
-			throw error;
-		}
-		try {
-			const promises = [];
-			for (const sq of sequences) {
-				// Get latest datapoint from each time series
-				promises.push(() =>
-					this._client.cognite.sequences
-						.retrieveRows({
-							id: sq.id,
-							columns,
-							limit: 10000,
-						})
-						.autoPagingToArray({ limit: 1000000 }),
+			if (ids.length > 0 && ids[0] !== undefined) {
+				assets = await this._client.cognite.assets.retrieve(
+					this._timeSeries.numberToIdInternal([...new Set(ids)]),
 				);
 			}
-			rows = await throttleActions(promises, this._concurrency);
 		} catch (error) {
 			throw error;
 		}
+		const all = [];
+		try {
+			let response;
 
-		// Convert Cognite data to ODP data model
-		return this._timeSeries.sequenceConvert(sequences, rows, assets, columns);
+			while (true) {
+				const q = [];
+				for (const sq of sequences) {
+					// Get latest datapoint from each time series
+					q.push({
+						id: sq.id,
+						columns,
+						limit: 10000,
+						cursor: response ? response[q.length].nextCursor : null,
+					});
+				}
+				response = await this.getSequenceRows(q);
+				const converted = this._timeSeries.sequenceConvert(sequences, response, assets, columns);
+				if (!stream) {
+					all.push(...converted);
+				} else {
+					stream.push(converted);
+				}
+				if (!response[0].nextCursor) {
+					break;
+				}
+			}
+		} catch (error) {
+			throw error;
+		}
+		if (stream) {
+			// close stream
+			stream.push(null);
+		}
+
+		return all;
+	};
+
+	private getSequenceRows = (seqRows) => {
+		const promises = [];
+		for (const seq of seqRows) {
+			promises.push(this._client.cognite.sequences.retrieveRows(seq));
+		}
+		return Promise.all(promises);
 	};
 }
