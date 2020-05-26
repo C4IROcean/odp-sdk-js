@@ -10,7 +10,8 @@
 		"docs": "typedoc --options typedoc.js --tsconfig tsconfig.json",
 		"tslint": "tslint -e \"**/*.d.ts\" -e \"node_modules/**/*ts\" \"**/*.ts\"",
 		"format-code": "prettier package.json index.ts \"source/**/*.ts\" --write",
-		"test": "jest"
+		"test": "jest",
+		"compile": "tsc"
 	},
 	"keywords": [
 		"ODP",
