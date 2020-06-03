@@ -1,7 +1,7 @@
 import { ODPClient, ITimeSeriesFilter, ITimeSeries, IDatapointFilter } from "../../";
 import { TimeSeries } from "../";
 import { throttleActions } from "../../utils";
-import { TimeSeriesList } from "@cognite/sdk";
+import { TimeSeriesList, Sequence } from "@cognite/sdk";
 import { Readable } from "stream";
 
 /**
@@ -26,18 +26,22 @@ export class Temperature {
 	 * @param filter
 	 */
 	public getAll = async (filter: ITimeSeriesFilter, stream?: Readable): Promise<Array<ITimeSeries>> => {
-		// Get Cognite time series query from filter
-		const queries = await this._timeSeries.queryBuilder(filter);
-		const promises = [];
+		if (!filter.zoomLevel || filter.zoomLevel < 5) {
+			return this.getSequenceQueryResult(this._timeSeries.sequenceQueryBuilder(filter), filter, stream);
+		} else {
+			// Get Cognite time series query from filter
+			const queries = await this._timeSeries.queryBuilder(filter);
+			const promises = [];
 
-		for (const query of queries) {
-			promises.push(() => this.getSingleTimeSeriesQueryResult(query, filter));
-		}
-		try {
-			const timelines = await throttleActions(promises, this._concurrency, stream);
-			return [].concat(...timelines);
-		} catch (error) {
-			throw error;
+			for (const query of queries) {
+				promises.push(() => this.getSingleTimeSeriesQueryResult(query, filter));
+			}
+			try {
+				const timelines = await throttleActions(promises, this._concurrency, stream);
+				return [].concat(...timelines);
+			} catch (error) {
+				throw error;
+			}
 		}
 	};
 
@@ -53,7 +57,7 @@ export class Temperature {
 
 	public get = async (externalIds: Array<string>, filter: IDatapointFilter) => {
 		const timeseries = await this._client.cognite.timeseries.retrieve(
-			this._timeSeries.stringToIdEither(externalIds),
+			this._timeSeries.stringToIdExternal(externalIds),
 		);
 		const dataPointFilter = this._timeSeries.datapointFilter(filter);
 
@@ -107,5 +111,86 @@ export class Temperature {
 
 		// Convert Cognite data to ODP data model
 		return this._timeSeries.convert(timeseries, dataPoints, assets);
+	};
+
+	private getSequenceColumns = () => {
+		const columns = this._timeSeries.getSequenceColumns();
+		columns.push("temp");
+		return columns;
+	};
+
+	private getSequenceQueryResult = async (query, filter: ITimeSeriesFilter, stream?: Readable) => {
+		let sequences: Array<Sequence>;
+		let assets;
+		const columns = this.getSequenceColumns();
+		try {
+			sequences = await this._client.cognite.sequences.search(query);
+		} catch (error) {
+			throw error;
+		}
+		if (sequences.length === 0) {
+			return [];
+		}
+		sequences.sort((a, b) => (a.metadata.date > b.metadata.date ? 1 : b.metadata.date > a.metadata.date ? -1 : 0));
+
+		if (filter.latestValue) {
+			sequences = [sequences[sequences.length - 1]];
+		}
+
+		try {
+			const ids = sequences.map((s) => {
+				return s.assetId;
+			});
+			if (ids.length > 0 && ids[0] !== undefined) {
+				assets = await this._client.cognite.assets.retrieve(
+					this._timeSeries.numberToIdInternal([...new Set(ids)]),
+				);
+			}
+		} catch (error) {
+			throw error;
+		}
+		const all = [];
+		try {
+			let response;
+
+			while (true) {
+				const q = [];
+				for (const sq of sequences) {
+					// Get latest datapoint from each time series
+					q.push({
+						id: sq.id,
+						columns,
+						limit: 10000,
+						cursor: response ? response[q.length].nextCursor : null,
+					});
+				}
+				response = await this.getSequenceRows(q);
+				const converted = this._timeSeries.sequenceConvert(sequences, response, assets, columns);
+				if (!stream) {
+					all.push(...converted);
+				} else {
+					stream.push(converted);
+				}
+				if (!response[0].nextCursor) {
+					break;
+				}
+			}
+		} catch (error) {
+			throw error;
+		}
+		if (stream) {
+			// close stream
+			stream.push(null);
+		}
+
+		return all;
+	};
+
+	private getSequenceRows = (seqRows) => {
+		const promises = [];
+		for (const seq of seqRows) {
+			promises.push(this._client.cognite.sequences.retrieveRows(seq));
+		}
+		return Promise.all(promises);
 	};
 }

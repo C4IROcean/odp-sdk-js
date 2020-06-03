@@ -18,6 +18,8 @@ import {
 	LatestDataPropertyFilter,
 	IdEither,
 	DatapointsMultiQueryBase,
+	SequenceListScope,
+	Sequence,
 } from "@cognite/sdk";
 import { IDatapointFilter } from "../types/types";
 import { cloneDeep } from "lodash";
@@ -73,6 +75,51 @@ export class TimeSeries {
 					assetId: at.id,
 				});
 			}
+		}
+		return returnValue;
+	};
+
+	/**
+	 * Convert Cognite response to a ODP response
+	 */
+	public sequenceConvert = (
+		sequences: Array<Sequence>,
+		allRows,
+		assets: AssetList,
+		columns: Array<string>,
+	): Array<ITimeSeries> => {
+		const returnValue: Array<ITimeSeries> = [];
+		const columnIndex: any = this.arrayIndex(columns);
+		const firstTimeStamp = allRows[0].items[0][columnIndex.time];
+		const lastTimeStamp = allRows[allRows.length - 1].items[0][columnIndex.time];
+		const asset = assets ? assets.find((item) => item.id === sequences[0].assetId) : null;
+
+		for (let rowIndex = 0; rowIndex < allRows[0].items.length; rowIndex++) {
+			const dataPoints = [];
+			// tslint:disable-next-line: prefer-for-of
+			for (let allRowIndex = 0; allRowIndex < allRows.length; allRowIndex++) {
+				dataPoints.push({
+					timestamp: allRows[allRowIndex].items[rowIndex][columnIndex.time],
+					value: allRows[allRowIndex].items[rowIndex][columnIndex.temp],
+				});
+			}
+			const obj = {
+				firstTimestamp: firstTimeStamp,
+				lastTimestamp: lastTimeStamp,
+				dataPoints,
+				location: {
+					lat: parseFloat(allRows[0].items[rowIndex][columnIndex.lat]),
+					long: parseFloat(allRows[0].items[rowIndex][columnIndex.long]),
+					depth: parseInt(allRows[0].items[rowIndex][columnIndex.depth], 10),
+					zoomLevel: 0,
+				},
+				type: TimeSeriesType.TEMPERATURE,
+				unit: UnitType.CELSIUS,
+				id: sequences[0].id,
+				externalId: sequences[0].externalId,
+				assetId: asset ? asset.id : undefined,
+			};
+			returnValue.push(obj);
 		}
 		return returnValue;
 	};
@@ -149,9 +196,29 @@ export class TimeSeries {
 		return queries;
 	};
 
-	public stringToIdEither = (ids: Array<string>): Array<IdEither> => {
+	public sequenceQueryBuilder = (filter: ITimeSeriesFilter) => {
+		const sequenceFilter: SequenceListScope = {
+			filter: {
+				metadata: {
+					geo_key_from: "S90_W180",
+					geo_key_to: "N90_E180",
+					source: filter.provider[0],
+				},
+			},
+			limit: 1000,
+		};
+		return sequenceFilter;
+	};
+
+	public stringToIdExternal = (ids: Array<string>): Array<IdEither> => {
 		return ids.map((id) => {
 			return { externalId: id };
+		});
+	};
+
+	public numberToIdInternal = (ids: Array<number>): Array<IdEither> => {
+		return ids.map((id) => {
+			return { id };
 		});
 	};
 
@@ -194,6 +261,10 @@ export class TimeSeries {
 		return datapointLatestFilter;
 	};
 
+	public getSequenceColumns = () => {
+		return ["time", "lat", "long", "depth"];
+	};
+
 	private depthExpander = (depthFilter: INumberFilter) => {
 		const depths = [];
 		if (!depthFilter || (!depthFilter.max && !depthFilter.min)) {
@@ -213,6 +284,14 @@ export class TimeSeries {
 			}
 		}
 		return depths;
+	};
+
+	private arrayIndex = (array) => {
+		const ret = {};
+		for (let index = 0; index < array.length; index++) {
+			ret[array[index]] = index;
+		}
+		return ret;
 	};
 
 	private providerExpander = (providers) => {

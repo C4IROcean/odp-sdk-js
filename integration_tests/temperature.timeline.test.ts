@@ -79,6 +79,33 @@ describe("temperature", () => {
 		expect((temps[0].dataPoints[0] as GetDoubleDatapoint).value).toBe(9.299999999999997);
 	});
 
+	test.only("get readings from a specific timeline", async () => {
+		const filter: ITimeSeriesFilter = {
+			provider: ["World Ocean Atlas"],
+			limit: 100,
+			unit: UnitType.CELSIUS,
+		};
+
+		const temps = [];
+		const readableStream = new Readable({
+			read() {
+				// should be empty
+			},
+		})
+			.pipe(ndjson.parse())
+			.on("data", (json) => {
+				temps.push(...json);
+			});
+
+		const no = await odp.timeSeries.temperature.getAll(filter, readableStream);
+
+		expect(no.length).toBe(0);
+		expect(temps.length).toBe(29528);
+		expect(temps[0].dataPoints.length).toBe(1);
+		expect(temps[0].dataPoints[0].timestamp).toBe(631152000000);
+		expect((temps[0].dataPoints[0] as GetDoubleDatapoint).value).toBe(-0.7457605004310608);
+	});
+
 	test("get aggregate readings from a specific timeline", async () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
