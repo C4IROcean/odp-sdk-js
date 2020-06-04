@@ -1,6 +1,7 @@
 import { CogniteClient } from "@cognite/sdk";
 import { TimeSeries } from "./timeSeries";
 import { Assets } from "./asset";
+import { Sequences } from "./sequences";
 
 export interface IClientOptions {
 	/** App identifier (ex: 'FileExtractor') */
@@ -34,6 +35,7 @@ export interface IOAuthLoginOptions extends IProject {
 export default class ODPClient {
 	private _client: CogniteClient = null;
 	private _timeSeries: TimeSeries;
+	private _sequences: Sequences;
 	private _assets: Assets;
 
 	constructor(options: IClientOptions) {
@@ -67,12 +69,17 @@ export default class ODPClient {
 		return this._timeSeries;
 	}
 
+	public get sequences() {
+		return this._sequences;
+	}
+
 	public get asset() {
 		return this._assets;
 	}
 
 	private init = () => {
 		this._timeSeries = new TimeSeries(this);
+		this._sequences = new Sequences(this);
 		this._assets = new Assets(this);
 	};
 }

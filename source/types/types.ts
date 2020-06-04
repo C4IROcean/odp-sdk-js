@@ -19,6 +19,19 @@ export interface ITimeSeries {
 	dataPoints: Array<GetAggregateDatapoint> | Array<GetStringDatapoint> | Array<GetDoubleDatapoint>;
 }
 
+export interface ISequence {
+	type: SequenceType;
+	location: {
+		long: number;
+		lat: number;
+		depth: number;
+	};
+	value: number;
+	id: number;
+	externalId: string;
+	rowNumber: number;
+}
+
 export interface IDataPoints {
 	value: number;
 	timestamp: Date;
@@ -26,6 +39,11 @@ export interface IDataPoints {
 
 export enum TimeSeriesType {
 	TEMPERATURE = "temperature",
+}
+
+export enum SequenceType {
+	ALL = "all",
+	COUNT = "count",
 }
 
 export enum UnitType {
