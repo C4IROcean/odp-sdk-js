@@ -1,25 +1,29 @@
+import { IGeoLocation } from "..";
+
 export const indexToGridCoordinate = (index, resolution) => {
 	// returns cartesian grid coordinates, given index and resolution
 	const lat_range = resolution * 180;
-	const x_loc = (index - 1) / lat_range + 1;
+	const x_loc = Math.floor((index - 1) / lat_range + 1);
 	const y_loc = ((index - 1) % lat_range) + 1;
-	return [x_loc, y_loc];
+	return { x: x_loc, y: y_loc };
 };
 
-export const gridCoordinateToIndex = (x, y, resolution) => {
+export const gridCoordinateToIndex = (x, y, resolution): number => {
 	// returns index of specific grid-coordinate, given
 	return (x - 1) * 180 * resolution + y;
 };
 
-export const indexToMapCoordinate = (index, resolution) => {
+export const indexToMapCoordinate = (index, resolution): IGeoLocation => {
 	// Index to longitude and latitude
-	const [x, y] = indexToGridCoordinate(index, resolution);
-	const longitude = -180 + (x - 0.5) / resolution; // +0.5 is to put location to center of grid tile
-	const latitude = -90 + (y - 0.5) / resolution;
-	return [longitude, latitude];
+	const location = indexToGridCoordinate(index, resolution);
+	const longitude = -180 + (location.x - 0.5) / resolution; // +0.5 is to put location to center of grid tile
+	const latitude = -90 + (location.y - 0.5) / resolution;
+	return { lon: longitude, lat: latitude };
 };
 
-export const cornerCoordinatesToAllCoordinates = (resolution = 1, corners) => {
+export const cornerCoordinatesToAllCoordinates = (corners, resolution) => {
+	// ***needs verification***
+
 	// tuple of tuples ->((x1,y1),(x2,y2)) or ((x1,x2))
 	const x1 = corners[0][0];
 	const y1 = corners[0][1];

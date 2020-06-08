@@ -20,7 +20,7 @@ export class Sequences {
 	public sequenceQueryBuilder = () => {
 		const sequenceFilter: SequenceListScope = {
 			filter: {
-				externalIdPrefix: "cast_count_map",
+				externalIdPrefix: "cast_count_map_2",
 				metadata: {
 					geo_key_from: "-90S_-180W",
 					geo_key_to: "90N_180E",

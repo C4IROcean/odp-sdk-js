@@ -1,5 +1,5 @@
 import { Sequences } from "..";
-import { ODPClient } from "../../";
+import { ODPClient, IGeoLocation } from "../../";
 import { gridCoordinateToIndex } from "../utils";
 import { Sequence } from "@cognite/sdk";
 
@@ -11,14 +11,21 @@ export class Casts {
 		this._sequences = sequences;
 	}
 
-	public getCastsCount = async (long, lat) => {
-		if (long && lat) {
-			gridCoordinateToIndex(long, lat, 1);
+	public getCastsCount = async (location?: IGeoLocation, stream?) => {
+		let start = 0;
+		let end;
+		if (location && location.lon && location.lat) {
+			start = gridCoordinateToIndex(location.lon, location.lat, 1);
+			end = start + 1;
 		}
-		return this.getSequenceQueryResult(this._sequences.sequenceQueryBuilder());
+		return this.getSequenceQueryResult(this._sequences.sequenceQueryBuilder(), null, start, end, stream);
 	};
 
-	private getSequenceQueryResult = async (query, columns?, stream?) => {
+	public getCasts = async (location: IGeoLocation, stream?) => {};
+
+	public getCastRows = async (test, stream?) => {};
+
+	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?) => {
 		let sequences: Array<Sequence>;
 		try {
 			sequences = await this._client.cognite.sequences.search(query);
@@ -48,6 +55,8 @@ export class Casts {
 						id: sq.id,
 						limit: 10000,
 						cursor: response ? response[q.length].nextCursor : null,
+						start,
+						end,
 					});
 				}
 				response = await this.getSequenceRows(q);

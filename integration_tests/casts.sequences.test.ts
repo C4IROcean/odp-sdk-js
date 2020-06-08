@@ -17,7 +17,12 @@ describe("sequences", () => {
 	});
 
 	test("get cast count", async () => {
-		const count = await odp.sequences.casts.getCastsCount(12, 12);
-		expect(count.length).toBe(5155);
+		const count = await odp.sequences.casts.getCastsCount();
+		expect(count.length).toBe(27300);
+	});
+
+	test("get cast count for a single location", async () => {
+		const count = await odp.sequences.casts.getCastsCount({ lat: 12, lon: 12 });
+		expect(count.length).toBe(1);
 	});
 });
