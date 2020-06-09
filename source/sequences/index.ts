@@ -1,4 +1,4 @@
-import { ODPClient, ISequence, SequenceType } from "../";
+import { ODPClient, ISequenceRow, SequenceType } from "../";
 import { Casts } from "./casts";
 import { SequenceListScope, Sequence } from "@cognite/sdk";
 
@@ -34,8 +34,8 @@ export class Sequences {
 	/**
 	 * Convert Cognite response to a ODP response
 	 */
-	public sequenceConvert = (sequences: Array<Sequence>, allRows, columns): Array<ISequence> => {
-		const returnValue: Array<ISequence> = [];
+	public sequenceConvert = (sequences: Array<Sequence>, allRows, columns): Array<ISequenceRow> => {
+		const returnValue: Array<ISequenceRow> = [];
 		const columnIndex: any = this.arrayIndex(columns);
 
 		for (const item of allRows[0].items) {
@@ -48,8 +48,7 @@ export class Sequences {
 				id: sequences[0].id,
 				rowNumber: item.rowNumber,
 				externalId: sequences[0].externalId,
-				value: item[columnIndex.cast_count],
-				type: SequenceType.COUNT,
+				value: { count: item[columnIndex.cast_count] },
 			});
 		}
 		return returnValue;
@@ -59,8 +58,8 @@ export class Sequences {
 	 * Convert a cast sequence
 	 */
 
-	public castSequenceConvert = (sequences: Array<Sequence>, allRows, columns): Array<ISequence> => {
-		const returnValue: Array<ISequence> = [];
+	public castSequenceConvert = (sequences: Array<Sequence>, allRows, columns): Array<ISequenceRow> => {
+		const returnValue: Array<ISequenceRow> = [];
 		const columnIndex: any = this.arrayIndex(columns);
 
 		for (const item of allRows[0].items) {
@@ -73,8 +72,7 @@ export class Sequences {
 				id: sequences[0].id,
 				rowNumber: item.rowNumber,
 				externalId: sequences[0].externalId,
-				value: item[columnIndex.cast_count],
-				type: SequenceType.COUNT,
+				value: { count: item[columnIndex.cast_count] },
 			});
 		}
 		return returnValue;

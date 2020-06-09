@@ -20,29 +20,22 @@ export interface ITimeSeries {
 }
 
 export interface ISequence {
-	type: SequenceType;
 	location: {
 		long: number;
 		lat: number;
-		depth: number;
+		depth?: number;
 	};
-	cruise: {
+	cruise?: {
 		country: string;
+		id: string;
+		vesselName: string;
 	};
-	value: number;
 	id: number;
 	externalId: string;
-	rowNumber: number;
-	rows: Array<ISequenceRow>;
-	time: number;
+	time?: number;
 }
 
-export interface ISequenceRow {
-	location: {
-		long: number;
-		lat: number;
-		depth: number;
-	};
+export interface ISequenceRow extends ISequence {
 	value: {
 		temperature?: number;
 		count?: number;
@@ -55,9 +48,9 @@ export interface ISequenceRow {
 		nitrite?: number;
 		ph?: number;
 		chlorophyll?: number;
+		pressure?: number;
 	};
 	rowNumber: number;
-	time: number;
 }
 
 export interface IDataPoints {
