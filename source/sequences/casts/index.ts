@@ -1,6 +1,6 @@
 import { Sequences } from "..";
 import { ODPClient, IGeoLocation } from "../../";
-import { gridCoordinateToIndex } from "../utils";
+import { gridCoordinateToIndex, mapCoordinateToIndex } from "../utils";
 import { Sequence } from "@cognite/sdk";
 
 export class Casts {
@@ -21,11 +21,24 @@ export class Casts {
 		return this.getSequenceQueryResult(this._sequences.sequenceQueryBuilder(), null, start, end, stream);
 	};
 
-	public getCasts = async (location: IGeoLocation, stream?) => {};
+	public getCasts = async (location?: IGeoLocation, castId?: string, stream?) => {
+		if (!location && !castId) {
+			throw new Error("Either location or castId is required");
+		}
+		if (!castId) {
+			castId = "CASTS_WOD_" + mapCoordinateToIndex(location);
+		}
+		return this.getSequenceQueryResult({ externalId: castId }, undefined, stream);
+	};
 
-	public getCastRows = async (test, stream?) => {};
+	public getCastRows = async (castId, columns, stream?) => {
+		if (!castId) {
+			throw new Error("castId is required");
+		}
+		return this.getSequenceQueryResult({ externalId: castId }, columns, stream);
+	};
 
-	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?) => {
+	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?, converter?) => {
 		let sequences: Array<Sequence>;
 		try {
 			sequences = await this._client.cognite.sequences.search(query);
@@ -60,7 +73,9 @@ export class Casts {
 					});
 				}
 				response = await this.getSequenceRows(q);
-				const converted = this._sequences.sequenceConvert(sequences, response, columns);
+				const converted = converter
+					? converter(sequences, response, columns)
+					: this._sequences.sequenceConvert(sequences, response, columns);
 				if (!stream) {
 					all.push(...converted);
 				} else {

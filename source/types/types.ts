@@ -26,10 +26,38 @@ export interface ISequence {
 		lat: number;
 		depth: number;
 	};
+	cruise: {
+		country: string;
+	};
 	value: number;
 	id: number;
 	externalId: string;
 	rowNumber: number;
+	rows: Array<ISequenceRow>;
+	time: number;
+}
+
+export interface ISequenceRow {
+	location: {
+		long: number;
+		lat: number;
+		depth: number;
+	};
+	value: {
+		temperature?: number;
+		count?: number;
+		name?: string;
+		salinity?: number;
+		oxygen?: number;
+		phosphate?: number;
+		silicate?: number;
+		nitrate?: number;
+		nitrite?: number;
+		ph?: number;
+		chlorophyll?: number;
+	};
+	rowNumber: number;
+	time: number;
 }
 
 export interface IDataPoints {

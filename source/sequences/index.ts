@@ -55,6 +55,31 @@ export class Sequences {
 		return returnValue;
 	};
 
+	/**
+	 * Convert a cast sequence
+	 */
+
+	public castSequenceConvert = (sequences: Array<Sequence>, allRows, columns): Array<ISequence> => {
+		const returnValue: Array<ISequence> = [];
+		const columnIndex: any = this.arrayIndex(columns);
+
+		for (const item of allRows[0].items) {
+			returnValue.push({
+				location: {
+					lat: parseFloat(item[columnIndex.lat]),
+					long: parseFloat(item[columnIndex.long]),
+					depth: parseInt(item[columnIndex.depth], 10),
+				},
+				id: sequences[0].id,
+				rowNumber: item.rowNumber,
+				externalId: sequences[0].externalId,
+				value: item[columnIndex.cast_count],
+				type: SequenceType.COUNT,
+			});
+		}
+		return returnValue;
+	};
+
 	private arrayIndex = (array) => {
 		const ret = {};
 		for (let index = 0; index < array.length; index++) {
