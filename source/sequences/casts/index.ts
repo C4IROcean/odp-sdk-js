@@ -28,14 +28,21 @@ export class Casts {
 		if (!castId) {
 			castId = "CASTS_WOD_" + mapCoordinateToIndex(location);
 		}
-		return this.getSequenceQueryResult({ externalId: castId }, undefined, stream);
+		return this.getSequenceQueryResult({ filter: { name: castId } }, undefined, 0, undefined, stream);
 	};
 
-	public getCastRows = async (castId, columns, stream?) => {
+	public getCastRows = async (castId, columns?, stream?) => {
 		if (!castId) {
 			throw new Error("castId is required");
 		}
-		return this.getSequenceQueryResult({ externalId: castId }, columns, stream);
+		return this.getSequenceQueryResult(
+			{ filter: { name: castId } },
+			columns,
+			0,
+			undefined,
+			stream,
+			this._sequences.castSequenceConvert,
+		);
 	};
 
 	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?, converter?) => {

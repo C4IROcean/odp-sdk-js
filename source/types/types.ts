@@ -26,9 +26,9 @@ export interface ISequence {
 		depth?: number;
 	};
 	cruise?: {
-		country: string;
-		id: string;
-		vesselName: string;
+		country?: string;
+		id?: string;
+		vesselName?: string;
 	};
 	id: number;
 	externalId: string;
@@ -36,21 +36,23 @@ export interface ISequence {
 }
 
 export interface ISequenceRow extends ISequence {
-	value: {
-		temperature?: number;
-		count?: number;
-		name?: string;
-		salinity?: number;
-		oxygen?: number;
-		phosphate?: number;
-		silicate?: number;
-		nitrate?: number;
-		nitrite?: number;
-		ph?: number;
-		chlorophyll?: number;
-		pressure?: number;
-	};
+	value: ISequenceRowValue;
 	rowNumber: number;
+}
+
+export interface ISequenceRowValue {
+	temperature?: number;
+	count?: number;
+	name?: string;
+	salinity?: number;
+	oxygen?: number;
+	phosphate?: number;
+	silicate?: number;
+	nitrate?: number;
+	nitrite?: number;
+	ph?: number;
+	chlorophyll?: number;
+	pressure?: number;
 }
 
 export interface IDataPoints {

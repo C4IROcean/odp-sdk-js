@@ -25,4 +25,10 @@ describe("sequences", () => {
 		const count = await odp.sequences.casts.getCastsCount({ lat: 12, lon: 12 });
 		expect(count.length).toBe(1);
 	});
+
+	test("get a specific cast", async () => {
+		const values = await odp.sequences.casts.getCastRows("wod_detail_133_32");
+		expect(values.length).toBe(232);
+		expect(values[0].value.temperature).toBe(156.4);
+	});
 });
