@@ -1,5 +1,5 @@
 import { Sequences } from "..";
-import { ODPClient, IGeoLocation } from "../../";
+import { ODPClient, IGeoLocation, SequenceColumnType } from "../../";
 import { gridCoordinateToIndex, mapCoordinateToIndex } from "../utils";
 import { Sequence } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
@@ -8,7 +8,7 @@ import { getBounds, isPointInPolygon } from "geolib";
  * Casts class. Responsible for handling the three levels of casts.
  *
  * Level 1 contains an overview of all 1x1 grid cast count and is useful
- * for for getting an globe (or large area) overview.
+ * for for getting a globe (or large area) overview.
  *
  * Level 2 contains a list of all casts for a given 1x1 grid with some metadata
  *
@@ -61,24 +61,34 @@ export class Casts {
 	};
 
 	/**
+	 * Get cast rows that fit within a given polygon. Level 2
+	 *
+	 * @param polygon Polygon with lists of location objects. The list have to be in a correct order.
+	 * @param stream Optional stream
+	 */
+	public getCastsFromPolygon = async (polygon, columns?, stream?) => {
+		const geoBounds = getBounds(polygon);
+		const castPromises = [];
+		for (let lat = geoBounds.minLat; lat < geoBounds.maxLat; lat++) {
+			for (let lon = geoBounds.minLng; lon < geoBounds.maxLng; lon++) {
+				castPromises.push(this.getCasts({ lat, lon }, columns, stream));
+			}
+		}
+		return Promise.all(castPromises);
+	};
+
+	/**
 	 * Get cast rows that fit within a given polygon. Level 3
 	 *
 	 * @param polygon Polygon with lists of location objects. The list have to be in a correct order.
 	 * @param stream Optional stream
 	 */
-	public getCastsFromPolygon = async (polygon, stream?) => {
-		const geoBounds = getBounds(polygon);
-		const castPromises = [];
+	public getCastRowsFromPolygon = async (polygon, columns?, stream?) => {
 		const rowPromises = [];
-		for (let lat = geoBounds.minLat; lat < geoBounds.maxLat; lat++) {
-			for (let lon = geoBounds.minLng; lon < geoBounds.maxLng; lon++) {
-				castPromises.push(this.getCasts({ lat, lon }));
-			}
-		}
-		const casts = await Promise.all(castPromises);
+		const casts = await this.getCastsFromPolygon(polygon);
 		for (const cast of casts) {
 			if (isPointInPolygon({ latitude: cast.location.lat, longitude: cast.location.lon }, polygon)) {
-				rowPromises.push(this.getCastRows(cast.id, undefined, stream));
+				rowPromises.push(this.getCastRows(cast.id, columns, stream));
 			}
 		}
 		return Promise.all(rowPromises);
@@ -91,7 +101,7 @@ export class Casts {
 	 * @param columns Columns that we want returned
 	 * @param stream Optional stream
 	 */
-	public getCastRows = async (castId, columns?, stream?) => {
+	public getCastRows = async (castId: string, columns?: Array<SequenceColumnType>, stream?) => {
 		if (!castId) {
 			throw new Error("castId is required");
 		}

@@ -73,6 +73,24 @@ export enum UnitType {
 	CELSIUS = "celsius",
 }
 
+export enum SequenceColumnType {
+	TEMPERATURE = "temperature",
+	COUNT = "cast_count",
+	NAME = "name",
+	SALINITY = "salinity",
+	OXYGEN = "oxygen",
+	PHOSPHATE = "phosphate",
+	SILICATE = "silicate",
+	NITRATE = "nitrate",
+	NITRITE = "nitrite",
+	PH = "pH",
+	CHLOROPHYLL = "chlorophyll",
+	PRESSURE = "pressure",
+	DATE = "date",
+	LATITUDE = "latitude",
+	LONGITUDE = "longitude",
+}
+
 export enum ZoomLevel {
 	_1 = 1,
 	_2 = 2,
