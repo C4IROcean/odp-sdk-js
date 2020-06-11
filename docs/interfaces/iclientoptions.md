@@ -23,7 +23,7 @@
 
 **● appId**: *`string`*
 
-*Defined in ODPClient.ts:7*
+*Defined in ODPClient.ts:8*
 
 ___
 <a id="baseurl"></a>
@@ -32,7 +32,7 @@ ___
 
 **● baseUrl**: *`string`*
 
-*Defined in ODPClient.ts:8*
+*Defined in ODPClient.ts:9*
 
 ___
 

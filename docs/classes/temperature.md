@@ -48,7 +48,7 @@ ___
 
 ▸ **get**(externalIds: *`Array`<`string`>*, filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `Promise`<[ITimeSeries](../interfaces/itimeseries.md)[]>
 
-*Defined in timeSeries/temperature/index.ts:54*
+*Defined in timeSeries/temperature/index.ts:58*
 
 **Parameters:**
 
@@ -84,7 +84,7 @@ ___
 
 ▸ **getLatest**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*, stream?: *`Readable`*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
 
-*Defined in timeSeries/temperature/index.ts:48*
+*Defined in timeSeries/temperature/index.ts:52*
 
 **Parameters:**
 

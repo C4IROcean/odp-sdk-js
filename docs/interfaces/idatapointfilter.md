@@ -27,7 +27,7 @@
 
 **● aggregation**: *[IAggregation](iaggregation.md)*
 
-*Defined in types/types.ts:76*
+*Defined in types/types.ts:117*
 
 ___
 <a id="latestvalue"></a>
@@ -36,7 +36,7 @@ ___
 
 **● latestValue**: *`boolean`*
 
-*Defined in types/types.ts:78*
+*Defined in types/types.ts:119*
 
 ___
 <a id="limit"></a>
@@ -45,7 +45,7 @@ ___
 
 **● limit**: *`number`*
 
-*Defined in types/types.ts:77*
+*Defined in types/types.ts:118*
 
 ___
 <a id="time"></a>
@@ -54,7 +54,7 @@ ___
 
 **● time**: *[ITimeFilter](itimefilter.md)*
 
-*Defined in types/types.ts:75*
+*Defined in types/types.ts:116*
 
 ___
 
