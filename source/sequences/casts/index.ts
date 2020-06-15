@@ -84,14 +84,14 @@ export class Casts {
 	 * @param stream Optional stream
 	 */
 	public getCastRowsFromPolygon = async (polygon, columns?, stream?) => {
-		const rowPromises = [];
+		const promises = [];
 		const casts = await this.getCastsFromPolygon(polygon);
 		for (const cast of casts) {
 			if (isPointInPolygon({ latitude: cast.location.lat, longitude: cast.location.lon }, polygon)) {
-				rowPromises.push(this.getCastRows(cast.id, columns, stream));
+				promises.push(this.getCastRows(cast.id, columns, stream));
 			}
 		}
-		return Promise.all(rowPromises);
+		return Promise.all(promises);
 	};
 
 	/**
