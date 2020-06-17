@@ -2,7 +2,7 @@ import { Sequences } from "..";
 import { ODPClient, IGeoLocation, SequenceColumnType } from "../../";
 import { gridCoordinateToIndex, mapCoordinateToIndex } from "../utils";
 import { Sequence } from "@cognite/sdk";
-import { getBounds, isPointInPolygon } from "geolib";
+import { getBounds } from "geolib";
 
 /**
  * Casts class. Responsible for handling the three levels of casts.
@@ -57,7 +57,14 @@ export class Casts {
 		if (!castId) {
 			castId = "CASTS_WOD_" + mapCoordinateToIndex(location);
 		}
-		return this.getSequenceQueryResult({ filter: { name: castId } }, undefined, 0, undefined, stream);
+		return this.getSequenceQueryResult(
+			{ filter: { name: castId } },
+			undefined,
+			0,
+			undefined,
+			stream,
+			this._sequences.castSequenceLv2Convert,
+		);
 	};
 
 	/**
@@ -68,13 +75,21 @@ export class Casts {
 	 */
 	public getCastsFromPolygon = async (polygon, columns?, stream?) => {
 		const geoBounds = getBounds(polygon);
+		const all = [];
+		geoBounds.maxLat = Math.ceil(geoBounds.maxLat);
+		geoBounds.maxLng = Math.ceil(geoBounds.maxLng);
+		geoBounds.minLat = Math.floor(geoBounds.minLat);
+		geoBounds.minLng = Math.floor(geoBounds.minLng);
 		const castPromises = [];
 		for (let lat = geoBounds.minLat; lat < geoBounds.maxLat; lat++) {
 			for (let lon = geoBounds.minLng; lon < geoBounds.maxLng; lon++) {
 				castPromises.push(this.getCasts({ lat, lon }, columns, stream));
 			}
 		}
-		return Promise.all(castPromises);
+		for (const iterator of await Promise.all(castPromises)) {
+			all.push(...iterator);
+		}
+		return all;
 	};
 
 	/**
@@ -85,13 +100,18 @@ export class Casts {
 	 */
 	public getCastRowsFromPolygon = async (polygon, columns?, stream?) => {
 		const promises = [];
+		const all = [];
+
 		const casts = await this.getCastsFromPolygon(polygon);
 		for (const cast of casts) {
-			if (isPointInPolygon({ latitude: cast.location.lat, longitude: cast.location.lon }, polygon)) {
-				promises.push(this.getCastRows(cast.id, columns, stream));
-			}
+			promises.push(this.getCastRows(cast.value.externalId, columns, stream));
+			// if (isPointInPolygon({ latitude: cast.location.lat, longitude: cast.location.long }, polygon)) {
+			// }
 		}
-		return Promise.all(promises);
+		for (const iterator of await Promise.all(promises)) {
+			all.push(...iterator);
+		}
+		return all;
 	};
 
 	/**
@@ -152,7 +172,7 @@ export class Casts {
 				response = await this.getSequenceRows(q);
 				const converted = converter
 					? converter(sequences, response, columns)
-					: this._sequences.sequenceConvert(sequences, response, columns);
+					: this._sequences.castSequenceConvert(sequences, response, columns);
 				if (!stream) {
 					all.push(...converted);
 				} else {

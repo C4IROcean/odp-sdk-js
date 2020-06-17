@@ -1,4 +1,4 @@
-import * as http from "http";
+import * as https from "https";
 import { IBoundingBox } from "../types/types";
 
 export const throttleActions = (listOfCallableActions, limit, stream?) => {
@@ -46,27 +46,29 @@ export const throttleActions = (listOfCallableActions, limit, stream?) => {
 
 export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> => {
 	return new Promise((resolve, reject) => {
-		const url = `http://marineregions.org/mrgid/${mrgid}`;
-		http.get(url, (res) => {
-			let body = "";
+		const url = `https://marineregions.org/mrgid/${mrgid}`;
+		https
+			.get(url, (res) => {
+				let body = "";
 
-			res.on("data", (chunk) => {
-				body += chunk;
-			});
+				res.on("data", (chunk) => {
+					body += chunk;
+				});
 
-			res.on("end", () => {
-				try {
-					const json = JSON.parse(body);
-					return resolve({
-						bottomLeft: { lat: json.minLatitude, lon: json.minLongitude },
-						topRight: { lat: json.maxLatitude, lon: json.maxLongitude },
-					});
-				} catch (error) {
-					return reject(error);
-				}
+				res.on("end", () => {
+					try {
+						const json = JSON.parse(body);
+						return resolve({
+							bottomLeft: { lat: json.minLatitude, lon: json.minLongitude },
+							topRight: { lat: json.maxLatitude, lon: json.maxLongitude },
+						});
+					} catch (error) {
+						return reject(error);
+					}
+				});
+			})
+			.on("error", (error) => {
+				return reject(error);
 			});
-		}).on("error", (error) => {
-			return reject(error);
-		});
 	});
 };

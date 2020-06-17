@@ -53,6 +53,18 @@ export interface ISequenceRowValue {
 	ph?: number;
 	chlorophyll?: number;
 	pressure?: number;
+	externalId?: string;
+	castId?: number;
+	cruiseId?: string;
+	countryCode?: string;
+	latitudeMax?: number;
+	latitudeMin?: number;
+	longitudeMax?: number;
+	longitudeMin?: number;
+	pressureMax?: number;
+	pressureMin?: number;
+	temperatureMax?: number;
+	temperatureMin?: number;
 }
 
 export interface IDataPoints {

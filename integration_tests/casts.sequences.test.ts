@@ -31,4 +31,41 @@ describe("sequences", () => {
 		expect(values.length).toBe(232);
 		expect(values[0].value.temperature).toBe(156.4);
 	});
+
+	test("get casts from polygon", async () => {
+		/*const polygon = [
+			{ longitude: 0.1, latitude: 0.1 },
+			{ longitude: 0.1, latitude: 1.1 },
+			{ longitude: 2.2, latitude: 1.1 },
+			{ longitude: 2.1, latitude: 0.1 },
+			{ longitude: 0.1, latitude: 0.1 },
+		];*/
+
+		const polygon = [
+			{ longitude: -5, latitude: 57 },
+			{ longitude: -5, latitude: 62 },
+			{ longitude: 5, latitude: 62 },
+			{ longitude: 5, latitude: 57 },
+			{ longitude: -5, latitude: 57 },
+		];
+		const values = await odp.sequences.casts.getCastsFromPolygon(polygon);
+		expect(values.length).toBe(8);
+	});
+
+	test("get casts level 2", async () => {
+		const values = await odp.sequences.casts.getCasts({ lat: 32, lon: 131 });
+		expect(values.length).toBe(2);
+	});
+
+	test("get rows from polygon", async () => {
+		const polygon = [
+			{ longitude: -5, latitude: 57 },
+			{ longitude: -5, latitude: 62 },
+			{ longitude: 5, latitude: 62 },
+			{ longitude: 5, latitude: 57 },
+			{ longitude: -5, latitude: 57 },
+		];
+		const values = await odp.sequences.casts.getCastRowsFromPolygon(polygon);
+		expect(values.length).toBe(1231);
+	});
 });
