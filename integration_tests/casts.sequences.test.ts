@@ -49,12 +49,12 @@ describe("sequences", () => {
 			{ longitude: -5, latitude: 57 },
 		];
 		const values = await odp.sequences.casts.getCastsFromPolygon(polygon);
-		expect(values.length).toBe(8);
+		expect(values.length).toBe(14);
 	});
 
 	test("get casts level 2", async () => {
 		const values = await odp.sequences.casts.getCasts({ lat: 32, lon: 131 });
-		expect(values.length).toBe(2);
+		expect(values.length).toBe(20);
 	});
 
 	test("get rows from polygon", async () => {
@@ -66,6 +66,6 @@ describe("sequences", () => {
 			{ longitude: -5, latitude: 57 },
 		];
 		const values = await odp.sequences.casts.getCastRowsFromPolygon(polygon);
-		expect(values.length).toBe(1231);
+		expect(values.length).toBe(580);
 	});
 });

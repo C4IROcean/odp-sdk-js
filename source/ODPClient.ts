@@ -65,6 +65,10 @@ export default class ODPClient {
 		this._client.loginWithOAuth(options);
 	};
 
+	public authenticate = () => {
+		return this._client.authenticate();
+	};
+
 	public get timeSeries() {
 		return this._timeSeries;
 	}

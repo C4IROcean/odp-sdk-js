@@ -2,7 +2,7 @@ import { Sequences } from "..";
 import { ODPClient, IGeoLocation, SequenceColumnType } from "../../";
 import { gridCoordinateToIndex, mapCoordinateToIndex } from "../utils";
 import { Sequence } from "@cognite/sdk";
-import { getBounds } from "geolib";
+import { getBounds, isPointInPolygon } from "geolib";
 
 /**
  * Casts class. Responsible for handling the three levels of casts.
@@ -109,7 +109,11 @@ export class Casts {
 			// }
 		}
 		for (const iterator of await Promise.all(promises)) {
-			all.push(...iterator);
+			for (const row of iterator) {
+				if (isPointInPolygon({ latitude: row.location.lat, longitude: row.location.long }, polygon)) {
+					all.push(row);
+				}
+			}
 		}
 		return all;
 	};
@@ -172,7 +176,7 @@ export class Casts {
 				response = await this.getSequenceRows(q);
 				const converted = converter
 					? converter(sequences, response, columns)
-					: this._sequences.castSequenceConvert(sequences, response, columns);
+					: this._sequences.sequenceConvert(sequences, response, columns);
 				if (!stream) {
 					all.push(...converted);
 				} else {
