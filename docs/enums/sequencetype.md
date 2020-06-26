@@ -19,7 +19,7 @@
 
 **ALL**:  = "all"
 
-*Defined in types/types.ts:68*
+*Defined in types/types.ts:80*
 
 ___
 <a id="count"></a>
@@ -28,7 +28,7 @@ ___
 
 **COUNT**:  = "count"
 
-*Defined in types/types.ts:69*
+*Defined in types/types.ts:81*
 
 ___
 

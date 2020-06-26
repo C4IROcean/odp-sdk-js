@@ -20,6 +20,8 @@
 ### Methods
 
 * [castSequenceConvert](sequences.md#castsequenceconvert)
+* [castSequenceLv2Convert](sequences.md#castsequencelv2convert)
+* [constants](sequences.md#constants)
 * [sequenceConvert](sequences.md#sequenceconvert)
 * [sequenceQueryBuilder](sequences.md#sequencequerybuilder)
 
@@ -74,7 +76,7 @@ ___
 
 ▸ **castSequenceConvert**(sequences: *`Array`<`Sequence`>*, allRows: *`any`*, columns: *`any`*): `Array`<[ISequenceRow](../interfaces/isequencerow.md)>
 
-*Defined in sequences/index.ts:61*
+*Defined in sequences/index.ts:71*
 
 **Parameters:**
 
@@ -87,13 +89,43 @@ ___
 **Returns:** `Array`<[ISequenceRow](../interfaces/isequencerow.md)>
 
 ___
+<a id="castsequencelv2convert"></a>
+
+###  castSequenceLv2Convert
+
+▸ **castSequenceLv2Convert**(sequences: *`Array`<`Sequence`>*, allRows: *`any`*, columns: *`any`*): `Array`<[ISequenceRow](../interfaces/isequencerow.md)>
+
+*Defined in sequences/index.ts:101*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| sequences | `Array`<`Sequence`> |
+| allRows | `any` |
+| columns | `any` |
+
+**Returns:** `Array`<[ISequenceRow](../interfaces/isequencerow.md)>
+
+___
+<a id="constants"></a>
+
+###  constants
+
+▸ **constants**(): `object`
+
+*Defined in sequences/index.ts:20*
+
+**Returns:** `object`
+
+___
 <a id="sequenceconvert"></a>
 
 ###  sequenceConvert
 
 ▸ **sequenceConvert**(sequences: *`Array`<`Sequence`>*, allRows: *`any`*, columns: *`any`*): `Array`<[ISequenceRow](../interfaces/isequencerow.md)>
 
-*Defined in sequences/index.ts:37*
+*Defined in sequences/index.ts:47*
 
 **Parameters:**
 
@@ -112,7 +144,7 @@ ___
 
 ▸ **sequenceQueryBuilder**(): `SequenceListScope`
 
-*Defined in sequences/index.ts:20*
+*Defined in sequences/index.ts:30*
 
 **Returns:** `SequenceListScope`
 

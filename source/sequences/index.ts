@@ -17,10 +17,20 @@ export class Sequences {
 		return this._casts;
 	}
 
+	public constants = () => {
+		return {
+			sequence: {
+				level1prefix: "cast_count_map_2",
+				level2prefix: "CASTS_WOD_",
+				level3prefix: "CASTS_WOD_",
+			},
+		};
+	};
+
 	public sequenceQueryBuilder = () => {
 		const sequenceFilter: SequenceListScope = {
 			filter: {
-				externalIdPrefix: "cast_count_map_2",
+				externalIdPrefix: this.constants().sequence.level1prefix,
 				metadata: {
 					geo_key_from: "-90S_-180W",
 					geo_key_to: "90N_180E",

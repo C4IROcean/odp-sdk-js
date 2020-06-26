@@ -5,6 +5,7 @@
 
 ### Enumerations
 
+* [SequenceColumnType](enums/sequencecolumntype.md)
 * [SequenceType](enums/sequencetype.md)
 * [TimeSeriesType](enums/timeseriestype.md)
 * [UnitType](enums/unittype.md)

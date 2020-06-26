@@ -25,6 +25,7 @@
 
 ### Methods
 
+* [authenticate](odpclient.md#authenticate)
 * [loginWithApiKey](odpclient.md#loginwithapikey)
 * [loginWithOAuth](odpclient.md#loginwithoauth)
 
@@ -58,7 +59,7 @@ ___
 
 **asset**: 
 
-*Defined in ODPClient.ts:76*
+*Defined in ODPClient.ts:80*
 
 ___
 <a id="cognite"></a>
@@ -103,7 +104,7 @@ ___
 
 **sequences**: 
 
-*Defined in ODPClient.ts:72*
+*Defined in ODPClient.ts:76*
 
 ___
 <a id="temperatures"></a>
@@ -121,12 +122,23 @@ ___
 
 **timeSeries**: 
 
-*Defined in ODPClient.ts:68*
+*Defined in ODPClient.ts:72*
 
 ___
 
 ## Methods
 
+<a id="authenticate"></a>
+
+###  authenticate
+
+▸ **authenticate**(): `Promise`<`boolean`>
+
+*Defined in ODPClient.ts:68*
+
+**Returns:** `Promise`<`boolean`>
+
+___
 <a id="loginwithapikey"></a>
 
 ###  loginWithApiKey

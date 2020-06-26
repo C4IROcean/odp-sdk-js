@@ -18,7 +18,7 @@
 
 **CELSIUS**:  = "celsius"
 
-*Defined in types/types.ts:73*
+*Defined in types/types.ts:85*
 
 ___
 

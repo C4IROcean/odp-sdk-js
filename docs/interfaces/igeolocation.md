@@ -23,7 +23,7 @@
 
 **● lat**: *`number`*
 
-*Defined in types/types.ts:90*
+*Defined in types/types.ts:120*
 
 ___
 <a id="lon"></a>
@@ -32,7 +32,7 @@ ___
 
 **● lon**: *`number`*
 
-*Defined in types/types.ts:91*
+*Defined in types/types.ts:121*
 
 ___
 

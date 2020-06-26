@@ -15,6 +15,7 @@
 ### Methods
 
 * [getCastRows](casts.md#getcastrows)
+* [getCastRowsFromPolygon](casts.md#getcastrowsfrompolygon)
 * [getCasts](casts.md#getcasts)
 * [getCastsCount](casts.md#getcastscount)
 * [getCastsFromPolygon](casts.md#getcastsfrompolygon)
@@ -47,16 +48,35 @@ ___
 
 ###  getCastRows
 
-▸ **getCastRows**(castId: *`any`*, columns?: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
+▸ **getCastRows**(castId: *`string`*, columns?: *`Array`<[SequenceColumnType](../enums/sequencecolumntype.md)>*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in sequences/casts/index.ts:94*
+*Defined in sequences/casts/index.ts:128*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| castId | `any` |  Id for the cast |
-| `Optional` columns | `any` |  Columns that we want returned |
+| castId | `string` |  Id for the cast |
+| `Optional` columns | `Array`<[SequenceColumnType](../enums/sequencecolumntype.md)> |  Columns that we want returned |
+| `Optional` stream | `any` |  Optional stream |
+
+**Returns:** `Promise`<`any`[]>
+
+___
+<a id="getcastrowsfrompolygon"></a>
+
+###  getCastRowsFromPolygon
+
+▸ **getCastRowsFromPolygon**(polygon: *`any`*, columns?: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
+
+*Defined in sequences/casts/index.ts:101*
+
+**Parameters:**
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| polygon | `any` |  Polygon with lists of location objects. The list have to be in a correct order. |
+| `Optional` columns | `any` |
 | `Optional` stream | `any` |  Optional stream |
 
 **Returns:** `Promise`<`any`[]>
@@ -103,15 +123,16 @@ ___
 
 ###  getCastsFromPolygon
 
-▸ **getCastsFromPolygon**(polygon: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
+▸ **getCastsFromPolygon**(polygon: *`any`*, columns?: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in sequences/casts/index.ts:69*
+*Defined in sequences/casts/index.ts:76*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
 | polygon | `any` |  Polygon with lists of location objects. The list have to be in a correct order. |
+| `Optional` columns | `any` |
 | `Optional` stream | `any` |  Optional stream |
 
 **Returns:** `Promise`<`any`[]>

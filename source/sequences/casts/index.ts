@@ -55,7 +55,7 @@ export class Casts {
 			throw new Error("Either location or castId is required");
 		}
 		if (!castId) {
-			castId = "CASTS_WOD_" + mapCoordinateToIndex(location);
+			castId = this._sequences.constants().sequence.level2prefix + mapCoordinateToIndex(location);
 		}
 		return this.getSequenceQueryResult(
 			{ filter: { name: castId } },
@@ -104,16 +104,14 @@ export class Casts {
 
 		const casts = await this.getCastsFromPolygon(polygon);
 		for (const cast of casts) {
-			promises.push(this.getCastRows(cast.value.externalId, columns, stream));
-			// if (isPointInPolygon({ latitude: cast.location.lat, longitude: cast.location.long }, polygon)) {
-			// }
+			promises.push(
+				this.getCastRows(cast.value.externalId, columns, stream).then((rows) => {
+					return this.filterLocationByPolygon(rows, polygon);
+				}),
+			);
 		}
 		for (const iterator of await Promise.all(promises)) {
-			for (const row of iterator) {
-				if (isPointInPolygon({ latitude: row.location.lat, longitude: row.location.long }, polygon)) {
-					all.push(row);
-				}
-			}
+			all.push(...iterator);
 		}
 		return all;
 	};
@@ -137,6 +135,16 @@ export class Casts {
 			stream,
 			this._sequences.castSequenceConvert,
 		);
+	};
+
+	private filterLocationByPolygon = (rows, polygon) => {
+		const all = [];
+		for (const row of rows) {
+			if (isPointInPolygon({ latitude: row.location.lat, longitude: row.location.long }, polygon)) {
+				all.push(row);
+			}
+		}
+		return all;
 	};
 
 	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?, converter?) => {
