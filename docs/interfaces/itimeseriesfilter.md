@@ -34,7 +34,7 @@
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[aggregation](idatapointfilter.md#aggregation)*
 
-*Defined in types/types.ts:76*
+*Defined in types/types.ts:147*
 
 ___
 <a id="depth"></a>
@@ -43,7 +43,7 @@ ___
 
 **● depth**: *[INumberFilter](inumberfilter.md)*
 
-*Defined in types/types.ts:83*
+*Defined in types/types.ts:154*
 
 ___
 <a id="geofilter"></a>
@@ -52,7 +52,7 @@ ___
 
 **● geoFilter**: *[IGeoFilter](igeofilter.md)*
 
-*Defined in types/types.ts:82*
+*Defined in types/types.ts:153*
 
 ___
 <a id="latestvalue"></a>
@@ -63,7 +63,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[latestValue](idatapointfilter.md#latestvalue)*
 
-*Defined in types/types.ts:78*
+*Defined in types/types.ts:149*
 
 ___
 <a id="limit"></a>
@@ -74,7 +74,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[limit](idatapointfilter.md#limit)*
 
-*Defined in types/types.ts:77*
+*Defined in types/types.ts:148*
 
 ___
 <a id="provider"></a>
@@ -83,7 +83,7 @@ ___
 
 **● provider**: *`Array`<`string`>*
 
-*Defined in types/types.ts:85*
+*Defined in types/types.ts:156*
 
 ___
 <a id="time"></a>
@@ -94,7 +94,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[time](idatapointfilter.md#time)*
 
-*Defined in types/types.ts:75*
+*Defined in types/types.ts:146*
 
 ___
 <a id="unit"></a>
@@ -103,7 +103,7 @@ ___
 
 **● unit**: *[UnitType](../enums/unittype.md)*
 
-*Defined in types/types.ts:81*
+*Defined in types/types.ts:152*
 
 ___
 <a id="zoomlevel"></a>
@@ -112,7 +112,7 @@ ___
 
 **● zoomLevel**: *[ZoomLevel](../enums/zoomlevel.md)*
 
-*Defined in types/types.ts:84*
+*Defined in types/types.ts:155*
 
 ___
 

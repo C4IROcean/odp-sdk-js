@@ -22,8 +22,12 @@
 * [convert](timeseries.md#convert)
 * [datapointFilter](timeseries.md#datapointfilter)
 * [datapointLatestFilter](timeseries.md#datapointlatestfilter)
+* [getSequenceColumns](timeseries.md#getsequencecolumns)
+* [numberToIdInternal](timeseries.md#numbertoidinternal)
 * [queryBuilder](timeseries.md#querybuilder)
-* [stringToIdEither](timeseries.md#stringtoideither)
+* [sequenceConvert](timeseries.md#sequenceconvert)
+* [sequenceQueryBuilder](timeseries.md#sequencequerybuilder)
+* [stringToIdExternal](timeseries.md#stringtoidexternal)
 
 ---
 
@@ -35,7 +39,7 @@
 
 ⊕ **new TimeSeries**(client: *[ODPClient](odpclient.md)*): [TimeSeries](timeseries.md)
 
-*Defined in timeSeries/index.ts:31*
+*Defined in timeSeries/index.ts:33*
 
 **Parameters:**
 
@@ -55,7 +59,7 @@ ___
 
 **client**: 
 
-*Defined in timeSeries/index.ts:38*
+*Defined in timeSeries/index.ts:40*
 
 ___
 <a id="temperature"></a>
@@ -64,7 +68,7 @@ ___
 
 **temperature**: 
 
-*Defined in timeSeries/index.ts:42*
+*Defined in timeSeries/index.ts:44*
 
 ___
 
@@ -76,7 +80,7 @@ ___
 
 ▸ **convert**(timeseries: *`TimeSeriesList`*, dataPoints: *`Array`<`DatapointsGetAggregateDatapoint`> \| `Array`<`DatapointsGetDatapoint`>*, assets: *`AssetList`*): `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
-*Defined in timeSeries/index.ts:49*
+*Defined in timeSeries/index.ts:51*
 
 **Parameters:**
 
@@ -95,7 +99,7 @@ ___
 
 ▸ **datapointFilter**(filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `DatapointsMultiQueryBase`
 
-*Defined in timeSeries/index.ts:160*
+*Defined in timeSeries/index.ts:228*
 
 **Parameters:**
 
@@ -112,7 +116,7 @@ ___
 
 ▸ **datapointLatestFilter**(filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `LatestDataPropertyFilter`
 
-*Defined in timeSeries/index.ts:187*
+*Defined in timeSeries/index.ts:255*
 
 **Parameters:**
 
@@ -123,13 +127,41 @@ ___
 **Returns:** `LatestDataPropertyFilter`
 
 ___
+<a id="getsequencecolumns"></a>
+
+###  getSequenceColumns
+
+▸ **getSequenceColumns**(): `string`[]
+
+*Defined in timeSeries/index.ts:264*
+
+**Returns:** `string`[]
+
+___
+<a id="numbertoidinternal"></a>
+
+###  numberToIdInternal
+
+▸ **numberToIdInternal**(ids: *`Array`<`number`>*): `Array`<`IdEither`>
+
+*Defined in timeSeries/index.ts:219*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| ids | `Array`<`number`> |
+
+**Returns:** `Array`<`IdEither`>
+
+___
 <a id="querybuilder"></a>
 
 ###  queryBuilder
 
 ▸ **queryBuilder**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Promise`<`Array`<`TimeSeriesSearchDTO`>>
 
-*Defined in timeSeries/index.ts:82*
+*Defined in timeSeries/index.ts:130*
 
 **Parameters:**
 
@@ -140,13 +172,50 @@ ___
 **Returns:** `Promise`<`Array`<`TimeSeriesSearchDTO`>>
 
 ___
-<a id="stringtoideither"></a>
+<a id="sequenceconvert"></a>
 
-###  stringToIdEither
+###  sequenceConvert
 
-▸ **stringToIdEither**(ids: *`Array`<`string`>*): `Array`<`IdEither`>
+▸ **sequenceConvert**(sequences: *`Array`<`Sequence`>*, allRows: *`any`*, assets: *`AssetList`*, columns: *`Array`<`string`>*): `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
-*Defined in timeSeries/index.ts:151*
+*Defined in timeSeries/index.ts:85*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| sequences | `Array`<`Sequence`> |
+| allRows | `any` |
+| assets | `AssetList` |
+| columns | `Array`<`string`> |
+
+**Returns:** `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
+
+___
+<a id="sequencequerybuilder"></a>
+
+###  sequenceQueryBuilder
+
+▸ **sequenceQueryBuilder**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `SequenceListScope`
+
+*Defined in timeSeries/index.ts:199*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| filter | [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md) |
+
+**Returns:** `SequenceListScope`
+
+___
+<a id="stringtoidexternal"></a>
+
+###  stringToIdExternal
+
+▸ **stringToIdExternal**(ids: *`Array`<`string`>*): `Array`<`IdEither`>
+
+*Defined in timeSeries/index.ts:213*
 
 **Parameters:**
 

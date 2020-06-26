@@ -24,7 +24,7 @@
 
 **● boundingBox**: *[IBoundingBox](iboundingbox.md)*
 
-*Defined in types/types.ts:69*
+*Defined in types/types.ts:140*
 
 ___
 <a id="mrgid"></a>
@@ -33,7 +33,7 @@ ___
 
 **● mrgid**: *`number`*
 
-*Defined in types/types.ts:71*
+*Defined in types/types.ts:142*
 
 ___
 <a id="polygon"></a>
@@ -42,7 +42,7 @@ ___
 
 **● polygon**: *`Array`<[IGeoLocation](igeolocation.md)>*
 
-*Defined in types/types.ts:70*
+*Defined in types/types.ts:141*
 
 ___
 

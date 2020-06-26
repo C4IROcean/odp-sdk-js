@@ -19,6 +19,54 @@ export interface ITimeSeries {
 	dataPoints: Array<GetAggregateDatapoint> | Array<GetStringDatapoint> | Array<GetDoubleDatapoint>;
 }
 
+export interface ISequence {
+	location: {
+		long: number;
+		lat: number;
+		depth?: number;
+	};
+	cruise?: {
+		country?: string;
+		id?: string;
+		vesselName?: string;
+	};
+	id: number;
+	externalId: string;
+	time?: number;
+}
+
+export interface ISequenceRow extends ISequence {
+	value: ISequenceRowValue;
+	rowNumber: number;
+}
+
+export interface ISequenceRowValue {
+	temperature?: number;
+	count?: number;
+	name?: string;
+	salinity?: number;
+	oxygen?: number;
+	phosphate?: number;
+	silicate?: number;
+	nitrate?: number;
+	nitrite?: number;
+	ph?: number;
+	chlorophyll?: number;
+	pressure?: number;
+	externalId?: string;
+	castId?: number;
+	cruiseId?: string;
+	countryCode?: string;
+	latitudeMax?: number;
+	latitudeMin?: number;
+	longitudeMax?: number;
+	longitudeMin?: number;
+	pressureMax?: number;
+	pressureMin?: number;
+	temperatureMax?: number;
+	temperatureMin?: number;
+}
+
 export interface IDataPoints {
 	value: number;
 	timestamp: Date;
@@ -28,8 +76,31 @@ export enum TimeSeriesType {
 	TEMPERATURE = "temperature",
 }
 
+export enum SequenceType {
+	ALL = "all",
+	COUNT = "count",
+}
+
 export enum UnitType {
 	CELSIUS = "celsius",
+}
+
+export enum SequenceColumnType {
+	TEMPERATURE = "temperature",
+	COUNT = "cast_count",
+	NAME = "name",
+	SALINITY = "salinity",
+	OXYGEN = "oxygen",
+	PHOSPHATE = "phosphate",
+	SILICATE = "silicate",
+	NITRATE = "nitrate",
+	NITRITE = "nitrite",
+	PH = "pH",
+	CHLOROPHYLL = "chlorophyll",
+	PRESSURE = "pressure",
+	DATE = "date",
+	LATITUDE = "latitude",
+	LONGITUDE = "longitude",
 }
 
 export enum ZoomLevel {

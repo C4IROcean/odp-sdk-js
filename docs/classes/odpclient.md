@@ -19,11 +19,13 @@
 * [login](odpclient.md#login)
 * [logout](odpclient.md#logout)
 * [project](odpclient.md#project)
+* [sequences](odpclient.md#sequences)
 * [temperatures](odpclient.md#temperatures)
 * [timeSeries](odpclient.md#timeseries)
 
 ### Methods
 
+* [authenticate](odpclient.md#authenticate)
 * [loginWithApiKey](odpclient.md#loginwithapikey)
 * [loginWithOAuth](odpclient.md#loginwithoauth)
 
@@ -37,7 +39,7 @@
 
 ⊕ **new ODPClient**(options: *[IClientOptions](../interfaces/iclientoptions.md)*): [ODPClient](odpclient.md)
 
-*Defined in ODPClient.ts:37*
+*Defined in ODPClient.ts:39*
 
 **Parameters:**
 
@@ -57,7 +59,7 @@ ___
 
 **asset**: 
 
-*Defined in ODPClient.ts:70*
+*Defined in ODPClient.ts:80*
 
 ___
 <a id="cognite"></a>
@@ -66,7 +68,7 @@ ___
 
 **cognite**: 
 
-*Defined in ODPClient.ts:55*
+*Defined in ODPClient.ts:57*
 
 ___
 <a id="login"></a>
@@ -75,7 +77,7 @@ ___
 
 **login**: 
 
-*Defined in ODPClient.ts:46*
+*Defined in ODPClient.ts:48*
 
 ___
 <a id="logout"></a>
@@ -84,7 +86,7 @@ ___
 
 **logout**: 
 
-*Defined in ODPClient.ts:49*
+*Defined in ODPClient.ts:51*
 
 ___
 <a id="project"></a>
@@ -93,7 +95,16 @@ ___
 
 **project**: 
 
-*Defined in ODPClient.ts:52*
+*Defined in ODPClient.ts:54*
+
+___
+<a id="sequences"></a>
+
+###  sequences
+
+**sequences**: 
+
+*Defined in ODPClient.ts:76*
 
 ___
 <a id="temperatures"></a>
@@ -102,7 +113,7 @@ ___
 
 **temperatures**: 
 
-*Defined in ODPClient.ts:43*
+*Defined in ODPClient.ts:45*
 
 ___
 <a id="timeseries"></a>
@@ -111,19 +122,30 @@ ___
 
 **timeSeries**: 
 
-*Defined in ODPClient.ts:66*
+*Defined in ODPClient.ts:72*
 
 ___
 
 ## Methods
 
+<a id="authenticate"></a>
+
+###  authenticate
+
+▸ **authenticate**(): `Promise`<`boolean`>
+
+*Defined in ODPClient.ts:68*
+
+**Returns:** `Promise`<`boolean`>
+
+___
 <a id="loginwithapikey"></a>
 
 ###  loginWithApiKey
 
 ▸ **loginWithApiKey**(options: *[IApiKeyLoginOptions](../interfaces/iapikeyloginoptions.md)*): `void`
 
-*Defined in ODPClient.ts:58*
+*Defined in ODPClient.ts:60*
 
 **Parameters:**
 
@@ -140,7 +162,7 @@ ___
 
 ▸ **loginWithOAuth**(options: *`any`*): `void`
 
-*Defined in ODPClient.ts:62*
+*Defined in ODPClient.ts:64*
 
 **Parameters:**
 
