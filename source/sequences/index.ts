@@ -20,21 +20,17 @@ export class Sequences {
 	public constants = () => {
 		return {
 			sequence: {
-				level1prefix: "cast_count_map_2",
-				level2prefix: "CASTS_WOD_",
-				level3prefix: "CASTS_WOD_",
+				prefix: { 1: "cast_wod_1", 2: "cast_wod_2", 3: "cast_wod_3" },
+				rowNames: ["Oxygen", "Temperature", "Salinity", "Chlorophyll", "Pressure", "Nitrate", "pH"],
 			},
 		};
 	};
 
-	public sequenceQueryBuilder = () => {
+	public sequenceQueryBuilder = (level: number, year: number, index?: number, castId?: number) => {
 		const sequenceFilter: SequenceListScope = {
 			filter: {
-				externalIdPrefix: this.constants().sequence.level1prefix,
-				metadata: {
-					geo_key_from: "-90S_-180W",
-					geo_key_to: "90N_180E",
-				},
+				externalIdPrefix: this.constants().sequence.prefix[level] + "_" + year,
+				metadata: {},
 			},
 			limit: 1000,
 		};
@@ -51,14 +47,14 @@ export class Sequences {
 		for (const item of allRows[0].items) {
 			returnValue.push({
 				location: {
-					lat: parseFloat(item[columnIndex.lat]),
-					long: parseFloat(item[columnIndex.long]),
+					lat: parseFloat(item[columnIndex.geo_lat]),
+					long: parseFloat(item[columnIndex.geo_long]),
 					depth: parseInt(item[columnIndex.depth], 10),
 				},
 				id: sequences[0].id,
 				rowNumber: item.rowNumber,
 				externalId: sequences[0].externalId,
-				value: { count: item[columnIndex.cast_count] },
+				value: { count: item[columnIndex.castCount] },
 			});
 		}
 		return returnValue;
@@ -71,24 +67,25 @@ export class Sequences {
 	public castSequenceConvert = (sequences: Array<Sequence>, allRows, columns): Array<ISequenceRow> => {
 		const returnValue: Array<ISequenceRow> = [];
 		const columnIndex: any = this.arrayIndex(columns);
+		const cruise = {
+			country: sequences[0].metadata.country,
+			id: sequences[0].metadata.WOD_cruise_identifier,
+			vesselName: sequences[0].metadata.WOD_cruise_name,
+		};
 
 		for (const item of allRows[0].items) {
 			returnValue.push({
 				location: {
-					lat: parseFloat(item[columnIndex.latitude]),
-					long: parseFloat(item[columnIndex.longitude]),
-					depth: parseInt(item[columnIndex.depth], 10),
+					lat: parseFloat(item[columnIndex.lat]),
+					long: parseFloat(item[columnIndex.lon]),
+					depth: parseInt(item[columnIndex.z], 10),
 				},
 				id: sequences[0].id,
 				rowNumber: item.rowNumber,
 				externalId: sequences[0].externalId,
 				value: this.castRowValues(item, columnIndex),
 				time: item[columnIndex.date],
-				cruise: {
-					country: item[columnIndex.country],
-					id: item[columnIndex.WOD_cruise_id],
-					vesselName: item[columnIndex.vessel_name],
-				},
+				cruise,
 			});
 		}
 		return returnValue;
@@ -119,35 +116,30 @@ export class Sequences {
 	};
 	private castRowValues = (item, columnIndex) => {
 		const values: ISequenceRowValue = {};
-		if ("temperature" in columnIndex) {
-			values.temperature = parseFloat(item[columnIndex.temperature]);
+
+		for (const rowName of this.constants().sequence.rowNames) {
+			if (rowName in columnIndex && item[columnIndex[rowName]] !== null) {
+				const lowerCaseName = rowName.toLocaleLowerCase();
+				values[lowerCaseName] = { value: item[columnIndex[rowName]], flags: {} };
+				if (rowName + "_WODflag" in columnIndex) {
+					values[lowerCaseName].flags.wod = item[columnIndex[rowName + "_WODflag"]];
+				}
+				if (rowName + "_origflag" in columnIndex && item[columnIndex[rowName + "_origflag"]] !== null) {
+					values[lowerCaseName].flags.orig = item[columnIndex[rowName + "_origflag"]];
+				}
+			}
 		}
-		if ("cast_count" in columnIndex) {
-			values.count = parseInt(item[columnIndex.cast_count], 10);
-		}
-		if ("oxygen" in columnIndex) {
-			values.oxygen = parseFloat(item[columnIndex.oxygen]);
-		}
-		if ("salinity" in columnIndex) {
-			values.salinity = parseFloat(item[columnIndex.salinity]);
-		}
-		if ("chlorophyll" in columnIndex) {
-			values.chlorophyll = parseFloat(item[columnIndex.chlorophyll]);
-		}
-		if ("pressure" in columnIndex) {
-			values.pressure = parseFloat(item[columnIndex.pressure]);
-		}
-		if ("nitrate" in columnIndex) {
-			values.chlorophyll = parseFloat(item[columnIndex.nitrate]);
-		}
-		if ("pH" in columnIndex) {
-			values.ph = parseFloat(item[columnIndex.pH]);
-		}
+
 		return values;
 	};
 
 	private castValues = (item, columnIndex) => {
 		const values: ISequenceRowValue = {};
+
+		for (const iterator of Object.keys(columnIndex)) {
+			values[iterator] = item[columnIndex[iterator]];
+		}
+		/*
 		if ("external_id" in columnIndex) {
 			values.externalId = item[columnIndex.external_id];
 		}
@@ -183,7 +175,7 @@ export class Sequences {
 		}
 		if ("temperature_min" in columnIndex) {
 			values.temperatureMin = parseFloat(item[columnIndex.temperature_min]);
-		}
+		}*/
 		return values;
 	};
 

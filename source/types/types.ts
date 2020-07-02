@@ -41,7 +41,7 @@ export interface ISequenceRow extends ISequence {
 }
 
 export interface ISequenceRowValue {
-	temperature?: number;
+	temperature?: INumberValue;
 	count?: number;
 	name?: string;
 	salinity?: number;
@@ -65,6 +65,11 @@ export interface ISequenceRowValue {
 	pressureMin?: number;
 	temperatureMax?: number;
 	temperatureMin?: number;
+}
+
+export interface INumberValue {
+	value: number;
+	flags?: any;
 }
 
 export interface IDataPoints {
