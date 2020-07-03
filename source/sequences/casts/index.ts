@@ -83,8 +83,8 @@ export class Casts {
 		geoBounds.minLat = Math.floor(geoBounds.minLat);
 		geoBounds.minLng = Math.floor(geoBounds.minLng);
 		const castPromises = [];
-		for (let lat = geoBounds.minLat; lat <= geoBounds.maxLat; lat++) {
-			for (let lon = geoBounds.minLng; lon <= geoBounds.maxLng; lon++) {
+		for (let lat = geoBounds.minLat + 1; lat <= geoBounds.maxLat; lat++) {
+			for (let lon = geoBounds.minLng + 1; lon <= geoBounds.maxLng; lon++) {
 				castPromises.push(this.getCasts(year, { lat, lon }, columns, stream));
 			}
 		}
