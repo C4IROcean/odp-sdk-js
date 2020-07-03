@@ -83,8 +83,8 @@ export class Casts {
 		geoBounds.minLat = Math.floor(geoBounds.minLat);
 		geoBounds.minLng = Math.floor(geoBounds.minLng);
 		const castPromises = [];
-		for (let lat = geoBounds.minLat; lat < geoBounds.maxLat; lat++) {
-			for (let lon = geoBounds.minLng; lon < geoBounds.maxLng; lon++) {
+		for (let lat = geoBounds.minLat; lat <= geoBounds.maxLat; lat++) {
+			for (let lon = geoBounds.minLng; lon <= geoBounds.maxLng; lon++) {
 				castPromises.push(this.getCasts(year, { lat, lon }, columns, stream));
 			}
 		}
@@ -107,7 +107,7 @@ export class Casts {
 		const casts = await this.getCastsFromPolygon(polygon);
 		for (const cast of casts) {
 			promises.push(
-				this.getCastRows(cast.value.externalId, columns, stream).then((rows) => {
+				this.getCastRows(cast.value.extId, columns, stream).then((rows) => {
 					return this.filterLocationByPolygon(rows, polygon);
 				}),
 			);

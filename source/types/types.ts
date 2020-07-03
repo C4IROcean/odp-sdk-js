@@ -65,6 +65,7 @@ export interface ISequenceRowValue {
 	pressureMin?: number;
 	temperatureMax?: number;
 	temperatureMin?: number;
+	depth?: number;
 }
 
 export interface INumberValue {

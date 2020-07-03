@@ -54,7 +54,17 @@ export class Sequences {
 				id: sequences[0].id,
 				rowNumber: item.rowNumber,
 				externalId: sequences[0].externalId,
-				value: { count: item[columnIndex.castCount] },
+				value: {
+					count: item[columnIndex.castCount],
+					depth: item[columnIndex.z_first_avg],
+					oxygen: item[columnIndex.Oxygen_first_avg],
+					temperature: item[columnIndex.Temperature_first_avg],
+					salinity: item[columnIndex.Salinity_first_avg],
+					chlorophyll: item[columnIndex.Chlorophyll_first_avg],
+					pressure: item[columnIndex.Pressure_first_avg],
+					nitrate: item[columnIndex.Nitrate_first_avg],
+					ph: item[columnIndex.pH_first_avg],
+				},
 			});
 		}
 		return returnValue;
@@ -100,15 +110,16 @@ export class Sequences {
 		const columnIndex: any = this.arrayIndex(columns);
 
 		for (const item of allRows[0].items) {
+			const value = this.castValues(item, columnIndex);
 			returnValue.push({
 				location: {
-					lat: parseFloat(sequences[0].metadata.geo_lat),
-					long: parseFloat(sequences[0].metadata.geo_long),
+					lat: parseFloat(value.lat),
+					long: parseFloat(value.lon),
 				},
 				id: sequences[0].id,
 				rowNumber: item.rowNumber,
 				externalId: sequences[0].externalId,
-				value: this.castValues(item, columnIndex),
+				value,
 				time: item[columnIndex.date],
 			});
 		}
@@ -134,7 +145,7 @@ export class Sequences {
 	};
 
 	private castValues = (item, columnIndex) => {
-		const values: ISequenceRowValue = {};
+		const values: any = {};
 
 		for (const iterator of Object.keys(columnIndex)) {
 			values[iterator] = item[columnIndex[iterator]];

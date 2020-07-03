@@ -18,7 +18,7 @@ describe("sequences", () => {
 
 	test("get cast count", async () => {
 		const count = await odp.sequences.casts.getCastsCount();
-		expect(count.length).toBe(2288);
+		expect(count.length).toBe(2357);
 	});
 
 	test("get cast count for a single location", async () => {
