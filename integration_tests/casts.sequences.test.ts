@@ -18,18 +18,18 @@ describe("sequences", () => {
 
 	test("get cast count", async () => {
 		const count = await odp.sequences.casts.getCastsCount();
-		expect(count.length).toBe(27300);
+		expect(count.length).toBe(27412);
 	});
 
 	test("get cast count for a single location", async () => {
-		const count = await odp.sequences.casts.getCastsCount({ lat: 12, lon: 12 });
+		const count = await odp.sequences.casts.getCastsCount(2018, { lat: 20, lon: 173 });
 		expect(count.length).toBe(1);
 	});
 
 	test("get a specific cast", async () => {
-		const values = await odp.sequences.casts.getCastRows("wod_detail_133_32");
-		expect(values.length).toBe(232);
-		expect(values[0].value.temperature).toBe(156.4);
+		const values = await odp.sequences.casts.getCastRows("cast_wod_3_2018_63470_18777858");
+		expect(values.length).toBe(115);
+		expect(values[0].value.temperature.value).toBe(25.790000915527344);
 	});
 
 	test("get casts from polygon", async () => {
@@ -42,30 +42,30 @@ describe("sequences", () => {
 		];*/
 
 		const polygon = [
-			{ longitude: -5, latitude: 57 },
-			{ longitude: -5, latitude: 62 },
-			{ longitude: 5, latitude: 62 },
-			{ longitude: 5, latitude: 57 },
-			{ longitude: -5, latitude: 57 },
+			{ longitude: 170, latitude: 15 },
+			{ longitude: 170, latitude: 25 },
+			{ longitude: 180, latitude: 25 },
+			{ longitude: 180, latitude: 15 },
+			{ longitude: 170, latitude: 15 },
 		];
 		const values = await odp.sequences.casts.getCastsFromPolygon(polygon);
-		expect(values.length).toBe(14);
+		expect(values.length).toBe(370);
 	});
 
 	test("get casts level 2", async () => {
-		const values = await odp.sequences.casts.getCasts({ lat: 32, lon: 131 });
-		expect(values.length).toBe(20);
+		const values = await odp.sequences.casts.getCasts(2018, { lat: 32, lon: 131 });
+		expect(values.length).toBe(85);
 	});
 
 	test("get rows from polygon", async () => {
 		const polygon = [
-			{ longitude: -5, latitude: 57 },
-			{ longitude: -5, latitude: 62 },
-			{ longitude: 5, latitude: 62 },
-			{ longitude: 5, latitude: 57 },
-			{ longitude: -5, latitude: 57 },
+			{ longitude: -1, latitude: 59 },
+			{ longitude: -1, latitude: 61 },
+			{ longitude: 3, latitude: 61 },
+			{ longitude: 3, latitude: 59 },
+			{ longitude: -1, latitude: 59 },
 		];
 		const values = await odp.sequences.casts.getCastRowsFromPolygon(polygon);
-		expect(values.length).toBe(580);
+		expect(values.length).toBe(15570);
 	});
 });

@@ -1,25 +1,32 @@
 import { IGeoLocation } from "..";
 
+const start = 1;
+
 export const indexToGridCoordinate = (index, resolution = 1) => {
 	// returns cartesian grid coordinates, given index and resolution
 	const lat_range = resolution * 180;
-	const x_loc = Math.floor((index - 1) / lat_range + 1);
-	const y_loc = ((index - 1) % lat_range) + 1;
+	const x_loc = Math.floor((index - start) / lat_range + start);
+	const y_loc = ((index - start) % lat_range) + start;
 	return { x: x_loc, y: y_loc };
 };
 
 export const gridCoordinateToIndex = (x, y, resolution = 1): number => {
-	// returns index of specific grid-coordinate, given
-	return (x - 1) * 180 * resolution + y;
+	// returns index of specific grid-coordinate, given x and y coordinates
+	return ((x - start) * 180) / resolution + y;
 };
 
 export const mapCoordinateToIndex = (location: IGeoLocation, resolution = 1): number => {
-	// returns index of specific grid-coordinate, given
+	// returns index of specific grid-coordinate, given lon lat
+	const lat = location.lat + 90;
+	const lon = location.lon + 180;
 
-	const x = Math.floor((180 + location.lon) * resolution);
-	const y = Math.floor((90 + location.lat) * resolution);
+	const roundLat = resolution * Math.ceil(lat / resolution);
+	const roundLong = resolution * Math.ceil(lon / resolution);
 
-	return x * 180 + y + 1;
+	const x = Math.floor(roundLong / resolution);
+	const y = Math.floor(roundLat / resolution);
+
+	return ((x - start) * 180) / resolution + y;
 };
 
 export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
