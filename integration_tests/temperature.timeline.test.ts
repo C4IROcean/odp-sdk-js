@@ -2,7 +2,7 @@ import { ODPClient, ITimeSeriesFilter, UnitType, GetDoubleDatapoint, GetAggregat
 import { Readable } from "stream";
 import * as ndjson from "ndjson";
 
-describe("temperature", () => {
+describe.skip("temperature", () => {
 	let odp: ODPClient;
 	beforeAll(() => {
 		jest.setTimeout(30000);
@@ -79,7 +79,7 @@ describe("temperature", () => {
 		expect((temps[0].dataPoints[0] as GetDoubleDatapoint).value).toBe(9.299999999999997);
 	});
 
-	test.only("get readings from a specific timeline", async () => {
+	test("get readings from a specific timeline", async () => {
 		const filter: ITimeSeriesFilter = {
 			provider: ["World Ocean Atlas"],
 			limit: 100,

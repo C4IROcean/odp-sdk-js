@@ -18,7 +18,7 @@ describe("sequences", () => {
 
 	test("get cast count", async () => {
 		const count = await odp.sequences.casts.getCastsCount();
-		expect(count.length).toBe(2357);
+		expect(count.length).toBe(27412);
 	});
 
 	test("get cast count for a single location", async () => {
@@ -49,12 +49,12 @@ describe("sequences", () => {
 			{ longitude: 170, latitude: 15 },
 		];
 		const values = await odp.sequences.casts.getCastsFromPolygon(polygon);
-		expect(values.length).toBe(6);
+		expect(values.length).toBe(370);
 	});
 
 	test("get casts level 2", async () => {
 		const values = await odp.sequences.casts.getCasts(2018, { lat: 32, lon: 131 });
-		expect(values.length).toBe(86);
+		expect(values.length).toBe(85);
 	});
 
 	test("get rows from polygon", async () => {
@@ -66,6 +66,6 @@ describe("sequences", () => {
 			{ longitude: -1, latitude: 59 },
 		];
 		const values = await odp.sequences.casts.getCastRowsFromPolygon(polygon);
-		expect(values.length).toBe(4041);
+		expect(values.length).toBe(15570);
 	});
 });
