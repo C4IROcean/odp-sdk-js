@@ -123,8 +123,8 @@ export interface IBoundingBox {
 }
 
 export interface IGeoLocation {
-	lat: number;
-	lon: number;
+	latitude: number;
+	longitude: number;
 }
 
 export interface INumberFilter {
@@ -160,6 +160,15 @@ export interface ITimeSeriesFilter extends IDatapointFilter {
 	depth?: INumberFilter;
 	zoomLevel?: ZoomLevel; // mapbox zoom levels 0 (the earth) - 22 (very close)
 	provider?: Array<string>;
+}
+
+export interface ICastFilter {
+	time?: ITimeFilter;
+	year?: number;
+	polygon?: Array<IGeoLocation>;
+	columns?: Array<SequenceColumnType>;
+	castId?: string;
+	location?: IGeoLocation;
 }
 
 export interface IAssetsFilter {

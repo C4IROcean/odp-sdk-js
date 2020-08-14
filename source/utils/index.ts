@@ -59,8 +59,8 @@ export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> => {
 					try {
 						const json = JSON.parse(body);
 						return resolve({
-							bottomLeft: { lat: json.minLatitude, lon: json.minLongitude },
-							topRight: { lat: json.maxLatitude, lon: json.maxLongitude },
+							bottomLeft: { latitude: json.minLatitude, longitude: json.minLongitude },
+							topRight: { latitude: json.maxLatitude, longitude: json.maxLongitude },
 						});
 					} catch (error) {
 						return reject(error);

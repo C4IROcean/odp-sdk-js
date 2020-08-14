@@ -310,10 +310,10 @@ export class TimeSeries {
 		// get bottom left tile
 		// N68.000_E12.000
 		// Lat = N, Lon = E
-		const firstLat = this.nFloor(boundingBoxFilter.bottomLeft.lat, decimals);
-		const firstLon = this.nFloor(boundingBoxFilter.bottomLeft.lon, decimals);
-		const lastLat = this.nFloor(boundingBoxFilter.topRight.lat, decimals);
-		const lastLon = this.nFloor(boundingBoxFilter.topRight.lon, decimals);
+		const firstLat = this.nFloor(boundingBoxFilter.bottomLeft.latitude, decimals);
+		const firstLon = this.nFloor(boundingBoxFilter.bottomLeft.longitude, decimals);
+		const lastLat = this.nFloor(boundingBoxFilter.topRight.latitude, decimals);
+		const lastLon = this.nFloor(boundingBoxFilter.topRight.longitude, decimals);
 		let currentLat = firstLat;
 		let currentLon = firstLon;
 		while (currentLat < lastLat) {

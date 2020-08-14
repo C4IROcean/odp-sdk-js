@@ -1,8 +1,9 @@
 import { Sequences } from "..";
-import { ODPClient, IGeoLocation, SequenceColumnType } from "../../";
+import { ODPClient } from "../../";
 import { mapCoordinateToIndex } from "../utils";
 import { Sequence } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
+import { ICastFilter } from "../../types/types";
 
 /**
  * Casts class. Responsible for handling the three levels of casts.
@@ -26,41 +27,58 @@ export class Casts {
 	/**
 	 * Get a cast count for the globe or a specific location. Level 1
 	 *
-	 * @param
-	 * @param location optional longitude latitude object
+	 * @param filter cast filter object
 	 * @param stream optional stream
 	 *
 	 * #TODO
 	 * - Need to support polygon location object the get multiple values
 	 */
 
-	public getCastsCount = async (year: number = 2018, location?: IGeoLocation, stream?) => {
+	public getCastsCount = async (filter: ICastFilter, stream?) => {
 		let start = 0;
 		let end;
+
+		// If not year is set, default to 2018
+		if (!filter.year) {
+			filter.year = 2018;
+		}
 		const level = 1;
-		if (location && location.lon && location.lat) {
-			start = mapCoordinateToIndex(location, 1);
+		if (filter.location && filter.location.longitude && filter.location.latitude) {
+			start = mapCoordinateToIndex(filter.location, 1);
 			end = start + 1;
 		}
-		return this.getSequenceQueryResult(this._sequences.sequenceQueryBuilder(level, year), null, start, end, stream);
+		return this.getSequenceQueryResult(
+			this._sequences.sequenceQueryBuilder(level, filter.year),
+			null,
+			start,
+			end,
+			stream,
+		);
 	};
 
 	/**
 	 * Get casts and metadata for a given area. Note: Either castId or location needs to be provided. Level 2
 	 *
-	 * @param location optional location latitude longitude object
-	 * @param castId optional cast id.
+	 * @param filter cast filter object
 	 * @param stream optional stream
 	 */
-	public getCasts = async (year: number = 2018, location?: IGeoLocation, castId?: string, stream?) => {
-		if (!location && !castId) {
+	public getCasts = async (filter: ICastFilter, stream?) => {
+		if (!filter.location && !filter.castId) {
 			throw new Error("Either location or castId is required");
 		}
-		if (!castId) {
-			castId = this._sequences.constants().sequence.prefix[2] + "_" + year + "_" + mapCoordinateToIndex(location);
+		if (!filter.castId) {
+			if (!filter.year) {
+				throw new Error("Need a given year when castId is missing");
+			}
+			filter.castId =
+				this._sequences.constants().sequence.prefix[2] +
+				"_" +
+				filter.year +
+				"_" +
+				mapCoordinateToIndex(filter.location);
 		}
 		return this.getSequenceQueryResult(
-			{ filter: { name: castId } },
+			{ filter: { name: filter.castId } },
 			undefined,
 			0,
 			undefined,
@@ -72,20 +90,31 @@ export class Casts {
 	/**
 	 * Get cast rows that fit within a given polygon. Level 2
 	 *
-	 * @param polygon Polygon with lists of location objects. The list have to be in a correct order.
+	 * @param filter cast filter object
 	 * @param stream Optional stream
 	 */
-	public getCastsFromPolygon = async (polygon, year = 2018, columns?, stream?) => {
-		const geoBounds = getBounds(polygon);
+	public getCastsFromPolygon = async (filter: ICastFilter, stream?) => {
+		if (!filter.polygon || filter.polygon.length < 3) {
+			throw new Error("A polygon with a length > 2 is required");
+		}
+		if (!filter.year) {
+			throw new Error("A year is required in filter");
+		}
+		const geoBounds = getBounds(filter.polygon);
 		const all = [];
 		geoBounds.maxLat = Math.ceil(geoBounds.maxLat);
 		geoBounds.maxLng = Math.ceil(geoBounds.maxLng);
 		geoBounds.minLat = Math.floor(geoBounds.minLat);
 		geoBounds.minLng = Math.floor(geoBounds.minLng);
 		const castPromises = [];
-		for (let lat = geoBounds.minLat + 1; lat <= geoBounds.maxLat; lat++) {
-			for (let lon = geoBounds.minLng + 1; lon <= geoBounds.maxLng; lon++) {
-				castPromises.push(this.getCasts(year, { lat, lon }, columns, stream));
+		for (let latitude = geoBounds.minLat + 1; latitude <= geoBounds.maxLat; latitude++) {
+			for (let longitude = geoBounds.minLng + 1; longitude <= geoBounds.maxLng; longitude++) {
+				castPromises.push(
+					this.getCasts(
+						{ year: filter.year, location: { latitude, longitude }, columns: filter.columns },
+						stream,
+					),
+				);
 			}
 		}
 		for (const iterator of await Promise.all(castPromises)) {
@@ -97,18 +126,18 @@ export class Casts {
 	/**
 	 * Get cast rows that fit within a given polygon. Level 3
 	 *
-	 * @param polygon Polygon with lists of location objects. The list have to be in a correct order.
+	 * @param filter cast filter object
 	 * @param stream Optional stream
 	 */
-	public getCastRowsFromPolygon = async (polygon, columns?, stream?) => {
+	public getCastRowsFromPolygon = async (filter: ICastFilter, stream?) => {
 		const promises = [];
 		const all = [];
 
-		const casts = await this.getCastsFromPolygon(polygon);
+		const casts = await this.getCastsFromPolygon(filter);
 		for (const cast of casts) {
 			promises.push(
-				this.getCastRows(cast.value.extId, columns, stream).then((rows) => {
-					return this.filterLocationByPolygon(rows, polygon);
+				this.getCastRows({ castId: cast.value.extId, columns: filter.columns }, stream).then((rows) => {
+					return this.filterLocationByPolygon(rows, filter.polygon);
 				}),
 			);
 		}
@@ -121,17 +150,16 @@ export class Casts {
 	/**
 	 * Get content for a given cast. Level 3
 	 *
-	 * @param castId Id for the cast
-	 * @param columns Columns that we want returned
+	 * @param filter cast filter object
 	 * @param stream Optional stream
 	 */
-	public getCastRows = async (castId: string, columns?: Array<SequenceColumnType>, stream?) => {
-		if (!castId) {
+	public getCastRows = async (filter: ICastFilter, stream?) => {
+		if (!filter.castId) {
 			throw new Error("castId is required");
 		}
 		return this.getSequenceQueryResult(
-			{ filter: { name: castId } },
-			columns,
+			{ filter: { name: filter.castId } },
+			filter.columns,
 			0,
 			undefined,
 			stream,

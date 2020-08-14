@@ -17,8 +17,8 @@ export const gridCoordinateToIndex = (x, y, resolution = 1): number => {
 
 export const mapCoordinateToIndex = (location: IGeoLocation, resolution = 1): number => {
 	// returns index of specific grid-coordinate, given lon lat
-	const lat = location.lat + 90;
-	const lon = location.lon + 180;
+	const lat = location.latitude + 90;
+	const lon = location.longitude + 180;
 
 	const roundLat = resolution * Math.ceil(lat / resolution);
 	const roundLong = resolution * Math.ceil(lon / resolution);
@@ -34,7 +34,7 @@ export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
 	const location = indexToGridCoordinate(index, resolution);
 	const longitude = -180 + (location.x - 0.5) / resolution; // +0.5 is to put location to center of grid tile
 	const latitude = -90 + (location.y - 0.5) / resolution;
-	return { lon: longitude, lat: latitude };
+	return { longitude, latitude };
 };
 
 export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
