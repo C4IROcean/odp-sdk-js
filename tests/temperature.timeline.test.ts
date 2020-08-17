@@ -21,7 +21,10 @@ describe.skip("temperature", () => {
 			unit: UnitType.CELSIUS,
 			provider: ["simulated"],
 			geoFilter: {
-				boundingBox: { bottomLeft: { lat: 67.99, lon: 11.99 }, topRight: { lat: 68.01, lon: 12.01 } },
+				boundingBox: {
+					bottomLeft: { latitude: 67.99, longitude: 11.99 },
+					topRight: { latitude: 68.01, longitude: 12.01 },
+				},
 			},
 			zoomLevel: 8,
 			limit: 500,

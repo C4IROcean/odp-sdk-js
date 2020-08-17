@@ -1,6 +1,6 @@
 import { CogniteClient } from "@cognite/sdk";
 import { TimeSeries } from "./timeSeries";
-import { Assets } from "./asset";
+import { Assets } from "./assets";
 import { Sequences } from "./sequences";
 
 export interface IClientOptions {

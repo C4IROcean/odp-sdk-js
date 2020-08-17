@@ -24,7 +24,7 @@ describe("sequences", () => {
 	test("get cast count for a single location", async () => {
 		const count = await odp.sequences.casts.getCastsCount({
 			year: 2018,
-			location: { latitude: 20, longitude: 173 },
+			geoFilter: { location: { latitude: 20, longitude: 173 } },
 		});
 		expect(count.length).toBe(1);
 	});
@@ -51,12 +51,15 @@ describe("sequences", () => {
 			{ longitude: 180, latitude: 15 },
 			{ longitude: 170, latitude: 15 },
 		];
-		const values = await odp.sequences.casts.getCastsFromPolygon({ year: 2018, polygon });
+		const values = await odp.sequences.casts.getCastsFromPolygon({ year: 2018, geoFilter: { polygon } });
 		expect(values.length).toBe(370);
 	});
 
 	test("get casts level 2", async () => {
-		const values = await odp.sequences.casts.getCasts({ year: 2018, location: { latitude: 32, longitude: 131 } });
+		const values = await odp.sequences.casts.getCasts({
+			year: 2018,
+			geoFilter: { location: { latitude: 32, longitude: 131 } },
+		});
 		expect(values.length).toBe(85);
 	});
 
@@ -68,7 +71,7 @@ describe("sequences", () => {
 			{ longitude: 3, latitude: 59 },
 			{ longitude: -1, latitude: 59 },
 		];
-		const values = await odp.sequences.casts.getCastRowsFromPolygon({ year: 2018, polygon });
+		const values = await odp.sequences.casts.getCastRowsFromPolygon({ year: 2018, geoFilter: { polygon } });
 		expect(values.length).toBe(15570);
 	});
 });

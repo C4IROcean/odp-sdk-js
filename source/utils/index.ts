@@ -72,3 +72,32 @@ export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> => {
 			});
 	});
 };
+
+export const getMRGIDBPolygon = (mrgid: number): Promise<IBoundingBox> => {
+	return new Promise((resolve, reject) => {
+		const url = `https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=1.0.0&request=GetFeature&typeNames=eez&cql_filter=mrgid=${mrgid}&outputFormat=application/json`;
+		https
+			.get(url, (res) => {
+				let body = "";
+
+				res.on("data", (chunk) => {
+					body += chunk;
+				});
+
+				res.on("end", () => {
+					try {
+						const json = JSON.parse(body);
+						return resolve({
+							bottomLeft: { latitude: json.minLatitude, longitude: json.minLongitude },
+							topRight: { latitude: json.maxLatitude, longitude: json.maxLongitude },
+						});
+					} catch (error) {
+						return reject(error);
+					}
+				});
+			})
+			.on("error", (error) => {
+				return reject(error);
+			});
+	});
+};

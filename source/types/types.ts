@@ -143,6 +143,7 @@ export interface IAggregation {
 }
 
 export interface IGeoFilter {
+	location?: IGeoLocation;
 	boundingBox?: IBoundingBox;
 	polygon?: Array<IGeoLocation>;
 	mrgid?: number;
@@ -154,6 +155,7 @@ export interface IDatapointFilter {
 	limit?: number;
 	latestValue?: boolean;
 }
+
 export interface ITimeSeriesFilter extends IDatapointFilter {
 	unit: UnitType;
 	geoFilter?: IGeoFilter;
@@ -165,10 +167,11 @@ export interface ITimeSeriesFilter extends IDatapointFilter {
 export interface ICastFilter {
 	time?: ITimeFilter;
 	year?: number;
-	polygon?: Array<IGeoLocation>;
+	geoFilter?: IGeoFilter;
+	depth?: INumberFilter;
 	columns?: Array<SequenceColumnType>;
 	castId?: string;
-	location?: IGeoLocation;
+	provider?: Array<string>;
 }
 
 export interface IAssetsFilter {

@@ -43,8 +43,13 @@ export class Casts {
 			filter.year = 2018;
 		}
 		const level = 1;
-		if (filter.location && filter.location.longitude && filter.location.latitude) {
-			start = mapCoordinateToIndex(filter.location, 1);
+		if (
+			filter.geoFilter &&
+			filter.geoFilter.location &&
+			filter.geoFilter.location.longitude &&
+			filter.geoFilter.location.latitude
+		) {
+			start = mapCoordinateToIndex(filter.geoFilter.location, 1);
 			end = start + 1;
 		}
 		return this.getSequenceQueryResult(
@@ -63,7 +68,7 @@ export class Casts {
 	 * @param stream optional stream
 	 */
 	public getCasts = async (filter: ICastFilter, stream?) => {
-		if (!filter.location && !filter.castId) {
+		if (!filter.geoFilter && !filter.geoFilter.location && !filter.castId) {
 			throw new Error("Either location or castId is required");
 		}
 		if (!filter.castId) {
@@ -75,7 +80,7 @@ export class Casts {
 				"_" +
 				filter.year +
 				"_" +
-				mapCoordinateToIndex(filter.location);
+				mapCoordinateToIndex(filter.geoFilter.location);
 		}
 		return this.getSequenceQueryResult(
 			{ filter: { name: filter.castId } },
@@ -94,13 +99,13 @@ export class Casts {
 	 * @param stream Optional stream
 	 */
 	public getCastsFromPolygon = async (filter: ICastFilter, stream?) => {
-		if (!filter.polygon || filter.polygon.length < 3) {
+		if ((!filter.geoFilter.polygon && !filter.geoFilter.polygon) || filter.geoFilter.polygon.length < 3) {
 			throw new Error("A polygon with a length > 2 is required");
 		}
 		if (!filter.year) {
 			throw new Error("A year is required in filter");
 		}
-		const geoBounds = getBounds(filter.polygon);
+		const geoBounds = getBounds(filter.geoFilter.polygon);
 		const all = [];
 		geoBounds.maxLat = Math.ceil(geoBounds.maxLat);
 		geoBounds.maxLng = Math.ceil(geoBounds.maxLng);
@@ -111,7 +116,11 @@ export class Casts {
 			for (let longitude = geoBounds.minLng + 1; longitude <= geoBounds.maxLng; longitude++) {
 				castPromises.push(
 					this.getCasts(
-						{ year: filter.year, location: { latitude, longitude }, columns: filter.columns },
+						{
+							year: filter.year,
+							geoFilter: { location: { latitude, longitude } },
+							columns: filter.columns,
+						},
 						stream,
 					),
 				);
@@ -137,7 +146,7 @@ export class Casts {
 		for (const cast of casts) {
 			promises.push(
 				this.getCastRows({ castId: cast.value.extId, columns: filter.columns }, stream).then((rows) => {
-					return this.filterLocationByPolygon(rows, filter.polygon);
+					return this.filterLocationByPolygon(rows, filter.geoFilter.polygon);
 				}),
 			);
 		}

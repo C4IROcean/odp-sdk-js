@@ -30,19 +30,21 @@ async function getGlobalCastCountForAGivenYear() {
 }
 
 /**
- * Get cast count for a given polygon
+ * Get cast count for a given polygon and find average sea surface temperature and sea bed temperature
  */
 async function getCastsFromPolygon() {
 	console.log("Casts for a given polygon");
 	const result = await odp.sequences.casts.getCastsFromPolygon({
 		year: 2018,
-		polygon: [
-			{ latitude: 68, longitude: 9 },
-			{ latitude: 68, longitude: 0 },
-			{ latitude: 71, longitude: 0 },
-			{ latitude: 71, longitude: 9 },
-			{ latitude: 68, longitude: 9 },
-		],
+		geoFilter: {
+			polygon: [
+				{ latitude: 68, longitude: 9 },
+				{ latitude: 68, longitude: 0 },
+				{ latitude: 71, longitude: 0 },
+				{ latitude: 71, longitude: 9 },
+				{ latitude: 68, longitude: 9 },
+			],
+		},
 	});
 	console.log("\tFound " + result.length + " casts");
 
@@ -60,19 +62,21 @@ async function getCastsFromPolygon() {
 }
 
 /**
- * Get cast row values for a given polygon
+ * Get cast row values for a given polygon and calculate max/min/average temperature for casts within the polygon
  */
 async function getCastRowsFromPolygon() {
 	console.log("Cast rows for a given polygon");
 	const result = await odp.sequences.casts.getCastRowsFromPolygon({
 		year: 2018,
-		polygon: [
-			{ latitude: 68, longitude: 9 },
-			{ latitude: 68, longitude: 0 },
-			{ latitude: 71, longitude: 0 },
-			{ latitude: 71, longitude: 9 },
-			{ latitude: 68, longitude: 9 },
-		],
+		geoFilter: {
+			polygon: [
+				{ latitude: 68, longitude: 9 },
+				{ latitude: 68, longitude: 0 },
+				{ latitude: 71, longitude: 0 },
+				{ latitude: 71, longitude: 9 },
+				{ latitude: 68, longitude: 9 },
+			],
+		},
 	});
 	console.log("\tFound " + result.length + " cast rows");
 	let maxTemp = -100;
