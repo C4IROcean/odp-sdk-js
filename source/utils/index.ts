@@ -74,6 +74,9 @@ export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> => {
 };
 
 export const getMRGIDBPolygon = (mrgid: number): Promise<IBoundingBox> => {
+	throw new Error("Not implemented");
+	// tslint:disable: max-line-length
+	/*
 	return new Promise((resolve, reject) => {
 		const url = `https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=1.0.0&request=GetFeature&typeNames=eez&cql_filter=mrgid=${mrgid}&outputFormat=application/json`;
 		https
@@ -99,5 +102,5 @@ export const getMRGIDBPolygon = (mrgid: number): Promise<IBoundingBox> => {
 			.on("error", (error) => {
 				return reject(error);
 			});
-	});
+	});*/
 };

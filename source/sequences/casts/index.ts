@@ -3,7 +3,7 @@ import { ODPClient } from "../../";
 import { mapCoordinateToIndex } from "../utils";
 import { Sequence } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
-import { ICastFilter } from "../../types/types";
+import { ICastFilter, SequenceColumnType } from "../../types/types";
 
 /**
  * Casts class. Responsible for handling the three levels of casts.
@@ -34,15 +34,14 @@ export class Casts {
 	 * - Need to support polygon location object the get multiple values
 	 */
 
-	public getCastsCount = async (filter: ICastFilter, stream?) => {
+	public getCastsCount = async (filter: ICastFilter = {}, stream?) => {
 		let start = 0;
 		let end;
 
-		// If not year is set, default to 2018
-		if (!filter.year) {
-			filter.year = 2018;
+		let level = 0;
+		if (filter.year) {
+			level = 1;
 		}
-		const level = 1;
 		if (
 			filter.geoFilter &&
 			filter.geoFilter.location &&
@@ -61,6 +60,21 @@ export class Casts {
 		);
 	};
 
+	public getCastYears = async () => {
+		const cast = await this._client.cognite.sequences.retrieve([{ externalId: "cast_wod_0" }]);
+		if (cast.length > 0 && cast[0].metadata.cast_years) {
+			return cast[0].metadata.cast_years.split(", ");
+		}
+		return [];
+	};
+
+	public getCastColumns = () => {
+		return Object.values(SequenceColumnType);
+	};
+
+	public getCastUnits = () => {
+		throw new Error("Not implemented");
+	};
 	/**
 	 * Get casts and metadata for a given area. Note: Either castId or location needs to be provided. Level 2
 	 *
