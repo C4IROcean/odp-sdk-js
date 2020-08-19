@@ -21,7 +21,7 @@ describe("sequences", () => {
 		expect(count.length).toBe(33056);
 	});
 
-	test.only("get cast years", async () => {
+	test("get cast years", async () => {
 		const years = await odp.sequences.casts.getCastYears();
 		expect(years.length).toBe(3);
 	});
@@ -56,7 +56,7 @@ describe("sequences", () => {
 			{ longitude: 180, latitude: 15 },
 			{ longitude: 170, latitude: 15 },
 		];
-		const values = await odp.sequences.casts.getCastsFromPolygon({ year: 2018, geoFilter: { polygon } });
+		const values = await odp.sequences.casts.getCasts({ year: 2018, geoFilter: { polygon } });
 		expect(values.length).toBe(370);
 	});
 
@@ -76,7 +76,7 @@ describe("sequences", () => {
 			{ longitude: 3, latitude: 59 },
 			{ longitude: -1, latitude: 59 },
 		];
-		const values = await odp.sequences.casts.getCastRowsFromPolygon({ year: 2018, geoFilter: { polygon } });
+		const values = await odp.sequences.casts.getCastRows({ year: 2018, geoFilter: { polygon } });
 		expect(values.length).toBe(15570);
 	});
 });

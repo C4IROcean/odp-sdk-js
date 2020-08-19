@@ -34,7 +34,7 @@ async function getGlobalCastCountForAGivenYear() {
  */
 async function getCastsFromPolygon() {
 	console.log("Casts for a given polygon");
-	const result = await odp.sequences.casts.getCastsFromPolygon({
+	const result = await odp.sequences.casts.getCasts({
 		year: 2018,
 		geoFilter: {
 			polygon: [
@@ -66,7 +66,7 @@ async function getCastsFromPolygon() {
  */
 async function getCastRowsFromPolygon() {
 	console.log("Cast rows for a given polygon");
-	const result = await odp.sequences.casts.getCastRowsFromPolygon({
+	const result = await odp.sequences.casts.getCastRows({
 		year: 2018,
 		geoFilter: {
 			polygon: [

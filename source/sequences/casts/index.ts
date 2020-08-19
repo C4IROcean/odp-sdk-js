@@ -82,6 +82,10 @@ export class Casts {
 	 * @param stream optional stream
 	 */
 	public getCasts = async (filter: ICastFilter, stream?) => {
+		if (filter.geoFilter.polygon && filter.geoFilter.polygon && filter.geoFilter.polygon.length > 2) {
+			return this.getCastsFromPolygon(filter, stream);
+		}
+
 		if (!filter.geoFilter && !filter.geoFilter.location && !filter.castId) {
 			throw new Error("Either location or castId is required");
 		}
@@ -107,12 +111,52 @@ export class Casts {
 	};
 
 	/**
-	 * Get cast rows that fit within a given polygon. Level 2
+	 * Get content for a given cast. Level 3
 	 *
 	 * @param filter cast filter object
 	 * @param stream Optional stream
 	 */
-	public getCastsFromPolygon = async (filter: ICastFilter, stream?) => {
+	public getCastRows = async (filter: ICastFilter, stream?) => {
+		if (
+			filter.geoFilter &&
+			filter.geoFilter.polygon &&
+			filter.geoFilter.polygon &&
+			filter.geoFilter.polygon.length > 2
+		) {
+			return this.getCastRowsFromPolygon(filter, stream);
+		}
+		if (!filter.castId) {
+			throw new Error("castId is required");
+		}
+		return this.getSequenceQueryResult(
+			{ filter: { name: filter.castId } },
+			filter.columns,
+			0,
+			undefined,
+			stream,
+			this._sequences.castSequenceConvert,
+		);
+	};
+
+	private getCastRowsFromPolygon = async (filter: ICastFilter, stream?) => {
+		const promises = [];
+		const all = [];
+
+		const casts = await this.getCastsFromPolygon(filter);
+		for (const cast of casts) {
+			promises.push(
+				this.getCastRows({ castId: cast.value.extId, columns: filter.columns }, stream).then((rows) => {
+					return this.filterLocationByPolygon(rows, filter.geoFilter.polygon);
+				}),
+			);
+		}
+		for (const iterator of await Promise.all(promises)) {
+			all.push(...iterator);
+		}
+		return all;
+	};
+
+	private getCastsFromPolygon = async (filter: ICastFilter, stream?) => {
 		if ((!filter.geoFilter.polygon && !filter.geoFilter.polygon) || filter.geoFilter.polygon.length < 3) {
 			throw new Error("A polygon with a length > 2 is required");
 		}
@@ -144,50 +188,6 @@ export class Casts {
 			all.push(...iterator);
 		}
 		return all;
-	};
-
-	/**
-	 * Get cast rows that fit within a given polygon. Level 3
-	 *
-	 * @param filter cast filter object
-	 * @param stream Optional stream
-	 */
-	public getCastRowsFromPolygon = async (filter: ICastFilter, stream?) => {
-		const promises = [];
-		const all = [];
-
-		const casts = await this.getCastsFromPolygon(filter);
-		for (const cast of casts) {
-			promises.push(
-				this.getCastRows({ castId: cast.value.extId, columns: filter.columns }, stream).then((rows) => {
-					return this.filterLocationByPolygon(rows, filter.geoFilter.polygon);
-				}),
-			);
-		}
-		for (const iterator of await Promise.all(promises)) {
-			all.push(...iterator);
-		}
-		return all;
-	};
-
-	/**
-	 * Get content for a given cast. Level 3
-	 *
-	 * @param filter cast filter object
-	 * @param stream Optional stream
-	 */
-	public getCastRows = async (filter: ICastFilter, stream?) => {
-		if (!filter.castId) {
-			throw new Error("castId is required");
-		}
-		return this.getSequenceQueryResult(
-			{ filter: { name: filter.castId } },
-			filter.columns,
-			0,
-			undefined,
-			stream,
-			this._sequences.castSequenceConvert,
-		);
 	};
 
 	private filterLocationByPolygon = (rows, polygon) => {
