@@ -1,6 +1,7 @@
 import { Sequences } from "..";
 import { ODPClient } from "../../";
 import { mapCoordinateToIndex } from "../utils";
+import { boundingBoxToPolygon } from "../../utils";
 import { Sequence } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
 import { ICastFilter, SequenceColumnType } from "../../types/types";
@@ -75,6 +76,7 @@ export class Casts {
 	public getCastUnits = () => {
 		throw new Error("Not implemented");
 	};
+
 	/**
 	 * Get casts and metadata for a given area. Note: Either castId or location needs to be provided. Level 2
 	 *
@@ -82,6 +84,9 @@ export class Casts {
 	 * @param stream optional stream
 	 */
 	public getCasts = async (filter: ICastFilter, stream?) => {
+		if (filter.geoFilter && filter.geoFilter.boundingBox) {
+			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
+		}
 		if (filter.geoFilter.polygon && filter.geoFilter.polygon && filter.geoFilter.polygon.length > 2) {
 			return this.getCastsFromPolygon(filter, stream);
 		}
@@ -117,6 +122,10 @@ export class Casts {
 	 * @param stream Optional stream
 	 */
 	public getCastRows = async (filter: ICastFilter, stream?) => {
+		if (filter.geoFilter && filter.geoFilter.boundingBox) {
+			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
+		}
+
 		if (
 			filter.geoFilter &&
 			filter.geoFilter.polygon &&

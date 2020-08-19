@@ -43,18 +43,17 @@ The SDK is written in native typescript, so no extra types needs to be defined.
 Get temperatures for a given provider
 
 ```js
-import { ODPClient, UnitType, ITimeSeriesFilter } from "@odp/sdk";
+import { ODPClient, ICastFilter } from "@odp/sdk";
 
 async function quickstart() {
 	const odp = new ODPClient({ appId: "YOUR APPLICATION NAME" });
 	odp.loginWithOAuth({
 		project: "odp",
 	});
-	const filter: ITimeSeriesFilter = {
-		unit: UnitType.CELSIUS,
-		provider: ["simulated"],
+	const filter: ICastFilter = {
+		year: 2018,
 	};
-	const temperatures = await odp.timeSeries.temperature.getAll(filter);
+	const casts = await odp.sequences.casts.getCastCount(filter);
 }
 quickstart();
 ```
@@ -62,7 +61,7 @@ quickstart();
 ### Backend
 
 ```js
-const { ODPClient, UnitType, ITimeSeriesFilter } = require("@odp/sdk");
+const { ODPClient, ICastFilter } = require("@odp/sdk");
 
 async function quickstart() {
 	const client = new ODPClient({ appId: "YOUR APPLICATION NAME" });
@@ -71,11 +70,10 @@ async function quickstart() {
 		apiKey: "YOUR_SECRET_API_KEY",
 	});
 
-	const filter: ITimeSeriesFilter = {
-		unit: UnitType.CELSIUS,
-		provider: ["simulated"],
+	const filter: ICastFilter = {
+		year: 2018,
 	};
-	const temperatures = await odp.timeSeries.temperature.getAll(filter);
+	const casts = await odp.sequences.casts.getCastCount(filter);
 }
 quickstart();
 ```
@@ -85,6 +83,10 @@ quickstart();
 -   [SDK documentation](./docs/README.md)
 -   [API documentation](https://doc.cognitedata.com)
 -   [API reference documentation](https://doc.cognitedata.com/api/v1)
+
+## Samples
+
+-   [Casts](./samples/casts.ts)
 
 ## Development
 

@@ -1,5 +1,5 @@
 import * as https from "https";
-import { IBoundingBox } from "../types/types";
+import { IBoundingBox, IGeoLocation } from "../types/types";
 
 export const throttleActions = (listOfCallableActions, limit, stream?) => {
 	// We'll need to store which is the next promise in the list.
@@ -71,6 +71,17 @@ export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> => {
 				return reject(error);
 			});
 	});
+};
+
+// Convert a bounding box to polygon
+export const boundingBoxToPolygon = (bb: IBoundingBox): Array<IGeoLocation> => {
+	return [
+		{ latitude: bb.bottomLeft.latitude, longitude: bb.bottomLeft.longitude },
+		{ latitude: bb.topRight.latitude, longitude: bb.bottomLeft.longitude },
+		{ latitude: bb.topRight.latitude, longitude: bb.topRight.longitude },
+		{ latitude: bb.bottomLeft.latitude, longitude: bb.topRight.longitude },
+		{ latitude: bb.bottomLeft.latitude, longitude: bb.bottomLeft.longitude },
+	];
 };
 
 export const getMRGIDBPolygon = (mrgid: number): Promise<IBoundingBox> => {
