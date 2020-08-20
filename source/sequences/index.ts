@@ -26,7 +26,7 @@ export class Sequences {
 		};
 	};
 
-	public sequenceQueryBuilder = (level: number, year?: number, index?: number, castId?: number) => {
+	public sequenceQueryBuilder = (level: number, year?: number) => {
 		const sequenceFilter: SequenceListScope = {
 			filter: {
 				externalIdPrefix: this.constants().sequence.prefix[level],

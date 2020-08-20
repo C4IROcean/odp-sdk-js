@@ -1,4 +1,4 @@
-import { ODPClient } from "../source";
+import { ODPClient, SequenceColumnType } from "../source";
 
 describe("sequences", () => {
 	let odp: ODPClient;
@@ -56,7 +56,11 @@ describe("sequences", () => {
 			{ longitude: 180, latitude: 15 },
 			{ longitude: 170, latitude: 15 },
 		];
-		const values = await odp.sequences.casts.getCasts({ year: 2018, geoFilter: { polygon } });
+		const values = await odp.sequences.casts.getCasts({
+			year: 2018,
+			geoFilter: { polygon },
+			columns: [SequenceColumnType.TEMPERATURE],
+		});
 		expect(values.length).toBe(370);
 	});
 
@@ -76,7 +80,13 @@ describe("sequences", () => {
 			{ longitude: 3, latitude: 59 },
 			{ longitude: -1, latitude: 59 },
 		];
-		const values = await odp.sequences.casts.getCastRows({ year: 2018, geoFilter: { polygon } });
+		const values = await odp.sequences.casts.getCastRows({
+			year: 2018,
+			geoFilter: { polygon },
+			columns: [SequenceColumnType.TEMPERATURE],
+		});
 		expect(values.length).toBe(15570);
+		expect(values[0].value.temperature).toBeTruthy();
+		expect(values[0].value.nitrate).toBeFalsy();
 	});
 });

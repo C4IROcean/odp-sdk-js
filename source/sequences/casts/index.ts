@@ -1,8 +1,8 @@
 import { Sequences } from "..";
 import { ODPClient } from "../../";
-import { mapCoordinateToIndex } from "../utils";
+import { mapCoordinateToIndex, getColumnsFromEnum } from "../utils";
 import { boundingBoxToPolygon } from "../../utils";
-import { Sequence } from "@cognite/sdk";
+import { Sequence, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
 import { ICastFilter, SequenceColumnType } from "../../types/types";
 
@@ -78,7 +78,7 @@ export class Casts {
 	};
 
 	/**
-	 * Get casts and metadata for a given area. Note: Either castId or location needs to be provided. Level 2
+	 * Get casts and metadata for a given area. Level 2
 	 *
 	 * @param filter cast filter object
 	 * @param stream optional stream
@@ -146,6 +146,10 @@ export class Casts {
 			this._sequences.castSequenceConvert,
 		);
 	};
+
+	/**
+	 * Internal methods
+	 */
 
 	private getCastRowsFromPolygon = async (filter: ICastFilter, stream?) => {
 		const promises = [];
@@ -226,6 +230,8 @@ export class Casts {
 			columns = sequences[0].columns.map((col) => {
 				return col.externalId;
 			});
+		} else {
+			columns = getColumnsFromEnum(columns);
 		}
 
 		const all = [];
@@ -233,7 +239,7 @@ export class Casts {
 			let response;
 
 			while (true) {
-				const q = [];
+				const q: Array<SequenceRowsRetrieve> = [];
 				for (const sq of sequences) {
 					q.push({
 						id: sq.id,
@@ -241,6 +247,7 @@ export class Casts {
 						cursor: response ? response[q.length].nextCursor : null,
 						start,
 						end,
+						columns,
 					});
 				}
 				response = await this.getSequenceRows(q);

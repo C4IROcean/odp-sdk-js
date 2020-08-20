@@ -1,4 +1,4 @@
-import { IGeoLocation } from "..";
+import { IGeoLocation, SequenceColumnType } from "..";
 
 const start = 1;
 
@@ -63,4 +63,21 @@ export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	}
 
 	return [boxCoords, boxIndexes];
+};
+
+export const getColumnsFromEnum = (cols: SequenceColumnType) => {
+	const columns = ["date", "lat", "lon", "Latitude", "Longitude"];
+
+	for (const col of cols) {
+		if (col === SequenceColumnType.NITRATE) {
+			columns.push("Nitrate");
+			columns.push("Nitrate_WODflag");
+			columns.push("Nitrate_origflag");
+		} else if (col === SequenceColumnType.TEMPERATURE) {
+			columns.push("Temperature");
+			columns.push("Temperature_WODflag");
+			columns.push("Temperature_origflag");
+		}
+	}
+	return columns;
 };
