@@ -231,7 +231,11 @@ export class Casts {
 				return col.externalId;
 			});
 		} else {
-			columns = getColumnsFromEnum(columns);
+			const availableColumns = sequences[0].columns.map((col) => {
+				return col.externalId;
+			});
+
+			columns = getColumnsFromEnum(columns, availableColumns);
 		}
 
 		const all = [];
