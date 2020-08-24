@@ -1,4 +1,4 @@
-import { IGeoLocation } from "..";
+import { IGeoLocation, SequenceColumnType } from "..";
 
 const start = 1;
 
@@ -17,8 +17,8 @@ export const gridCoordinateToIndex = (x, y, resolution = 1): number => {
 
 export const mapCoordinateToIndex = (location: IGeoLocation, resolution = 1): number => {
 	// returns index of specific grid-coordinate, given lon lat
-	const lat = location.lat + 90;
-	const lon = location.lon + 180;
+	const lat = location.latitude + 90;
+	const lon = location.longitude + 180;
 
 	const roundLat = resolution * Math.ceil(lat / resolution);
 	const roundLong = resolution * Math.ceil(lon / resolution);
@@ -34,7 +34,7 @@ export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
 	const location = indexToGridCoordinate(index, resolution);
 	const longitude = -180 + (location.x - 0.5) / resolution; // +0.5 is to put location to center of grid tile
 	const latitude = -90 + (location.y - 0.5) / resolution;
-	return { lon: longitude, lat: latitude };
+	return { longitude, latitude };
 };
 
 export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
@@ -63,4 +63,41 @@ export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	}
 
 	return [boxCoords, boxIndexes];
+};
+
+export const getColumnsFromEnum = (cols: SequenceColumnType, available) => {
+	const columns = ["date", "lat", "lon", "Latitude", "Longitude", "z"];
+
+	for (const col of cols) {
+		if (col === SequenceColumnType.NITRATE && available.includes("Nitrate")) {
+			columns.push("Nitrate");
+			columns.push("Nitrate_WODflag");
+			columns.push("Nitrate_origflag");
+		} else if (col === SequenceColumnType.TEMPERATURE && available.includes("Temperature")) {
+			columns.push("Temperature");
+			columns.push("Temperature_WODflag");
+			columns.push("Temperature_origflag");
+		} else if (col === SequenceColumnType.OXYGEN && available.includes("Oxygen")) {
+			columns.push("Oxygen");
+			columns.push("Oxygen_WODflag");
+			columns.push("Oxygen_origflag");
+		} else if (col === SequenceColumnType.SALINITY && available.includes("Salinity")) {
+			columns.push("Salinity");
+			columns.push("Salinity_WODflag");
+			columns.push("Salinity_origflag");
+		} else if (col === SequenceColumnType.CHLOROPHYLL && available.includes("Chlorophyll")) {
+			columns.push("Chlorophyll");
+			columns.push("Chlorophyll_WODflag");
+			columns.push("Chlorophyll_origflag");
+		} else if (col === SequenceColumnType.PRESSURE && available.includes("Pressure")) {
+			columns.push("Pressure");
+			columns.push("Pressure_WODflag");
+			columns.push("Pressure_origflag");
+		} else if (col === SequenceColumnType.PRESSURE && available.includes("pH")) {
+			columns.push("pH");
+			columns.push("pH_WODflag");
+			columns.push("pH_origflag");
+		}
+	}
+	return columns;
 };

@@ -1,5 +1,5 @@
 import * as https from "https";
-import { IBoundingBox } from "../types/types";
+import { IBoundingBox, IGeoLocation } from "../types/types";
 
 export const throttleActions = (listOfCallableActions, limit, stream?) => {
 	// We'll need to store which is the next promise in the list.
@@ -59,8 +59,8 @@ export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> => {
 					try {
 						const json = JSON.parse(body);
 						return resolve({
-							bottomLeft: { lat: json.minLatitude, lon: json.minLongitude },
-							topRight: { lat: json.maxLatitude, lon: json.maxLongitude },
+							bottomLeft: { latitude: json.minLatitude, longitude: json.minLongitude },
+							topRight: { latitude: json.maxLatitude, longitude: json.maxLongitude },
 						});
 					} catch (error) {
 						return reject(error);
@@ -71,4 +71,47 @@ export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> => {
 				return reject(error);
 			});
 	});
+};
+
+// Convert a bounding box to polygon
+export const boundingBoxToPolygon = (bb: IBoundingBox): Array<IGeoLocation> => {
+	return [
+		{ latitude: bb.bottomLeft.latitude, longitude: bb.bottomLeft.longitude },
+		{ latitude: bb.topRight.latitude, longitude: bb.bottomLeft.longitude },
+		{ latitude: bb.topRight.latitude, longitude: bb.topRight.longitude },
+		{ latitude: bb.bottomLeft.latitude, longitude: bb.topRight.longitude },
+		{ latitude: bb.bottomLeft.latitude, longitude: bb.bottomLeft.longitude },
+	];
+};
+
+export const getMRGIDBPolygon = (mrgid: number): Promise<IBoundingBox> => {
+	throw new Error("Not implemented");
+	// tslint:disable: max-line-length
+	/*
+	return new Promise((resolve, reject) => {
+		const url = `https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=1.0.0&request=GetFeature&typeNames=eez&cql_filter=mrgid=${mrgid}&outputFormat=application/json`;
+		https
+			.get(url, (res) => {
+				let body = "";
+
+				res.on("data", (chunk) => {
+					body += chunk;
+				});
+
+				res.on("end", () => {
+					try {
+						const json = JSON.parse(body);
+						return resolve({
+							bottomLeft: { latitude: json.minLatitude, longitude: json.minLongitude },
+							topRight: { latitude: json.maxLatitude, longitude: json.maxLongitude },
+						});
+					} catch (error) {
+						return reject(error);
+					}
+				});
+			})
+			.on("error", (error) => {
+				return reject(error);
+			});
+	});*/
 };

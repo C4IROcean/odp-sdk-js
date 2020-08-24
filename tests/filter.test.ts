@@ -20,7 +20,9 @@ describe("filter", () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			limit: 500,
-			geoFilter: { boundingBox: { bottomLeft: { lat: 67, lon: 11 }, topRight: { lat: 68, lon: 12 } } },
+			geoFilter: {
+				boundingBox: { bottomLeft: { latitude: 67, longitude: 11 }, topRight: { latitude: 68, longitude: 12 } },
+			},
 			zoomLevel: 6,
 		};
 		const query = await timeSeries.queryBuilder(filter);
@@ -50,7 +52,12 @@ describe("filter", () => {
 		const filter: ITimeSeriesFilter = {
 			unit: UnitType.CELSIUS,
 			limit: 500,
-			geoFilter: { boundingBox: { bottomLeft: { lat: 67.9, lon: 11.9 }, topRight: { lat: 68.1, lon: 12.1 } } },
+			geoFilter: {
+				boundingBox: {
+					bottomLeft: { latitude: 67.9, longitude: 11.9 },
+					topRight: { latitude: 68.1, longitude: 12.1 },
+				},
+			},
 			zoomLevel: 8,
 			provider: ["provider1", "provider2"],
 			depth: { max: 500, min: 0 },

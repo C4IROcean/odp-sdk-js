@@ -1,4 +1,4 @@
-import { ODPClient } from "../source";
+import { ODPClient, SequenceColumnType } from "../source";
 
 describe("sequences", () => {
 	let odp: ODPClient;
@@ -18,16 +18,24 @@ describe("sequences", () => {
 
 	test("get cast count", async () => {
 		const count = await odp.sequences.casts.getCastsCount();
-		expect(count.length).toBe(27412);
+		expect(count.length).toBe(33056);
+	});
+
+	test("get cast years", async () => {
+		const years = await odp.sequences.casts.getCastYears();
+		expect(years.length).toBe(3);
 	});
 
 	test("get cast count for a single location", async () => {
-		const count = await odp.sequences.casts.getCastsCount(2018, { lat: 20, lon: 173 });
+		const count = await odp.sequences.casts.getCastsCount({
+			year: 2018,
+			geoFilter: { location: { latitude: 20, longitude: 173 } },
+		});
 		expect(count.length).toBe(1);
 	});
 
 	test("get a specific cast", async () => {
-		const values = await odp.sequences.casts.getCastRows("cast_wod_3_2018_63470_18777858");
+		const values = await odp.sequences.casts.getCastRows({ castId: "cast_wod_3_2018_63470_18777858" });
 		expect(values.length).toBe(115);
 		expect(values[0].value.temperature.value).toBe(25.790000915527344);
 	});
@@ -48,12 +56,19 @@ describe("sequences", () => {
 			{ longitude: 180, latitude: 15 },
 			{ longitude: 170, latitude: 15 },
 		];
-		const values = await odp.sequences.casts.getCastsFromPolygon(polygon);
+		const values = await odp.sequences.casts.getCasts({
+			year: 2018,
+			geoFilter: { polygon },
+			columns: [SequenceColumnType.TEMPERATURE],
+		});
 		expect(values.length).toBe(370);
 	});
 
 	test("get casts level 2", async () => {
-		const values = await odp.sequences.casts.getCasts(2018, { lat: 32, lon: 131 });
+		const values = await odp.sequences.casts.getCasts({
+			year: 2018,
+			geoFilter: { location: { latitude: 32, longitude: 131 } },
+		});
 		expect(values.length).toBe(85);
 	});
 
@@ -65,7 +80,13 @@ describe("sequences", () => {
 			{ longitude: 3, latitude: 59 },
 			{ longitude: -1, latitude: 59 },
 		];
-		const values = await odp.sequences.casts.getCastRowsFromPolygon(polygon);
+		const values = await odp.sequences.casts.getCastRows({
+			year: 2018,
+			geoFilter: { polygon },
+			columns: [SequenceColumnType.TEMPERATURE],
+		});
 		expect(values.length).toBe(15570);
+		expect(values[0].value.temperature).toBeTruthy();
+		expect(values[0].value.nitrate).toBeFalsy();
 	});
 });
