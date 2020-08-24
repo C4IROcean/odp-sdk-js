@@ -123,8 +123,8 @@ export interface IBoundingBox {
 }
 
 export interface IGeoLocation {
-	lat: number;
-	lon: number;
+	latitude: number;
+	longitude: number;
 }
 
 export interface INumberFilter {
@@ -143,6 +143,7 @@ export interface IAggregation {
 }
 
 export interface IGeoFilter {
+	location?: IGeoLocation;
 	boundingBox?: IBoundingBox;
 	polygon?: Array<IGeoLocation>;
 	mrgid?: number;
@@ -154,11 +155,22 @@ export interface IDatapointFilter {
 	limit?: number;
 	latestValue?: boolean;
 }
+
 export interface ITimeSeriesFilter extends IDatapointFilter {
 	unit: UnitType;
 	geoFilter?: IGeoFilter;
 	depth?: INumberFilter;
 	zoomLevel?: ZoomLevel; // mapbox zoom levels 0 (the earth) - 22 (very close)
+	provider?: Array<string>;
+}
+
+export interface ICastFilter {
+	time?: ITimeFilter;
+	year?: number;
+	geoFilter?: IGeoFilter;
+	depth?: INumberFilter;
+	columns?: Array<SequenceColumnType>;
+	castId?: string;
 	provider?: Array<string>;
 }
 

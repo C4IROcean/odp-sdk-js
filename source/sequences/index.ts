@@ -20,20 +20,23 @@ export class Sequences {
 	public constants = () => {
 		return {
 			sequence: {
-				prefix: { 1: "cast_wod_1", 2: "cast_wod_2", 3: "cast_wod_3" },
+				prefix: { 0: "cast_wod_0", 1: "cast_wod_1", 2: "cast_wod_2", 3: "cast_wod_3" },
 				rowNames: ["Oxygen", "Temperature", "Salinity", "Chlorophyll", "Pressure", "Nitrate", "pH"],
 			},
 		};
 	};
 
-	public sequenceQueryBuilder = (level: number, year: number, index?: number, castId?: number) => {
+	public sequenceQueryBuilder = (level: number, year?: number) => {
 		const sequenceFilter: SequenceListScope = {
 			filter: {
-				externalIdPrefix: this.constants().sequence.prefix[level] + "_" + year,
+				externalIdPrefix: this.constants().sequence.prefix[level],
 				metadata: {},
 			},
 			limit: 1000,
 		};
+		if (year) {
+			sequenceFilter.filter.externalIdPrefix += "_" + year;
+		}
 		return sequenceFilter;
 	};
 
