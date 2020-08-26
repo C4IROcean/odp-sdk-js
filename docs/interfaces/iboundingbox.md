@@ -23,7 +23,7 @@
 
 **● bottomLeft**: *[IGeoLocation](igeolocation.md)*
 
-*Defined in types/types.ts:115*
+*Defined in [source/types/types.ts:139](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L139)*
 
 ___
 <a id="topright"></a>
@@ -32,7 +32,7 @@ ___
 
 **● topRight**: *[IGeoLocation](igeolocation.md)*
 
-*Defined in types/types.ts:116*
+*Defined in [source/types/types.ts:140](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L140)*
 
 ___
 

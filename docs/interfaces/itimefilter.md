@@ -23,7 +23,7 @@
 
 **● max**: *`Date`*
 
-*Defined in types/types.ts:131*
+*Defined in [source/types/types.ts:155](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L155)*
 
 ___
 <a id="min"></a>
@@ -32,7 +32,7 @@ ___
 
 **● min**: *`Date`*
 
-*Defined in types/types.ts:130*
+*Defined in [source/types/types.ts:154](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L154)*
 
 ___
 

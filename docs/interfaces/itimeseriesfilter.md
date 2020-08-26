@@ -34,7 +34,7 @@
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[aggregation](idatapointfilter.md#aggregation)*
 
-*Defined in types/types.ts:147*
+*Defined in [source/types/types.ts:172](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L172)*
 
 ___
 <a id="depth"></a>
@@ -43,7 +43,7 @@ ___
 
 **● depth**: *[INumberFilter](inumberfilter.md)*
 
-*Defined in types/types.ts:154*
+*Defined in [source/types/types.ts:180](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L180)*
 
 ___
 <a id="geofilter"></a>
@@ -52,7 +52,7 @@ ___
 
 **● geoFilter**: *[IGeoFilter](igeofilter.md)*
 
-*Defined in types/types.ts:153*
+*Defined in [source/types/types.ts:179](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L179)*
 
 ___
 <a id="latestvalue"></a>
@@ -63,7 +63,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[latestValue](idatapointfilter.md#latestvalue)*
 
-*Defined in types/types.ts:149*
+*Defined in [source/types/types.ts:174](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L174)*
 
 ___
 <a id="limit"></a>
@@ -74,7 +74,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[limit](idatapointfilter.md#limit)*
 
-*Defined in types/types.ts:148*
+*Defined in [source/types/types.ts:173](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L173)*
 
 ___
 <a id="provider"></a>
@@ -83,7 +83,7 @@ ___
 
 **● provider**: *`Array`<`string`>*
 
-*Defined in types/types.ts:156*
+*Defined in [source/types/types.ts:182](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L182)*
 
 ___
 <a id="time"></a>
@@ -94,7 +94,7 @@ ___
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[time](idatapointfilter.md#time)*
 
-*Defined in types/types.ts:146*
+*Defined in [source/types/types.ts:171](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L171)*
 
 ___
 <a id="unit"></a>
@@ -103,7 +103,7 @@ ___
 
 **● unit**: *[UnitType](../enums/unittype.md)*
 
-*Defined in types/types.ts:152*
+*Defined in [source/types/types.ts:178](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L178)*
 
 ___
 <a id="zoomlevel"></a>
@@ -112,7 +112,7 @@ ___
 
 **● zoomLevel**: *[ZoomLevel](../enums/zoomlevel.md)*
 
-*Defined in types/types.ts:155*
+*Defined in [source/types/types.ts:181](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L181)*
 
 ___
 

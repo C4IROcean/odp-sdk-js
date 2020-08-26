@@ -15,6 +15,7 @@
 * [count](isequencerowvalue.md#count)
 * [countryCode](isequencerowvalue.md#countrycode)
 * [cruiseId](isequencerowvalue.md#cruiseid)
+* [depth](isequencerowvalue.md#depth)
 * [externalId](isequencerowvalue.md#externalid)
 * [latitudeMax](isequencerowvalue.md#latitudemax)
 * [latitudeMin](isequencerowvalue.md#latitudemin)
@@ -45,7 +46,7 @@
 
 **● castId**: *`number`*
 
-*Defined in types/types.ts:57*
+*Defined in [source/types/types.ts:57](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L57)*
 
 ___
 <a id="chlorophyll"></a>
@@ -54,7 +55,7 @@ ___
 
 **● chlorophyll**: *`number`*
 
-*Defined in types/types.ts:54*
+*Defined in [source/types/types.ts:54](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L54)*
 
 ___
 <a id="count"></a>
@@ -63,7 +64,7 @@ ___
 
 **● count**: *`number`*
 
-*Defined in types/types.ts:45*
+*Defined in [source/types/types.ts:45](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L45)*
 
 ___
 <a id="countrycode"></a>
@@ -72,7 +73,7 @@ ___
 
 **● countryCode**: *`string`*
 
-*Defined in types/types.ts:59*
+*Defined in [source/types/types.ts:59](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L59)*
 
 ___
 <a id="cruiseid"></a>
@@ -81,7 +82,16 @@ ___
 
 **● cruiseId**: *`string`*
 
-*Defined in types/types.ts:58*
+*Defined in [source/types/types.ts:58](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L58)*
+
+___
+<a id="depth"></a>
+
+### `<Optional>` depth
+
+**● depth**: *`number`*
+
+*Defined in [source/types/types.ts:68](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L68)*
 
 ___
 <a id="externalid"></a>
@@ -90,7 +100,7 @@ ___
 
 **● externalId**: *`string`*
 
-*Defined in types/types.ts:56*
+*Defined in [source/types/types.ts:56](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L56)*
 
 ___
 <a id="latitudemax"></a>
@@ -99,7 +109,7 @@ ___
 
 **● latitudeMax**: *`number`*
 
-*Defined in types/types.ts:60*
+*Defined in [source/types/types.ts:60](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L60)*
 
 ___
 <a id="latitudemin"></a>
@@ -108,7 +118,7 @@ ___
 
 **● latitudeMin**: *`number`*
 
-*Defined in types/types.ts:61*
+*Defined in [source/types/types.ts:61](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L61)*
 
 ___
 <a id="longitudemax"></a>
@@ -117,7 +127,7 @@ ___
 
 **● longitudeMax**: *`number`*
 
-*Defined in types/types.ts:62*
+*Defined in [source/types/types.ts:62](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L62)*
 
 ___
 <a id="longitudemin"></a>
@@ -126,7 +136,7 @@ ___
 
 **● longitudeMin**: *`number`*
 
-*Defined in types/types.ts:63*
+*Defined in [source/types/types.ts:63](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L63)*
 
 ___
 <a id="name"></a>
@@ -135,7 +145,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in types/types.ts:46*
+*Defined in [source/types/types.ts:46](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L46)*
 
 ___
 <a id="nitrate"></a>
@@ -144,7 +154,7 @@ ___
 
 **● nitrate**: *`number`*
 
-*Defined in types/types.ts:51*
+*Defined in [source/types/types.ts:51](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L51)*
 
 ___
 <a id="nitrite"></a>
@@ -153,7 +163,7 @@ ___
 
 **● nitrite**: *`number`*
 
-*Defined in types/types.ts:52*
+*Defined in [source/types/types.ts:52](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L52)*
 
 ___
 <a id="oxygen"></a>
@@ -162,7 +172,7 @@ ___
 
 **● oxygen**: *`number`*
 
-*Defined in types/types.ts:48*
+*Defined in [source/types/types.ts:48](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L48)*
 
 ___
 <a id="ph"></a>
@@ -171,7 +181,7 @@ ___
 
 **● ph**: *`number`*
 
-*Defined in types/types.ts:53*
+*Defined in [source/types/types.ts:53](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L53)*
 
 ___
 <a id="phosphate"></a>
@@ -180,7 +190,7 @@ ___
 
 **● phosphate**: *`number`*
 
-*Defined in types/types.ts:49*
+*Defined in [source/types/types.ts:49](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L49)*
 
 ___
 <a id="pressure"></a>
@@ -189,7 +199,7 @@ ___
 
 **● pressure**: *`number`*
 
-*Defined in types/types.ts:55*
+*Defined in [source/types/types.ts:55](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L55)*
 
 ___
 <a id="pressuremax"></a>
@@ -198,7 +208,7 @@ ___
 
 **● pressureMax**: *`number`*
 
-*Defined in types/types.ts:64*
+*Defined in [source/types/types.ts:64](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L64)*
 
 ___
 <a id="pressuremin"></a>
@@ -207,7 +217,7 @@ ___
 
 **● pressureMin**: *`number`*
 
-*Defined in types/types.ts:65*
+*Defined in [source/types/types.ts:65](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L65)*
 
 ___
 <a id="salinity"></a>
@@ -216,7 +226,7 @@ ___
 
 **● salinity**: *`number`*
 
-*Defined in types/types.ts:47*
+*Defined in [source/types/types.ts:47](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L47)*
 
 ___
 <a id="silicate"></a>
@@ -225,16 +235,16 @@ ___
 
 **● silicate**: *`number`*
 
-*Defined in types/types.ts:50*
+*Defined in [source/types/types.ts:50](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L50)*
 
 ___
 <a id="temperature"></a>
 
 ### `<Optional>` temperature
 
-**● temperature**: *`number`*
+**● temperature**: *[INumberValue](inumbervalue.md)*
 
-*Defined in types/types.ts:44*
+*Defined in [source/types/types.ts:44](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L44)*
 
 ___
 <a id="temperaturemax"></a>
@@ -243,7 +253,7 @@ ___
 
 **● temperatureMax**: *`number`*
 
-*Defined in types/types.ts:66*
+*Defined in [source/types/types.ts:66](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L66)*
 
 ___
 <a id="temperaturemin"></a>
@@ -252,7 +262,7 @@ ___
 
 **● temperatureMin**: *`number`*
 
-*Defined in types/types.ts:67*
+*Defined in [source/types/types.ts:67](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L67)*
 
 ___
 

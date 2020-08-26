@@ -27,7 +27,7 @@
 
 **● geo_key**: *`string`*
 
-*Defined in types/types.ts:164*
+*Defined in [source/types/types.ts:200](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L200)*
 
 ___
 

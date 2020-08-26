@@ -28,7 +28,7 @@
 
 **● cruise**: *`object`*
 
-*Defined in types/types.ts:28*
+*Defined in [source/types/types.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L28)*
 
 #### Type declaration
 
@@ -39,7 +39,7 @@ ___
 
 **● externalId**: *`string`*
 
-*Defined in types/types.ts:34*
+*Defined in [source/types/types.ts:34](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L34)*
 
 ___
 <a id="id"></a>
@@ -48,7 +48,7 @@ ___
 
 **● id**: *`number`*
 
-*Defined in types/types.ts:33*
+*Defined in [source/types/types.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L33)*
 
 ___
 <a id="location"></a>
@@ -57,7 +57,7 @@ ___
 
 **● location**: *`object`*
 
-*Defined in types/types.ts:23*
+*Defined in [source/types/types.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L23)*
 
 #### Type declaration
 
@@ -68,7 +68,7 @@ ___
 
 **● time**: *`number`*
 
-*Defined in types/types.ts:35*
+*Defined in [source/types/types.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L35)*
 
 ___
 

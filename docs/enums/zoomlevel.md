@@ -22,7 +22,7 @@
 
 **_1**:  = 1
 
-*Defined in types/types.ts:107*
+*Defined in [source/types/types.ts:131](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L131)*
 
 ___
 <a id="_2"></a>
@@ -31,7 +31,7 @@ ___
 
 **_2**:  = 2
 
-*Defined in types/types.ts:108*
+*Defined in [source/types/types.ts:132](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L132)*
 
 ___
 <a id="_3"></a>
@@ -40,7 +40,7 @@ ___
 
 **_3**:  = 3
 
-*Defined in types/types.ts:109*
+*Defined in [source/types/types.ts:133](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L133)*
 
 ___
 <a id="_4"></a>
@@ -49,7 +49,7 @@ ___
 
 **_4**:  = 4
 
-*Defined in types/types.ts:110*
+*Defined in [source/types/types.ts:134](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L134)*
 
 ___
 <a id="_5"></a>
@@ -58,7 +58,7 @@ ___
 
 **_5**:  = 5
 
-*Defined in types/types.ts:111*
+*Defined in [source/types/types.ts:135](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L135)*
 
 ___
 

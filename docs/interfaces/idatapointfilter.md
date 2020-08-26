@@ -27,7 +27,7 @@
 
 **● aggregation**: *[IAggregation](iaggregation.md)*
 
-*Defined in types/types.ts:147*
+*Defined in [source/types/types.ts:172](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L172)*
 
 ___
 <a id="latestvalue"></a>
@@ -36,7 +36,7 @@ ___
 
 **● latestValue**: *`boolean`*
 
-*Defined in types/types.ts:149*
+*Defined in [source/types/types.ts:174](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L174)*
 
 ___
 <a id="limit"></a>
@@ -45,7 +45,7 @@ ___
 
 **● limit**: *`number`*
 
-*Defined in types/types.ts:148*
+*Defined in [source/types/types.ts:173](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L173)*
 
 ___
 <a id="time"></a>
@@ -54,7 +54,7 @@ ___
 
 **● time**: *[ITimeFilter](itimefilter.md)*
 
-*Defined in types/types.ts:146*
+*Defined in [source/types/types.ts:171](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L171)*
 
 ___
 

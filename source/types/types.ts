@@ -71,6 +71,7 @@ export interface ISequenceRowValue {
 export interface INumberValue {
 	value: number;
 	flags?: any;
+	unit;
 }
 
 export interface IDataPoints {
@@ -107,6 +108,23 @@ export enum SequenceColumnType {
 	DATE = "date",
 	LATITUDE = "latitude",
 	LONGITUDE = "longitude",
+}
+
+export enum Unit {
+	TEMPERATURE = "degree_C",
+	COUNT = "",
+	DEPTH = "m",
+	SALINITY = "",
+	OXYGEN = "umol/kg",
+	PHOSPHATE = "",
+	SILICATE = "",
+	NITRATE = "µmol/kg",
+	NITRITE = "",
+	PH = "",
+	CHLOROPHYLL = "ugram/l",
+	PRESSURE = "dbar",
+	LATITUDE = "degrees_north",
+	LONGITUDE = "degrees_east",
 }
 
 export enum ZoomLevel {

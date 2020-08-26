@@ -14,11 +14,12 @@
 
 ### Methods
 
+* [getCastColumns](casts.md#getcastcolumns)
 * [getCastRows](casts.md#getcastrows)
-* [getCastRowsFromPolygon](casts.md#getcastrowsfrompolygon)
+* [getCastUnits](casts.md#getcastunits)
+* [getCastYears](casts.md#getcastyears)
 * [getCasts](casts.md#getcasts)
 * [getCastsCount](casts.md#getcastscount)
-* [getCastsFromPolygon](casts.md#getcastsfrompolygon)
 
 ---
 
@@ -30,7 +31,7 @@
 
 ⊕ **new Casts**(sequences: *[Sequences](sequences.md)*): [Casts](casts.md)
 
-*Defined in sequences/casts/index.ts:20*
+*Defined in [source/sequences/casts/index.ts:22](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/casts/index.ts#L22)*
 
 **Parameters:**
 
@@ -44,58 +45,70 @@ ___
 
 ## Methods
 
+<a id="getcastcolumns"></a>
+
+###  getCastColumns
+
+▸ **getCastColumns**(): `any`[]
+
+*Defined in [source/sequences/casts/index.ts:72](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/casts/index.ts#L72)*
+
+**Returns:** `any`[]
+
+___
 <a id="getcastrows"></a>
 
 ###  getCastRows
 
-▸ **getCastRows**(castId: *`string`*, columns?: *`Array`<[SequenceColumnType](../enums/sequencecolumntype.md)>*, stream?: *`any`*): `Promise`<`any`[]>
+▸ **getCastRows**(filter: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in sequences/casts/index.ts:128*
+*Defined in [source/sequences/casts/index.ts:124](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/casts/index.ts#L124)*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| castId | `string` |  Id for the cast |
-| `Optional` columns | `Array`<[SequenceColumnType](../enums/sequencecolumntype.md)> |  Columns that we want returned |
+| filter | [ICastFilter](../interfaces/icastfilter.md) |  cast filter object |
 | `Optional` stream | `any` |  Optional stream |
 
 **Returns:** `Promise`<`any`[]>
 
 ___
-<a id="getcastrowsfrompolygon"></a>
+<a id="getcastunits"></a>
 
-###  getCastRowsFromPolygon
+###  getCastUnits
 
-▸ **getCastRowsFromPolygon**(polygon: *`any`*, columns?: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
+▸ **getCastUnits**(): `never`
 
-*Defined in sequences/casts/index.ts:101*
+*Defined in [source/sequences/casts/index.ts:76](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/casts/index.ts#L76)*
 
-**Parameters:**
+**Returns:** `never`
 
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| polygon | `any` |  Polygon with lists of location objects. The list have to be in a correct order. |
-| `Optional` columns | `any` |
-| `Optional` stream | `any` |  Optional stream |
+___
+<a id="getcastyears"></a>
 
-**Returns:** `Promise`<`any`[]>
+###  getCastYears
+
+▸ **getCastYears**(): `Promise`<`string`[]>
+
+*Defined in [source/sequences/casts/index.ts:64](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/casts/index.ts#L64)*
+
+**Returns:** `Promise`<`string`[]>
 
 ___
 <a id="getcasts"></a>
 
 ###  getCasts
 
-▸ **getCasts**(location?: *[IGeoLocation](../interfaces/igeolocation.md)*, castId?: *`string`*, stream?: *`any`*): `Promise`<`any`[]>
+▸ **getCasts**(filter: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in sequences/casts/index.ts:53*
+*Defined in [source/sequences/casts/index.ts:86](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/casts/index.ts#L86)*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| `Optional` location | [IGeoLocation](../interfaces/igeolocation.md) |  optional location latitude longitude object |
-| `Optional` castId | `string` |  optional cast id. |
+| filter | [ICastFilter](../interfaces/icastfilter.md) |  cast filter object |
 | `Optional` stream | `any` |  optional stream |
 
 **Returns:** `Promise`<`any`[]>
@@ -105,35 +118,16 @@ ___
 
 ###  getCastsCount
 
-▸ **getCastsCount**(location?: *[IGeoLocation](../interfaces/igeolocation.md)*, stream?: *`any`*): `Promise`<`any`[]>
+▸ **getCastsCount**(filter?: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in sequences/casts/index.ts:36*
-
-**Parameters:**
-
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| `Optional` location | [IGeoLocation](../interfaces/igeolocation.md) |  optional longitude latitude object |
-| `Optional` stream | `any` |  optional stream<br><br>#TODO*   Need to support polygon location object the get multiple values |
-
-**Returns:** `Promise`<`any`[]>
-
-___
-<a id="getcastsfrompolygon"></a>
-
-###  getCastsFromPolygon
-
-▸ **getCastsFromPolygon**(polygon: *`any`*, columns?: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
-
-*Defined in sequences/casts/index.ts:76*
+*Defined in [source/sequences/casts/index.ts:38](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/casts/index.ts#L38)*
 
 **Parameters:**
 
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| polygon | `any` |  Polygon with lists of location objects. The list have to be in a correct order. |
-| `Optional` columns | `any` |
-| `Optional` stream | `any` |  Optional stream |
+| Name | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| `Default value` filter | [ICastFilter](../interfaces/icastfilter.md) |  {} |  cast filter object |
+| `Optional` stream | `any` | - |  optional stream<br><br>#TODO*   Need to support polygon location object the get multiple values |
 
 **Returns:** `Promise`<`any`[]>
 

@@ -23,7 +23,7 @@
 
 **● appId**: *`string`*
 
-*Defined in ODPClient.ts:8*
+*Defined in [source/ODPClient.ts:8](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/ODPClient.ts#L8)*
 
 ___
 <a id="baseurl"></a>
@@ -32,7 +32,7 @@ ___
 
 **● baseUrl**: *`string`*
 
-*Defined in ODPClient.ts:9*
+*Defined in [source/ODPClient.ts:9](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/ODPClient.ts#L9)*
 
 ___
 
