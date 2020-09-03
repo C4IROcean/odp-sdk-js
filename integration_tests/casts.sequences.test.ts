@@ -1,4 +1,4 @@
-import { ODPClient, SequenceColumnType } from "../source";
+import { ODPClient, SequenceColumnType, ObservedLevelFlag } from "../source";
 
 describe("sequences", () => {
 	let odp: ODPClient;
@@ -18,7 +18,7 @@ describe("sequences", () => {
 
 	test("get cast count", async () => {
 		const count = await odp.sequences.casts.getCastsCount();
-		expect(count.length).toBe(33056);
+		expect(count.length).toBe(34613);
 	});
 
 	test("get cast years", async () => {
@@ -87,6 +87,26 @@ describe("sequences", () => {
 		});
 		expect(values.length).toBe(15570);
 		expect(values[0].value.temperature).toBeTruthy();
+		expect(values[0].value.nitrate).toBeFalsy();
+	});
+
+	test.only("filter polygon rows by quality", async () => {
+		const polygon = [
+			{ longitude: 1.8, latitude: 56 },
+			{ longitude: 1.8, latitude: 57 },
+			{ longitude: 2, latitude: 57 },
+			{ longitude: 2, latitude: 56 },
+			{ longitude: 1.8, latitude: 56 },
+		];
+		const values = await odp.sequences.casts.getCastRows({
+			year: 2018,
+			geoFilter: { polygon },
+			quality: ObservedLevelFlag.FAILED_GRADIENT_CHECK,
+			columns: [SequenceColumnType.TEMPERATURE],
+		});
+		expect(values.length).toBe(543);
+		expect(values[0].value.temperature).toBeTruthy();
+		expect(values[0].value.temperature.flags.wod).toBe(3);
 		expect(values[0].value.nitrate).toBeFalsy();
 	});
 });

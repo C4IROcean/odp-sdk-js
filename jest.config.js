@@ -7,6 +7,7 @@ module.exports = {
 		logging_disabled: true,
 		_testMode: true,
 	},
+	collectCoverage: true,
 	transform: {
 		"^.+\\.tsx?$": "ts-jest",
 	},

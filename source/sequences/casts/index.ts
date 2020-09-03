@@ -159,7 +159,7 @@ export class Casts {
 		for (const cast of casts) {
 			promises.push(
 				this.getCastRows({ castId: cast.value.extId, columns: filter.columns }, stream).then((rows) => {
-					return this.filterLocationByPolygon(rows, filter.geoFilter.polygon);
+					return this.postRowFilter(rows, filter);
 				}),
 			);
 		}
@@ -203,14 +203,45 @@ export class Casts {
 		return all;
 	};
 
-	private filterLocationByPolygon = (rows, polygon) => {
+	private filterLocationByPolygon = (row, polygon) => {
+		if (isPointInPolygon({ latitude: row.location.lat, longitude: row.location.long }, polygon)) {
+			return row;
+		}
+	};
+
+	private postRowFilter = (rows, filter: ICastFilter) => {
 		const all = [];
 		for (const row of rows) {
-			if (isPointInPolygon({ latitude: row.location.lat, longitude: row.location.long }, polygon)) {
-				all.push(row);
+			if (filter.quality !== undefined) {
+				const qFilterResult = this.filterByQuality(row, filter);
+				if (!qFilterResult) {
+					continue;
+				}
 			}
+			if (filter.geoFilter.polygon) {
+				const pFilterResult = this.filterLocationByPolygon(row, filter.geoFilter.polygon);
+				if (!pFilterResult) {
+					continue;
+				}
+			}
+			all.push(row);
 		}
 		return all;
+	};
+
+	private filterByQuality = (row, filter: ICastFilter) => {
+		let skip = false;
+		for (const value of Object.keys(row.value)) {
+			if (row.value[value].flags && row.value[value].flags.wod !== null) {
+				if (filter.quality !== undefined && row.value[value].flags.wod !== filter.quality) {
+					skip = true;
+					break;
+				}
+			}
+		}
+		if (!skip) {
+			return row;
+		}
 	};
 
 	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?, converter?) => {
