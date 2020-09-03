@@ -19,7 +19,7 @@
 
 **ALL**:  = "all"
 
-*Defined in types/types.ts:80*
+*Defined in [source/types/types.ts:87](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L87)*
 
 ___
 <a id="count"></a>
@@ -28,7 +28,7 @@ ___
 
 **COUNT**:  = "count"
 
-*Defined in types/types.ts:81*
+*Defined in [source/types/types.ts:88](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L88)*
 
 ___
 

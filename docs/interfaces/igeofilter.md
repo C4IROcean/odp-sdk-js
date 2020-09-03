@@ -11,6 +11,7 @@
 ### Properties
 
 * [boundingBox](igeofilter.md#boundingbox)
+* [location](igeofilter.md#location)
 * [mrgid](igeofilter.md#mrgid)
 * [polygon](igeofilter.md#polygon)
 
@@ -24,7 +25,16 @@
 
 **● boundingBox**: *[IBoundingBox](iboundingbox.md)*
 
-*Defined in types/types.ts:140*
+*Defined in [source/types/types.ts:191](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L191)*
+
+___
+<a id="location"></a>
+
+### `<Optional>` location
+
+**● location**: *[IGeoLocation](igeolocation.md)*
+
+*Defined in [source/types/types.ts:190](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L190)*
 
 ___
 <a id="mrgid"></a>
@@ -33,7 +43,7 @@ ___
 
 **● mrgid**: *`number`*
 
-*Defined in types/types.ts:142*
+*Defined in [source/types/types.ts:193](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L193)*
 
 ___
 <a id="polygon"></a>
@@ -42,7 +52,7 @@ ___
 
 **● polygon**: *`Array`<[IGeoLocation](igeolocation.md)>*
 
-*Defined in types/types.ts:141*
+*Defined in [source/types/types.ts:192](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L192)*
 
 ___
 

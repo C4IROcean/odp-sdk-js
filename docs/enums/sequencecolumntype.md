@@ -32,7 +32,7 @@
 
 **CHLOROPHYLL**:  = "chlorophyll"
 
-*Defined in types/types.ts:99*
+*Defined in [source/types/types.ts:106](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L106)*
 
 ___
 <a id="count"></a>
@@ -41,7 +41,7 @@ ___
 
 **COUNT**:  = "cast_count"
 
-*Defined in types/types.ts:90*
+*Defined in [source/types/types.ts:97](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L97)*
 
 ___
 <a id="date"></a>
@@ -50,7 +50,7 @@ ___
 
 **DATE**:  = "date"
 
-*Defined in types/types.ts:101*
+*Defined in [source/types/types.ts:108](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L108)*
 
 ___
 <a id="latitude"></a>
@@ -59,7 +59,7 @@ ___
 
 **LATITUDE**:  = "latitude"
 
-*Defined in types/types.ts:102*
+*Defined in [source/types/types.ts:109](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L109)*
 
 ___
 <a id="longitude"></a>
@@ -68,7 +68,7 @@ ___
 
 **LONGITUDE**:  = "longitude"
 
-*Defined in types/types.ts:103*
+*Defined in [source/types/types.ts:110](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L110)*
 
 ___
 <a id="name"></a>
@@ -77,7 +77,7 @@ ___
 
 **NAME**:  = "name"
 
-*Defined in types/types.ts:91*
+*Defined in [source/types/types.ts:98](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L98)*
 
 ___
 <a id="nitrate"></a>
@@ -86,7 +86,7 @@ ___
 
 **NITRATE**:  = "nitrate"
 
-*Defined in types/types.ts:96*
+*Defined in [source/types/types.ts:103](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L103)*
 
 ___
 <a id="nitrite"></a>
@@ -95,7 +95,7 @@ ___
 
 **NITRITE**:  = "nitrite"
 
-*Defined in types/types.ts:97*
+*Defined in [source/types/types.ts:104](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L104)*
 
 ___
 <a id="oxygen"></a>
@@ -104,7 +104,7 @@ ___
 
 **OXYGEN**:  = "oxygen"
 
-*Defined in types/types.ts:93*
+*Defined in [source/types/types.ts:100](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L100)*
 
 ___
 <a id="ph"></a>
@@ -113,7 +113,7 @@ ___
 
 **PH**:  = "pH"
 
-*Defined in types/types.ts:98*
+*Defined in [source/types/types.ts:105](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L105)*
 
 ___
 <a id="phosphate"></a>
@@ -122,7 +122,7 @@ ___
 
 **PHOSPHATE**:  = "phosphate"
 
-*Defined in types/types.ts:94*
+*Defined in [source/types/types.ts:101](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L101)*
 
 ___
 <a id="pressure"></a>
@@ -131,7 +131,7 @@ ___
 
 **PRESSURE**:  = "pressure"
 
-*Defined in types/types.ts:100*
+*Defined in [source/types/types.ts:107](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L107)*
 
 ___
 <a id="salinity"></a>
@@ -140,7 +140,7 @@ ___
 
 **SALINITY**:  = "salinity"
 
-*Defined in types/types.ts:92*
+*Defined in [source/types/types.ts:99](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L99)*
 
 ___
 <a id="silicate"></a>
@@ -149,7 +149,7 @@ ___
 
 **SILICATE**:  = "silicate"
 
-*Defined in types/types.ts:95*
+*Defined in [source/types/types.ts:102](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L102)*
 
 ___
 <a id="temperature"></a>
@@ -158,7 +158,7 @@ ___
 
 **TEMPERATURE**:  = "temperature"
 
-*Defined in types/types.ts:89*
+*Defined in [source/types/types.ts:96](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L96)*
 
 ___
 

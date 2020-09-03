@@ -1,6 +1,6 @@
 {
 	"name": "@odp/sdk",
-	"version": "0.6.0",
+	"version": "0.6.1",
 	"description": "Javascript client library for ODP SDK, built on top of Cognite SDK",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -26,6 +26,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@cognite/sdk": "^2.22.0",
+		"cd": "^0.3.3",
 		"geolib": "^3.3.1",
 		"lodash": "^4.17.15",
 		"ndjson": "^1.5.0"
@@ -33,9 +34,9 @@
 	"devDependencies": {
 		"@types/jest": "^24.9.1",
 		"@types/node": "^13.7.7",
-		"jest": "^24.9.0",
+		"jest": "^26.4.2",
 		"prettier": "^1.19.1",
-		"ts-jest": "^24.2.0",
+		"ts-jest": "^26.3.0",
 		"ts-node": "^8.5.2",
 		"tslint": "^5.20.1",
 		"typescript": "^3.7.2",

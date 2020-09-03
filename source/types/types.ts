@@ -71,6 +71,7 @@ export interface ISequenceRowValue {
 export interface INumberValue {
 	value: number;
 	flags?: any;
+	unit;
 }
 
 export interface IDataPoints {
@@ -107,6 +108,49 @@ export enum SequenceColumnType {
 	DATE = "date",
 	LATITUDE = "latitude",
 	LONGITUDE = "longitude",
+}
+
+export enum ObservedLevelFlag {
+	ACCEPTED_VALUE = 0,
+	RANGE_OUTLIER = 1,
+	FAILED_INVERSION_CHECK = 2,
+	FAILED_GRADIENT_CHECK = 3,
+	OBSERVED_LEVEL_BULLSEYE_FLAG_AND_ZERO_GRADIENT_CHECK = 4,
+	COMBINED_GRADIENT_AND_INVERSION_CHECKS = 5,
+	FAILED_RANGE_AND_INVERSION_CHECKS = 6,
+	FAILED_RANGE_AND_GRADIENT_CHECKS = 7,
+	FAILED_RANGE_AND_QUESTIONABLE_DATA_CHECKS = 8,
+	FAILED_RANGE_AND_COMBINED_GRADIENT_AND_INVERSION_CHECKS = 9,
+}
+
+export enum StandardLevelFlag {
+	ACCEPTED_VALUE = 0,
+	BULLSEYE_MARKER = 1,
+	DENSITY_INVERSION = 2,
+	FAILED_ANNUAL_STANDARD_DEVIATION_CHECK = 3,
+	FAILED_SEASONAL_STANDARD_DEVIATION_CHECK = 4,
+	FAILED_MONTHLY_STANDARD_DEVIATION_CHECK = 5,
+	FAILED_ANNUAL_AND_SEASONAL_STANDARD_DEVIATION_CHECK = 6,
+	FAILED_ANNUAL_AND_MONTHLY_STANDARD_DEVIATION_CHECK = 7,
+	FAILED_SEASONAL_AND_MONTHLY_STANDARD_DEVIATION_CHECK = 8,
+	FAILED_ANNUAL_SEASONAL_AND_MONTHLY_STANDARD_DEVIATION_CHECK_ = 9,
+}
+
+export enum Unit {
+	TEMPERATURE = "degree_C",
+	COUNT = "",
+	DEPTH = "m",
+	SALINITY = "",
+	OXYGEN = "umol/kg",
+	PHOSPHATE = "",
+	SILICATE = "",
+	NITRATE = "µmol/kg",
+	NITRITE = "",
+	PH = "",
+	CHLOROPHYLL = "ugram/l",
+	PRESSURE = "dbar",
+	LATITUDE = "degrees_north",
+	LONGITUDE = "degrees_east",
 }
 
 export enum ZoomLevel {
@@ -172,6 +216,7 @@ export interface ICastFilter {
 	columns?: Array<SequenceColumnType>;
 	castId?: string;
 	provider?: Array<string>;
+	quality?: ObservedLevelFlag;
 }
 
 export interface IAssetsFilter {

@@ -10,29 +10,29 @@
 
 ### Properties
 
-* [lat](igeolocation.md#lat)
-* [lon](igeolocation.md#lon)
+* [latitude](igeolocation.md#latitude)
+* [longitude](igeolocation.md#longitude)
 
 ---
 
 ## Properties
 
-<a id="lat"></a>
+<a id="latitude"></a>
 
-###  lat
+###  latitude
 
-**● lat**: *`number`*
+**● latitude**: *`number`*
 
-*Defined in types/types.ts:120*
+*Defined in [source/types/types.ts:170](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L170)*
 
 ___
-<a id="lon"></a>
+<a id="longitude"></a>
 
-###  lon
+###  longitude
 
-**● lon**: *`number`*
+**● longitude**: *`number`*
 
-*Defined in types/types.ts:121*
+*Defined in [source/types/types.ts:171](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L171)*
 
 ___
 

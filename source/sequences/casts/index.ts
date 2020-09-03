@@ -1,7 +1,7 @@
 import { Sequences } from "..";
 import { ODPClient } from "../../";
 import { mapCoordinateToIndex, getColumnsFromEnum } from "../utils";
-import { boundingBoxToPolygon } from "../../utils";
+import { boundingBoxToPolygon, throttleActions } from "../../utils";
 import { Sequence, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
 import { ICastFilter, SequenceColumnType } from "../../types/types";
@@ -18,6 +18,7 @@ import { ICastFilter, SequenceColumnType } from "../../types/types";
  */
 
 export class Casts {
+	private _concurrency = 50;
 	private _client: ODPClient;
 	private _sequences: Sequences;
 	constructor(sequences: Sequences) {
@@ -157,13 +158,15 @@ export class Casts {
 
 		const casts = await this.getCastsFromPolygon(filter);
 		for (const cast of casts) {
-			promises.push(
+			promises.push(() =>
 				this.getCastRows({ castId: cast.value.extId, columns: filter.columns }, stream).then((rows) => {
-					return this.filterLocationByPolygon(rows, filter.geoFilter.polygon);
+					return this.postRowFilter(rows, filter);
 				}),
 			);
 		}
-		for (const iterator of await Promise.all(promises)) {
+
+		const allResult = await throttleActions(promises, this._concurrency, stream);
+		for (const iterator of allResult) {
 			all.push(...iterator);
 		}
 		return all;
@@ -185,7 +188,7 @@ export class Casts {
 		const castPromises = [];
 		for (let latitude = geoBounds.minLat + 1; latitude <= geoBounds.maxLat; latitude++) {
 			for (let longitude = geoBounds.minLng + 1; longitude <= geoBounds.maxLng; longitude++) {
-				castPromises.push(
+				castPromises.push(() =>
 					this.getCasts(
 						{
 							year: filter.year,
@@ -197,20 +200,54 @@ export class Casts {
 				);
 			}
 		}
-		for (const iterator of await Promise.all(castPromises)) {
+
+		const allResult = await throttleActions(castPromises, this._concurrency, stream);
+
+		for (const iterator of allResult) {
 			all.push(...iterator);
 		}
 		return all;
 	};
 
-	private filterLocationByPolygon = (rows, polygon) => {
+	private filterLocationByPolygon = (row, polygon) => {
+		if (isPointInPolygon({ latitude: row.location.lat, longitude: row.location.long }, polygon)) {
+			return row;
+		}
+	};
+
+	private postRowFilter = (rows, filter: ICastFilter) => {
 		const all = [];
 		for (const row of rows) {
-			if (isPointInPolygon({ latitude: row.location.lat, longitude: row.location.long }, polygon)) {
-				all.push(row);
+			if (filter.quality !== undefined) {
+				const qFilterResult = this.filterByQuality(row, filter);
+				if (!qFilterResult) {
+					continue;
+				}
 			}
+			if (filter.geoFilter.polygon) {
+				const pFilterResult = this.filterLocationByPolygon(row, filter.geoFilter.polygon);
+				if (!pFilterResult) {
+					continue;
+				}
+			}
+			all.push(row);
 		}
 		return all;
+	};
+
+	private filterByQuality = (row, filter: ICastFilter) => {
+		let skip = false;
+		for (const value of Object.keys(row.value)) {
+			if (row.value[value].flags && row.value[value].flags.wod !== null) {
+				if (filter.quality !== undefined && row.value[value].flags.wod !== filter.quality) {
+					skip = true;
+					break;
+				}
+			}
+		}
+		if (!skip) {
+			return row;
+		}
 	};
 
 	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?, converter?) => {
@@ -281,8 +318,8 @@ export class Casts {
 	private getSequenceRows = (seqRows) => {
 		const promises = [];
 		for (const seq of seqRows) {
-			promises.push(this._client.cognite.sequences.retrieveRows(seq));
+			promises.push(() => this._client.cognite.sequences.retrieveRows(seq));
 		}
-		return Promise.all(promises);
+		return throttleActions(promises, this._concurrency);
 	};
 }
