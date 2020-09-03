@@ -1,6 +1,6 @@
 {
 	"name": "@odp/sdk",
-	"version": "0.6.1",
+	"version": "0.6.2",
 	"description": "Javascript client library for ODP SDK, built on top of Cognite SDK",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
