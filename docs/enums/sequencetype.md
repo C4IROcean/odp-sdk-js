@@ -19,7 +19,7 @@
 
 **ALL**:  = "all"
 
-*Defined in [source/types/types.ts:87](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L87)*
+*Defined in [source/types/types.ts:87](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L87)*
 
 ___
 <a id="count"></a>
@@ -28,7 +28,7 @@ ___
 
 **COUNT**:  = "count"
 
-*Defined in [source/types/types.ts:88](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/types/types.ts#L88)*
+*Defined in [source/types/types.ts:88](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L88)*
 
 ___
 
