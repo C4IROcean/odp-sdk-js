@@ -90,7 +90,7 @@ describe("sequences", () => {
 		expect(values[0].value.nitrate).toBeFalsy();
 	});
 
-	test.only("filter polygon rows by quality", async () => {
+	test("filter polygon rows by quality", async () => {
 		const polygon = [
 			{ longitude: 1.8, latitude: 56 },
 			{ longitude: 1.8, latitude: 57 },
