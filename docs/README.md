@@ -5,8 +5,10 @@
 
 ### Enumerations
 
+* [ObservedLevelFlag](enums/observedlevelflag.md)
 * [SequenceColumnType](enums/sequencecolumntype.md)
 * [SequenceType](enums/sequencetype.md)
+* [StandardLevelFlag](enums/standardlevelflag.md)
 * [TimeSeriesType](enums/timeseriestype.md)
 * [Unit](enums/unit.md)
 * [UnitType](enums/unittype.md)
@@ -48,7 +50,6 @@
 ### Functions
 
 * [boundingBoxToPolygon](#boundingboxtopolygon)
-* [cornerCoordinatesToAllCoordinates](#cornercoordinatestoallcoordinates)
 * [getColumnsFromEnum](#getcolumnsfromenum)
 * [getMRGIDBPolygon](#getmrgidbpolygon)
 * [getMRGIDBoundingBox](#getmrgidboundingbox)
@@ -68,7 +69,7 @@
 
 ▸ **boundingBoxToPolygon**(bb: *[IBoundingBox](interfaces/iboundingbox.md)*): `Array`<[IGeoLocation](interfaces/igeolocation.md)>
 
-*Defined in [source/utils/index.ts:77](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/utils/index.ts#L77)*
+*Defined in [source/utils/index.ts:77](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/utils/index.ts#L77)*
 
 **Parameters:**
 
@@ -79,37 +80,19 @@
 **Returns:** `Array`<[IGeoLocation](interfaces/igeolocation.md)>
 
 ___
-<a id="cornercoordinatestoallcoordinates"></a>
-
-### `<Const>` cornerCoordinatesToAllCoordinates
-
-▸ **cornerCoordinatesToAllCoordinates**(corners: *`any`*, resolution?: *`number`*): `any`[][]
-
-*Defined in [source/sequences/utils.ts:40](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/utils.ts#L40)*
-
-**Parameters:**
-
-| Name | Type | Default value |
-| ------ | ------ | ------ |
-| corners | `any` | - |
-| `Default value` resolution | `number` | 1 |
-
-**Returns:** `any`[][]
-
-___
 <a id="getcolumnsfromenum"></a>
 
 ### `<Const>` getColumnsFromEnum
 
-▸ **getColumnsFromEnum**(cols: *[SequenceColumnType](enums/sequencecolumntype.md)*, available: *`any`*): `string`[]
+▸ **getColumnsFromEnum**(cols: *`Array`<[SequenceColumnType](enums/sequencecolumntype.md)>*, available: *`any`*): `string`[]
 
-*Defined in [source/sequences/utils.ts:68](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/utils.ts#L68)*
+*Defined in [source/sequences/utils.ts:68](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/utils.ts#L68)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| cols | [SequenceColumnType](enums/sequencecolumntype.md) |
+| cols | `Array`<[SequenceColumnType](enums/sequencecolumntype.md)> |
 | available | `any` |
 
 **Returns:** `string`[]
@@ -121,7 +104,7 @@ ___
 
 ▸ **getMRGIDBPolygon**(mrgid: *`number`*): `Promise`<[IBoundingBox](interfaces/iboundingbox.md)>
 
-*Defined in [source/utils/index.ts:87](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/utils/index.ts#L87)*
+*Defined in [source/utils/index.ts:87](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/utils/index.ts#L87)*
 
 **Parameters:**
 
@@ -138,7 +121,7 @@ ___
 
 ▸ **getMRGIDBoundingBox**(mrgid: *`number`*): `Promise`<[IBoundingBox](interfaces/iboundingbox.md)>
 
-*Defined in [source/utils/index.ts:47](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/utils/index.ts#L47)*
+*Defined in [source/utils/index.ts:47](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/utils/index.ts#L47)*
 
 **Parameters:**
 
@@ -155,7 +138,7 @@ ___
 
 ▸ **gridCoordinateToIndex**(x: *`any`*, y: *`any`*, resolution?: *`number`*): `number`
 
-*Defined in [source/sequences/utils.ts:13](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/utils.ts#L13)*
+*Defined in [source/sequences/utils.ts:13](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/utils.ts#L13)*
 
 **Parameters:**
 
@@ -174,7 +157,7 @@ ___
 
 ▸ **indexToGridCoordinate**(index: *`any`*, resolution?: *`number`*): `object`
 
-*Defined in [source/sequences/utils.ts:5](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/utils.ts#L5)*
+*Defined in [source/sequences/utils.ts:5](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/utils.ts#L5)*
 
 **Parameters:**
 
@@ -192,7 +175,7 @@ ___
 
 ▸ **indexToMapCoordinate**(index: *`any`*, resolution?: *`number`*): [IGeoLocation](interfaces/igeolocation.md)
 
-*Defined in [source/sequences/utils.ts:32](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/utils.ts#L32)*
+*Defined in [source/sequences/utils.ts:32](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/utils.ts#L32)*
 
 **Parameters:**
 
@@ -210,7 +193,7 @@ ___
 
 ▸ **mapCoordinateToIndex**(location: *[IGeoLocation](interfaces/igeolocation.md)*, resolution?: *`number`*): `number`
 
-*Defined in [source/sequences/utils.ts:18](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/sequences/utils.ts#L18)*
+*Defined in [source/sequences/utils.ts:18](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/utils.ts#L18)*
 
 **Parameters:**
 
@@ -228,7 +211,7 @@ ___
 
 ▸ **throttleActions**(listOfCallableActions: *`any`*, limit: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in [source/utils/index.ts:4](https://github.com/C4IROcean/ODP-sdk-js/blob/4709765/source/utils/index.ts#L4)*
+*Defined in [source/utils/index.ts:4](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/utils/index.ts#L4)*
 
 **Parameters:**
 

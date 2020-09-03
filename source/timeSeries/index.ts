@@ -190,9 +190,6 @@ export class TimeSeries {
 				}
 			}
 		}
-		// debug
-		// tslint:disable-next-line: no-console
-		console.log("Generated " + queries.length + " queries");
 		return queries;
 	};
 

@@ -1,4 +1,5 @@
 import * as sequenceUtils from "../source/sequences/utils";
+import { SequenceColumnType } from "../source";
 
 describe("utils", () => {
 	test("sequence utils", async () => {
@@ -14,5 +15,6 @@ describe("utils", () => {
 		expect(sequenceUtils.mapCoordinateToIndex({ latitude: -89.3, longitude: -179 })).toBe(1);
 		expect(sequenceUtils.mapCoordinateToIndex({ latitude: 20, longitude: 173 })).toBe(63470);
 		expect(sequenceUtils.indexToMapCoordinate(63470, 1).latitude).toBe(19.5);
+		expect(sequenceUtils.getColumnsFromEnum([SequenceColumnType.NITRATE], ["Nitrate"])[6]).toBe("Nitrate");
 	});
 });

@@ -36,7 +36,7 @@ export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
 	const latitude = -90 + (location.y - 0.5) / resolution;
 	return { longitude, latitude };
 };
-
+/*
 export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	// ***needs verification***
 
@@ -64,8 +64,8 @@ export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 
 	return [boxCoords, boxIndexes];
 };
-
-export const getColumnsFromEnum = (cols: SequenceColumnType, available) => {
+*/
+export const getColumnsFromEnum = (cols: Array<SequenceColumnType>, available) => {
 	const columns = ["date", "lat", "lon", "Latitude", "Longitude", "z"];
 
 	for (const col of cols) {
