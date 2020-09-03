@@ -3,7 +3,7 @@ import { ODPClient, SequenceColumnType, ObservedLevelFlag } from "../source";
 describe("sequences", () => {
 	let odp: ODPClient;
 	beforeAll(() => {
-		jest.setTimeout(30000);
+		jest.setTimeout(60000);
 
 		odp = new ODPClient({ appId: "SDKTests" });
 		odp.loginWithApiKey({
