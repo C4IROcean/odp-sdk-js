@@ -148,6 +148,20 @@ export class Casts {
 		);
 	};
 
+	public getCastSourceFile = async (filter: ICastFilter) => {
+		if (!filter.castId) {
+			throw new Error("Need a castId ");
+		}
+		return this.getSequenceQueryResult(
+			{ filter: { name: filter.castId } },
+			undefined,
+			0,
+			undefined,
+			undefined,
+			this._sequences.castSequenceLv2Convert,
+		);
+	};
+
 	/**
 	 * Internal methods
 	 */
@@ -239,7 +253,11 @@ export class Casts {
 		let skip = false;
 		for (const value of Object.keys(row.value)) {
 			if (row.value[value].flags && row.value[value].flags.wod !== null) {
-				if (filter.quality !== undefined && row.value[value].flags.wod !== filter.quality) {
+				if (
+					filter.quality !== undefined &&
+					((Array.isArray(filter.quality) && !filter.quality.includes(row.value[value].flags.wod)) ||
+						row.value[value].flags.wod !== filter.quality)
+				) {
 					skip = true;
 					break;
 				}

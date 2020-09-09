@@ -216,7 +216,7 @@ export interface ICastFilter {
 	columns?: Array<SequenceColumnType>;
 	castId?: string;
 	provider?: Array<string>;
-	quality?: ObservedLevelFlag;
+	quality?: ObservedLevelFlag | Array<ObservedLevelFlag>;
 }
 
 export interface IAssetsFilter {
