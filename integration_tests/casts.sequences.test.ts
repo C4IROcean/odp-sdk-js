@@ -85,7 +85,7 @@ describe("sequences", () => {
 			geoFilter: { polygon },
 			columns: [SequenceColumnType.TEMPERATURE],
 		});
-		expect(values.length).toBe(15570);
+		expect(values.length > 15500).toBeTruthy();
 		expect(values[0].value.temperature).toBeTruthy();
 		expect(values[0].value.nitrate).toBeFalsy();
 	});
