@@ -1,5 +1,4 @@
 import { ODPClient } from "../";
-import { FileFilter } from "@cognite/sdk";
 
 export class Files {
 	private _client: ODPClient;
@@ -10,7 +9,11 @@ export class Files {
 		return this._client;
 	}
 
-	public getFile = (externalId: string) => {
-		return this._client.cognite.files.getDownloadUrls([{ externalId }]);
+	public getFileUrl = (externalIds: Array<string>) => {
+		const query = [];
+		for (const externalId of externalIds) {
+			query.push({ externalId });
+		}
+		return this._client.cognite.files.getDownloadUrls(query);
 	};
 }

@@ -90,6 +90,16 @@ describe("sequences", () => {
 		expect(values[0].value.nitrate).toBeFalsy();
 	});
 
+	test("get source file url for cast", async () => {
+		const url = await odp.sequences.casts.getCastSourceFileUrl({
+			castId: "cast_wod_3_2018_32370_19272466",
+		});
+		expect(url[0].downloadUrl).toMatch(
+			/^https:\/\/api.cognitedata.com\/api\/v1\/files\/gcs_proxy\/cognite-storage/,
+		);
+		expect(url[0].castId).toBe("cast_wod_3_2018_32370_19272466");
+	});
+
 	test("filter polygon rows by quality", async () => {
 		const polygon = [
 			{ longitude: 1.8, latitude: 56 },

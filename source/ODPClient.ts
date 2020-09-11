@@ -90,5 +90,6 @@ export default class ODPClient {
 		this._timeSeries = new TimeSeries(this);
 		this._sequences = new Sequences(this);
 		this._assets = new Assets(this);
+		this._files = new Files(this);
 	};
 }
