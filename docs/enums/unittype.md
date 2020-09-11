@@ -18,7 +18,7 @@
 
 **CELSIUS**:  = "celsius"
 
-*Defined in [source/types/types.ts:92](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L92)*
+*Defined in [types/types.ts:149](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L149)*
 
 ___
 

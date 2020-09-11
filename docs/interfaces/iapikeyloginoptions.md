@@ -25,7 +25,7 @@
 
 **● apiKey**: *`string`*
 
-*Defined in [source/ODPClient.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L23)*
+*Defined in [ODPClient.ts:24](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L24)*
 
 ___
 <a id="project"></a>
@@ -36,7 +36,7 @@ ___
 
 *Inherited from [IProject](iproject.md).[project](iproject.md#project)*
 
-*Defined in [source/ODPClient.ts:16](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L16)*
+*Defined in [ODPClient.ts:17](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L17)*
 
 ___
 

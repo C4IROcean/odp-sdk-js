@@ -22,7 +22,7 @@
 
 **● externalId**: *`Array`<`string`>*
 
-*Defined in [source/types/types.ts:223](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L223)*
+*Defined in [types/types.ts:280](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L280)*
 
 ___
 

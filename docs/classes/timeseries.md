@@ -39,7 +39,7 @@
 
 ⊕ **new TimeSeries**(client: *[ODPClient](odpclient.md)*): [TimeSeries](timeseries.md)
 
-*Defined in [source/timeSeries/index.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L33)*
+*Defined in [timeSeries/index.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L33)*
 
 **Parameters:**
 
@@ -59,7 +59,7 @@ ___
 
 **client**: 
 
-*Defined in [source/timeSeries/index.ts:40](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L40)*
+*Defined in [timeSeries/index.ts:40](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L40)*
 
 ___
 <a id="temperature"></a>
@@ -68,7 +68,7 @@ ___
 
 **temperature**: 
 
-*Defined in [source/timeSeries/index.ts:44](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L44)*
+*Defined in [timeSeries/index.ts:44](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L44)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **convert**(timeseries: *`TimeSeriesList`*, dataPoints: *`Array`<`DatapointsGetAggregateDatapoint`> \| `Array`<`DatapointsGetDatapoint`>*, assets: *`AssetList`*): `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
-*Defined in [source/timeSeries/index.ts:51](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L51)*
+*Defined in [timeSeries/index.ts:51](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L51)*
 
 **Parameters:**
 
@@ -99,7 +99,7 @@ ___
 
 ▸ **datapointFilter**(filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `DatapointsMultiQueryBase`
 
-*Defined in [source/timeSeries/index.ts:225](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L225)*
+*Defined in [timeSeries/index.ts:225](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L225)*
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **datapointLatestFilter**(filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `LatestDataPropertyFilter`
 
-*Defined in [source/timeSeries/index.ts:252](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L252)*
+*Defined in [timeSeries/index.ts:252](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L252)*
 
 **Parameters:**
 
@@ -133,7 +133,7 @@ ___
 
 ▸ **getSequenceColumns**(): `string`[]
 
-*Defined in [source/timeSeries/index.ts:261](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L261)*
+*Defined in [timeSeries/index.ts:261](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L261)*
 
 **Returns:** `string`[]
 
@@ -144,7 +144,7 @@ ___
 
 ▸ **numberToIdInternal**(ids: *`Array`<`number`>*): `Array`<`IdEither`>
 
-*Defined in [source/timeSeries/index.ts:216](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L216)*
+*Defined in [timeSeries/index.ts:216](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L216)*
 
 **Parameters:**
 
@@ -161,7 +161,7 @@ ___
 
 ▸ **queryBuilder**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `Promise`<`Array`<`TimeSeriesSearchDTO`>>
 
-*Defined in [source/timeSeries/index.ts:130](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L130)*
+*Defined in [timeSeries/index.ts:130](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L130)*
 
 **Parameters:**
 
@@ -178,7 +178,7 @@ ___
 
 ▸ **sequenceConvert**(sequences: *`Array`<`Sequence`>*, allRows: *`any`*, assets: *`AssetList`*, columns: *`Array`<`string`>*): `Array`<[ITimeSeries](../interfaces/itimeseries.md)>
 
-*Defined in [source/timeSeries/index.ts:85](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L85)*
+*Defined in [timeSeries/index.ts:85](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L85)*
 
 **Parameters:**
 
@@ -198,7 +198,7 @@ ___
 
 ▸ **sequenceQueryBuilder**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*): `SequenceListScope`
 
-*Defined in [source/timeSeries/index.ts:196](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L196)*
+*Defined in [timeSeries/index.ts:196](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L196)*
 
 **Parameters:**
 
@@ -215,7 +215,7 @@ ___
 
 ▸ **stringToIdExternal**(ids: *`Array`<`string`>*): `Array`<`IdEither`>
 
-*Defined in [source/timeSeries/index.ts:210](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/index.ts#L210)*
+*Defined in [timeSeries/index.ts:210](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/index.ts#L210)*
 
 **Parameters:**
 

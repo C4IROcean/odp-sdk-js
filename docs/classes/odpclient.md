@@ -16,6 +16,7 @@
 
 * [asset](odpclient.md#asset)
 * [cognite](odpclient.md#cognite)
+* [files](odpclient.md#files)
 * [login](odpclient.md#login)
 * [logout](odpclient.md#logout)
 * [project](odpclient.md#project)
@@ -39,7 +40,7 @@
 
 ⊕ **new ODPClient**(options: *[IClientOptions](../interfaces/iclientoptions.md)*): [ODPClient](odpclient.md)
 
-*Defined in [source/ODPClient.ts:39](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L39)*
+*Defined in [ODPClient.ts:41](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L41)*
 
 **Parameters:**
 
@@ -59,7 +60,7 @@ ___
 
 **asset**: 
 
-*Defined in [source/ODPClient.ts:80](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L80)*
+*Defined in [ODPClient.ts:85](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L85)*
 
 ___
 <a id="cognite"></a>
@@ -68,7 +69,16 @@ ___
 
 **cognite**: 
 
-*Defined in [source/ODPClient.ts:57](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L57)*
+*Defined in [ODPClient.ts:59](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L59)*
+
+___
+<a id="files"></a>
+
+###  files
+
+**files**: 
+
+*Defined in [ODPClient.ts:82](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L82)*
 
 ___
 <a id="login"></a>
@@ -77,7 +87,7 @@ ___
 
 **login**: 
 
-*Defined in [source/ODPClient.ts:48](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L48)*
+*Defined in [ODPClient.ts:50](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L50)*
 
 ___
 <a id="logout"></a>
@@ -86,7 +96,7 @@ ___
 
 **logout**: 
 
-*Defined in [source/ODPClient.ts:51](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L51)*
+*Defined in [ODPClient.ts:53](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L53)*
 
 ___
 <a id="project"></a>
@@ -95,7 +105,7 @@ ___
 
 **project**: 
 
-*Defined in [source/ODPClient.ts:54](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L54)*
+*Defined in [ODPClient.ts:56](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L56)*
 
 ___
 <a id="sequences"></a>
@@ -104,7 +114,7 @@ ___
 
 **sequences**: 
 
-*Defined in [source/ODPClient.ts:76](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L76)*
+*Defined in [ODPClient.ts:78](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L78)*
 
 ___
 <a id="temperatures"></a>
@@ -113,7 +123,7 @@ ___
 
 **temperatures**: 
 
-*Defined in [source/ODPClient.ts:45](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L45)*
+*Defined in [ODPClient.ts:47](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L47)*
 
 ___
 <a id="timeseries"></a>
@@ -122,7 +132,7 @@ ___
 
 **timeSeries**: 
 
-*Defined in [source/ODPClient.ts:72](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L72)*
+*Defined in [ODPClient.ts:74](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L74)*
 
 ___
 
@@ -134,7 +144,7 @@ ___
 
 ▸ **authenticate**(): `Promise`<`boolean`>
 
-*Defined in [source/ODPClient.ts:68](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L68)*
+*Defined in [ODPClient.ts:70](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L70)*
 
 **Returns:** `Promise`<`boolean`>
 
@@ -145,7 +155,7 @@ ___
 
 ▸ **loginWithApiKey**(options: *[IApiKeyLoginOptions](../interfaces/iapikeyloginoptions.md)*): `void`
 
-*Defined in [source/ODPClient.ts:60](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L60)*
+*Defined in [ODPClient.ts:62](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L62)*
 
 **Parameters:**
 
@@ -162,7 +172,7 @@ ___
 
 ▸ **loginWithOAuth**(options: *`any`*): `void`
 
-*Defined in [source/ODPClient.ts:64](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L64)*
+*Defined in [ODPClient.ts:66](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L66)*
 
 **Parameters:**
 

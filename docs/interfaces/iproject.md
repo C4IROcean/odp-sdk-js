@@ -26,7 +26,7 @@
 
 **● project**: *`string`*
 
-*Defined in [source/ODPClient.ts:16](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/ODPClient.ts#L16)*
+*Defined in [ODPClient.ts:17](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L17)*
 
 ___
 

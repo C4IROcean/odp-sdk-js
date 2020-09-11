@@ -21,6 +21,7 @@
 
 * [castSequenceConvert](sequences.md#castsequenceconvert)
 * [castSequenceLv2Convert](sequences.md#castsequencelv2convert)
+* [castSequenceMetadataConvert](sequences.md#castsequencemetadataconvert)
 * [constants](sequences.md#constants)
 * [sequenceConvert](sequences.md#sequenceconvert)
 * [sequenceQueryBuilder](sequences.md#sequencequerybuilder)
@@ -35,7 +36,7 @@
 
 ⊕ **new Sequences**(client: *[ODPClient](odpclient.md)*): [Sequences](sequences.md)
 
-*Defined in [source/sequences/index.ts:7](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/index.ts#L7)*
+*Defined in [sequences/index.ts:8](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/index.ts#L8)*
 
 **Parameters:**
 
@@ -55,7 +56,7 @@ ___
 
 **casts**: 
 
-*Defined in [source/sequences/index.ts:16](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/index.ts#L16)*
+*Defined in [sequences/index.ts:17](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/index.ts#L17)*
 
 ___
 <a id="client"></a>
@@ -64,7 +65,7 @@ ___
 
 **client**: 
 
-*Defined in [source/sequences/index.ts:12](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/index.ts#L12)*
+*Defined in [sequences/index.ts:13](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/index.ts#L13)*
 
 ___
 
@@ -76,7 +77,7 @@ ___
 
 ▸ **castSequenceConvert**(sequences: *`Array`<`Sequence`>*, allRows: *`any`*, columns: *`any`*): `Array`<[ISequenceRow](../interfaces/isequencerow.md)>
 
-*Defined in [source/sequences/index.ts:80](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/index.ts#L80)*
+*Defined in [sequences/index.ts:81](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/index.ts#L81)*
 
 **Parameters:**
 
@@ -95,7 +96,7 @@ ___
 
 ▸ **castSequenceLv2Convert**(sequences: *`Array`<`Sequence`>*, allRows: *`any`*, columns: *`any`*): `Array`<[ISequenceRow](../interfaces/isequencerow.md)>
 
-*Defined in [source/sequences/index.ts:111](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/index.ts#L111)*
+*Defined in [sequences/index.ts:112](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/index.ts#L112)*
 
 **Parameters:**
 
@@ -108,13 +109,30 @@ ___
 **Returns:** `Array`<[ISequenceRow](../interfaces/isequencerow.md)>
 
 ___
+<a id="castsequencemetadataconvert"></a>
+
+###  castSequenceMetadataConvert
+
+▸ **castSequenceMetadataConvert**(sequences: *`Array`<`Sequence`>*): `Array`<[ISequence](../interfaces/isequence.md)>
+
+*Defined in [sequences/index.ts:133](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/index.ts#L133)*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| sequences | `Array`<`Sequence`> |
+
+**Returns:** `Array`<[ISequence](../interfaces/isequence.md)>
+
+___
 <a id="constants"></a>
 
 ###  constants
 
 ▸ **constants**(): `object`
 
-*Defined in [source/sequences/index.ts:20](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/index.ts#L20)*
+*Defined in [sequences/index.ts:21](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/index.ts#L21)*
 
 **Returns:** `object`
 
@@ -125,7 +143,7 @@ ___
 
 ▸ **sequenceConvert**(sequences: *`Array`<`Sequence`>*, allRows: *`any`*, columns: *`any`*): `Array`<[ISequenceRow](../interfaces/isequencerow.md)>
 
-*Defined in [source/sequences/index.ts:46](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/index.ts#L46)*
+*Defined in [sequences/index.ts:47](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/index.ts#L47)*
 
 **Parameters:**
 
@@ -144,7 +162,7 @@ ___
 
 ▸ **sequenceQueryBuilder**(level: *`number`*, year?: *`number`*): `SequenceListScope`
 
-*Defined in [source/sequences/index.ts:29](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/sequences/index.ts#L29)*
+*Defined in [sequences/index.ts:30](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/index.ts#L30)*
 
 **Parameters:**
 
