@@ -27,7 +27,7 @@
 
 **ACCEPTED_VALUE**:  = 0
 
-*Defined in [source/types/types.ts:127](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L127)*
+*Defined in [types/types.ts:184](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L184)*
 
 ___
 <a id="bullseye_marker"></a>
@@ -36,7 +36,7 @@ ___
 
 **BULLSEYE_MARKER**:  = 1
 
-*Defined in [source/types/types.ts:128](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L128)*
+*Defined in [types/types.ts:185](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L185)*
 
 ___
 <a id="density_inversion"></a>
@@ -45,7 +45,7 @@ ___
 
 **DENSITY_INVERSION**:  = 2
 
-*Defined in [source/types/types.ts:129](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L129)*
+*Defined in [types/types.ts:186](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L186)*
 
 ___
 <a id="failed_annual_and_monthly_standard_deviation_check"></a>
@@ -54,7 +54,7 @@ ___
 
 **FAILED_ANNUAL_AND_MONTHLY_STANDARD_DEVIATION_CHECK**:  = 7
 
-*Defined in [source/types/types.ts:134](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L134)*
+*Defined in [types/types.ts:191](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L191)*
 
 ___
 <a id="failed_annual_and_seasonal_standard_deviation_check"></a>
@@ -63,7 +63,7 @@ ___
 
 **FAILED_ANNUAL_AND_SEASONAL_STANDARD_DEVIATION_CHECK**:  = 6
 
-*Defined in [source/types/types.ts:133](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L133)*
+*Defined in [types/types.ts:190](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L190)*
 
 ___
 <a id="failed_annual_seasonal_and_monthly_standard_deviation_check_"></a>
@@ -72,7 +72,7 @@ ___
 
 **FAILED_ANNUAL_SEASONAL_AND_MONTHLY_STANDARD_DEVIATION_CHECK_**:  = 9
 
-*Defined in [source/types/types.ts:136](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L136)*
+*Defined in [types/types.ts:193](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L193)*
 
 ___
 <a id="failed_annual_standard_deviation_check"></a>
@@ -81,7 +81,7 @@ ___
 
 **FAILED_ANNUAL_STANDARD_DEVIATION_CHECK**:  = 3
 
-*Defined in [source/types/types.ts:130](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L130)*
+*Defined in [types/types.ts:187](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L187)*
 
 ___
 <a id="failed_monthly_standard_deviation_check"></a>
@@ -90,7 +90,7 @@ ___
 
 **FAILED_MONTHLY_STANDARD_DEVIATION_CHECK**:  = 5
 
-*Defined in [source/types/types.ts:132](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L132)*
+*Defined in [types/types.ts:189](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L189)*
 
 ___
 <a id="failed_seasonal_and_monthly_standard_deviation_check"></a>
@@ -99,7 +99,7 @@ ___
 
 **FAILED_SEASONAL_AND_MONTHLY_STANDARD_DEVIATION_CHECK**:  = 8
 
-*Defined in [source/types/types.ts:135](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L135)*
+*Defined in [types/types.ts:192](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L192)*
 
 ___
 <a id="failed_seasonal_standard_deviation_check"></a>
@@ -108,7 +108,7 @@ ___
 
 **FAILED_SEASONAL_STANDARD_DEVIATION_CHECK**:  = 4
 
-*Defined in [source/types/types.ts:131](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L131)*
+*Defined in [types/types.ts:188](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L188)*
 
 ___
 

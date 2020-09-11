@@ -1,6 +1,7 @@
 import { ODPClient, ISequenceRow, ISequenceRowValue } from "../";
 import { Casts } from "./casts";
 import { SequenceListScope, Sequence } from "@cognite/sdk";
+import { ISequence } from "../types/types";
 
 export class Sequences {
 	private _client: ODPClient;
@@ -128,6 +129,36 @@ export class Sequences {
 		}
 		return returnValue;
 	};
+
+	public castSequenceMetadataConvert = (sequences: Array<Sequence>): Array<ISequence> => {
+		const returnValue: Array<ISequence> = [];
+		for (const sequence of sequences) {
+			const seqMeta: ISequence = {
+				cruise: {
+					country: sequence.metadata.country,
+					id: sequence.metadata.WOD_cruise_identifier,
+					vesselName: sequence.metadata.WOD_cruise_name,
+				},
+				externalId: sequence.externalId,
+				id: sequence.id,
+				location: {
+					lat: parseFloat(sequence.metadata.lat),
+					long: parseFloat(sequence.metadata.lon),
+				},
+				time: parseInt(sequence.metadata.date, 10),
+				metadata: {},
+			};
+			for (const item of Object.keys(sequence.metadata)) {
+				if (!["country", "WOD_cruise_identifier", "WOD_cruise_name", "lat", "lon", "date"].includes(item)) {
+					seqMeta.metadata[item] = sequence.metadata[item];
+				}
+			}
+			returnValue.push(seqMeta);
+		}
+
+		return returnValue;
+	};
+
 	private castRowValues = (item, columnIndex) => {
 		const values: ISequenceRowValue = {};
 

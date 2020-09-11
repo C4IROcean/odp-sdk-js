@@ -28,7 +28,7 @@
 
 ⊕ **new Temperature**(timeSeries: *[TimeSeries](timeseries.md)*): [Temperature](temperature.md)
 
-*Defined in [source/timeSeries/temperature/index.ts:13](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/temperature/index.ts#L13)*
+*Defined in [timeSeries/temperature/index.ts:13](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/temperature/index.ts#L13)*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ ___
 
 ▸ **get**(externalIds: *`Array`<`string`>*, filter: *[IDatapointFilter](../interfaces/idatapointfilter.md)*): `Promise`<[ITimeSeries](../interfaces/itimeseries.md)[]>
 
-*Defined in [source/timeSeries/temperature/index.ts:58](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/temperature/index.ts#L58)*
+*Defined in [timeSeries/temperature/index.ts:58](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/temperature/index.ts#L58)*
 
 **Parameters:**
 
@@ -66,7 +66,7 @@ ___
 
 ▸ **getAll**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*, stream?: *`Readable`*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
 
-*Defined in [source/timeSeries/temperature/index.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/temperature/index.ts#L28)*
+*Defined in [timeSeries/temperature/index.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/temperature/index.ts#L28)*
 
 **Parameters:**
 
@@ -84,7 +84,7 @@ ___
 
 ▸ **getLatest**(filter: *[ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)*, stream?: *`Readable`*): `Promise`<`Array`<[ITimeSeries](../interfaces/itimeseries.md)>>
 
-*Defined in [source/timeSeries/temperature/index.ts:52](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/timeSeries/temperature/index.ts#L52)*
+*Defined in [timeSeries/temperature/index.ts:52](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/timeSeries/temperature/index.ts#L52)*
 
 **Parameters:**
 

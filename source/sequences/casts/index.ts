@@ -116,6 +116,21 @@ export class Casts {
 		);
 	};
 
+	public getCastMetadata = async (filter: ICastFilter) => {
+		if (!filter.castId) {
+			throw new Error("castId is required");
+		}
+		let sequences = [];
+		try {
+			sequences = await this._client.cognite.sequences.search({ filter: { name: filter.castId } });
+		} catch (error) {
+			throw error;
+		}
+		if (sequences.length === 0) {
+			return null;
+		}
+		return this._sequences.castSequenceMetadataConvert(sequences);
+	};
 	/**
 	 * Get content for a given cast. Level 3
 	 *
@@ -146,6 +161,27 @@ export class Casts {
 			stream,
 			this._sequences.castSequenceConvert,
 		);
+	};
+
+	public getCastSourceFileUrl = async (filter: ICastFilter) => {
+		if (!filter.castId) {
+			throw new Error("Need a castId ");
+		}
+		const sequences = await this.getCastMetadata(filter);
+		const extId = [];
+		for (const sequence of sequences) {
+			extId.push(sequence.metadata.CDF_extIdFile);
+		}
+		const urls: any = await this._client.files.getFileUrl(extId);
+		for (const url of urls) {
+			for (const sequence of sequences) {
+				if (url.externalId === sequence.metadata.CDF_extIdFile) {
+					url.castId = sequence.externalId;
+					break;
+				}
+			}
+		}
+		return urls;
 	};
 
 	/**
@@ -239,7 +275,11 @@ export class Casts {
 		let skip = false;
 		for (const value of Object.keys(row.value)) {
 			if (row.value[value].flags && row.value[value].flags.wod !== null) {
-				if (filter.quality !== undefined && row.value[value].flags.wod !== filter.quality) {
+				if (
+					filter.quality !== undefined &&
+					((Array.isArray(filter.quality) && !filter.quality.includes(row.value[value].flags.wod)) ||
+						row.value[value].flags.wod !== filter.quality)
+				) {
 					skip = true;
 					break;
 				}

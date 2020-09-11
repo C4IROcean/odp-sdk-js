@@ -23,7 +23,7 @@
 
 **● aggregationFunctions**: *`Array`<`Aggregate`>*
 
-*Defined in [source/types/types.ts:185](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L185)*
+*Defined in [types/types.ts:242](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L242)*
 
 ___
 <a id="granularity"></a>
@@ -32,7 +32,7 @@ ___
 
 **● granularity**: *`string`*
 
-*Defined in [source/types/types.ts:186](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L186)*
+*Defined in [types/types.ts:243](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L243)*
 
 ___
 

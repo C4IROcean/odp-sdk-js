@@ -18,12 +18,12 @@ describe("sequences", () => {
 
 	test("get cast count", async () => {
 		const count = await odp.sequences.casts.getCastsCount();
-		expect(count.length).toBe(34613);
+		expect(count.length).toBe(34972);
 	});
 
 	test("get cast years", async () => {
 		const years = await odp.sequences.casts.getCastYears();
-		expect(years.length).toBe(3);
+		expect(years.length).toBe(4);
 	});
 
 	test("get cast count for a single location", async () => {
@@ -85,9 +85,19 @@ describe("sequences", () => {
 			geoFilter: { polygon },
 			columns: [SequenceColumnType.TEMPERATURE],
 		});
-		expect(values.length).toBe(15570);
+		expect(values.length > 15500).toBeTruthy();
 		expect(values[0].value.temperature).toBeTruthy();
 		expect(values[0].value.nitrate).toBeFalsy();
+	});
+
+	test("get source file url for cast", async () => {
+		const url = await odp.sequences.casts.getCastSourceFileUrl({
+			castId: "cast_wod_3_2018_32370_19272466",
+		});
+		expect(url[0].downloadUrl).toMatch(
+			/^https:\/\/api.cognitedata.com\/api\/v1\/files\/gcs_proxy\/cognite-storage/,
+		);
+		expect(url[0].castId).toBe("cast_wod_3_2018_32370_19272466");
 	});
 
 	test("filter polygon rows by quality", async () => {
@@ -106,7 +116,7 @@ describe("sequences", () => {
 		});
 		expect(values.length).toBe(543);
 		expect(values[0].value.temperature).toBeTruthy();
-		expect(values[0].value.temperature.flags.wod).toBe(3);
+		expect(values[0].value.temperature.flags.wod).toBe(ObservedLevelFlag.FAILED_GRADIENT_CHECK);
 		expect(values[0].value.nitrate).toBeFalsy();
 	});
 });
