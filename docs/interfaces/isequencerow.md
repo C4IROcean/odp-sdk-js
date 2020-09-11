@@ -16,6 +16,7 @@
 * [externalId](isequencerow.md#externalid)
 * [id](isequencerow.md#id)
 * [location](isequencerow.md#location)
+* [metadata](isequencerow.md#metadata)
 * [rowNumber](isequencerow.md#rownumber)
 * [time](isequencerow.md#time)
 * [value](isequencerow.md#value)
@@ -32,7 +33,7 @@
 
 *Inherited from [ISequence](isequence.md).[cruise](isequence.md#cruise)*
 
-*Defined in [source/types/types.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L28)*
+*Defined in [types/types.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L28)*
 
 #### Type declaration
 
@@ -45,7 +46,7 @@ ___
 
 *Inherited from [ISequence](isequence.md).[externalId](isequence.md#externalid)*
 
-*Defined in [source/types/types.ts:34](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L34)*
+*Defined in [types/types.ts:34](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L34)*
 
 ___
 <a id="id"></a>
@@ -56,7 +57,7 @@ ___
 
 *Inherited from [ISequence](isequence.md).[id](isequence.md#id)*
 
-*Defined in [source/types/types.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L33)*
+*Defined in [types/types.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L33)*
 
 ___
 <a id="location"></a>
@@ -67,7 +68,20 @@ ___
 
 *Inherited from [ISequence](isequence.md).[location](isequence.md#location)*
 
-*Defined in [source/types/types.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L23)*
+*Defined in [types/types.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L23)*
+
+#### Type declaration
+
+___
+<a id="metadata"></a>
+
+### `<Optional>` metadata
+
+**● metadata**: *`object`*
+
+*Inherited from [ISequence](isequence.md).[metadata](isequence.md#metadata)*
+
+*Defined in [types/types.ts:36](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L36)*
 
 #### Type declaration
 
@@ -78,7 +92,7 @@ ___
 
 **● rowNumber**: *`number`*
 
-*Defined in [source/types/types.ts:40](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L40)*
+*Defined in [types/types.ts:97](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L97)*
 
 ___
 <a id="time"></a>
@@ -89,7 +103,7 @@ ___
 
 *Inherited from [ISequence](isequence.md).[time](isequence.md#time)*
 
-*Defined in [source/types/types.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L35)*
+*Defined in [types/types.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L35)*
 
 ___
 <a id="value"></a>
@@ -98,7 +112,7 @@ ___
 
 **● value**: *[ISequenceRowValue](isequencerowvalue.md)*
 
-*Defined in [source/types/types.ts:39](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L39)*
+*Defined in [types/types.ts:96](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L96)*
 
 ___
 

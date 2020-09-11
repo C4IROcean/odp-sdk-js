@@ -16,6 +16,7 @@
 * [externalId](isequence.md#externalid)
 * [id](isequence.md#id)
 * [location](isequence.md#location)
+* [metadata](isequence.md#metadata)
 * [time](isequence.md#time)
 
 ---
@@ -28,7 +29,7 @@
 
 **● cruise**: *`object`*
 
-*Defined in [source/types/types.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L28)*
+*Defined in [types/types.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L28)*
 
 #### Type declaration
 
@@ -39,7 +40,7 @@ ___
 
 **● externalId**: *`string`*
 
-*Defined in [source/types/types.ts:34](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L34)*
+*Defined in [types/types.ts:34](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L34)*
 
 ___
 <a id="id"></a>
@@ -48,7 +49,7 @@ ___
 
 **● id**: *`number`*
 
-*Defined in [source/types/types.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L33)*
+*Defined in [types/types.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L33)*
 
 ___
 <a id="location"></a>
@@ -57,7 +58,18 @@ ___
 
 **● location**: *`object`*
 
-*Defined in [source/types/types.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L23)*
+*Defined in [types/types.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L23)*
+
+#### Type declaration
+
+___
+<a id="metadata"></a>
+
+### `<Optional>` metadata
+
+**● metadata**: *`object`*
+
+*Defined in [types/types.ts:36](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L36)*
 
 #### Type declaration
 
@@ -68,7 +80,7 @@ ___
 
 **● time**: *`number`*
 
-*Defined in [source/types/types.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/d16dc4d/source/types/types.ts#L35)*
+*Defined in [types/types.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/types/types.ts#L35)*
 
 ___
 
