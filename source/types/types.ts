@@ -286,7 +286,6 @@ export interface ICogniteGeo extends Metadata {
 
 export interface IMarineRegion {
 	name?: string;
-	parent?: string;
 	parentId?: number;
 	parentExternalId?: string;
 	id: number;
@@ -294,4 +293,13 @@ export interface IMarineRegion {
 	source?: string;
 	polygon?: Array<IGeoLocation>;
 	metadata?: any;
+}
+
+export interface IMarineRegionType {
+	name: string;
+	parentId?: number;
+	parentExternalId?: string;
+	id: number;
+	externalId: string;
+	source: string;
 }

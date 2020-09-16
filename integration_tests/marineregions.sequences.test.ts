@@ -16,22 +16,22 @@ describe.only("marine regions", () => {
 		expect(odp.project).toBe(process.env.COGNITE_PROJECT);
 	});
 	test("get marine regions type", async () => {
-		const mr = await odp.sequences.marineRegions.getChildRegions();
+		const mr = await odp.sequences.marineRegions.getRegionTypes();
 		expect(mr.length).toBe(13);
 	});
 
 	test("get marine regions eez", async () => {
-		const mr = await odp.sequences.marineRegions.getChildRegions(7151095269305513);
+		const mr = await odp.sequences.marineRegions.getMarineRegions(7151095269305513);
 		expect(mr.length).toBe(281);
 	});
 
-	test("get marine regions eez with polygons", async () => {
-		const mr = await odp.sequences.marineRegions.getChildRegions(7151095269305513, true);
+	test.skip("get marine regions eez with polygons", async () => {
+		const mr = await odp.sequences.marineRegions.getMarineRegions(7151095269305513, true);
 		expect(mr.length).toBe(281);
 	});
 
 	test("get marine region polygon", async () => {
-		const mrpol = await odp.sequences.marineRegions.getPolygons(232174795580313);
+		const mrpol = await odp.sequences.marineRegions.getMarineRegion(232174795580313);
 		expect(mrpol.polygon.length).toBe(11849);
 	});
 });
