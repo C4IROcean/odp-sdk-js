@@ -1,7 +1,7 @@
 import { Sequences } from "..";
 import { IGeoLocation, ODPClient } from "../../";
 import { throttleActions } from "../../utils";
-import { Sequence, SequenceRowsRetrieve } from "@cognite/sdk";
+import { Sequence } from "@cognite/sdk";
 import { IMarineRegion } from "../../types/types";
 
 /**
@@ -15,9 +15,9 @@ export class MarineRegions {
 		this._client = sequences.client;
 	}
 
-	public getChildRegions = async (id?): Promise<Array<any>> => {
+	public getChildRegions = async (id?, polygon = false): Promise<Array<any>> => {
 		if (id) {
-			return this.getMarineRegions(id);
+			return this.getMarineRegions(id, polygon);
 		}
 		return (await this._client.asset.getChildren("marine-regions")).items;
 	};
@@ -73,7 +73,16 @@ export class MarineRegions {
 		if (sequences.length === 0) {
 			return null;
 		}
-		return this.MRSequenceConvert(sequences, asset);
+		if (polygon) {
+			const promises = [];
+
+			for (const sequence of sequences) {
+				promises.push(() => this.getPolygonRows(sequence, asset));
+			}
+			return throttleActions(promises, this._concurrency);
+		} else {
+			return this.MRSequenceConvert(sequences, asset);
+		}
 	};
 
 	private MRSequenceConvert = (sequences: Array<Sequence>, asset?): Array<IMarineRegion> => {
@@ -93,10 +102,6 @@ export class MarineRegions {
 	};
 
 	private getSequenceRows = (seqRows) => {
-		const promises = [];
-		for (const seq of seqRows) {
-			promises.push(() => this._client.cognite.sequences.retrieveRows(seq));
-		}
-		return throttleActions(promises, this._concurrency);
+		return this._client.cognite.sequences.retrieveRows(seqRows);
 	};
 }

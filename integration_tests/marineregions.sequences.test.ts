@@ -25,6 +25,11 @@ describe.only("marine regions", () => {
 		expect(mr.length).toBe(281);
 	});
 
+	test("get marine regions eez with polygons", async () => {
+		const mr = await odp.sequences.marineRegions.getChildRegions(7151095269305513, true);
+		expect(mr.length).toBe(281);
+	});
+
 	test("get marine region polygon", async () => {
 		const mrpol = await odp.sequences.marineRegions.getPolygons(232174795580313);
 		expect(mrpol.polygon.length).toBe(11849);
