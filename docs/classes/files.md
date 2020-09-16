@@ -30,7 +30,7 @@
 
 ⊕ **new Files**(client: *[ODPClient](odpclient.md)*): [Files](files.md)
 
-*Defined in [files/index.ts:4](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/files/index.ts#L4)*
+*Defined in [files/index.ts:4](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/files/index.ts#L4)*
 
 **Parameters:**
 
@@ -50,7 +50,7 @@ ___
 
 **client**: 
 
-*Defined in [files/index.ts:8](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/files/index.ts#L8)*
+*Defined in [files/index.ts:8](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/files/index.ts#L8)*
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 ▸ **getFileUrl**(externalIds: *`Array`<`string`>*): `Promise`<(`FileLink` & `InternalId` \| `FileLink` & `ExternalId`)[]>
 
-*Defined in [files/index.ts:12](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/files/index.ts#L12)*
+*Defined in [files/index.ts:12](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/files/index.ts#L12)*
 
 **Parameters:**
 
