@@ -84,7 +84,7 @@ export const boundingBoxToPolygon = (bb: IBoundingBox): Array<IGeoLocation> => {
 	];
 };
 
-export const getMRGIDBPolygon = (mrgid: number): Promise<IBoundingBox> => {
+export const getMRGIDPolygon = (mrgid: number): Promise<Array<IGeoLocation>> => {
 	throw new Error("Not implemented");
 	// tslint:disable: max-line-length
 	/*

@@ -283,3 +283,15 @@ export interface IAssetsFilter {
 export interface ICogniteGeo extends Metadata {
 	geo_key?: string;
 }
+
+export interface IMarineRegion {
+	name?: string;
+	parent?: string;
+	parentId?: number;
+	parentExternalId?: string;
+	id: number;
+	externalId: string;
+	source?: string;
+	polygon?: Array<IGeoLocation>;
+	metadata?: any;
+}

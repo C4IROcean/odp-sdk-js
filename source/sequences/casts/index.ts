@@ -1,7 +1,7 @@
 import { Sequences } from "..";
 import { ODPClient } from "../../";
 import { mapCoordinateToIndex, getColumnsFromEnum } from "../utils";
-import { boundingBoxToPolygon, throttleActions } from "../../utils";
+import { boundingBoxToPolygon, getMRGIDPolygon, throttleActions } from "../../utils";
 import { Sequence, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
 import { ICastFilter, SequenceColumnType } from "../../types/types";
@@ -87,6 +87,9 @@ export class Casts {
 	public getCasts = async (filter: ICastFilter, stream?) => {
 		if (filter.geoFilter && filter.geoFilter.boundingBox) {
 			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
+		}
+		if (filter.geoFilter && filter.geoFilter.mrgid) {
+			filter.geoFilter.polygon = await getMRGIDPolygon(filter.geoFilter.mrgid);
 		}
 		if (filter.geoFilter.polygon && filter.geoFilter.polygon && filter.geoFilter.polygon.length > 2) {
 			return this.getCastsFromPolygon(filter, stream);

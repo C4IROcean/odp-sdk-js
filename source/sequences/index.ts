@@ -2,10 +2,12 @@ import { ODPClient, ISequenceRow, ISequenceRowValue } from "../";
 import { Casts } from "./casts";
 import { SequenceListScope, Sequence } from "@cognite/sdk";
 import { ISequence } from "../types/types";
+import { MarineRegions } from "./marineRegions";
 
 export class Sequences {
 	private _client: ODPClient;
 	private _casts: Casts;
+	private _marineRegions: MarineRegions;
 	constructor(client: ODPClient) {
 		this._client = client;
 		this.init();
@@ -18,6 +20,9 @@ export class Sequences {
 		return this._casts;
 	}
 
+	public get marineRegions() {
+		return this._marineRegions;
+	}
 	public constants = () => {
 		return {
 			sequence: {
@@ -234,5 +239,6 @@ export class Sequences {
 
 	private init = () => {
 		this._casts = new Casts(this);
+		this._marineRegions = new MarineRegions(this);
 	};
 }

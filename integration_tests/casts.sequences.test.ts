@@ -18,12 +18,12 @@ describe("sequences", () => {
 
 	test("get cast count", async () => {
 		const count = await odp.sequences.casts.getCastsCount();
-		expect(count.length).toBe(34972);
+		expect(count.length).toBe(38632);
 	});
 
 	test("get cast years", async () => {
 		const years = await odp.sequences.casts.getCastYears();
-		expect(years.length).toBe(4);
+		expect(years.length).toBe(8);
 	});
 
 	test("get cast count for a single location", async () => {
