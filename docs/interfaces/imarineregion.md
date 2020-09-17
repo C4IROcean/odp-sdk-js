@@ -29,7 +29,7 @@
 
 **● externalId**: *`string`*
 
-*Defined in [types/types.ts:292](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L292)*
+*Defined in [types/types.ts:292](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L292)*
 
 ___
 <a id="id"></a>
@@ -38,7 +38,7 @@ ___
 
 **● id**: *`number`*
 
-*Defined in [types/types.ts:291](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L291)*
+*Defined in [types/types.ts:291](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L291)*
 
 ___
 <a id="metadata"></a>
@@ -47,7 +47,7 @@ ___
 
 **● metadata**: *`any`*
 
-*Defined in [types/types.ts:295](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L295)*
+*Defined in [types/types.ts:295](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L295)*
 
 ___
 <a id="name"></a>
@@ -56,7 +56,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [types/types.ts:288](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L288)*
+*Defined in [types/types.ts:288](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L288)*
 
 ___
 <a id="parentexternalid"></a>
@@ -65,7 +65,7 @@ ___
 
 **● parentExternalId**: *`string`*
 
-*Defined in [types/types.ts:290](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L290)*
+*Defined in [types/types.ts:290](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L290)*
 
 ___
 <a id="parentid"></a>
@@ -74,7 +74,7 @@ ___
 
 **● parentId**: *`number`*
 
-*Defined in [types/types.ts:289](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L289)*
+*Defined in [types/types.ts:289](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L289)*
 
 ___
 <a id="polygon"></a>
@@ -83,7 +83,7 @@ ___
 
 **● polygon**: *`Array`<[IGeoLocation](igeolocation.md)>*
 
-*Defined in [types/types.ts:294](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L294)*
+*Defined in [types/types.ts:294](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L294)*
 
 ___
 <a id="source"></a>
@@ -92,7 +92,7 @@ ___
 
 **● source**: *`string`*
 
-*Defined in [types/types.ts:293](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L293)*
+*Defined in [types/types.ts:293](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L293)*
 
 ___
 

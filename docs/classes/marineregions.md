@@ -28,7 +28,7 @@
 
 ⊕ **new MarineRegions**(sequences: *`Sequences`*): [MarineRegions](marineregions.md)
 
-*Defined in [marineRegions/index.ts:14](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/marineRegions/index.ts#L14)*
+*Defined in [marineRegions/index.ts:14](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/marineRegions/index.ts#L14)*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ ___
 
 ▸ **getMarineRegion**(id: *`any`*): `Promise`<[IMarineRegion](../interfaces/imarineregion.md)>
 
-*Defined in [marineRegions/index.ts:69](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/marineRegions/index.ts#L69)*
+*Defined in [marineRegions/index.ts:69](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/marineRegions/index.ts#L69)*
 
 **Parameters:**
 
@@ -65,7 +65,7 @@ ___
 
 ▸ **getMarineRegions**(regionTypeId: *`any`*, polygon?: *`boolean`*): `Promise`<`Array`<[IMarineRegion](../interfaces/imarineregion.md)>>
 
-*Defined in [marineRegions/index.ts:27](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/marineRegions/index.ts#L27)*
+*Defined in [marineRegions/index.ts:27](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/marineRegions/index.ts#L27)*
 
 **Parameters:**
 
@@ -83,7 +83,7 @@ ___
 
 ▸ **getRegionTypes**(): `Promise`<`Array`<[IMarineRegionType](../interfaces/imarineregiontype.md)>>
 
-*Defined in [marineRegions/index.ts:54](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/marineRegions/index.ts#L54)*
+*Defined in [marineRegions/index.ts:54](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/marineRegions/index.ts#L54)*
 
 **Returns:** `Promise`<`Array`<[IMarineRegionType](../interfaces/imarineregiontype.md)>>
 

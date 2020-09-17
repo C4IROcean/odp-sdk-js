@@ -23,7 +23,7 @@
 
 **● max**: *`Date`*
 
-*Defined in [types/types.ts:238](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L238)*
+*Defined in [types/types.ts:238](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L238)*
 
 ___
 <a id="min"></a>
@@ -32,7 +32,7 @@ ___
 
 **● min**: *`Date`*
 
-*Defined in [types/types.ts:237](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L237)*
+*Defined in [types/types.ts:237](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L237)*
 
 ___
 
