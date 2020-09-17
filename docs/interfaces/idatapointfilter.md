@@ -27,7 +27,7 @@
 
 **● aggregation**: *[IAggregation](iaggregation.md)*
 
-*Defined in [types/types.ts:255](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L255)*
+*Defined in [types/types.ts:255](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L255)*
 
 ___
 <a id="latestvalue"></a>
@@ -36,7 +36,7 @@ ___
 
 **● latestValue**: *`boolean`*
 
-*Defined in [types/types.ts:257](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L257)*
+*Defined in [types/types.ts:257](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L257)*
 
 ___
 <a id="limit"></a>
@@ -45,7 +45,7 @@ ___
 
 **● limit**: *`number`*
 
-*Defined in [types/types.ts:256](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L256)*
+*Defined in [types/types.ts:256](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L256)*
 
 ___
 <a id="time"></a>
@@ -54,7 +54,7 @@ ___
 
 **● time**: *[ITimeFilter](itimefilter.md)*
 
-*Defined in [types/types.ts:254](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L254)*
+*Defined in [types/types.ts:254](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/types/types.ts#L254)*
 
 ___
 

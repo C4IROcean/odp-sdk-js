@@ -6,8 +6,8 @@
 ### Enumerations
 
 * [CastColumnType](enums/castcolumntype.md)
+* [CastType](enums/casttype.md)
 * [ObservedLevelFlag](enums/observedlevelflag.md)
-* [SequenceType](enums/sequencetype.md)
 * [StandardLevelFlag](enums/standardlevelflag.md)
 * [TimeSeriesType](enums/timeseriestype.md)
 * [Unit](enums/unit.md)
@@ -16,14 +16,9 @@
 
 ### Classes
 
-* [Assets](classes/assets.md)
 * [Casts](classes/casts.md)
-* [Files](classes/files.md)
 * [MarineRegions](classes/marineregions.md)
 * [ODPClient](classes/odpclient.md)
-* [Sequences](classes/sequences.md)
-* [Temperature](classes/temperature.md)
-* [TimeSeries](classes/timeseries.md)
 
 ### Interfaces
 
@@ -31,7 +26,10 @@
 * [IApiKeyLoginOptions](interfaces/iapikeyloginoptions.md)
 * [IAssetsFilter](interfaces/iassetsfilter.md)
 * [IBoundingBox](interfaces/iboundingbox.md)
+* [ICast](interfaces/icast.md)
 * [ICastFilter](interfaces/icastfilter.md)
+* [ICastRow](interfaces/icastrow.md)
+* [ICastRowValue](interfaces/icastrowvalue.md)
 * [IClientOptions](interfaces/iclientoptions.md)
 * [ICogniteGeo](interfaces/icognitegeo.md)
 * [IDataPoints](interfaces/idatapoints.md)
@@ -44,96 +42,38 @@
 * [INumberValue](interfaces/inumbervalue.md)
 * [IOAuthLoginOptions](interfaces/ioauthloginoptions.md)
 * [IProject](interfaces/iproject.md)
-* [ISequence](interfaces/isequence.md)
-* [ISequenceRow](interfaces/isequencerow.md)
-* [ISequenceRowValue](interfaces/isequencerowvalue.md)
 * [ITimeFilter](interfaces/itimefilter.md)
 * [ITimeSeries](interfaces/itimeseries.md)
 * [ITimeSeriesFilter](interfaces/itimeseriesfilter.md)
 
 ### Functions
 
-* [boundingBoxToPolygon](#boundingboxtopolygon)
 * [getColumnsFromEnum](#getcolumnsfromenum)
-* [getMRGIDBoundingBox](#getmrgidboundingbox)
-* [getMRGIDPolygon](#getmrgidpolygon)
 * [gridCoordinateToIndex](#gridcoordinatetoindex)
 * [indexToGridCoordinate](#indextogridcoordinate)
 * [indexToMapCoordinate](#indextomapcoordinate)
 * [mapCoordinateToIndex](#mapcoordinatetoindex)
-* [throttleActions](#throttleactions)
 
 ---
 
 ## Functions
 
-<a id="boundingboxtopolygon"></a>
-
-### `<Const>` boundingBoxToPolygon
-
-▸ **boundingBoxToPolygon**(bb: *[IBoundingBox](interfaces/iboundingbox.md)*): `Array`<[IGeoLocation](interfaces/igeolocation.md)>
-
-*Defined in utils/geoUtils/index.ts:77*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| bb | [IBoundingBox](interfaces/iboundingbox.md) |
-
-**Returns:** `Array`<[IGeoLocation](interfaces/igeolocation.md)>
-
-___
 <a id="getcolumnsfromenum"></a>
 
 ### `<Const>` getColumnsFromEnum
 
-▸ **getColumnsFromEnum**(cols: *`Array`<[CastColumnType](enums/castcolumntype.md)>*, available: *`any`*): `string`[]
+▸ **getColumnsFromEnum**(cols: *`Array`<`CastColumnType`>*, available: *`any`*): `string`[]
 
-*Defined in utils/sequences/utils.ts:68*
+*Defined in [casts/utils.ts:68](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/casts/utils.ts#L68)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| cols | `Array`<[CastColumnType](enums/castcolumntype.md)> |
+| cols | `Array`<`CastColumnType`> |
 | available | `any` |
 
 **Returns:** `string`[]
-
-___
-<a id="getmrgidboundingbox"></a>
-
-### `<Const>` getMRGIDBoundingBox
-
-▸ **getMRGIDBoundingBox**(mrgid: *`number`*): `Promise`<[IBoundingBox](interfaces/iboundingbox.md)>
-
-*Defined in utils/geoUtils/index.ts:47*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| mrgid | `number` |
-
-**Returns:** `Promise`<[IBoundingBox](interfaces/iboundingbox.md)>
-
-___
-<a id="getmrgidpolygon"></a>
-
-### `<Const>` getMRGIDPolygon
-
-▸ **getMRGIDPolygon**(mrgid: *`number`*): `Promise`<`Array`<[IGeoLocation](interfaces/igeolocation.md)>>
-
-*Defined in utils/geoUtils/index.ts:87*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| mrgid | `number` |
-
-**Returns:** `Promise`<`Array`<[IGeoLocation](interfaces/igeolocation.md)>>
 
 ___
 <a id="gridcoordinatetoindex"></a>
@@ -142,7 +82,7 @@ ___
 
 ▸ **gridCoordinateToIndex**(x: *`any`*, y: *`any`*, resolution?: *`number`*): `number`
 
-*Defined in utils/sequences/utils.ts:13*
+*Defined in [casts/utils.ts:13](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/casts/utils.ts#L13)*
 
 **Parameters:**
 
@@ -161,7 +101,7 @@ ___
 
 ▸ **indexToGridCoordinate**(index: *`any`*, resolution?: *`number`*): `object`
 
-*Defined in utils/sequences/utils.ts:5*
+*Defined in [casts/utils.ts:5](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/casts/utils.ts#L5)*
 
 **Parameters:**
 
@@ -177,9 +117,9 @@ ___
 
 ### `<Const>` indexToMapCoordinate
 
-▸ **indexToMapCoordinate**(index: *`any`*, resolution?: *`number`*): [IGeoLocation](interfaces/igeolocation.md)
+▸ **indexToMapCoordinate**(index: *`any`*, resolution?: *`number`*): `IGeoLocation`
 
-*Defined in utils/sequences/utils.ts:32*
+*Defined in [casts/utils.ts:32](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/casts/utils.ts#L32)*
 
 **Parameters:**
 
@@ -188,44 +128,25 @@ ___
 | index | `any` | - |
 | `Default value` resolution | `number` | 1 |
 
-**Returns:** [IGeoLocation](interfaces/igeolocation.md)
+**Returns:** `IGeoLocation`
 
 ___
 <a id="mapcoordinatetoindex"></a>
 
 ### `<Const>` mapCoordinateToIndex
 
-▸ **mapCoordinateToIndex**(location: *[IGeoLocation](interfaces/igeolocation.md)*, resolution?: *`number`*): `number`
+▸ **mapCoordinateToIndex**(location: *`IGeoLocation`*, resolution?: *`number`*): `number`
 
-*Defined in utils/sequences/utils.ts:18*
+*Defined in [casts/utils.ts:18](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/casts/utils.ts#L18)*
 
 **Parameters:**
 
 | Name | Type | Default value |
 | ------ | ------ | ------ |
-| location | [IGeoLocation](interfaces/igeolocation.md) | - |
+| location | `IGeoLocation` | - |
 | `Default value` resolution | `number` | 1 |
 
 **Returns:** `number`
-
-___
-<a id="throttleactions"></a>
-
-### `<Const>` throttleActions
-
-▸ **throttleActions**(listOfCallableActions: *`any`*, limit: *`any`*, stream?: *`any`*): `Promise`<`any`[]>
-
-*Defined in utils/geoUtils/index.ts:4*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| listOfCallableActions | `any` |
-| limit | `any` |
-| `Optional` stream | `any` |
-
-**Returns:** `Promise`<`any`[]>
 
 ___
 

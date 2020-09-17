@@ -23,7 +23,7 @@
 
 **● appId**: *`string`*
 
-*Defined in [ODPClient.ts:11](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/ODPClient.ts#L11)*
+*Defined in [ODPClient.ts:11](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/ODPClient.ts#L11)*
 
 ___
 <a id="baseurl"></a>
@@ -32,7 +32,7 @@ ___
 
 **● baseUrl**: *`string`*
 
-*Defined in [ODPClient.ts:12](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/ODPClient.ts#L12)*
+*Defined in [ODPClient.ts:12](https://github.com/C4IROcean/ODP-sdk-js/blob/17df383/source/ODPClient.ts#L12)*
 
 ___
 
