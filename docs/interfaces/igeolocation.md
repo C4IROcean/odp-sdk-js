@@ -23,7 +23,7 @@
 
 **● latitude**: *`number`*
 
-*Defined in [types/types.ts:227](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L227)*
+*Defined in [types/types.ts:227](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L227)*
 
 ___
 <a id="longitude"></a>
@@ -32,7 +32,7 @@ ___
 
 **● longitude**: *`number`*
 
-*Defined in [types/types.ts:228](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L228)*
+*Defined in [types/types.ts:228](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L228)*
 
 ___
 

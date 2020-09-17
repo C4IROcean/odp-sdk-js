@@ -23,7 +23,7 @@
 
 **● max**: *`number`*
 
-*Defined in [types/types.ts:233](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L233)*
+*Defined in [types/types.ts:233](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L233)*
 
 ___
 <a id="min"></a>
@@ -32,7 +32,7 @@ ___
 
 **● min**: *`number`*
 
-*Defined in [types/types.ts:232](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L232)*
+*Defined in [types/types.ts:232](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L232)*
 
 ___
 

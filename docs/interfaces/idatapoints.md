@@ -23,7 +23,7 @@
 
 **● timestamp**: *`Date`*
 
-*Defined in [types/types.ts:136](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L136)*
+*Defined in [types/types.ts:136](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L136)*
 
 ___
 <a id="value"></a>
@@ -32,7 +32,7 @@ ___
 
 **● value**: *`number`*
 
-*Defined in [types/types.ts:135](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L135)*
+*Defined in [types/types.ts:135](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L135)*
 
 ___
 

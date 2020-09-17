@@ -1,4 +1,4 @@
-import { ODPClient } from "..";
+import { ODPClient } from "../..";
 import { AssetListScope } from "@cognite/sdk";
 
 export class Assets {

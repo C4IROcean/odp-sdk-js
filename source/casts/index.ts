@@ -1,10 +1,10 @@
-import { Sequences } from "..";
-import { ODPClient } from "../../";
-import { mapCoordinateToIndex, getColumnsFromEnum } from "../utils";
-import { boundingBoxToPolygon, getMRGIDPolygon, throttleActions } from "../../utils";
-import { Sequence, SequenceRowsRetrieve } from "@cognite/sdk";
+import { Sequences } from "../utils/sequences";
+import { ODPClient } from "..";
+import { mapCoordinateToIndex, getColumnsFromEnum } from "./utils";
+import { boundingBoxToPolygon, getMRGIDPolygon, throttleActions } from "../utils/geoUtils";
+import { Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
-import { ICastFilter, SequenceColumnType } from "../../types/types";
+import { ICastFilter, CastColumnType, ICast, ICastRow, ICastRowValue } from "../types/types";
 
 /**
  * Casts class. Responsible for handling the three levels of casts.
@@ -53,17 +53,11 @@ export class Casts {
 			start = mapCoordinateToIndex(filter.geoFilter.location, 1);
 			end = start + 1;
 		}
-		return this.getSequenceQueryResult(
-			this._sequences.sequenceQueryBuilder(level, filter.year),
-			null,
-			start,
-			end,
-			stream,
-		);
+		return this.getSequenceQueryResult(this.sequenceQueryBuilder(level, filter.year), null, start, end, stream);
 	};
 
 	public getCastYears = async () => {
-		const cast = await this._client.cognite.sequences.retrieve([{ externalId: "cast_wod_0" }]);
+		const cast = await this._sequences.retrieve([{ externalId: "cast_wod_0" }]);
 		if (cast.length > 0 && cast[0].metadata.cast_years) {
 			return cast[0].metadata.cast_years.split(", ");
 		}
@@ -71,7 +65,7 @@ export class Casts {
 	};
 
 	public getCastColumns = () => {
-		return Object.values(SequenceColumnType);
+		return Object.values(CastColumnType);
 	};
 
 	public getCastUnits = () => {
@@ -103,7 +97,7 @@ export class Casts {
 				throw new Error("Need a given year when castId is missing");
 			}
 			filter.castId =
-				this._sequences.constants().sequence.prefix[2] +
+				this.constants().sequence.prefix[2] +
 				"_" +
 				filter.year +
 				"_" +
@@ -115,7 +109,7 @@ export class Casts {
 			0,
 			undefined,
 			stream,
-			this._sequences.castSequenceLv2Convert,
+			this.castSequenceLv2Convert,
 		);
 	};
 
@@ -125,14 +119,14 @@ export class Casts {
 		}
 		let sequences = [];
 		try {
-			sequences = await this._client.cognite.sequences.search({ filter: { name: filter.castId } });
+			sequences = await this._sequences.search({ filter: { name: filter.castId } });
 		} catch (error) {
 			throw error;
 		}
 		if (sequences.length === 0) {
 			return null;
 		}
-		return this._sequences.castSequenceMetadataConvert(sequences);
+		return this.castSequenceMetadataConvert(sequences);
 	};
 	/**
 	 * Get content for a given cast. Level 3
@@ -162,7 +156,7 @@ export class Casts {
 			0,
 			undefined,
 			stream,
-			this._sequences.castSequenceConvert,
+			this.castSequenceConvert,
 		);
 	};
 
@@ -296,7 +290,7 @@ export class Casts {
 	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?, converter?) => {
 		let sequences: Array<Sequence>;
 		try {
-			sequences = await this._client.cognite.sequences.search(query);
+			sequences = await this._sequences.search(query);
 		} catch (error) {
 			throw error;
 		}
@@ -337,7 +331,7 @@ export class Casts {
 				response = await this.getSequenceRows(q);
 				const converted = converter
 					? converter(sequences, response, columns)
-					: this._sequences.sequenceConvert(sequences, response, columns);
+					: this.sequenceConvert(sequences, response, columns);
 				if (!stream) {
 					all.push(...converted);
 				} else {
@@ -361,8 +355,222 @@ export class Casts {
 	private getSequenceRows = (seqRows) => {
 		const promises = [];
 		for (const seq of seqRows) {
-			promises.push(() => this._client.cognite.sequences.retrieveRows(seq));
+			promises.push(() => this._sequences.retrieveRows(seq));
 		}
 		return throttleActions(promises, this._concurrency);
+	};
+
+	private constants = () => {
+		return {
+			sequence: {
+				prefix: { 0: "cast_wod_0", 1: "cast_wod_1", 2: "cast_wod_2", 3: "cast_wod_3" },
+				rowNames: ["Oxygen", "Temperature", "Salinity", "Chlorophyll", "Pressure", "Nitrate", "pH"],
+			},
+		};
+	};
+
+	private sequenceQueryBuilder = (level: number, year?: number) => {
+		const sequenceFilter: SequenceListScope = {
+			filter: {
+				externalIdPrefix: this.constants().sequence.prefix[level],
+				metadata: {},
+			},
+			limit: 1000,
+		};
+		if (year) {
+			sequenceFilter.filter.externalIdPrefix += "_" + year;
+		}
+		return sequenceFilter;
+	};
+
+	/**
+	 * Convert Cognite response to a ODP response
+	 */
+	private sequenceConvert = (sequences: Array<Sequence>, allRows, columns): Array<ICastRow> => {
+		const returnValue: Array<ICastRow> = [];
+		const columnIndex: any = this.arrayIndex(columns);
+
+		for (const item of allRows[0].items) {
+			returnValue.push({
+				location: {
+					lat: parseFloat(item[columnIndex.geo_lat]),
+					long: parseFloat(item[columnIndex.geo_long]),
+					depth: parseInt(item[columnIndex.depth], 10),
+				},
+				id: sequences[0].id,
+				rowNumber: item.rowNumber,
+				externalId: sequences[0].externalId,
+				value: {
+					count: item[columnIndex.castCount],
+					depth: item[columnIndex.z_first_avg],
+					oxygen: item[columnIndex.Oxygen_first_avg],
+					temperature: item[columnIndex.Temperature_first_avg],
+					salinity: item[columnIndex.Salinity_first_avg],
+					chlorophyll: item[columnIndex.Chlorophyll_first_avg],
+					pressure: item[columnIndex.Pressure_first_avg],
+					nitrate: item[columnIndex.Nitrate_first_avg],
+					ph: item[columnIndex.pH_first_avg],
+				},
+			});
+		}
+		return returnValue;
+	};
+
+	/**
+	 * Convert a cast sequence
+	 */
+
+	private castSequenceConvert = (sequences: Array<Sequence>, allRows, columns): Array<ICastRow> => {
+		const returnValue: Array<ICastRow> = [];
+		const columnIndex: any = this.arrayIndex(columns);
+		const cruise = {
+			country: sequences[0].metadata.country,
+			id: sequences[0].metadata.WOD_cruise_identifier,
+			vesselName: sequences[0].metadata.WOD_cruise_name,
+		};
+
+		for (const item of allRows[0].items) {
+			returnValue.push({
+				location: {
+					lat: parseFloat(item[columnIndex.lat]),
+					long: parseFloat(item[columnIndex.lon]),
+					depth: parseInt(item[columnIndex.z], 10),
+				},
+				id: sequences[0].id,
+				rowNumber: item.rowNumber,
+				externalId: sequences[0].externalId,
+				value: this.castRowValues(item, columnIndex),
+				time: item[columnIndex.date],
+				cruise,
+			});
+		}
+		return returnValue;
+	};
+
+	/**
+	 * Convert a cast sequence
+	 */
+
+	private castSequenceLv2Convert = (sequences: Array<Sequence>, allRows, columns): Array<ICastRow> => {
+		const returnValue: Array<ICastRow> = [];
+		const columnIndex: any = this.arrayIndex(columns);
+
+		for (const item of allRows[0].items) {
+			const value = this.castValues(item, columnIndex);
+			returnValue.push({
+				location: {
+					lat: parseFloat(value.lat),
+					long: parseFloat(value.lon),
+				},
+				id: sequences[0].id,
+				rowNumber: item.rowNumber,
+				externalId: sequences[0].externalId,
+				value,
+				time: item[columnIndex.date],
+			});
+		}
+		return returnValue;
+	};
+
+	private castSequenceMetadataConvert = (sequences: Array<Sequence>): Array<ICast> => {
+		const returnValue: Array<ICast> = [];
+		for (const sequence of sequences) {
+			const seqMeta: ICast = {
+				cruise: {
+					country: sequence.metadata.country,
+					id: sequence.metadata.WOD_cruise_identifier,
+					vesselName: sequence.metadata.WOD_cruise_name,
+				},
+				externalId: sequence.externalId,
+				id: sequence.id,
+				location: {
+					lat: parseFloat(sequence.metadata.lat),
+					long: parseFloat(sequence.metadata.lon),
+				},
+				time: parseInt(sequence.metadata.date, 10),
+				metadata: {},
+			};
+			for (const item of Object.keys(sequence.metadata)) {
+				if (!["country", "WOD_cruise_identifier", "WOD_cruise_name", "lat", "lon", "date"].includes(item)) {
+					seqMeta.metadata[item] = sequence.metadata[item];
+				}
+			}
+			returnValue.push(seqMeta);
+		}
+
+		return returnValue;
+	};
+
+	private castRowValues = (item, columnIndex) => {
+		const values: ICastRowValue = {};
+
+		for (const rowName of this.constants().sequence.rowNames) {
+			if (rowName in columnIndex && item[columnIndex[rowName]] !== null) {
+				const lowerCaseName = rowName.toLocaleLowerCase();
+				values[lowerCaseName] = { value: item[columnIndex[rowName]], flags: {} };
+				if (rowName + "_WODflag" in columnIndex) {
+					values[lowerCaseName].flags.wod = item[columnIndex[rowName + "_WODflag"]];
+				}
+				if (rowName + "_origflag" in columnIndex && item[columnIndex[rowName + "_origflag"]] !== null) {
+					values[lowerCaseName].flags.orig = item[columnIndex[rowName + "_origflag"]];
+				}
+			}
+		}
+
+		return values;
+	};
+
+	private castValues = (item, columnIndex) => {
+		const values: any = {};
+
+		for (const iterator of Object.keys(columnIndex)) {
+			values[iterator] = item[columnIndex[iterator]];
+		}
+		/*
+		if ("external_id" in columnIndex) {
+			values.externalId = item[columnIndex.external_id];
+		}
+		if ("cast_id" in columnIndex) {
+			values.castId = item[columnIndex.cast_id];
+		}
+		if ("cruise_id" in columnIndex) {
+			values.cruiseId = item[columnIndex.cruise_id];
+		}
+		if ("country_code" in columnIndex) {
+			values.countryCode = item[columnIndex.country_code];
+		}
+		if ("latitude_max" in columnIndex) {
+			values.latitudeMax = parseFloat(item[columnIndex.latitude_max]);
+		}
+		if ("latitude_min" in columnIndex) {
+			values.latitudeMin = parseFloat(item[columnIndex.latitude_min]);
+		}
+		if ("longitude_max" in columnIndex) {
+			values.longitudeMax = parseFloat(item[columnIndex.longitude_max]);
+		}
+		if ("longitude_min" in columnIndex) {
+			values.longitudeMin = parseFloat(item[columnIndex.longitude_min]);
+		}
+		if ("pressure_max" in columnIndex) {
+			values.pressureMax = parseFloat(item[columnIndex.pressure_max]);
+		}
+		if ("pressure_min" in columnIndex) {
+			values.pressureMin = parseFloat(item[columnIndex.pressure_min]);
+		}
+		if ("temperature_max" in columnIndex) {
+			values.temperatureMax = parseFloat(item[columnIndex.temperature_max]);
+		}
+		if ("temperature_min" in columnIndex) {
+			values.temperatureMin = parseFloat(item[columnIndex.temperature_min]);
+		}*/
+		return values;
+	};
+
+	private arrayIndex = (array) => {
+		const ret = {};
+		for (let index = 0; index < array.length; index++) {
+			ret[array[index]] = index;
+		}
+		return ret;
 	};
 }

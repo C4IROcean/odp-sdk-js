@@ -1,8 +1,8 @@
-import { Sequences } from "..";
-import { IGeoLocation, ODPClient } from "../../";
-import { throttleActions } from "../../utils";
+import { Sequences } from "../utils/sequences";
+import { IGeoLocation, ODPClient } from "..";
+import { throttleActions } from "../utils/geoUtils";
 import { Sequence } from "@cognite/sdk";
-import { IMarineRegion, IMarineRegionType } from "../../types/types";
+import { IMarineRegion, IMarineRegionType } from "../types/types";
 
 /**
  * Marine regions class.
@@ -10,8 +10,10 @@ import { IMarineRegion, IMarineRegionType } from "../../types/types";
 
 export class MarineRegions {
 	private _concurrency = 50;
+	private _sequences: Sequences;
 	private _client: ODPClient;
 	constructor(sequences: Sequences) {
+		this._sequences = sequences;
 		this._client = sequences.client;
 	}
 
@@ -26,9 +28,7 @@ export class MarineRegions {
 		let sequences = [];
 		let asset;
 		try {
-			sequences = await (
-				await this._client.cognite.sequences.list({ filter: { assetIds: [regionTypeId] }, limit: 1000 })
-			).items;
+			sequences = await (await this._sequences.list({ filter: { assetIds: [regionTypeId] }, limit: 1000 })).items;
 			asset = (await this._client.cognite.assets.retrieve([{ id: regionTypeId }]))[0];
 		} catch (error) {
 			throw error;
@@ -69,7 +69,7 @@ export class MarineRegions {
 	public getMarineRegion = async (id) => {
 		let sequences;
 		try {
-			sequences = await this._client.cognite.sequences.retrieve([{ id }]);
+			sequences = await this._sequences.retrieve([{ id }]);
 		} catch (e) {
 			throw e;
 		}
@@ -159,6 +159,6 @@ export class MarineRegions {
 		return returnValue;
 	};
 	private getSequenceRows = (seqRows) => {
-		return this._client.cognite.sequences.retrieveRows(seqRows);
+		return this._sequences.retrieveRows(seqRows);
 	};
 }

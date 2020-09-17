@@ -19,7 +19,7 @@ export interface ITimeSeries {
 	dataPoints: Array<GetAggregateDatapoint> | Array<GetStringDatapoint> | Array<GetDoubleDatapoint>;
 }
 
-export interface ISequence {
+export interface ICast {
 	location: {
 		long: number;
 		lat: number;
@@ -92,12 +92,12 @@ export interface ISequence {
 	};
 }
 
-export interface ISequenceRow extends ISequence {
-	value: ISequenceRowValue;
+export interface ICastRow extends ICast {
+	value: ICastRowValue;
 	rowNumber: number;
 }
 
-export interface ISequenceRowValue {
+export interface ICastRowValue {
 	temperature?: INumberValue;
 	count?: number;
 	name?: string;
@@ -140,7 +140,7 @@ export enum TimeSeriesType {
 	TEMPERATURE = "temperature",
 }
 
-export enum SequenceType {
+export enum CastType {
 	ALL = "all",
 	COUNT = "count",
 }
@@ -149,7 +149,7 @@ export enum UnitType {
 	CELSIUS = "celsius",
 }
 
-export enum SequenceColumnType {
+export enum CastColumnType {
 	TEMPERATURE = "temperature",
 	COUNT = "cast_count",
 	NAME = "name",
@@ -270,7 +270,7 @@ export interface ICastFilter {
 	year?: number;
 	geoFilter?: IGeoFilter;
 	depth?: INumberFilter;
-	columns?: Array<SequenceColumnType>;
+	columns?: Array<CastColumnType>;
 	castId?: string;
 	provider?: Array<string>;
 	quality?: ObservedLevelFlag | Array<ObservedLevelFlag>;

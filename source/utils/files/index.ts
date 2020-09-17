@@ -1,4 +1,4 @@
-import { ODPClient } from "../";
+import { ODPClient } from "../..";
 
 export class Files {
 	private _client: ODPClient;

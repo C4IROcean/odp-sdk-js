@@ -27,7 +27,7 @@
 
 **● externalId**: *`string`*
 
-*Defined in [types/types.ts:303](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L303)*
+*Defined in [types/types.ts:303](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L303)*
 
 ___
 <a id="id"></a>
@@ -36,7 +36,7 @@ ___
 
 **● id**: *`number`*
 
-*Defined in [types/types.ts:302](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L302)*
+*Defined in [types/types.ts:302](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L302)*
 
 ___
 <a id="name"></a>
@@ -45,7 +45,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [types/types.ts:299](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L299)*
+*Defined in [types/types.ts:299](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L299)*
 
 ___
 <a id="parentexternalid"></a>
@@ -54,7 +54,7 @@ ___
 
 **● parentExternalId**: *`string`*
 
-*Defined in [types/types.ts:301](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L301)*
+*Defined in [types/types.ts:301](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L301)*
 
 ___
 <a id="parentid"></a>
@@ -63,7 +63,7 @@ ___
 
 **● parentId**: *`number`*
 
-*Defined in [types/types.ts:300](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L300)*
+*Defined in [types/types.ts:300](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L300)*
 
 ___
 <a id="source"></a>
@@ -72,7 +72,7 @@ ___
 
 **● source**: *`string`*
 
-*Defined in [types/types.ts:304](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L304)*
+*Defined in [types/types.ts:304](https://github.com/C4IROcean/ODP-sdk-js/blob/493a038/source/types/types.ts#L304)*
 
 ___
 

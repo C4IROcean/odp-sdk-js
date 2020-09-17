@@ -27,7 +27,7 @@
 
 ⊕ **new Assets**(client: *[ODPClient](odpclient.md)*): [Assets](assets.md)
 
-*Defined in [assets/index.ts:5](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/assets/index.ts#L5)*
+*Defined in utils/assets/index.ts:5*
 
 **Parameters:**
 
@@ -47,7 +47,7 @@ ___
 
 ▸ **get**(id: *`string`*): `Promise`<`AssetList`>
 
-*Defined in [assets/index.ts:10](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/assets/index.ts#L10)*
+*Defined in utils/assets/index.ts:10*
 
 **Parameters:**
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **getChildren**(id: *`string`*): `Promise`<`ListResponse`<`AssetList`>> & `CogniteAsyncIterator`<`Asset`>
 
-*Defined in [assets/index.ts:13](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/assets/index.ts#L13)*
+*Defined in utils/assets/index.ts:13*
 
 **Parameters:**
 
