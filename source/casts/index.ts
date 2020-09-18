@@ -1,7 +1,7 @@
 import { Sequences } from "../utils/sequences";
 import { ODPClient } from "..";
 import { mapCoordinateToIndex, getColumnsFromEnum } from "./utils";
-import { boundingBoxToPolygon, getMRGIDPolygon, throttleActions } from "../utils/geoUtils";
+import { boundingBoxToPolygon, throttleActions } from "../utils/geoUtils";
 import { Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
 import { ICastFilter, CastColumnType, ICast, ICastRow, ICastRowValue } from "../types/types";
@@ -32,8 +32,6 @@ export class Casts {
 	 * @param filter cast filter object
 	 * @param stream optional stream
 	 *
-	 * #TODO
-	 * - Need to support polygon location object the get multiple values
 	 */
 
 	public getCastsCount = async (filter: ICastFilter = {}, stream?) => {
@@ -56,6 +54,10 @@ export class Casts {
 		return this.getSequenceQueryResult(this.sequenceQueryBuilder(level, filter.year), null, start, end, stream);
 	};
 
+	/**
+	 * Get years that are available
+	 */
+
 	public getCastYears = async () => {
 		const cast = await this._sequences.retrieve([{ externalId: "cast_wod_0" }]);
 		if (cast.length > 0 && cast[0].metadata.cast_years) {
@@ -64,10 +66,17 @@ export class Casts {
 		return [];
 	};
 
+	/**
+	 * Get available cast columns
+	 */
+
 	public getCastColumns = () => {
 		return Object.values(CastColumnType);
 	};
 
+	/**
+	 * Get available cast units (not implemented)
+	 */
 	public getCastUnits = () => {
 		throw new Error("Not implemented");
 	};
@@ -83,7 +92,8 @@ export class Casts {
 			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
 		}
 		if (filter.geoFilter && filter.geoFilter.mrgid) {
-			filter.geoFilter.polygon = await getMRGIDPolygon(filter.geoFilter.mrgid);
+			const mr = await this._client.marineRegions.getMarineRegionByMRGID(filter.geoFilter.mrgid);
+			filter.geoFilter.polygon = mr.polygon;
 		}
 		if (filter.geoFilter.polygon && filter.geoFilter.polygon && filter.geoFilter.polygon.length > 2) {
 			return this.getCastsFromPolygon(filter, stream);
