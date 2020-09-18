@@ -12,12 +12,12 @@ odp.loginWithApiKey({
 });
 
 /**
- * Get at global count of all casts
+ * Get all available marine regions
  */
-async function getGlobalCastCount() {
+async function getMarineRegions() {
 	console.log("Global cast count");
-	const result = await odp.casts.getCastsCount({});
-	console.log("\tFound " + result.length + " global casts");
+	const result = await odp.marineRegions.getRegionTypes();
+	console.log("\tFound " + result.length + " marine region types");
 }
 
 /**
@@ -101,7 +101,7 @@ async function getCastRowsFromPolygon() {
 	console.log("\tAverage temperature " + averageTemp / numTempValues + " celsius");
 }
 
-getGlobalCastCount()
+getMarineRegions()
 	.then(() => getGlobalCastCountForAGivenYear())
 	.then(() => getCastsFromPolygon())
 	.then(() => getCastRowsFromPolygon());

@@ -53,7 +53,7 @@ async function quickstart() {
 	const filter: ICastFilter = {
 		year: 2018,
 	};
-	const casts = await odp.sequences.casts.getCastCount(filter);
+	const casts = await odp.casts.getCastCount(filter);
 }
 quickstart();
 ```
@@ -73,7 +73,7 @@ async function quickstart() {
 	const filter: ICastFilter = {
 		year: 2018,
 	};
-	const casts = await odp.sequences.casts.getCastCount(filter);
+	const casts = await odp.casts.getCastCount(filter);
 }
 quickstart();
 ```
