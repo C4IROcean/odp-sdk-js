@@ -1,5 +1,5 @@
 <a href="https://www.oceandata.earth/">
-<img src="https://stdevloginsitecdnendpoint.azureedge.net/assets/images/odp-logo-symbol.svg" alt="Ocean Data Foundation Logo" title="Ocean Data Foundation"> </a>
+<img src="https://stdevloginsitecdnendpoint.azureedge.net/assets/images/odp-logo-symbol.svg" width="auto" height="46px" alt="Ocean Data Foundation Logo" title="Ocean Data Foundation"> </a>
 
 # ODP Javascript SDK
 
