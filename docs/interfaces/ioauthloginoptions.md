@@ -27,7 +27,7 @@
 
 **● accessToken**: *`string`*
 
-*Defined in [ODPClient.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L33)*
+*Defined in [ODPClient.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/ODPClient.ts#L35)*
 
 ___
 <a id="onauthenticate"></a>
@@ -36,7 +36,7 @@ ___
 
 **● onAuthenticate**: *`any` \| "REDIRECT" \| "POPUP"*
 
-*Defined in [ODPClient.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L28)*
+*Defined in [ODPClient.ts:30](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/ODPClient.ts#L30)*
 
 ___
 <a id="ontokens"></a>
@@ -45,7 +45,7 @@ ___
 
 **● onTokens**: *`any`*
 
-*Defined in [ODPClient.ts:29](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L29)*
+*Defined in [ODPClient.ts:31](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/ODPClient.ts#L31)*
 
 ___
 <a id="project"></a>
@@ -56,7 +56,7 @@ ___
 
 *Inherited from [IProject](iproject.md).[project](iproject.md#project)*
 
-*Defined in [ODPClient.ts:17](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/ODPClient.ts#L17)*
+*Defined in [ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/ODPClient.ts#L19)*
 
 ___
 

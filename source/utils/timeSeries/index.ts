@@ -8,7 +8,7 @@ import {
 	INumberFilter,
 	IBoundingBox,
 	IGeoFilter,
-} from "../";
+} from "../..";
 import {
 	DatapointsGetAggregateDatapoint,
 	DatapointsGetDatapoint,
@@ -21,9 +21,9 @@ import {
 	SequenceListScope,
 	Sequence,
 } from "@cognite/sdk";
-import { IDatapointFilter } from "../types/types";
+import { IDatapointFilter } from "../../types/types";
 import { cloneDeep } from "lodash";
-import { getMRGIDBoundingBox } from "../utils";
+import { getMRGIDBoundingBox } from "../geoUtils";
 
 /**
  *

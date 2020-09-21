@@ -1,8 +1,10 @@
 import { CogniteClient } from "@cognite/sdk";
-import { TimeSeries } from "./timeSeries";
-import { Assets } from "./assets";
-import { Sequences } from "./sequences";
-import { Files } from "./files";
+import { TimeSeries } from "./utils/timeSeries";
+import { Assets } from "./utils/assets";
+import { Sequences } from "./utils/sequences";
+import { Files } from "./utils/files";
+import { Casts } from "./casts";
+import { MarineRegions } from "./marineRegions";
 
 export interface IClientOptions {
 	/** App identifier (ex: 'FileExtractor') */
@@ -39,6 +41,8 @@ export default class ODPClient {
 	private _sequences: Sequences;
 	private _files: Files;
 	private _assets: Assets;
+	private _casts: Casts;
+	private _marineRegions: MarineRegions;
 
 	constructor(options: IClientOptions) {
 		this._client = new CogniteClient(options);
@@ -85,11 +89,19 @@ export default class ODPClient {
 	public get asset() {
 		return this._assets;
 	}
+	public get casts() {
+		return this._casts;
+	}
+	public get marineRegions() {
+		return this._marineRegions;
+	}
 
 	private init = () => {
 		this._timeSeries = new TimeSeries(this);
 		this._sequences = new Sequences(this);
 		this._assets = new Assets(this);
 		this._files = new Files(this);
+		this._casts = new Casts(this._sequences);
+		this._marineRegions = new MarineRegions(this._sequences);
 	};
 }
