@@ -23,6 +23,7 @@ export class Casts {
 	private _files: Files;
 	private _sequences: Sequences;
 	private _marineRegions: MarineRegions;
+
 	constructor(sequences: Sequences) {
 		this._files = sequences.client.files;
 		this._marineRegions = sequences.client.marineRegions;
@@ -30,7 +31,7 @@ export class Casts {
 	}
 
 	/**
-	 * Get a cast count for the globe or a specific location. Level 1
+	 * Get a cast count for the globe or a specific location. Level 1/0
 	 *
 	 * @param filter cast filter object
 	 * @param stream optional stream
