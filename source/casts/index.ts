@@ -1,10 +1,11 @@
 import { Sequences } from "../utils/sequences";
-import { ODPClient } from "..";
 import { mapCoordinateToIndex, getColumnsFromEnum } from "./utils";
 import { boundingBoxToPolygon, throttleActions } from "../utils/geoUtils";
 import { Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
 import { ICastFilter, CastColumnType, ICast, ICastRow, ICastRowValue } from "../types/types";
+import { Files } from "../utils/files";
+import { MarineRegions } from "../marineRegions";
 
 /**
  * Casts class. Responsible for handling the three levels of casts.
@@ -19,10 +20,12 @@ import { ICastFilter, CastColumnType, ICast, ICastRow, ICastRowValue } from "../
 
 export class Casts {
 	private _concurrency = 50;
-	private _client: ODPClient;
+	private _files: Files;
 	private _sequences: Sequences;
+	private _marineRegions: MarineRegions;
 	constructor(sequences: Sequences) {
-		this._client = sequences.client;
+		this._files = sequences.client.files;
+		this._marineRegions = sequences.client.marineRegions;
 		this._sequences = sequences;
 	}
 
@@ -59,7 +62,12 @@ export class Casts {
 	 */
 
 	public getCastYears = async () => {
-		const cast = await this._sequences.retrieve([{ externalId: "cast_wod_0" }]);
+		let cast;
+		try {
+			cast = await this._sequences.retrieve([{ externalId: "cast_wod_0" }]);
+		} catch (e) {
+			throw e;
+		}
 		if (cast.length > 0 && cast[0].metadata.cast_years) {
 			return cast[0].metadata.cast_years.split(", ");
 		}
@@ -92,7 +100,13 @@ export class Casts {
 			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
 		}
 		if (filter.geoFilter && filter.geoFilter.mrgid) {
-			const mr = await this._client.marineRegions.getMarineRegionByMRGID(filter.geoFilter.mrgid);
+			let mr;
+			try {
+				mr = await this._marineRegions.getMarineRegionByMRGID(filter.geoFilter.mrgid);
+			} catch (e) {
+				throw e;
+			}
+
 			filter.geoFilter.polygon = mr.polygon;
 		}
 		if (filter.geoFilter.polygon && filter.geoFilter.polygon && filter.geoFilter.polygon.length > 2) {
@@ -174,12 +188,22 @@ export class Casts {
 		if (!filter.castId) {
 			throw new Error("Need a castId ");
 		}
-		const sequences = await this.getCastMetadata(filter);
+		let sequences;
+		try {
+			sequences = await this.getCastMetadata(filter);
+		} catch (e) {
+			throw e;
+		}
 		const extId = [];
 		for (const sequence of sequences) {
 			extId.push(sequence.metadata.CDF_extIdFile);
 		}
-		const urls: any = await this._client.files.getFileUrl(extId);
+		let urls;
+		try {
+			urls = await this._files.getFileUrl(extId);
+		} catch (e) {
+			throw e;
+		}
 		for (const url of urls) {
 			for (const sequence of sequences) {
 				if (url.externalId === sequence.metadata.CDF_extIdFile) {
@@ -198,8 +222,12 @@ export class Casts {
 	private getCastRowsFromPolygon = async (filter: ICastFilter, stream?) => {
 		const promises = [];
 		const all = [];
-
-		const casts = await this.getCastsFromPolygon(filter);
+		let casts;
+		try {
+			casts = await this.getCastsFromPolygon(filter);
+		} catch (e) {
+			throw e;
+		}
 		for (const cast of casts) {
 			promises.push(() =>
 				this.getCastRows({ castId: cast.value.extId, columns: filter.columns }, stream).then((rows) => {
