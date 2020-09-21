@@ -16,7 +16,7 @@ odp.loginWithApiKey({
  */
 async function getGlobalCastCount() {
 	console.log("Global cast count");
-	const result = await odp.sequences.casts.getCastsCount({});
+	const result = await odp.casts.getCastsCount({});
 	console.log("\tFound " + result.length + " global casts");
 }
 
@@ -25,7 +25,7 @@ async function getGlobalCastCount() {
  */
 async function getGlobalCastCountForAGivenYear() {
 	console.log("Global cast count for a given year");
-	const result = await odp.sequences.casts.getCastsCount({ year: 2015 });
+	const result = await odp.casts.getCastsCount({ year: 2015 });
 	console.log("\tFound " + result.length + " global casts from 2015");
 }
 
@@ -34,7 +34,7 @@ async function getGlobalCastCountForAGivenYear() {
  */
 async function getCastsFromPolygon() {
 	console.log("Casts for a given polygon");
-	const result = await odp.sequences.casts.getCasts({
+	const result = await odp.casts.getCasts({
 		year: 2018,
 		geoFilter: {
 			polygon: [
@@ -66,7 +66,7 @@ async function getCastsFromPolygon() {
  */
 async function getCastRowsFromPolygon() {
 	console.log("Cast rows for a given polygon");
-	const result = await odp.sequences.casts.getCastRows({
+	const result = await odp.casts.getCastRows({
 		year: 2018,
 		geoFilter: {
 			polygon: [

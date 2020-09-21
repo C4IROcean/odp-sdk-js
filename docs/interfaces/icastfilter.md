@@ -29,16 +29,16 @@
 
 **● castId**: *`string`*
 
-*Defined in [types/types.ts:274](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L274)*
+*Defined in [types/types.ts:274](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L274)*
 
 ___
 <a id="columns"></a>
 
 ### `<Optional>` columns
 
-**● columns**: *`Array`<[SequenceColumnType](../enums/sequencecolumntype.md)>*
+**● columns**: *`Array`<[CastColumnType](../enums/castcolumntype.md)>*
 
-*Defined in [types/types.ts:273](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L273)*
+*Defined in [types/types.ts:273](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L273)*
 
 ___
 <a id="depth"></a>
@@ -47,7 +47,7 @@ ___
 
 **● depth**: *[INumberFilter](inumberfilter.md)*
 
-*Defined in [types/types.ts:272](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L272)*
+*Defined in [types/types.ts:272](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L272)*
 
 ___
 <a id="geofilter"></a>
@@ -56,7 +56,7 @@ ___
 
 **● geoFilter**: *[IGeoFilter](igeofilter.md)*
 
-*Defined in [types/types.ts:271](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L271)*
+*Defined in [types/types.ts:271](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L271)*
 
 ___
 <a id="provider"></a>
@@ -65,7 +65,7 @@ ___
 
 **● provider**: *`Array`<`string`>*
 
-*Defined in [types/types.ts:275](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L275)*
+*Defined in [types/types.ts:275](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L275)*
 
 ___
 <a id="quality"></a>
@@ -74,7 +74,7 @@ ___
 
 **● quality**: *[ObservedLevelFlag](../enums/observedlevelflag.md) \| `Array`<[ObservedLevelFlag](../enums/observedlevelflag.md)>*
 
-*Defined in [types/types.ts:276](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L276)*
+*Defined in [types/types.ts:276](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L276)*
 
 ___
 <a id="time"></a>
@@ -83,7 +83,7 @@ ___
 
 **● time**: *[ITimeFilter](itimefilter.md)*
 
-*Defined in [types/types.ts:269](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L269)*
+*Defined in [types/types.ts:269](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L269)*
 
 ___
 <a id="year"></a>
@@ -92,7 +92,7 @@ ___
 
 **● year**: *`number`*
 
-*Defined in [types/types.ts:270](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L270)*
+*Defined in [types/types.ts:270](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L270)*
 
 ___
 

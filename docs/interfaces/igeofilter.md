@@ -25,7 +25,7 @@
 
 **● boundingBox**: *[IBoundingBox](iboundingbox.md)*
 
-*Defined in [types/types.ts:248](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L248)*
+*Defined in [types/types.ts:248](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L248)*
 
 ___
 <a id="location"></a>
@@ -34,7 +34,7 @@ ___
 
 **● location**: *[IGeoLocation](igeolocation.md)*
 
-*Defined in [types/types.ts:247](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L247)*
+*Defined in [types/types.ts:247](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L247)*
 
 ___
 <a id="mrgid"></a>
@@ -43,7 +43,7 @@ ___
 
 **● mrgid**: *`number`*
 
-*Defined in [types/types.ts:250](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L250)*
+*Defined in [types/types.ts:250](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L250)*
 
 ___
 <a id="polygon"></a>
@@ -52,7 +52,7 @@ ___
 
 **● polygon**: *`Array`<[IGeoLocation](igeolocation.md)>*
 
-*Defined in [types/types.ts:249](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L249)*
+*Defined in [types/types.ts:249](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L249)*
 
 ___
 

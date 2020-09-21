@@ -1,8 +1,8 @@
-import { Sequences } from "..";
-import { IGeoLocation, ODPClient } from "../../";
-import { throttleActions } from "../../utils";
+import { Sequences } from "../utils/sequences";
+import { IGeoLocation, ODPClient } from "..";
+import { throttleActions } from "../utils/geoUtils";
 import { Sequence } from "@cognite/sdk";
-import { IMarineRegion, IMarineRegionType } from "../../types/types";
+import { IMarineRegion, IMarineRegionType } from "../types/types";
 
 /**
  * Marine regions class.
@@ -10,26 +10,30 @@ import { IMarineRegion, IMarineRegionType } from "../../types/types";
 
 export class MarineRegions {
 	private _concurrency = 50;
+	private _sequences: Sequences;
 	private _client: ODPClient;
 	constructor(sequences: Sequences) {
+		this._sequences = sequences;
 		this._client = sequences.client;
 	}
 
 	/**
-	 * Get regions within a given id or if no id is given, get ids for the root asset
+	 * Get regions within a given id
 	 *
 	 * @param regionTypeId root asset
-	 * @param polygon fetch polygons for each marine regions
+	 * @param polygon If set to true, fetch polygons for each marine regions
 	 */
 
 	public getMarineRegions = async (regionTypeId, polygon = false): Promise<Array<IMarineRegion>> => {
 		let sequences = [];
 		let asset;
 		try {
-			sequences = await (
-				await this._client.cognite.sequences.list({ filter: { assetIds: [regionTypeId] }, limit: 1000 })
-			).items;
-			asset = (await this._client.cognite.assets.retrieve([{ id: regionTypeId }]))[0];
+			const result = await Promise.all([
+				this._sequences.list({ filter: { assetIds: [regionTypeId] }, limit: 1000 }),
+				this._client.cognite.assets.retrieve([{ id: regionTypeId }]),
+			]);
+			sequences = result[0].items;
+			asset = result[1][0];
 		} catch (error) {
 			throw error;
 		}
@@ -49,7 +53,7 @@ export class MarineRegions {
 	};
 
 	/**
-	 *
+	 * Get all available region types
 	 */
 	public getRegionTypes = async (): Promise<Array<IMarineRegionType>> => {
 		let marineRegions;
@@ -69,7 +73,7 @@ export class MarineRegions {
 	public getMarineRegion = async (id) => {
 		let sequences;
 		try {
-			sequences = await this._client.cognite.sequences.retrieve([{ id }]);
+			sequences = await this._sequences.retrieve([{ id }]);
 		} catch (e) {
 			throw e;
 		}
@@ -85,6 +89,24 @@ export class MarineRegions {
 		return this.getPolygonRows(sequences[0], asset[0]);
 	};
 
+	public getMarineRegionByMRGID = async (mrgid) => {
+		let sequences;
+		try {
+			sequences = await this._sequences.retrieve([{ metadata: { MRGID: mrgid } }]);
+		} catch (e) {
+			throw e;
+		}
+		if (sequences.length === 0) {
+			return null;
+		}
+		let asset;
+		try {
+			asset = await this._client.cognite.assets.retrieve([{ id: sequences[0].assetId }]);
+		} catch (e) {
+			throw e;
+		}
+		return this.getPolygonRows(sequences[0], asset[0]);
+	};
 	/**
 	 * Private methods
 	 */
@@ -159,6 +181,6 @@ export class MarineRegions {
 		return returnValue;
 	};
 	private getSequenceRows = (seqRows) => {
-		return this._client.cognite.sequences.retrieveRows(seqRows);
+		return this._sequences.retrieveRows(seqRows);
 	};
 }

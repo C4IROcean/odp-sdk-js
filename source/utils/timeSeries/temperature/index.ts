@@ -1,6 +1,6 @@
-import { ODPClient, ITimeSeriesFilter, ITimeSeries, IDatapointFilter } from "../../";
+import { ODPClient, ITimeSeriesFilter, ITimeSeries, IDatapointFilter } from "../../../";
 import { TimeSeries } from "../";
-import { throttleActions } from "../../utils";
+import { throttleActions } from "../../geoUtils";
 import { TimeSeriesList, Sequence } from "@cognite/sdk";
 import { Readable } from "stream";
 

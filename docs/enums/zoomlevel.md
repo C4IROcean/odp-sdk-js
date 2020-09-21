@@ -22,7 +22,7 @@
 
 **_1**:  = 1
 
-*Defined in [types/types.ts:214](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L214)*
+*Defined in [types/types.ts:214](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L214)*
 
 ___
 <a id="_2"></a>
@@ -31,7 +31,7 @@ ___
 
 **_2**:  = 2
 
-*Defined in [types/types.ts:215](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L215)*
+*Defined in [types/types.ts:215](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L215)*
 
 ___
 <a id="_3"></a>
@@ -40,7 +40,7 @@ ___
 
 **_3**:  = 3
 
-*Defined in [types/types.ts:216](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L216)*
+*Defined in [types/types.ts:216](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L216)*
 
 ___
 <a id="_4"></a>
@@ -49,7 +49,7 @@ ___
 
 **_4**:  = 4
 
-*Defined in [types/types.ts:217](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L217)*
+*Defined in [types/types.ts:217](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L217)*
 
 ___
 <a id="_5"></a>
@@ -58,7 +58,7 @@ ___
 
 **_5**:  = 5
 
-*Defined in [types/types.ts:218](https://github.com/C4IROcean/ODP-sdk-js/blob/26e019a/source/types/types.ts#L218)*
+*Defined in [types/types.ts:218](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L218)*
 
 ___
 
