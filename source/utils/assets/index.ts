@@ -1,4 +1,4 @@
-import { ODPClient } from "..";
+import { ODPClient } from "../..";
 import { AssetListScope } from "@cognite/sdk";
 
 export class Assets {
@@ -11,7 +11,11 @@ export class Assets {
 		return this._client.cognite.assets.retrieve([{ externalId: id }]);
 	};
 	public getChildren = (id: string) => {
-		const scope: AssetListScope = { filter: {} };
+		const scope: AssetListScope = {
+			filter: {
+				parentExternalIds: [id],
+			},
+		};
 		return this._client.cognite.assets.list(scope);
 	};
 }

@@ -1,5 +1,5 @@
 import { ODPClient, ITimeSeriesFilter, UnitType } from "../source";
-import { TimeSeries } from "../source/timeSeries/";
+import { TimeSeries } from "../source/utils/timeSeries/";
 
 describe("filter", () => {
 	const odp: ODPClient = null;

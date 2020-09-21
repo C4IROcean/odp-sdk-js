@@ -31,15 +31,15 @@
 
 ###  constructor
 
-⊕ **new Casts**(sequences: *[Sequences](sequences.md)*): [Casts](casts.md)
+⊕ **new Casts**(sequences: *`Sequences`*): [Casts](casts.md)
 
-*Defined in [sequences/casts/index.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/casts/index.ts#L23)*
+*Defined in [casts/index.ts:25](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L25)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| sequences | [Sequences](sequences.md) |
+| sequences | `Sequences` |
 
 **Returns:** [Casts](casts.md)
 
@@ -53,7 +53,7 @@ ___
 
 ▸ **getCastColumns**(): `any`[]
 
-*Defined in [sequences/casts/index.ts:73](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/casts/index.ts#L73)*
+*Defined in [casts/index.ts:82](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L82)*
 
 **Returns:** `any`[]
 
@@ -62,9 +62,9 @@ ___
 
 ###  getCastMetadata
 
-▸ **getCastMetadata**(filter: *[ICastFilter](../interfaces/icastfilter.md)*): `Promise`<[ISequence](../interfaces/isequence.md)[]>
+▸ **getCastMetadata**(filter: *[ICastFilter](../interfaces/icastfilter.md)*): `Promise`<[ICast](../interfaces/icast.md)[]>
 
-*Defined in [sequences/casts/index.ts:119](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/casts/index.ts#L119)*
+*Defined in [casts/index.ts:141](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L141)*
 
 **Parameters:**
 
@@ -72,7 +72,7 @@ ___
 | ------ | ------ |
 | filter | [ICastFilter](../interfaces/icastfilter.md) |
 
-**Returns:** `Promise`<[ISequence](../interfaces/isequence.md)[]>
+**Returns:** `Promise`<[ICast](../interfaces/icast.md)[]>
 
 ___
 <a id="getcastrows"></a>
@@ -81,7 +81,7 @@ ___
 
 ▸ **getCastRows**(filter: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in [sequences/casts/index.ts:140](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/casts/index.ts#L140)*
+*Defined in [casts/index.ts:162](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L162)*
 
 **Parameters:**
 
@@ -99,7 +99,7 @@ ___
 
 ▸ **getCastSourceFileUrl**(filter: *[ICastFilter](../interfaces/icastfilter.md)*): `Promise`<`any`>
 
-*Defined in [sequences/casts/index.ts:166](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/casts/index.ts#L166)*
+*Defined in [casts/index.ts:188](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L188)*
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **getCastUnits**(): `never`
 
-*Defined in [sequences/casts/index.ts:77](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/casts/index.ts#L77)*
+*Defined in [casts/index.ts:89](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L89)*
 
 **Returns:** `never`
 
@@ -125,11 +125,11 @@ ___
 
 ###  getCastYears
 
-▸ **getCastYears**(): `Promise`<`string`[]>
+▸ **getCastYears**(): `Promise`<`any`>
 
-*Defined in [sequences/casts/index.ts:65](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/casts/index.ts#L65)*
+*Defined in [casts/index.ts:65](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L65)*
 
-**Returns:** `Promise`<`string`[]>
+**Returns:** `Promise`<`any`>
 
 ___
 <a id="getcasts"></a>
@@ -138,7 +138,7 @@ ___
 
 ▸ **getCasts**(filter: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in [sequences/casts/index.ts:87](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/casts/index.ts#L87)*
+*Defined in [casts/index.ts:99](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L99)*
 
 **Parameters:**
 
@@ -156,14 +156,14 @@ ___
 
 ▸ **getCastsCount**(filter?: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in [sequences/casts/index.ts:39](https://github.com/C4IROcean/ODP-sdk-js/blob/4911c12/source/sequences/casts/index.ts#L39)*
+*Defined in [casts/index.ts:41](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L41)*
 
 **Parameters:**
 
 | Name | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `Default value` filter | [ICastFilter](../interfaces/icastfilter.md) |  {} |  cast filter object |
-| `Optional` stream | `any` | - |  optional stream<br><br>#TODO*   Need to support polygon location object the get multiple values |
+| `Optional` stream | `any` | - |  optional stream<br><br> |
 
 **Returns:** `Promise`<`any`[]>
 
