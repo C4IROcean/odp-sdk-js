@@ -24,7 +24,7 @@
 
 **● flags**: *`any`*
 
-*Defined in [types/types.ts:130](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L130)*
+*Defined in [types/types.ts:130](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/types/types.ts#L130)*
 
 ___
 <a id="unit"></a>
@@ -33,7 +33,7 @@ ___
 
 **● unit**: *`any`*
 
-*Defined in [types/types.ts:131](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L131)*
+*Defined in [types/types.ts:131](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/types/types.ts#L131)*
 
 ___
 <a id="value"></a>
@@ -42,7 +42,7 @@ ___
 
 **● value**: *`number`*
 
-*Defined in [types/types.ts:129](https://github.com/C4IROcean/ODP-sdk-js/blob/cee227f/source/types/types.ts#L129)*
+*Defined in [types/types.ts:129](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/types/types.ts#L129)*
 
 ___
 
