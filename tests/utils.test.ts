@@ -1,4 +1,4 @@
-import * as sequenceUtils from "../source/utils/sequences/utils";
+import * as sequenceUtils from "../source/casts/utils";
 import { CastColumnType } from "../source";
 
 describe("utils", () => {
