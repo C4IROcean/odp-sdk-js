@@ -3,7 +3,7 @@ import { mapCoordinateToIndex, getColumnsFromEnum } from "./utils";
 import { boundingBoxToPolygon, throttleActions } from "../utils/geoUtils";
 import { Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
-import { ICastFilter, CastColumnType, ICast, ICastRow, ICastRowValue } from "../types/types";
+import { ICastFilter, CastColumnType, ICast, ICastRow, ICastRowValue, Provider } from "../types/types";
 import { Files } from "../utils/files";
 import { MarineRegions } from "../marineRegions";
 
@@ -55,7 +55,18 @@ export class Casts {
 			start = mapCoordinateToIndex(filter.geoFilter.location, 1);
 			end = start + 1;
 		}
-		return this.getSequenceQueryResult(this.sequenceQueryBuilder(level, filter.year), null, start, end, stream);
+
+		const promises = [];
+		for (const ft of this.sequenceQueryBuilder(level, filter.year, filter.provider)) {
+			promises.push(this.getSequenceQueryResult(ft, null, start, end, stream));
+		}
+		const result = await Promise.all(promises);
+		const all = [];
+		for (const iterator of result) {
+			all.push(...iterator);
+		}
+
+		return all;
 	};
 
 	/**
@@ -81,6 +92,10 @@ export class Casts {
 
 	public getCastColumns = () => {
 		return Object.values(CastColumnType);
+	};
+
+	public getCastProviders = () => {
+		return Object.values(Provider);
 	};
 
 	/**
@@ -117,25 +132,40 @@ export class Casts {
 		if (!filter.geoFilter && !filter.geoFilter.location && !filter.castId) {
 			throw new Error("Either location or castId is required");
 		}
+
+		const castIds = [];
+
 		if (!filter.castId) {
 			if (!filter.year) {
 				throw new Error("Need a given year when castId is missing");
 			}
-			filter.castId =
-				this.constants().sequence.prefix[2] +
-				"_" +
-				filter.year +
-				"_" +
-				mapCoordinateToIndex(filter.geoFilter.location);
+
+			for (const ids of this.getCastIds(filter, 2)) {
+				castIds.push(ids + "_" + filter.year + "_" + mapCoordinateToIndex(filter.geoFilter.location));
+			}
+		} else {
+			castIds.push(filter.castId);
 		}
-		return this.getSequenceQueryResult(
-			{ filter: { name: filter.castId } },
-			undefined,
-			0,
-			undefined,
-			stream,
-			this.castSequenceLv2Convert,
-		);
+		const promises = [];
+		for (const castId of castIds) {
+			promises.push(
+				this.getSequenceQueryResult(
+					{ filter: { name: castId } },
+					undefined,
+					0,
+					undefined,
+					stream,
+					this.castSequenceLv2Convert,
+				),
+			);
+		}
+		const all = [];
+		const result = await Promise.all(promises);
+		for (const iterator of result) {
+			all.push(...iterator);
+		}
+
+		return all;
 	};
 
 	public getCastMetadata = async (filter: ICastFilter) => {
@@ -266,6 +296,7 @@ export class Casts {
 							year: filter.year,
 							geoFilter: { location: { latitude, longitude } },
 							columns: filter.columns,
+							provider: filter.provider,
 						},
 						stream,
 					),
@@ -324,6 +355,20 @@ export class Casts {
 		if (!skip) {
 			return row;
 		}
+	};
+
+	private getCastIds = (filter: ICastFilter, level) => {
+		const ids = [];
+		if (filter.provider && filter.provider.length > 0) {
+			for (const provider of filter.provider) {
+				ids.push(this.constants2().sequence.prefix[level].replace("{provider}", provider));
+			}
+		} else {
+			for (const provider of Object.values(Provider)) {
+				ids.push(this.constants2().sequence.prefix[level].replace("{provider}", provider));
+			}
+		}
+		return ids;
 	};
 
 	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?, converter?) => {
@@ -408,18 +453,40 @@ export class Casts {
 		};
 	};
 
-	private sequenceQueryBuilder = (level: number, year?: number) => {
-		const sequenceFilter: SequenceListScope = {
-			filter: {
-				externalIdPrefix: this.constants().sequence.prefix[level],
-				metadata: {},
+	private constants2 = () => {
+		return {
+			sequence: {
+				prefix: {
+					0: "cast_{provider}_0",
+					1: "cast_{provider}_1",
+					2: "cast_{provider}_2",
+					3: "cast_{provider}_3",
+				},
+				rowNames: ["Oxygen", "Temperature", "Salinity", "Chlorophyll", "Pressure", "Nitrate", "pH"],
 			},
-			limit: 1000,
 		};
-		if (year) {
-			sequenceFilter.filter.externalIdPrefix += "_" + year;
+	};
+
+	private sequenceQueryBuilder = (level: number, year?: number, provider?: Array<string>) => {
+		const sequenceFilters: Array<SequenceListScope> = [];
+		if (!provider || provider.length === 0) {
+			provider = Object.values(Provider);
 		}
-		return sequenceFilter;
+		for (const prov of provider) {
+			const sequenceFilter = {
+				filter: {
+					externalIdPrefix: this.constants2().sequence.prefix[level].replace("{provider}", prov),
+					metadata: {},
+				},
+				limit: 1000,
+			};
+			if (year) {
+				sequenceFilter.filter.externalIdPrefix += "_" + year;
+			}
+			sequenceFilters.push(sequenceFilter);
+		}
+
+		return sequenceFilters;
 	};
 
 	/**
@@ -498,8 +565,8 @@ export class Casts {
 			const value = this.castValues(item, columnIndex);
 			returnValue.push({
 				location: {
-					lat: parseFloat(value.lat),
-					long: parseFloat(value.lon),
+					lat: parseFloat(value.lat ? value.lat : value.geo_lat),
+					long: parseFloat(value.lon ? value.lon : value.geo_lon),
 				},
 				id: sequences[0].id,
 				rowNumber: item.rowNumber,

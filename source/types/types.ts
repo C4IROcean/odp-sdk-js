@@ -210,6 +210,11 @@ export enum Unit {
 	LONGITUDE = "degrees_east",
 }
 
+export enum Provider {
+	WOD = "wod",
+	AUV_NTNU = "auv_ntnu",
+}
+
 export enum ZoomLevel {
 	_1 = 1,
 	_2 = 2,
@@ -272,7 +277,7 @@ export interface ICastFilter {
 	depth?: INumberFilter;
 	columns?: Array<CastColumnType>;
 	castId?: string;
-	provider?: Array<string>;
+	provider?: Array<Provider>;
 	quality?: ObservedLevelFlag | Array<ObservedLevelFlag>;
 }
 

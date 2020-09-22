@@ -1,4 +1,4 @@
-import { ODPClient, CastColumnType, ObservedLevelFlag } from "../source";
+import { ODPClient, CastColumnType, ObservedLevelFlag, Provider } from "../source";
 
 describe("sequences", () => {
 	let odp: ODPClient;
@@ -70,6 +70,31 @@ describe("sequences", () => {
 			geoFilter: { location: { latitude: 32, longitude: 131 } },
 		});
 		expect(values.length).toBe(85);
+	});
+
+	test("get casts count for a given provider", async () => {
+		const values = await odp.casts.getCastsCount({
+			year: 2019,
+			provider: [Provider.AUV_NTNU],
+		});
+		expect(values.length).toBe(1);
+	});
+
+	test.only("get casts count for a given provider for a given polygon", async () => {
+		const polygon = [
+			{ longitude: 9, latitude: 62 },
+			{ longitude: 9, latitude: 65 },
+			{ longitude: 12, latitude: 65 },
+			{ longitude: 12, latitude: 62 },
+			{ longitude: 9, latitude: 62 },
+		];
+		const values = await odp.casts.getCasts({
+			year: 2019,
+			geoFilter: { polygon },
+			columns: [CastColumnType.TEMPERATURE],
+			provider: [Provider.AUV_NTNU],
+		});
+		expect(values.length).toBe(4);
 	});
 
 	test("get rows from polygon", async () => {
