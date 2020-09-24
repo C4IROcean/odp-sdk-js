@@ -87,6 +87,7 @@ quickstart();
 ## Samples
 
 -   [Casts](./samples/casts.ts)
+-   [Marine regions](./samples/marineRegions.ts)
 
 ## Development
 

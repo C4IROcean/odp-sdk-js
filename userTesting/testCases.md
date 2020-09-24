@@ -4,7 +4,9 @@
 
 ### Description:
 
-Follow the [JS-SDK-preparation](testPreparation.md)
+Have a look at the [documentation](../docs/README.md) and [getting started](../README.md)
+
+Follow the [JS-SDK-preparation](testPreparation.md) to set up your environment.
 
 ### Purpose:
 
