@@ -33,7 +33,7 @@
 
 ⊕ **new Casts**(sequences: *`Sequences`*): [Casts](casts.md)
 
-*Defined in [casts/index.ts:25](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L25)*
+*Defined in [casts/index.ts:25](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L25)*
 
 **Parameters:**
 
@@ -53,7 +53,7 @@ ___
 
 ▸ **getCastColumns**(): `any`[]
 
-*Defined in [casts/index.ts:82](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L82)*
+*Defined in [casts/index.ts:82](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L82)*
 
 **Returns:** `any`[]
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **getCastMetadata**(filter: *[ICastFilter](../interfaces/icastfilter.md)*): `Promise`<[ICast](../interfaces/icast.md)[]>
 
-*Defined in [casts/index.ts:141](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L141)*
+*Defined in [casts/index.ts:141](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L141)*
 
 **Parameters:**
 
@@ -81,7 +81,7 @@ ___
 
 ▸ **getCastRows**(filter: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in [casts/index.ts:162](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L162)*
+*Defined in [casts/index.ts:162](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L162)*
 
 **Parameters:**
 
@@ -99,7 +99,7 @@ ___
 
 ▸ **getCastSourceFileUrl**(filter: *[ICastFilter](../interfaces/icastfilter.md)*): `Promise`<`any`>
 
-*Defined in [casts/index.ts:188](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L188)*
+*Defined in [casts/index.ts:188](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L188)*
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **getCastUnits**(): `never`
 
-*Defined in [casts/index.ts:89](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L89)*
+*Defined in [casts/index.ts:89](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L89)*
 
 **Returns:** `never`
 
@@ -127,7 +127,7 @@ ___
 
 ▸ **getCastYears**(): `Promise`<`any`>
 
-*Defined in [casts/index.ts:65](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L65)*
+*Defined in [casts/index.ts:65](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L65)*
 
 **Returns:** `Promise`<`any`>
 
@@ -138,7 +138,7 @@ ___
 
 ▸ **getCasts**(filter: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in [casts/index.ts:99](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L99)*
+*Defined in [casts/index.ts:99](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L99)*
 
 **Parameters:**
 
@@ -156,7 +156,7 @@ ___
 
 ▸ **getCastsCount**(filter?: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
 
-*Defined in [casts/index.ts:41](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/casts/index.ts#L41)*
+*Defined in [casts/index.ts:41](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L41)*
 
 **Parameters:**
 
