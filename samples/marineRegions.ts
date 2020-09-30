@@ -15,7 +15,7 @@ odp.loginWithApiKey({
  * Get all available marine region types
  */
 async function getMarineRegions() {
-	console.log("Global cast count");
+	console.log("Get marine region types");
 	const result = await odp.marineRegions.getRegionTypes();
 	console.log("\tFound " + result.length + " marine region types");
 }
