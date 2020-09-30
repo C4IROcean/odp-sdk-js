@@ -74,7 +74,7 @@ export default class ODPClient {
 	public authenticate = () => {
 		return this._client.authenticate();
 	};
-/*
+	/*
 	public get timeSeries() {
 		return this._timeSeries;
 	}

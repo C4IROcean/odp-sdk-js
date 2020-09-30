@@ -14,7 +14,7 @@ To make sure that the SDK is available and can be installed using the keys made 
 
 ### Expected result
 
-The command `npm install @odp/sdk --save` runs without errors
+The command `npm install odp-sdk --save` runs without errors
 
 ## Case 2: Initialise the SDK
 
@@ -25,7 +25,7 @@ The command `npm install @odp/sdk --save` runs without errors
 -   Paste the following code into the file and save it
 
 ```javascript
-const { ODPClient } = require("@odp/sdk");
+const { ODPClient } = require("odp-sdk");
 
 async function quickstart() {
 	const odp = new ODPClient({ appId: "odp_test" });
