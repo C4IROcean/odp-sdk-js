@@ -1,6 +1,6 @@
 {
 	"name": "odp-sdk",
-	"version": "0.7.0",
+	"version": "0.7.1",
 	"description": "Javascript client library for ODP SDK, built on top of Cognite SDK",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -20,7 +20,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git@ssh.dev.azure.com:v3/oceandatafoundation/ODP/ODP-Cognite"
+		"url": "https://github.com/C4IROcean/odp-sdk-js.git"
 	},
 	"author": "",
 	"license": "ISC",

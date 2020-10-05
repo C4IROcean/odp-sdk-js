@@ -13,6 +13,7 @@ odp.loginWithApiKey({
 
 /**
  * Get at global count of all casts
+ * Aggregation level 1
  */
 async function getGlobalCastCount() {
 	console.log("Global cast count");
@@ -22,6 +23,7 @@ async function getGlobalCastCount() {
 
 /**
  * Get global count of casts for a given year
+ * Aggregation level 1
  */
 async function getGlobalCastCountForAGivenYear() {
 	console.log("Global cast count for a given year");
@@ -31,6 +33,7 @@ async function getGlobalCastCountForAGivenYear() {
 
 /**
  * Get cast count for a given polygon and find average sea surface temperature and sea bed temperature
+ * Aggregation level 2
  */
 async function getCastsFromPolygon() {
 	console.log("Casts for a given polygon");
@@ -56,13 +59,14 @@ async function getCastsFromPolygon() {
 		bottomTemp += +cast.value.Temperature_last;
 		numValues += +cast.value.castSize;
 	}
-	console.log("\tAverage see surface temperatures: " + topTemp / result.length + " celsius");
-	console.log("\tAverage see bottom temperatures: " + bottomTemp / result.length + " celsius");
+	console.log("\tAverage sea surface temperatures: " + topTemp / result.length + " celsius");
+	console.log("\tAverage sea bottom temperatures: " + bottomTemp / result.length + " celsius");
 	console.log("\tNumber of readings " + numValues);
 }
 
 /**
  * Get cast row values for a given polygon and calculate max/min/average temperature for casts within the polygon
+ * Aggregation level 3
  */
 async function getCastRowsFromPolygon() {
 	console.log("Cast rows for a given polygon");

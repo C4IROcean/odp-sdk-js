@@ -31,18 +31,17 @@ async function quickstart() {
 	const odp = new ODPClient({ appId: "odp_test" });
 	odp.loginWithApiKey({
 		project: "odp",
-    apiKey: "YOUR_API_KEY",
-
+		apiKey: "YOUR_API_KEY",
 	});
-  let years;
-  try{
-	// we need to trigger a call to the platform
-    years = await odp.casts.getCastYears();
-  }catch(e){
-    console.log("Status: " + e.status)
-    process.exit(1)
-  }
-    console.log("Success, found " + years.length + " years of data")
+	let years;
+	try {
+		// we need to trigger a call to the platform
+		years = await odp.casts.getCastYears();
+	} catch (e) {
+		console.log("Status: " + e.status);
+		process.exit(1);
+	}
+	console.log("Success, found " + years.length + " years of data");
 }
 quickstart();
 ```
