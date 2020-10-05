@@ -364,7 +364,7 @@ export class Casts {
 				ids.push(this.constants2().sequence.prefix[level].replace("{provider}", provider));
 			}
 		} else {
-			for (const provider of Object.values(Provider)) {
+			for (const provider of ["auv", "wod"]) {
 				ids.push(this.constants2().sequence.prefix[level].replace("{provider}", provider));
 			}
 		}

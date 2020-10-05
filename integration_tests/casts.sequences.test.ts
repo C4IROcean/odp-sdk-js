@@ -80,7 +80,7 @@ describe("sequences", () => {
 		expect(values.length).toBe(1);
 	});
 
-	test.only("get casts count for a given provider for a given polygon", async () => {
+	test("get casts count for a given provider for a given polygon", async () => {
 		const polygon = [
 			{ longitude: 9, latitude: 62 },
 			{ longitude: 9, latitude: 65 },

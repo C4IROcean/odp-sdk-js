@@ -213,6 +213,7 @@ export enum Unit {
 export enum Provider {
 	WOD = "wod",
 	AUV_NTNU = "auv_ntnu",
+	AUV_SINTEF = "auv_sintef",
 }
 
 export enum ZoomLevel {
