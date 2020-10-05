@@ -1,5 +1,5 @@
 import { CogniteClient } from "@cognite/sdk";
-import { TimeSeries } from "./utils/timeSeries";
+// import { TimeSeries } from "./utils/timeSeries";
 import { Assets } from "./utils/assets";
 import { Sequences } from "./utils/sequences";
 import { Files } from "./utils/files";
@@ -37,7 +37,7 @@ export interface IOAuthLoginOptions extends IProject {
 
 export default class ODPClient {
 	private _client: CogniteClient = null;
-	private _timeSeries: TimeSeries;
+	// private _timeSeries: TimeSeries;
 	private _sequences: Sequences;
 	private _files: Files;
 	private _assets: Assets;
@@ -74,11 +74,11 @@ export default class ODPClient {
 	public authenticate = () => {
 		return this._client.authenticate();
 	};
-
+	/*
 	public get timeSeries() {
 		return this._timeSeries;
 	}
-
+*/
 	public get sequences() {
 		return this._sequences;
 	}
@@ -97,7 +97,7 @@ export default class ODPClient {
 	}
 
 	private init = () => {
-		this._timeSeries = new TimeSeries(this);
+		// this._timeSeries = new TimeSeries(this);
 		this._sequences = new Sequences(this);
 		this._assets = new Assets(this);
 		this._files = new Files(this);

@@ -14,22 +14,22 @@ The SDK supports authentication through api-keys (_for server-side applications_
 
 Install the package with yarn:
 
-    $ yarn add @odp/sdk
+    $ yarn add odp-sdk
 
 or npm
 
-    $ npm install @odp/sdk --save
+    $ npm install odp-sdk --save
 
 ## Usage
 
 ```js
-const { ODPClient } = require("@odp/sdk");
+const { ODPClient } = require("odp-sdk");
 ```
 
 ### Using ES modules
 
 ```js
-import { ODPClient } from "@odp/sdk";
+import { ODPClient } from "odp-sdk";
 ```
 
 ### Using typescript
@@ -43,7 +43,7 @@ The SDK is written in native typescript, so no extra types needs to be defined.
 Get temperatures for a given provider
 
 ```js
-import { ODPClient, ICastFilter } from "@odp/sdk";
+import { ODPClient, ICastFilter } from "odp-sdk";
 
 async function quickstart() {
 	const odp = new ODPClient({ appId: "YOUR APPLICATION NAME" });
@@ -61,7 +61,7 @@ quickstart();
 ### Backend
 
 ```js
-const { ODPClient, ICastFilter } = require("@odp/sdk");
+const { ODPClient, ICastFilter } = require("odp-sdk");
 
 async function quickstart() {
 	const client = new ODPClient({ appId: "YOUR APPLICATION NAME" });
@@ -87,6 +87,7 @@ quickstart();
 ## Samples
 
 -   [Casts](./samples/casts.ts)
+-   [Marine regions](./samples/marineRegions.ts)
 
 ## Development
 

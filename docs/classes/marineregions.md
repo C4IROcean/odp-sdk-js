@@ -29,7 +29,7 @@
 
 ⊕ **new MarineRegions**(sequences: *`Sequences`*): [MarineRegions](marineregions.md)
 
-*Defined in [marineRegions/index.ts:14](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/marineRegions/index.ts#L14)*
+*Defined in [marineRegions/index.ts:14](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/marineRegions/index.ts#L14)*
 
 **Parameters:**
 
@@ -49,7 +49,7 @@ ___
 
 ▸ **getMarineRegion**(id: *`any`*): `Promise`<[IMarineRegion](../interfaces/imarineregion.md)>
 
-*Defined in [marineRegions/index.ts:73](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/marineRegions/index.ts#L73)*
+*Defined in [marineRegions/index.ts:73](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/marineRegions/index.ts#L73)*
 
 **Parameters:**
 
@@ -66,7 +66,7 @@ ___
 
 ▸ **getMarineRegionByMRGID**(mrgid: *`any`*): `Promise`<[IMarineRegion](../interfaces/imarineregion.md)>
 
-*Defined in [marineRegions/index.ts:92](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/marineRegions/index.ts#L92)*
+*Defined in [marineRegions/index.ts:92](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/marineRegions/index.ts#L92)*
 
 **Parameters:**
 
@@ -83,7 +83,7 @@ ___
 
 ▸ **getMarineRegions**(regionTypeId: *`any`*, polygon?: *`boolean`*): `Promise`<`Array`<[IMarineRegion](../interfaces/imarineregion.md)>>
 
-*Defined in [marineRegions/index.ts:27](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/marineRegions/index.ts#L27)*
+*Defined in [marineRegions/index.ts:27](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/marineRegions/index.ts#L27)*
 
 **Parameters:**
 
@@ -101,7 +101,7 @@ ___
 
 ▸ **getRegionTypes**(): `Promise`<`Array`<[IMarineRegionType](../interfaces/imarineregiontype.md)>>
 
-*Defined in [marineRegions/index.ts:58](https://github.com/C4IROcean/ODP-sdk-js/blob/cbd469b/source/marineRegions/index.ts#L58)*
+*Defined in [marineRegions/index.ts:58](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/marineRegions/index.ts#L58)*
 
 **Returns:** `Promise`<`Array`<[IMarineRegionType](../interfaces/imarineregiontype.md)>>
 
