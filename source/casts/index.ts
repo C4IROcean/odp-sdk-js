@@ -136,8 +136,17 @@ export class Casts {
 		const castIds = [];
 
 		if (!filter.castId) {
-			if (!filter.year) {
-				throw new Error("Need a given year when castId is missing");
+			const years = [];
+			if (!filter.year && !filter.time) {
+				throw new Error("Need a given year or time filter when castId is missing");
+			}
+			if (filter.year) {
+				years.push(filter.year);
+			} else {
+				/*for (let index = filter.time.min.getFullYear(); index < array.length; index++) {
+					const element = array[index];
+				}
+				filter.time.min*/
 			}
 
 			for (const ids of this.getCastIds(filter, 2)) {

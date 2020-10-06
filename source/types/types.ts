@@ -240,8 +240,8 @@ export interface INumberFilter {
 }
 
 export interface ITimeFilter {
-	min?: Date;
-	max?: Date;
+	min: Date;
+	max: Date;
 }
 
 export interface IAggregation {

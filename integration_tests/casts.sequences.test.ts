@@ -72,10 +72,18 @@ describe("sequences", () => {
 		expect(values.length).toBe(85);
 	});
 
-	test("get casts count for a given provider", async () => {
+	test("get casts count for ntnu", async () => {
 		const values = await odp.casts.getCastsCount({
 			year: 2019,
 			provider: [Provider.AUV_NTNU],
+		});
+		expect(values.length).toBe(1);
+	});
+
+	test("get casts count for sintef", async () => {
+		const values = await odp.casts.getCastsCount({
+			year: 2020,
+			provider: [Provider.AUV_SINTEF],
 		});
 		expect(values.length).toBe(1);
 	});
