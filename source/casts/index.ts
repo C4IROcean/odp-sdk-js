@@ -136,21 +136,10 @@ export class Casts {
 		const castIds = [];
 
 		if (!filter.castId) {
-			const years = [];
-			if (!filter.year && !filter.time) {
-				throw new Error("Need a given year or time filter when castId is missing");
-			}
-			if (filter.year) {
-				years.push(filter.year);
-			} else {
-				/*for (let index = filter.time.min.getFullYear(); index < array.length; index++) {
-					const element = array[index];
+			for (const year of this.getYears(filter)) {
+				for (const ids of this.getCastIds(filter, 2)) {
+					castIds.push(ids + "_" + year + "_" + mapCoordinateToIndex(filter.geoFilter.location));
 				}
-				filter.time.min*/
-			}
-
-			for (const ids of this.getCastIds(filter, 2)) {
-				castIds.push(ids + "_" + filter.year + "_" + mapCoordinateToIndex(filter.geoFilter.location));
 			}
 		} else {
 			castIds.push(filter.castId);
@@ -171,7 +160,8 @@ export class Casts {
 		const all = [];
 		const result = await Promise.all(promises);
 		for (const iterator of result) {
-			all.push(...iterator);
+			const filtered = this.postCastFilter(iterator, filter);
+			all.push(...filtered);
 		}
 
 		return all;
@@ -287,8 +277,8 @@ export class Casts {
 		if ((!filter.geoFilter.polygon && !filter.geoFilter.polygon) || filter.geoFilter.polygon.length < 3) {
 			throw new Error("A polygon with a length > 2 is required");
 		}
-		if (!filter.year) {
-			throw new Error("A year is required in filter");
+		if (!filter.year && !filter.time) {
+			throw new Error("Need a given year or time filter when castId is missing");
 		}
 		const geoBounds = getBounds(filter.geoFilter.polygon);
 		const all = [];
@@ -299,17 +289,18 @@ export class Casts {
 		const castPromises = [];
 		for (let latitude = geoBounds.minLat + 1; latitude <= geoBounds.maxLat; latitude++) {
 			for (let longitude = geoBounds.minLng + 1; longitude <= geoBounds.maxLng; longitude++) {
-				castPromises.push(() =>
-					this.getCasts(
-						{
-							year: filter.year,
-							geoFilter: { location: { latitude, longitude } },
-							columns: filter.columns,
-							provider: filter.provider,
-						},
-						stream,
-					),
-				);
+				const newFilter: ICastFilter = {
+					year: filter.year,
+					geoFilter: { location: { latitude, longitude } },
+					columns: filter.columns,
+					provider: filter.provider,
+				};
+				if (filter.year) {
+					newFilter.year = filter.year;
+				} else {
+					newFilter.time = filter.time;
+				}
+				castPromises.push(() => this.getCasts(newFilter, stream));
 			}
 		}
 
@@ -343,6 +334,24 @@ export class Casts {
 				}
 			}
 			all.push(row);
+		}
+		return all;
+	};
+
+	private postCastFilter = (casts, filter: ICastFilter) => {
+		const all = [];
+		for (const cast of casts) {
+			if (filter.time !== undefined) {
+				const castDate = new Date(
+					cast.value.date.slice(0, 4),
+					cast.value.date.slice(5, 6),
+					cast.value.date.slice(7, 8),
+				);
+				if (castDate < filter.time.min || castDate > filter.time.max) {
+					continue;
+				}
+			}
+			all.push(cast);
 		}
 		return all;
 	};
@@ -633,6 +642,21 @@ export class Casts {
 		}
 
 		return values;
+	};
+
+	private getYears = (filter: ICastFilter) => {
+		const years = [];
+		if (!filter.year && !filter.time) {
+			throw new Error("Need a given year or time filter when castId is missing");
+		}
+		if (filter.year) {
+			years.push(filter.year);
+		} else {
+			for (let year = filter.time.min.getFullYear(); year <= filter.time.max.getFullYear(); year++) {
+				years.push(year);
+			}
+		}
+		return years;
 	};
 
 	private castValues = (item, columnIndex) => {

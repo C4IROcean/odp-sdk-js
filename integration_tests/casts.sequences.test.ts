@@ -41,14 +41,6 @@ describe("sequences", () => {
 	});
 
 	test("get casts from polygon", async () => {
-		/*const polygon = [
-			{ longitude: 0.1, latitude: 0.1 },
-			{ longitude: 0.1, latitude: 1.1 },
-			{ longitude: 2.2, latitude: 1.1 },
-			{ longitude: 2.1, latitude: 0.1 },
-			{ longitude: 0.1, latitude: 0.1 },
-		];*/
-
 		const polygon = [
 			{ longitude: 170, latitude: 15 },
 			{ longitude: 170, latitude: 25 },
@@ -70,6 +62,30 @@ describe("sequences", () => {
 			geoFilter: { location: { latitude: 32, longitude: 131 } },
 		});
 		expect(values.length).toBe(85);
+	});
+
+	test("get casts with time filter", async () => {
+		const values = await odp.casts.getCasts({
+			time: { max: new Date(2018, 4, 1), min: new Date(2016, 6, 10) },
+			geoFilter: { location: { latitude: 32, longitude: 131 } },
+		});
+		expect(values.length).toBe(154);
+	});
+
+	test("get casts from polygon and time filter", async () => {
+		const polygon = [
+			{ longitude: 170, latitude: 15 },
+			{ longitude: 170, latitude: 25 },
+			{ longitude: 180, latitude: 25 },
+			{ longitude: 180, latitude: 15 },
+			{ longitude: 170, latitude: 15 },
+		];
+		const values = await odp.casts.getCasts({
+			time: { max: new Date(2018, 4, 1), min: new Date(2016, 6, 10) },
+			geoFilter: { polygon },
+			columns: [CastColumnType.TEMPERATURE],
+		});
+		expect(values.length).toBe(771);
 	});
 
 	test("get casts count for ntnu", async () => {
@@ -119,6 +135,24 @@ describe("sequences", () => {
 			columns: [CastColumnType.TEMPERATURE],
 		});
 		expect(values.length > 15500).toBeTruthy();
+		expect(values[0].value.temperature).toBeTruthy();
+		expect(values[0].value.nitrate).toBeFalsy();
+	});
+
+	test("get rows from a timefilter and polygon", async () => {
+		const polygon = [
+			{ longitude: -1, latitude: 59 },
+			{ longitude: -1, latitude: 61 },
+			{ longitude: 3, latitude: 61 },
+			{ longitude: 3, latitude: 59 },
+			{ longitude: -1, latitude: 59 },
+		];
+		const values = await odp.casts.getCastRows({
+			time: { min: new Date(2018, 6, 1), max: new Date(2018, 10, 10) },
+			geoFilter: { polygon },
+			columns: [CastColumnType.TEMPERATURE, CastColumnType.DATE],
+		});
+		expect(values.length > 1000).toBeTruthy();
 		expect(values[0].value.temperature).toBeTruthy();
 		expect(values[0].value.nitrate).toBeFalsy();
 	});
