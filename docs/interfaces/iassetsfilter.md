@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IAssetsFilter](../interfaces/iassetsfilter.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IAssetsFilter
 
 # Interface: IAssetsFilter
 
 ## Hierarchy
 
-**IAssetsFilter**
+* **IAssetsFilter**
 
 ## Index
 
@@ -12,17 +14,10 @@
 
 * [externalId](iassetsfilter.md#externalid)
 
----
-
 ## Properties
 
-<a id="externalid"></a>
+### externalId
 
-### `<Optional>` externalId
+• `Optional` **externalId**: Array\<string>
 
-**● externalId**: *`Array`<`string`>*
-
-*Defined in [types/types.ts:280](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L280)*
-
-___
-
+*Defined in [source/types/types.ts:286](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L286)*

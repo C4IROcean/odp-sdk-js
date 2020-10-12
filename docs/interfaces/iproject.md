@@ -1,14 +1,16 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IProject](../interfaces/iproject.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IProject
 
 # Interface: IProject
 
 ## Hierarchy
 
-**IProject**
+* **IProject**
 
-↳  [IApiKeyLoginOptions](iapikeyloginoptions.md)
+  ↳ [IApiKeyLoginOptions](iapikeyloginoptions.md)
 
-↳  [IOAuthLoginOptions](ioauthloginoptions.md)
+  ↳ [IOAuthLoginOptions](ioauthloginoptions.md)
 
 ## Index
 
@@ -16,17 +18,12 @@
 
 * [project](iproject.md#project)
 
----
-
 ## Properties
 
-<a id="project"></a>
+### project
 
-###  project
+• `Optional` **project**: string
 
-**● project**: *`string`*
+*Defined in [source/ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L19)*
 
-*Defined in [ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/ODPClient.ts#L19)*
-
-___
-
+Cognite project to login into

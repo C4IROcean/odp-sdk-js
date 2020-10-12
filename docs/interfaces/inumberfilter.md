@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [INumberFilter](../interfaces/inumberfilter.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / INumberFilter
 
 # Interface: INumberFilter
 
 ## Hierarchy
 
-**INumberFilter**
+* **INumberFilter**
 
 ## Index
 
@@ -13,26 +15,18 @@
 * [max](inumberfilter.md#max)
 * [min](inumberfilter.md#min)
 
----
-
 ## Properties
 
-<a id="max"></a>
+### max
 
-### `<Optional>` max
+• `Optional` **max**: number
 
-**● max**: *`number`*
-
-*Defined in [types/types.ts:233](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L233)*
-
-___
-<a id="min"></a>
-
-### `<Optional>` min
-
-**● min**: *`number`*
-
-*Defined in [types/types.ts:232](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L232)*
+*Defined in [source/types/types.ts:239](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L239)*
 
 ___
 
+### min
+
+• `Optional` **min**: number
+
+*Defined in [source/types/types.ts:238](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L238)*

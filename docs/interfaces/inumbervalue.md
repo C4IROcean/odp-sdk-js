@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [INumberValue](../interfaces/inumbervalue.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / INumberValue
 
 # Interface: INumberValue
 
 ## Hierarchy
 
-**INumberValue**
+* **INumberValue**
 
 ## Index
 
@@ -14,35 +16,26 @@
 * [unit](inumbervalue.md#unit)
 * [value](inumbervalue.md#value)
 
----
-
 ## Properties
 
-<a id="flags"></a>
+### flags
 
-### `<Optional>` flags
+• `Optional` **flags**: any
 
-**● flags**: *`any`*
-
-*Defined in [types/types.ts:130](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L130)*
-
-___
-<a id="unit"></a>
-
-###  unit
-
-**● unit**: *`any`*
-
-*Defined in [types/types.ts:131](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L131)*
-
-___
-<a id="value"></a>
-
-###  value
-
-**● value**: *`number`*
-
-*Defined in [types/types.ts:129](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L129)*
+*Defined in [source/types/types.ts:130](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L130)*
 
 ___
 
+### unit
+
+•  **unit**: any
+
+*Defined in [source/types/types.ts:131](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L131)*
+
+___
+
+### value
+
+•  **value**: number
+
+*Defined in [source/types/types.ts:129](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L129)*

@@ -1,12 +1,14 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IApiKeyLoginOptions](../interfaces/iapikeyloginoptions.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IApiKeyLoginOptions
 
 # Interface: IApiKeyLoginOptions
 
 ## Hierarchy
 
- [IProject](iproject.md)
+* [IProject](iproject.md)
 
-**↳ IApiKeyLoginOptions**
+  ↳ **IApiKeyLoginOptions**
 
 ## Index
 
@@ -15,28 +17,24 @@
 * [apiKey](iapikeyloginoptions.md#apikey)
 * [project](iapikeyloginoptions.md#project)
 
----
-
 ## Properties
 
-<a id="apikey"></a>
+### apiKey
 
-###  apiKey
+•  **apiKey**: string
 
-**● apiKey**: *`string`*
+*Defined in [source/ODPClient.ts:26](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L26)*
 
-*Defined in [ODPClient.ts:26](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/ODPClient.ts#L26)*
+A Cognite issued api-key
 
 ___
-<a id="project"></a>
 
-###  project
+### project
 
-**● project**: *`string`*
+• `Optional` **project**: string
 
 *Inherited from [IProject](iproject.md).[project](iproject.md#project)*
 
-*Defined in [ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/ODPClient.ts#L19)*
+*Defined in [source/ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L19)*
 
-___
-
+Cognite project to login into

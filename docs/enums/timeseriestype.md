@@ -1,4 +1,6 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [TimeSeriesType](../enums/timeseriestype.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / TimeSeriesType
 
 # Enumeration: TimeSeriesType
 
@@ -8,17 +10,10 @@
 
 * [TEMPERATURE](timeseriestype.md#temperature)
 
----
-
 ## Enumeration members
 
-<a id="temperature"></a>
+### TEMPERATURE
 
-###  TEMPERATURE
+•  **TEMPERATURE**:  = "temperature"
 
-**TEMPERATURE**:  = "temperature"
-
-*Defined in [types/types.ts:140](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L140)*
-
-___
-
+*Defined in [source/types/types.ts:140](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L140)*

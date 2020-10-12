@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [ITimeFilter](../interfaces/itimefilter.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / ITimeFilter
 
 # Interface: ITimeFilter
 
 ## Hierarchy
 
-**ITimeFilter**
+* **ITimeFilter**
 
 ## Index
 
@@ -13,26 +15,18 @@
 * [max](itimefilter.md#max)
 * [min](itimefilter.md#min)
 
----
-
 ## Properties
 
-<a id="max"></a>
+### max
 
-### `<Optional>` max
+•  **max**: Date
 
-**● max**: *`Date`*
-
-*Defined in [types/types.ts:238](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L238)*
-
-___
-<a id="min"></a>
-
-### `<Optional>` min
-
-**● min**: *`Date`*
-
-*Defined in [types/types.ts:237](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L237)*
+*Defined in [source/types/types.ts:244](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L244)*
 
 ___
 
+### min
+
+•  **min**: Date
+
+*Defined in [source/types/types.ts:243](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L243)*

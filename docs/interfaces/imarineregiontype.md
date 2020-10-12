@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IMarineRegionType](../interfaces/imarineregiontype.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IMarineRegionType
 
 # Interface: IMarineRegionType
 
 ## Hierarchy
 
-**IMarineRegionType**
+* **IMarineRegionType**
 
 ## Index
 
@@ -17,62 +19,50 @@
 * [parentId](imarineregiontype.md#parentid)
 * [source](imarineregiontype.md#source)
 
----
-
 ## Properties
 
-<a id="externalid"></a>
+### externalId
 
-###  externalId
+•  **externalId**: string
 
-**● externalId**: *`string`*
-
-*Defined in [types/types.ts:303](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L303)*
-
-___
-<a id="id"></a>
-
-###  id
-
-**● id**: *`number`*
-
-*Defined in [types/types.ts:302](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L302)*
-
-___
-<a id="name"></a>
-
-###  name
-
-**● name**: *`string`*
-
-*Defined in [types/types.ts:299](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L299)*
-
-___
-<a id="parentexternalid"></a>
-
-### `<Optional>` parentExternalId
-
-**● parentExternalId**: *`string`*
-
-*Defined in [types/types.ts:301](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L301)*
-
-___
-<a id="parentid"></a>
-
-### `<Optional>` parentId
-
-**● parentId**: *`number`*
-
-*Defined in [types/types.ts:300](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L300)*
-
-___
-<a id="source"></a>
-
-###  source
-
-**● source**: *`string`*
-
-*Defined in [types/types.ts:304](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L304)*
+*Defined in [source/types/types.ts:309](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L309)*
 
 ___
 
+### id
+
+•  **id**: number
+
+*Defined in [source/types/types.ts:308](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L308)*
+
+___
+
+### name
+
+•  **name**: string
+
+*Defined in [source/types/types.ts:305](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L305)*
+
+___
+
+### parentExternalId
+
+• `Optional` **parentExternalId**: string
+
+*Defined in [source/types/types.ts:307](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L307)*
+
+___
+
+### parentId
+
+• `Optional` **parentId**: number
+
+*Defined in [source/types/types.ts:306](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L306)*
+
+___
+
+### source
+
+•  **source**: string
+
+*Defined in [source/types/types.ts:310](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L310)*

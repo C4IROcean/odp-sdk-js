@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IGeoLocation](../interfaces/igeolocation.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IGeoLocation
 
 # Interface: IGeoLocation
 
 ## Hierarchy
 
-**IGeoLocation**
+* **IGeoLocation**
 
 ## Index
 
@@ -13,26 +15,18 @@
 * [latitude](igeolocation.md#latitude)
 * [longitude](igeolocation.md#longitude)
 
----
-
 ## Properties
 
-<a id="latitude"></a>
+### latitude
 
-###  latitude
+•  **latitude**: number
 
-**● latitude**: *`number`*
-
-*Defined in [types/types.ts:227](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L227)*
-
-___
-<a id="longitude"></a>
-
-###  longitude
-
-**● longitude**: *`number`*
-
-*Defined in [types/types.ts:228](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L228)*
+*Defined in [source/types/types.ts:233](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L233)*
 
 ___
 
+### longitude
+
+•  **longitude**: number
+
+*Defined in [source/types/types.ts:234](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L234)*

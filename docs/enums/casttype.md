@@ -1,4 +1,6 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [CastType](../enums/casttype.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / CastType
 
 # Enumeration: CastType
 
@@ -9,26 +11,18 @@
 * [ALL](casttype.md#all)
 * [COUNT](casttype.md#count)
 
----
-
 ## Enumeration members
 
-<a id="all"></a>
+### ALL
 
-###  ALL
+•  **ALL**:  = "all"
 
-**ALL**:  = "all"
-
-*Defined in [types/types.ts:144](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L144)*
-
-___
-<a id="count"></a>
-
-###  COUNT
-
-**COUNT**:  = "count"
-
-*Defined in [types/types.ts:145](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L145)*
+*Defined in [source/types/types.ts:144](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L144)*
 
 ___
 
+### COUNT
+
+•  **COUNT**:  = "count"
+
+*Defined in [source/types/types.ts:145](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L145)*

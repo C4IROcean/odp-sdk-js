@@ -10,7 +10,10 @@ import { MarineRegions } from "../marineRegions";
 /**
  * Casts class. Responsible for handling the three levels of casts.
  *
- * Level 1 contains an overview of all 1x1 grid cast count and is useful
+ * Level 0 contains an overview of all 1x1 grid cast count across all years and is useful
+ * for for getting a globe (or large area) overview.
+ *
+ * Level 1 contains an overview of all 1x1 grid cast count for a specific year/years and is useful
  * for for getting a globe (or large area) overview.
  *
  * Level 2 contains a list of all casts for a given 1x1 grid with some metadata
@@ -37,18 +40,16 @@ export class Casts {
 	 * @param stream optional stream
 	 *
 	 */
-
 	public getCastsCount = async (filter: ICastFilter = {}, stream?) => {
 		let start = 0;
 		let end;
 
+		// Default level, used if there is no time filter.
 		let level = 0;
 		let years = [];
 		if (filter.year || filter.time) {
 			level = 1;
 			years = this.getYears(filter);
-		} else {
-			years.push(undefined);
 		}
 		if (
 			filter.geoFilter &&
@@ -60,24 +61,28 @@ export class Casts {
 			end = start + 1;
 		}
 		const promises = [];
-		for (const year of years) {
-			for (const query of this.sequenceQueryBuilder(level, year, filter.provider)) {
-				promises.push(this.getSequenceQueryResult(query, null, start, end, stream));
+		if (years.length > 0) {
+			for (const year of years) {
+				for (const query of this.sequenceQueryBuilder(level, year, filter.provider)) {
+					promises.push(() => this.getSequenceQueryResult(query, null, start, end, stream));
+				}
+			}
+		} else {
+			for (const query of this.sequenceQueryBuilder(level, undefined, filter.provider)) {
+				promises.push(() => this.getSequenceQueryResult(query, null, start, end, stream));
 			}
 		}
-		const result = await Promise.all(promises);
+		const result = await throttleActions(promises, this._concurrency, stream);
 		const all = [];
 		for (const iterator of result) {
 			all.push(...iterator);
 		}
-
 		return all;
 	};
 
 	/**
 	 * Get years that are available
 	 */
-
 	public getCastYears = async () => {
 		let cast;
 		try {
@@ -94,11 +99,13 @@ export class Casts {
 	/**
 	 * Get available cast columns
 	 */
-
 	public getCastColumns = () => {
 		return Object.values(CastColumnType);
 	};
 
+	/**
+	 * Get available data providers
+	 */
 	public getCastProviders = () => {
 		return Object.values(Provider);
 	};
@@ -118,9 +125,11 @@ export class Casts {
 	 */
 	public getCasts = async (filter: ICastFilter, stream?) => {
 		if (filter.geoFilter && filter.geoFilter.boundingBox) {
+			// convert bounding box to polygon
 			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
 		}
 		if (filter.geoFilter && filter.geoFilter.mrgid) {
+			// get polygon from mrgid
 			let mr;
 			try {
 				mr = await this._marineRegions.getMarineRegionByMRGID(filter.geoFilter.mrgid);
@@ -131,6 +140,7 @@ export class Casts {
 			filter.geoFilter.polygon = mr.polygon;
 		}
 		if (filter.geoFilter.polygon && filter.geoFilter.polygon && filter.geoFilter.polygon.length > 2) {
+			// get casts using a polygon
 			return this.getCastsFromPolygon(filter, stream);
 		}
 
@@ -139,7 +149,6 @@ export class Casts {
 		}
 
 		const castIds = [];
-
 		if (!filter.castId) {
 			for (const year of this.getYears(filter)) {
 				for (const ids of this.getCastIds(filter, 2)) {
@@ -168,17 +177,20 @@ export class Casts {
 			const filtered = this.postCastFilter(iterator, filter);
 			all.push(...filtered);
 		}
-
 		return all;
 	};
 
-	public getCastMetadata = async (filter: ICastFilter) => {
-		if (!filter.castId) {
+	/**
+	 * Get metadata for a given castId
+	 * @param castId id for a given cast
+	 */
+	public getCastMetadata = async (castId: string) => {
+		if (!castId) {
 			throw new Error("castId is required");
 		}
 		let sequences = [];
 		try {
-			sequences = await this._sequences.search({ filter: { name: filter.castId } });
+			sequences = await this._sequences.search({ filter: { name: castId } });
 		} catch (error) {
 			throw error;
 		}
@@ -187,6 +199,7 @@ export class Casts {
 		}
 		return this.castSequenceMetadataConvert(sequences);
 	};
+
 	/**
 	 * Get content for a given cast. Level 3
 	 *
@@ -219,13 +232,17 @@ export class Casts {
 		);
 	};
 
-	public getCastSourceFileUrl = async (filter: ICastFilter) => {
-		if (!filter.castId) {
-			throw new Error("Need a castId ");
+	/**
+	 * Get the source file of the given cast
+	 * @param castId id of a cast
+	 */
+	public getCastSourceFileUrl = async (castId: string) => {
+		if (!castId) {
+			throw new Error("Need a castId");
 		}
 		let sequences;
 		try {
-			sequences = await this.getCastMetadata(filter);
+			sequences = await this.getCastMetadata(castId);
 		} catch (e) {
 			throw e;
 		}
