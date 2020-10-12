@@ -61,8 +61,8 @@ export class Casts {
 		}
 		const promises = [];
 		for (const year of years) {
-			for (const ft of this.sequenceQueryBuilder(level, year, filter.provider)) {
-				promises.push(this.getSequenceQueryResult(ft, null, start, end, stream));
+			for (const query of this.sequenceQueryBuilder(level, year, filter.provider)) {
+				promises.push(this.getSequenceQueryResult(query, null, start, end, stream));
 			}
 		}
 		const result = await Promise.all(promises);
