@@ -31,7 +31,7 @@
 
 *Inherited from [ICast](icast.md).[cruise](icast.md#cruise)*
 
-*Defined in [source/types/types.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L28)*
+*Defined in [source/types/types.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L28)*
 
 #### Type declaration:
 
@@ -49,7 +49,7 @@ ___
 
 *Inherited from [ICast](icast.md).[externalId](icast.md#externalid)*
 
-*Defined in [source/types/types.ts:34](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L34)*
+*Defined in [source/types/types.ts:34](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L34)*
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 *Inherited from [ICast](icast.md).[id](icast.md#id)*
 
-*Defined in [source/types/types.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L33)*
+*Defined in [source/types/types.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L33)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 *Inherited from [ICast](icast.md).[location](icast.md#location)*
 
-*Defined in [source/types/types.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L23)*
+*Defined in [source/types/types.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L23)*
 
 #### Type declaration:
 
@@ -87,7 +87,7 @@ ___
 
 *Inherited from [ICast](icast.md).[metadata](icast.md#metadata)*
 
-*Defined in [source/types/types.ts:36](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L36)*
+*Defined in [source/types/types.ts:36](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L36)*
 
 #### Type declaration:
 
@@ -155,7 +155,7 @@ ___
 
 •  **rowNumber**: number
 
-*Defined in [source/types/types.ts:97](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L97)*
+*Defined in [source/types/types.ts:97](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L97)*
 
 ___
 
@@ -165,7 +165,7 @@ ___
 
 *Inherited from [ICast](icast.md).[time](icast.md#time)*
 
-*Defined in [source/types/types.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L35)*
+*Defined in [source/types/types.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L35)*
 
 ___
 
@@ -173,4 +173,4 @@ ___
 
 •  **value**: [ICastRowValue](icastrowvalue.md)
 
-*Defined in [source/types/types.ts:96](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L96)*
+*Defined in [source/types/types.ts:96](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L96)*

@@ -25,7 +25,7 @@
 
 •  **ACCEPTED\_VALUE**:  = 0
 
-*Defined in [source/types/types.ts:171](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L171)*
+*Defined in [source/types/types.ts:171](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L171)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 •  **COMBINED\_GRADIENT\_AND\_INVERSION\_CHECKS**:  = 5
 
-*Defined in [source/types/types.ts:176](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L176)*
+*Defined in [source/types/types.ts:176](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L176)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 •  **FAILED\_GRADIENT\_CHECK**:  = 3
 
-*Defined in [source/types/types.ts:174](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L174)*
+*Defined in [source/types/types.ts:174](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L174)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 •  **FAILED\_INVERSION\_CHECK**:  = 2
 
-*Defined in [source/types/types.ts:173](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L173)*
+*Defined in [source/types/types.ts:173](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L173)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 •  **FAILED\_RANGE\_AND\_COMBINED\_GRADIENT\_AND\_INVERSION\_CHECKS**:  = 9
 
-*Defined in [source/types/types.ts:180](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L180)*
+*Defined in [source/types/types.ts:180](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L180)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 •  **FAILED\_RANGE\_AND\_GRADIENT\_CHECKS**:  = 7
 
-*Defined in [source/types/types.ts:178](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L178)*
+*Defined in [source/types/types.ts:178](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L178)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 •  **FAILED\_RANGE\_AND\_INVERSION\_CHECKS**:  = 6
 
-*Defined in [source/types/types.ts:177](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L177)*
+*Defined in [source/types/types.ts:177](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L177)*
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 •  **FAILED\_RANGE\_AND\_QUESTIONABLE\_DATA\_CHECKS**:  = 8
 
-*Defined in [source/types/types.ts:179](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L179)*
+*Defined in [source/types/types.ts:179](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L179)*
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 •  **OBSERVED\_LEVEL\_BULLSEYE\_FLAG\_AND\_ZERO\_GRADIENT\_CHECK**:  = 4
 
-*Defined in [source/types/types.ts:175](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L175)*
+*Defined in [source/types/types.ts:175](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L175)*
 
 ___
 
@@ -97,4 +97,4 @@ ___
 
 •  **RANGE\_OUTLIER**:  = 1
 
-*Defined in [source/types/types.ts:172](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L172)*
+*Defined in [source/types/types.ts:172](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L172)*

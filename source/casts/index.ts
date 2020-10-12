@@ -40,7 +40,7 @@ export class Casts {
 	 * @param stream optional stream
 	 *
 	 */
-	public getCastsCount = async (filter: ICastFilter = {}, stream?) => {
+	public getCastsCount = async (filter: ICastFilter = {}, stream?): Promise<Array<ICastRow>> => {
 		let start = 0;
 		let end;
 
@@ -83,7 +83,7 @@ export class Casts {
 	/**
 	 * Get years that are available
 	 */
-	public getCastYears = async () => {
+	public getCastYears = async (): Promise<Array<string>> => {
 		let cast;
 		try {
 			cast = await this._sequences.retrieve([{ externalId: "cast_wod_0" }]);
@@ -99,14 +99,14 @@ export class Casts {
 	/**
 	 * Get available cast columns
 	 */
-	public getCastColumns = () => {
+	public getCastColumns = (): Array<string> => {
 		return Object.values(CastColumnType);
 	};
 
 	/**
 	 * Get available data providers
 	 */
-	public getCastProviders = () => {
+	public getCastProviders = (): Array<string> => {
 		return Object.values(Provider);
 	};
 
@@ -123,7 +123,7 @@ export class Casts {
 	 * @param filter cast filter object
 	 * @param stream optional stream
 	 */
-	public getCasts = async (filter: ICastFilter, stream?) => {
+	public getCasts = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		if (filter.geoFilter && filter.geoFilter.boundingBox) {
 			// convert bounding box to polygon
 			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
@@ -184,7 +184,7 @@ export class Casts {
 	 * Get metadata for a given castId
 	 * @param castId id for a given cast
 	 */
-	public getCastMetadata = async (castId: string) => {
+	public getCastMetadata = async (castId: string): Promise<Array<ICast>> => {
 		if (!castId) {
 			throw new Error("castId is required");
 		}
@@ -206,7 +206,7 @@ export class Casts {
 	 * @param filter cast filter object
 	 * @param stream Optional stream
 	 */
-	public getCastRows = async (filter: ICastFilter, stream?) => {
+	public getCastRows = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		if (filter.geoFilter && filter.geoFilter.boundingBox) {
 			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
 		}
@@ -271,7 +271,7 @@ export class Casts {
 	 * Internal methods
 	 */
 
-	private getCastRowsFromPolygon = async (filter: ICastFilter, stream?) => {
+	private getCastRowsFromPolygon = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		const promises = [];
 		const all = [];
 		let casts;
@@ -295,7 +295,7 @@ export class Casts {
 		return all;
 	};
 
-	private getCastsFromPolygon = async (filter: ICastFilter, stream?) => {
+	private getCastsFromPolygon = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		if ((!filter.geoFilter.polygon && !filter.geoFilter.polygon) || filter.geoFilter.polygon.length < 3) {
 			throw new Error("A polygon with a length > 2 is required");
 		}
@@ -340,7 +340,7 @@ export class Casts {
 		}
 	};
 
-	private postRowFilter = (rows, filter: ICastFilter) => {
+	private postRowFilter = (rows, filter: ICastFilter): Array<ICastRow> => {
 		const all = [];
 		for (const row of rows) {
 			if (filter.quality !== undefined) {
@@ -360,7 +360,7 @@ export class Casts {
 		return all;
 	};
 
-	private postCastFilter = (casts, filter: ICastFilter) => {
+	private postCastFilter = (casts, filter: ICastFilter): Array<ICastRow> => {
 		const all = [];
 		for (const cast of casts) {
 			if (filter.time !== undefined) {

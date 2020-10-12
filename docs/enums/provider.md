@@ -18,7 +18,7 @@
 
 •  **AUV\_NTNU**:  = "auv\_ntnu"
 
-*Defined in [source/types/types.ts:215](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L215)*
+*Defined in [source/types/types.ts:215](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L215)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 •  **AUV\_SINTEF**:  = "auv\_sintef"
 
-*Defined in [source/types/types.ts:216](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L216)*
+*Defined in [source/types/types.ts:216](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L216)*
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 •  **WOD**:  = "wod"
 
-*Defined in [source/types/types.ts:214](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L214)*
+*Defined in [source/types/types.ts:214](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L214)*

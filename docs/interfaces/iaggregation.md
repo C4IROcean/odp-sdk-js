@@ -21,7 +21,7 @@
 
 •  **aggregationFunctions**: Array\<Aggregate>
 
-*Defined in [source/types/types.ts:248](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L248)*
+*Defined in [source/types/types.ts:248](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L248)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **granularity**: string
 
-*Defined in [source/types/types.ts:249](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L249)*
+*Defined in [source/types/types.ts:249](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L249)*

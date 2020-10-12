@@ -25,7 +25,7 @@
 
 • `Optional` **accessToken**: string
 
-*Defined in [source/ODPClient.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L35)*
+*Defined in [source/ODPClient.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L35)*
 
 Provide optional cached access token to skip the authentication flow (client.authenticate will still override this).
 
@@ -35,7 +35,7 @@ ___
 
 • `Optional` **onAuthenticate**: any \| \"REDIRECT\" \| \"POPUP\"
 
-*Defined in [source/ODPClient.ts:30](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L30)*
+*Defined in [source/ODPClient.ts:30](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L30)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 • `Optional` **onTokens**: any
 
-*Defined in [source/ODPClient.ts:31](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L31)*
+*Defined in [source/ODPClient.ts:31](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L31)*
 
 ___
 
@@ -53,6 +53,6 @@ ___
 
 *Inherited from [IProject](iproject.md).[project](iproject.md#project)*
 
-*Defined in [source/ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L19)*
+*Defined in [source/ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L19)*
 
 Cognite project to login into

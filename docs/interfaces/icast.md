@@ -27,7 +27,7 @@
 
 • `Optional` **cruise**: { country?: string ; id?: string ; vesselName?: string  }
 
-*Defined in [source/types/types.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L28)*
+*Defined in [source/types/types.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L28)*
 
 #### Type declaration:
 
@@ -43,7 +43,7 @@ ___
 
 •  **externalId**: string
 
-*Defined in [source/types/types.ts:34](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L34)*
+*Defined in [source/types/types.ts:34](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L34)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 •  **id**: number
 
-*Defined in [source/types/types.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L33)*
+*Defined in [source/types/types.ts:33](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L33)*
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 •  **location**: { depth?: number ; lat: number ; long: number  }
 
-*Defined in [source/types/types.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L23)*
+*Defined in [source/types/types.ts:23](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L23)*
 
 #### Type declaration:
 
@@ -75,7 +75,7 @@ ___
 
 • `Optional` **metadata**: { Access_no?: string ; CDF_extIdFile?: string ; Conventions?: string ; GMT_time?: string ; Orig_Stat_Num?: string ; Platform?: string ; Recorder?: string ; Salinity_first?: string ; Salinity_last?: string ; Temperature_first?: string ; Temperature_last?: string ; WOD_cruise_identifier?: string ; WOD_cruise_name?: string ; castSize?: string ; castYear?: string ; cdm_data_type?: string ; country?: string ; creator_email?: string ; creator_name?: string ; creator_url?: string ; dataset?: string ; dataset_code?: string ; date?: string ; date_created?: string ; date_modified?: string ; dbase_orig?: string ; equipment?: string ; featureType?: string ; geo_index?: string ; geo_key?: string ; geo_lat?: string ; geo_long?: string ; id?: string ; institution?: string ; lat?: string ; level?: string ; lon?: string ; naming_authority?: string ; originators_cruise_identifier?: string ; parent_seq_name?: string ; prefix?: string ; project?: string ; publisher_email?: string ; publisher_name?: string ; publisher_url?: string ; real_time?: string ; references?: string ; source?: string ; standard_name_vocabulary?: string ; summary?: string ; time?: string ; title?: string ; wod_unique_cast?: string ; z_first?: string ; z_last?: string  }
 
-*Defined in [source/types/types.ts:36](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L36)*
+*Defined in [source/types/types.ts:36](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L36)*
 
 #### Type declaration:
 
@@ -143,4 +143,4 @@ ___
 
 • `Optional` **time**: number
 
-*Defined in [source/types/types.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/types/types.ts#L35)*
+*Defined in [source/types/types.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L35)*

@@ -44,7 +44,7 @@ Level 3 contains the raw data for a given cast
 
 \+ **new Casts**(`sequences`: Sequences): [Casts](casts.md)
 
-*Defined in [source/casts/index.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L28)*
+*Defined in [source/casts/index.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L28)*
 
 #### Parameters:
 
@@ -58,21 +58,21 @@ Name | Type |
 
 ### getCastColumns
 
-▸ **getCastColumns**(): ([TEMPERATURE](../enums/castcolumntype.md#temperature) \| [COUNT](../enums/castcolumntype.md#count) \| [NAME](../enums/castcolumntype.md#name) \| [SALINITY](../enums/castcolumntype.md#salinity) \| [OXYGEN](../enums/castcolumntype.md#oxygen) \| [PHOSPHATE](../enums/castcolumntype.md#phosphate) \| [SILICATE](../enums/castcolumntype.md#silicate) \| [NITRATE](../enums/castcolumntype.md#nitrate) \| [NITRITE](../enums/castcolumntype.md#nitrite) \| [PH](../enums/castcolumntype.md#ph) \| [CHLOROPHYLL](../enums/castcolumntype.md#chlorophyll) \| [PRESSURE](../enums/castcolumntype.md#pressure) \| [DATE](../enums/castcolumntype.md#date) \| [LATITUDE](../enums/castcolumntype.md#latitude) \| [LONGITUDE](../enums/castcolumntype.md#longitude))[]
+▸ **getCastColumns**(): Array\<string>
 
-*Defined in [source/casts/index.ts:102](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L102)*
+*Defined in [source/casts/index.ts:102](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L102)*
 
 Get available cast columns
 
-**Returns:** ([TEMPERATURE](../enums/castcolumntype.md#temperature) \| [COUNT](../enums/castcolumntype.md#count) \| [NAME](../enums/castcolumntype.md#name) \| [SALINITY](../enums/castcolumntype.md#salinity) \| [OXYGEN](../enums/castcolumntype.md#oxygen) \| [PHOSPHATE](../enums/castcolumntype.md#phosphate) \| [SILICATE](../enums/castcolumntype.md#silicate) \| [NITRATE](../enums/castcolumntype.md#nitrate) \| [NITRITE](../enums/castcolumntype.md#nitrite) \| [PH](../enums/castcolumntype.md#ph) \| [CHLOROPHYLL](../enums/castcolumntype.md#chlorophyll) \| [PRESSURE](../enums/castcolumntype.md#pressure) \| [DATE](../enums/castcolumntype.md#date) \| [LATITUDE](../enums/castcolumntype.md#latitude) \| [LONGITUDE](../enums/castcolumntype.md#longitude))[]
+**Returns:** Array\<string>
 
 ___
 
 ### getCastMetadata
 
-▸ **getCastMetadata**(`castId`: string): Promise\<[ICast](../interfaces/icast.md)[]>
+▸ **getCastMetadata**(`castId`: string): Promise\<Array\<[ICast](../interfaces/icast.md)>>
 
-*Defined in [source/casts/index.ts:187](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L187)*
+*Defined in [source/casts/index.ts:187](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L187)*
 
 Get metadata for a given castId
 
@@ -82,27 +82,27 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `castId` | string | id for a given cast  |
 
-**Returns:** Promise\<[ICast](../interfaces/icast.md)[]>
+**Returns:** Promise\<Array\<[ICast](../interfaces/icast.md)>>
 
 ___
 
 ### getCastProviders
 
-▸ **getCastProviders**(): ([WOD](../enums/provider.md#wod) \| [AUV_NTNU](../enums/provider.md#auv_ntnu) \| [AUV_SINTEF](../enums/provider.md#auv_sintef))[]
+▸ **getCastProviders**(): Array\<string>
 
-*Defined in [source/casts/index.ts:109](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L109)*
+*Defined in [source/casts/index.ts:109](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L109)*
 
 Get available data providers
 
-**Returns:** ([WOD](../enums/provider.md#wod) \| [AUV_NTNU](../enums/provider.md#auv_ntnu) \| [AUV_SINTEF](../enums/provider.md#auv_sintef))[]
+**Returns:** Array\<string>
 
 ___
 
 ### getCastRows
 
-▸ **getCastRows**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<any[]>
+▸ **getCastRows**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
 
-*Defined in [source/casts/index.ts:209](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L209)*
+*Defined in [source/casts/index.ts:209](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L209)*
 
 Get content for a given cast. Level 3
 
@@ -113,7 +113,7 @@ Name | Type | Description |
 `filter` | [ICastFilter](../interfaces/icastfilter.md) | cast filter object |
 `stream?` | any | Optional stream  |
 
-**Returns:** Promise\<any[]>
+**Returns:** Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 ▸ **getCastSourceFileUrl**(`castId`: string): Promise\<any>
 
-*Defined in [source/casts/index.ts:239](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L239)*
+*Defined in [source/casts/index.ts:239](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L239)*
 
 Get the source file of the given cast
 
@@ -139,7 +139,7 @@ ___
 
 ▸ **getCastUnits**(): never
 
-*Defined in [source/casts/index.ts:116](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L116)*
+*Defined in [source/casts/index.ts:116](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L116)*
 
 Get available cast units (not implemented)
 
@@ -149,21 +149,21 @@ ___
 
 ### getCastYears
 
-▸ **getCastYears**(): Promise\<any>
+▸ **getCastYears**(): Promise\<Array\<string>>
 
-*Defined in [source/casts/index.ts:86](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L86)*
+*Defined in [source/casts/index.ts:86](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L86)*
 
 Get years that are available
 
-**Returns:** Promise\<any>
+**Returns:** Promise\<Array\<string>>
 
 ___
 
 ### getCasts
 
-▸ **getCasts**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<any[]>
+▸ **getCasts**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
 
-*Defined in [source/casts/index.ts:126](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L126)*
+*Defined in [source/casts/index.ts:126](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L126)*
 
 Get casts and metadata for a given area. Level 2
 
@@ -174,15 +174,15 @@ Name | Type | Description |
 `filter` | [ICastFilter](../interfaces/icastfilter.md) | cast filter object |
 `stream?` | any | optional stream  |
 
-**Returns:** Promise\<any[]>
+**Returns:** Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
 
 ___
 
 ### getCastsCount
 
-▸ **getCastsCount**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<any[]>
+▸ **getCastsCount**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
 
-*Defined in [source/casts/index.ts:43](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/casts/index.ts#L43)*
+*Defined in [source/casts/index.ts:43](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L43)*
 
 Get a cast count for the globe or a specific location. Level 1/0
 
@@ -193,4 +193,4 @@ Name | Type | Default value | Description |
 `filter` | [ICastFilter](../interfaces/icastfilter.md) | {} | cast filter object |
 `stream?` | any | - | optional stream   |
 
-**Returns:** Promise\<any[]>
+**Returns:** Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>

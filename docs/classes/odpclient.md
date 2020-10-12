@@ -39,7 +39,7 @@
 
 \+ **new ODPClient**(`options`: [IClientOptions](../interfaces/iclientoptions.md)): [ODPClient](odpclient.md)
 
-*Defined in [source/ODPClient.ts:45](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L45)*
+*Defined in [source/ODPClient.ts:45](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L45)*
 
 #### Parameters:
 
@@ -55,7 +55,7 @@ Name | Type |
 
 • get **asset**(): Assets
 
-*Defined in [source/ODPClient.ts:100](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L100)*
+*Defined in [source/ODPClient.ts:100](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L100)*
 
 **Returns:** Assets
 
@@ -65,7 +65,7 @@ ___
 
 • get **casts**(): [Casts](casts.md)
 
-*Defined in [source/ODPClient.ts:103](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L103)*
+*Defined in [source/ODPClient.ts:103](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L103)*
 
 **Returns:** [Casts](casts.md)
 
@@ -75,7 +75,7 @@ ___
 
 • get **cognite**(): CogniteClient
 
-*Defined in [source/ODPClient.ts:63](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L63)*
+*Defined in [source/ODPClient.ts:63](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L63)*
 
 **Returns:** CogniteClient
 
@@ -85,7 +85,7 @@ ___
 
 • get **files**(): Files
 
-*Defined in [source/ODPClient.ts:97](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L97)*
+*Defined in [source/ODPClient.ts:97](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L97)*
 
 **Returns:** Files
 
@@ -95,7 +95,7 @@ ___
 
 • get **login**(): LoginAPI
 
-*Defined in [source/ODPClient.ts:54](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L54)*
+*Defined in [source/ODPClient.ts:54](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L54)*
 
 **Returns:** LoginAPI
 
@@ -105,7 +105,7 @@ ___
 
 • get **logout**(): LogoutApi
 
-*Defined in [source/ODPClient.ts:57](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L57)*
+*Defined in [source/ODPClient.ts:57](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L57)*
 
 **Returns:** LogoutApi
 
@@ -115,7 +115,7 @@ ___
 
 • get **marineRegions**(): [MarineRegions](marineregions.md)
 
-*Defined in [source/ODPClient.ts:106](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L106)*
+*Defined in [source/ODPClient.ts:106](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L106)*
 
 **Returns:** [MarineRegions](marineregions.md)
 
@@ -125,7 +125,7 @@ ___
 
 • get **project**(): string
 
-*Defined in [source/ODPClient.ts:60](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L60)*
+*Defined in [source/ODPClient.ts:60](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L60)*
 
 **Returns:** string
 
@@ -135,7 +135,7 @@ ___
 
 • get **sequences**(): Sequences
 
-*Defined in [source/ODPClient.ts:93](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L93)*
+*Defined in [source/ODPClient.ts:93](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L93)*
 
 **Returns:** Sequences
 
@@ -145,7 +145,7 @@ ___
 
 • get **temperatures**(): any
 
-*Defined in [source/ODPClient.ts:51](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L51)*
+*Defined in [source/ODPClient.ts:51](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L51)*
 
 **Returns:** any
 
@@ -155,7 +155,7 @@ ___
 
 ▸ **authenticate**(): Promise\<boolean>
 
-*Defined in [source/ODPClient.ts:83](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L83)*
+*Defined in [source/ODPClient.ts:83](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L83)*
 
 **Returns:** Promise\<boolean>
 
@@ -165,7 +165,7 @@ ___
 
 ▸ **loginWithApiKey**(`options`: [IApiKeyLoginOptions](../interfaces/iapikeyloginoptions.md)): void
 
-*Defined in [source/ODPClient.ts:66](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L66)*
+*Defined in [source/ODPClient.ts:66](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L66)*
 
 #### Parameters:
 
@@ -181,7 +181,7 @@ ___
 
 ▸ **loginWithOAuth**(`options?`: [IOAuthLoginOptions](../interfaces/ioauthloginoptions.md)): void
 
-*Defined in [source/ODPClient.ts:73](https://github.com/C4IROcean/ODP-sdk-js/blob/0525c32/source/ODPClient.ts#L73)*
+*Defined in [source/ODPClient.ts:73](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L73)*
 
 #### Parameters:
 
