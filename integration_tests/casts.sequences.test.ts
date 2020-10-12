@@ -34,6 +34,14 @@ describe("sequences", () => {
 		expect(count.length).toBe(1);
 	});
 
+	test("get cast count for a single location for multiple years", async () => {
+		const count = await odp.casts.getCastsCount({
+			time: { max: new Date(2018, 0), min: new Date(2015, 0) },
+			geoFilter: { location: { latitude: 20, longitude: 173 } },
+		});
+		expect(count.length).toBe(4);
+	});
+
 	test("get a specific cast", async () => {
 		const values = await odp.casts.getCastRows({ castId: "cast_wod_3_2018_63470_18777858" });
 		expect(values.length).toBe(115);

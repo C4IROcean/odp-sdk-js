@@ -43,8 +43,12 @@ export class Casts {
 		let end;
 
 		let level = 0;
-		if (filter.year) {
+		let years = [];
+		if (filter.year || filter.time) {
 			level = 1;
+			years = this.getYears(filter);
+		} else {
+			years.push(undefined);
 		}
 		if (
 			filter.geoFilter &&
@@ -55,10 +59,11 @@ export class Casts {
 			start = mapCoordinateToIndex(filter.geoFilter.location, 1);
 			end = start + 1;
 		}
-
 		const promises = [];
-		for (const ft of this.sequenceQueryBuilder(level, filter.year, filter.provider)) {
-			promises.push(this.getSequenceQueryResult(ft, null, start, end, stream));
+		for (const year of years) {
+			for (const ft of this.sequenceQueryBuilder(level, year, filter.provider)) {
+				promises.push(this.getSequenceQueryResult(ft, null, start, end, stream));
+			}
 		}
 		const result = await Promise.all(promises);
 		const all = [];

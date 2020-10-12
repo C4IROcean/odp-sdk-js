@@ -2,8 +2,12 @@ import { IGeoLocation, CastColumnType } from "../..";
 
 const start = 1;
 
+/**
+ * Returns cartesian grid coordinates, given index and resolution
+ * @param index
+ * @param resolution resolution, defaults to 1
+ */
 export const indexToGridCoordinate = (index, resolution = 1) => {
-	// returns cartesian grid coordinates, given index and resolution
 	const lat_range = resolution * 180;
 	const x_loc = Math.floor((index - start) / lat_range + start);
 	const y_loc = ((index - start) % lat_range) + start;
