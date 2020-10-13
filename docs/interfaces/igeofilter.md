@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IGeoFilter](../interfaces/igeofilter.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IGeoFilter
 
 # Interface: IGeoFilter
 
 ## Hierarchy
 
-**IGeoFilter**
+* **IGeoFilter**
 
 ## Index
 
@@ -15,44 +17,34 @@
 * [mrgid](igeofilter.md#mrgid)
 * [polygon](igeofilter.md#polygon)
 
----
-
 ## Properties
 
-<a id="boundingbox"></a>
+### boundingBox
 
-### `<Optional>` boundingBox
+• `Optional` **boundingBox**: [IBoundingBox](iboundingbox.md)
 
-**● boundingBox**: *[IBoundingBox](iboundingbox.md)*
-
-*Defined in [types/types.ts:248](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L248)*
-
-___
-<a id="location"></a>
-
-### `<Optional>` location
-
-**● location**: *[IGeoLocation](igeolocation.md)*
-
-*Defined in [types/types.ts:247](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L247)*
-
-___
-<a id="mrgid"></a>
-
-### `<Optional>` mrgid
-
-**● mrgid**: *`number`*
-
-*Defined in [types/types.ts:250](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L250)*
-
-___
-<a id="polygon"></a>
-
-### `<Optional>` polygon
-
-**● polygon**: *`Array`<[IGeoLocation](igeolocation.md)>*
-
-*Defined in [types/types.ts:249](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L249)*
+*Defined in [source/types/types.ts:254](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L254)*
 
 ___
 
+### location
+
+• `Optional` **location**: [IGeoLocation](igeolocation.md)
+
+*Defined in [source/types/types.ts:253](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L253)*
+
+___
+
+### mrgid
+
+• `Optional` **mrgid**: number
+
+*Defined in [source/types/types.ts:256](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L256)*
+
+___
+
+### polygon
+
+• `Optional` **polygon**: Array\<[IGeoLocation](igeolocation.md)>
+
+*Defined in [source/types/types.ts:255](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L255)*

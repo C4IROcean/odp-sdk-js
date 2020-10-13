@@ -1,33 +1,29 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [ICogniteGeo](../interfaces/icognitegeo.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / ICogniteGeo
 
 # Interface: ICogniteGeo
 
 ## Hierarchy
 
- `Metadata`
+* Metadata
 
-**↳ ICogniteGeo**
+  ↳ **ICogniteGeo**
 
 ## Indexable
 
-\[key: `string`\]:&nbsp;`string`
+▪ [key: string]: string
+
 ## Index
 
 ### Properties
 
-* [geo_key](icognitegeo.md#geo_key)
-
----
+* [geo\_key](icognitegeo.md#geo_key)
 
 ## Properties
 
-<a id="geo_key"></a>
+### geo\_key
 
-### `<Optional>` geo_key
+• `Optional` **geo\_key**: string
 
-**● geo_key**: *`string`*
-
-*Defined in [types/types.ts:284](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L284)*
-
-___
-
+*Defined in [source/types/types.ts:290](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L290)*

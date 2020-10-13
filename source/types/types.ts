@@ -210,6 +210,12 @@ export enum Unit {
 	LONGITUDE = "degrees_east",
 }
 
+export enum Provider {
+	WOD = "wod",
+	AUV_NTNU = "auv_ntnu",
+	AUV_SINTEF = "auv_sintef",
+}
+
 export enum ZoomLevel {
 	_1 = 1,
 	_2 = 2,
@@ -234,8 +240,8 @@ export interface INumberFilter {
 }
 
 export interface ITimeFilter {
-	min?: Date;
-	max?: Date;
+	min: Date;
+	max: Date;
 }
 
 export interface IAggregation {
@@ -272,7 +278,7 @@ export interface ICastFilter {
 	depth?: INumberFilter;
 	columns?: Array<CastColumnType>;
 	castId?: string;
-	provider?: Array<string>;
+	provider?: Array<Provider>;
 	quality?: ObservedLevelFlag | Array<ObservedLevelFlag>;
 }
 

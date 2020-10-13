@@ -25,22 +25,22 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@cognite/sdk": "^2.22.0",
+		"@cognite/sdk": "^2.33.0",
 		"cd": "^0.3.3",
 		"geolib": "^3.3.1",
-		"lodash": "^4.17.15",
+		"lodash": "^4.17.20",
 		"ndjson": "^1.5.0"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.9.1",
-		"@types/node": "^13.7.7",
-		"jest": "^26.4.2",
+		"@types/node": "^13.13.23",
+		"jest": "^26.5.2",
 		"prettier": "^1.19.1",
-		"ts-jest": "^26.3.0",
-		"ts-node": "^8.5.2",
+		"ts-jest": "^26.4.1",
+		"ts-node": "^8.10.2",
 		"tslint": "^5.20.1",
-		"typescript": "^3.7.2",
-		"typedoc": "^0.13.0",
-		"typedoc-plugin-markdown": "^1.1.19"
+		"typedoc": "^0.19.2",
+		"typedoc-plugin-markdown": "^3.0.8",
+		"typescript": "^3.9.7"
 	}
 }

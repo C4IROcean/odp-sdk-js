@@ -1,12 +1,14 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IOAuthLoginOptions](../interfaces/ioauthloginoptions.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IOAuthLoginOptions
 
 # Interface: IOAuthLoginOptions
 
 ## Hierarchy
 
- [IProject](iproject.md)
+* [IProject](iproject.md)
 
-**↳ IOAuthLoginOptions**
+  ↳ **IOAuthLoginOptions**
 
 ## Index
 
@@ -17,46 +19,40 @@
 * [onTokens](ioauthloginoptions.md#ontokens)
 * [project](ioauthloginoptions.md#project)
 
----
-
 ## Properties
 
-<a id="accesstoken"></a>
+### accessToken
 
-### `<Optional>` accessToken
+• `Optional` **accessToken**: string
 
-**● accessToken**: *`string`*
+*Defined in [source/ODPClient.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L35)*
 
-*Defined in [ODPClient.ts:35](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/ODPClient.ts#L35)*
-
-___
-<a id="onauthenticate"></a>
-
-### `<Optional>` onAuthenticate
-
-**● onAuthenticate**: *`any` \| "REDIRECT" \| "POPUP"*
-
-*Defined in [ODPClient.ts:30](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/ODPClient.ts#L30)*
+Provide optional cached access token to skip the authentication flow (client.authenticate will still override this).
 
 ___
-<a id="ontokens"></a>
 
-### `<Optional>` onTokens
+### onAuthenticate
 
-**● onTokens**: *`any`*
+• `Optional` **onAuthenticate**: any \| \"REDIRECT\" \| \"POPUP\"
 
-*Defined in [ODPClient.ts:31](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/ODPClient.ts#L31)*
+*Defined in [source/ODPClient.ts:30](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L30)*
 
 ___
-<a id="project"></a>
 
-###  project
+### onTokens
 
-**● project**: *`string`*
+• `Optional` **onTokens**: any
+
+*Defined in [source/ODPClient.ts:31](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L31)*
+
+___
+
+### project
+
+• `Optional` **project**: string
 
 *Inherited from [IProject](iproject.md).[project](iproject.md#project)*
 
-*Defined in [ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/ODPClient.ts#L19)*
+*Defined in [source/ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L19)*
 
-___
-
+Cognite project to login into

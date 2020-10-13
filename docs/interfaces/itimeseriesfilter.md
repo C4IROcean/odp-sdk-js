@@ -1,12 +1,14 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [ITimeSeriesFilter](../interfaces/itimeseriesfilter.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / ITimeSeriesFilter
 
 # Interface: ITimeSeriesFilter
 
 ## Hierarchy
 
- [IDatapointFilter](idatapointfilter.md)
+* [IDatapointFilter](idatapointfilter.md)
 
-**↳ ITimeSeriesFilter**
+  ↳ **ITimeSeriesFilter**
 
 ## Index
 
@@ -22,97 +24,82 @@
 * [unit](itimeseriesfilter.md#unit)
 * [zoomLevel](itimeseriesfilter.md#zoomlevel)
 
----
-
 ## Properties
 
-<a id="aggregation"></a>
+### aggregation
 
-### `<Optional>` aggregation
-
-**● aggregation**: *[IAggregation](iaggregation.md)*
+• `Optional` **aggregation**: [IAggregation](iaggregation.md)
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[aggregation](idatapointfilter.md#aggregation)*
 
-*Defined in [types/types.ts:255](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L255)*
+*Defined in [source/types/types.ts:261](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L261)*
 
 ___
-<a id="depth"></a>
 
-### `<Optional>` depth
+### depth
 
-**● depth**: *[INumberFilter](inumberfilter.md)*
+• `Optional` **depth**: [INumberFilter](inumberfilter.md)
 
-*Defined in [types/types.ts:263](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L263)*
-
-___
-<a id="geofilter"></a>
-
-### `<Optional>` geoFilter
-
-**● geoFilter**: *[IGeoFilter](igeofilter.md)*
-
-*Defined in [types/types.ts:262](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L262)*
+*Defined in [source/types/types.ts:269](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L269)*
 
 ___
-<a id="latestvalue"></a>
 
-### `<Optional>` latestValue
+### geoFilter
 
-**● latestValue**: *`boolean`*
+• `Optional` **geoFilter**: [IGeoFilter](igeofilter.md)
+
+*Defined in [source/types/types.ts:268](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L268)*
+
+___
+
+### latestValue
+
+• `Optional` **latestValue**: boolean
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[latestValue](idatapointfilter.md#latestvalue)*
 
-*Defined in [types/types.ts:257](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L257)*
+*Defined in [source/types/types.ts:263](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L263)*
 
 ___
-<a id="limit"></a>
 
-### `<Optional>` limit
+### limit
 
-**● limit**: *`number`*
+• `Optional` **limit**: number
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[limit](idatapointfilter.md#limit)*
 
-*Defined in [types/types.ts:256](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L256)*
+*Defined in [source/types/types.ts:262](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L262)*
 
 ___
-<a id="provider"></a>
 
-### `<Optional>` provider
+### provider
 
-**● provider**: *`Array`<`string`>*
+• `Optional` **provider**: Array\<string>
 
-*Defined in [types/types.ts:265](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L265)*
+*Defined in [source/types/types.ts:271](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L271)*
 
 ___
-<a id="time"></a>
 
-### `<Optional>` time
+### time
 
-**● time**: *[ITimeFilter](itimefilter.md)*
+• `Optional` **time**: [ITimeFilter](itimefilter.md)
 
 *Inherited from [IDatapointFilter](idatapointfilter.md).[time](idatapointfilter.md#time)*
 
-*Defined in [types/types.ts:254](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L254)*
-
-___
-<a id="unit"></a>
-
-###  unit
-
-**● unit**: *[UnitType](../enums/unittype.md)*
-
-*Defined in [types/types.ts:261](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L261)*
-
-___
-<a id="zoomlevel"></a>
-
-### `<Optional>` zoomLevel
-
-**● zoomLevel**: *[ZoomLevel](../enums/zoomlevel.md)*
-
-*Defined in [types/types.ts:264](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L264)*
+*Defined in [source/types/types.ts:260](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L260)*
 
 ___
 
+### unit
+
+•  **unit**: [UnitType](../enums/unittype.md)
+
+*Defined in [source/types/types.ts:267](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L267)*
+
+___
+
+### zoomLevel
+
+• `Optional` **zoomLevel**: [ZoomLevel](../enums/zoomlevel.md)
+
+*Defined in [source/types/types.ts:270](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L270)*

@@ -7,7 +7,6 @@ if (!apiKey) {
 }
 const odp = new ODPClient({ appId: "ODP samples" });
 odp.loginWithApiKey({
-	project: "odp",
 	apiKey,
 });
 

@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IClientOptions](../interfaces/iclientoptions.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IClientOptions
 
 # Interface: IClientOptions
 
 ## Hierarchy
 
-**IClientOptions**
+* **IClientOptions**
 
 ## Index
 
@@ -13,26 +15,20 @@
 * [appId](iclientoptions.md#appid)
 * [baseUrl](iclientoptions.md#baseurl)
 
----
-
 ## Properties
 
-<a id="appid"></a>
+### appId
 
-###  appId
+•  **appId**: string
 
-**● appId**: *`string`*
+*Defined in [source/ODPClient.ts:11](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L11)*
 
-*Defined in [ODPClient.ts:11](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/ODPClient.ts#L11)*
-
-___
-<a id="baseurl"></a>
-
-### `<Optional>` baseUrl
-
-**● baseUrl**: *`string`*
-
-*Defined in [ODPClient.ts:12](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/ODPClient.ts#L12)*
+App identifier (ex: 'FileExtractor')
 
 ___
 
+### baseUrl
+
+• `Optional` **baseUrl**: string
+
+*Defined in [source/ODPClient.ts:12](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L12)*

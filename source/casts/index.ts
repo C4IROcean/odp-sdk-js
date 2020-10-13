@@ -3,14 +3,17 @@ import { mapCoordinateToIndex, getColumnsFromEnum } from "./utils";
 import { boundingBoxToPolygon, throttleActions } from "../utils/geoUtils";
 import { Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
-import { ICastFilter, CastColumnType, ICast, ICastRow, ICastRowValue } from "../types/types";
+import { ICastFilter, CastColumnType, ICast, ICastRow, ICastRowValue, Provider } from "../types/types";
 import { Files } from "../utils/files";
 import { MarineRegions } from "../marineRegions";
 
 /**
  * Casts class. Responsible for handling the three levels of casts.
  *
- * Level 1 contains an overview of all 1x1 grid cast count and is useful
+ * Level 0 contains an overview of all 1x1 grid cast count across all years and is useful
+ * for for getting a globe (or large area) overview.
+ *
+ * Level 1 contains an overview of all 1x1 grid cast count for a specific year/years and is useful
  * for for getting a globe (or large area) overview.
  *
  * Level 2 contains a list of all casts for a given 1x1 grid with some metadata
@@ -37,14 +40,16 @@ export class Casts {
 	 * @param stream optional stream
 	 *
 	 */
-
-	public getCastsCount = async (filter: ICastFilter = {}, stream?) => {
+	public getCastsCount = async (filter: ICastFilter = {}, stream?): Promise<Array<ICastRow>> => {
 		let start = 0;
 		let end;
 
+		// Default level, used if there is no time filter.
 		let level = 0;
-		if (filter.year) {
+		let years = [];
+		if (filter.year || filter.time) {
 			level = 1;
+			years = this.getYears(filter);
 		}
 		if (
 			filter.geoFilter &&
@@ -55,14 +60,30 @@ export class Casts {
 			start = mapCoordinateToIndex(filter.geoFilter.location, 1);
 			end = start + 1;
 		}
-		return this.getSequenceQueryResult(this.sequenceQueryBuilder(level, filter.year), null, start, end, stream);
+		const promises = [];
+		if (years.length > 0) {
+			for (const year of years) {
+				for (const query of this.sequenceQueryBuilder(level, year, filter.provider)) {
+					promises.push(() => this.getSequenceQueryResult(query, null, start, end, stream));
+				}
+			}
+		} else {
+			for (const query of this.sequenceQueryBuilder(level, undefined, filter.provider)) {
+				promises.push(() => this.getSequenceQueryResult(query, null, start, end, stream));
+			}
+		}
+		const result = await throttleActions(promises, this._concurrency, stream);
+		const all = [];
+		for (const iterator of result) {
+			all.push(...iterator);
+		}
+		return all;
 	};
 
 	/**
 	 * Get years that are available
 	 */
-
-	public getCastYears = async () => {
+	public getCastYears = async (): Promise<Array<string>> => {
 		let cast;
 		try {
 			cast = await this._sequences.retrieve([{ externalId: "cast_wod_0" }]);
@@ -78,9 +99,15 @@ export class Casts {
 	/**
 	 * Get available cast columns
 	 */
-
-	public getCastColumns = () => {
+	public getCastColumns = (): Array<string> => {
 		return Object.values(CastColumnType);
+	};
+
+	/**
+	 * Get available data providers
+	 */
+	public getCastProviders = (): Array<string> => {
+		return Object.values(Provider);
 	};
 
 	/**
@@ -96,11 +123,13 @@ export class Casts {
 	 * @param filter cast filter object
 	 * @param stream optional stream
 	 */
-	public getCasts = async (filter: ICastFilter, stream?) => {
+	public getCasts = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		if (filter.geoFilter && filter.geoFilter.boundingBox) {
+			// convert bounding box to polygon
 			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
 		}
 		if (filter.geoFilter && filter.geoFilter.mrgid) {
+			// get polygon from mrgid
 			let mr;
 			try {
 				mr = await this._marineRegions.getMarineRegionByMRGID(filter.geoFilter.mrgid);
@@ -111,40 +140,57 @@ export class Casts {
 			filter.geoFilter.polygon = mr.polygon;
 		}
 		if (filter.geoFilter.polygon && filter.geoFilter.polygon && filter.geoFilter.polygon.length > 2) {
+			// get casts using a polygon
 			return this.getCastsFromPolygon(filter, stream);
 		}
 
 		if (!filter.geoFilter && !filter.geoFilter.location && !filter.castId) {
 			throw new Error("Either location or castId is required");
 		}
+
+		const castIds = [];
 		if (!filter.castId) {
-			if (!filter.year) {
-				throw new Error("Need a given year when castId is missing");
+			for (const year of this.getYears(filter)) {
+				for (const ids of this.getCastIds(filter, 2)) {
+					castIds.push(ids + "_" + year + "_" + mapCoordinateToIndex(filter.geoFilter.location));
+				}
 			}
-			filter.castId =
-				this.constants().sequence.prefix[2] +
-				"_" +
-				filter.year +
-				"_" +
-				mapCoordinateToIndex(filter.geoFilter.location);
+		} else {
+			castIds.push(filter.castId);
 		}
-		return this.getSequenceQueryResult(
-			{ filter: { name: filter.castId } },
-			undefined,
-			0,
-			undefined,
-			stream,
-			this.castSequenceLv2Convert,
-		);
+		const promises = [];
+		for (const castId of castIds) {
+			promises.push(
+				this.getSequenceQueryResult(
+					{ filter: { name: castId } },
+					undefined,
+					0,
+					undefined,
+					stream,
+					this.castSequenceLv2Convert,
+				),
+			);
+		}
+		const all = [];
+		const result = await Promise.all(promises);
+		for (const iterator of result) {
+			const filtered = this.postCastFilter(iterator, filter);
+			all.push(...filtered);
+		}
+		return all;
 	};
 
-	public getCastMetadata = async (filter: ICastFilter) => {
-		if (!filter.castId) {
+	/**
+	 * Get metadata for a given castId
+	 * @param castId id for a given cast
+	 */
+	public getCastMetadata = async (castId: string): Promise<Array<ICast>> => {
+		if (!castId) {
 			throw new Error("castId is required");
 		}
 		let sequences = [];
 		try {
-			sequences = await this._sequences.search({ filter: { name: filter.castId } });
+			sequences = await this._sequences.search({ filter: { name: castId } });
 		} catch (error) {
 			throw error;
 		}
@@ -153,13 +199,14 @@ export class Casts {
 		}
 		return this.castSequenceMetadataConvert(sequences);
 	};
+
 	/**
 	 * Get content for a given cast. Level 3
 	 *
 	 * @param filter cast filter object
 	 * @param stream Optional stream
 	 */
-	public getCastRows = async (filter: ICastFilter, stream?) => {
+	public getCastRows = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		if (filter.geoFilter && filter.geoFilter.boundingBox) {
 			filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox);
 		}
@@ -185,13 +232,17 @@ export class Casts {
 		);
 	};
 
-	public getCastSourceFileUrl = async (filter: ICastFilter) => {
-		if (!filter.castId) {
-			throw new Error("Need a castId ");
+	/**
+	 * Get the source file of the given cast
+	 * @param castId id of a cast
+	 */
+	public getCastSourceFileUrl = async (castId: string) => {
+		if (!castId) {
+			throw new Error("Need a castId");
 		}
 		let sequences;
 		try {
-			sequences = await this.getCastMetadata(filter);
+			sequences = await this.getCastMetadata(castId);
 		} catch (e) {
 			throw e;
 		}
@@ -220,7 +271,7 @@ export class Casts {
 	 * Internal methods
 	 */
 
-	private getCastRowsFromPolygon = async (filter: ICastFilter, stream?) => {
+	private getCastRowsFromPolygon = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		const promises = [];
 		const all = [];
 		let casts;
@@ -244,12 +295,12 @@ export class Casts {
 		return all;
 	};
 
-	private getCastsFromPolygon = async (filter: ICastFilter, stream?) => {
+	private getCastsFromPolygon = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		if ((!filter.geoFilter.polygon && !filter.geoFilter.polygon) || filter.geoFilter.polygon.length < 3) {
 			throw new Error("A polygon with a length > 2 is required");
 		}
-		if (!filter.year) {
-			throw new Error("A year is required in filter");
+		if (!filter.year && !filter.time) {
+			throw new Error("Need a given year or time filter when castId is missing");
 		}
 		const geoBounds = getBounds(filter.geoFilter.polygon);
 		const all = [];
@@ -260,16 +311,18 @@ export class Casts {
 		const castPromises = [];
 		for (let latitude = geoBounds.minLat + 1; latitude <= geoBounds.maxLat; latitude++) {
 			for (let longitude = geoBounds.minLng + 1; longitude <= geoBounds.maxLng; longitude++) {
-				castPromises.push(() =>
-					this.getCasts(
-						{
-							year: filter.year,
-							geoFilter: { location: { latitude, longitude } },
-							columns: filter.columns,
-						},
-						stream,
-					),
-				);
+				const newFilter: ICastFilter = {
+					year: filter.year,
+					geoFilter: { location: { latitude, longitude } },
+					columns: filter.columns,
+					provider: filter.provider,
+				};
+				if (filter.year) {
+					newFilter.year = filter.year;
+				} else {
+					newFilter.time = filter.time;
+				}
+				castPromises.push(() => this.getCasts(newFilter, stream));
 			}
 		}
 
@@ -287,7 +340,7 @@ export class Casts {
 		}
 	};
 
-	private postRowFilter = (rows, filter: ICastFilter) => {
+	private postRowFilter = (rows, filter: ICastFilter): Array<ICastRow> => {
 		const all = [];
 		for (const row of rows) {
 			if (filter.quality !== undefined) {
@@ -303,6 +356,24 @@ export class Casts {
 				}
 			}
 			all.push(row);
+		}
+		return all;
+	};
+
+	private postCastFilter = (casts, filter: ICastFilter): Array<ICastRow> => {
+		const all = [];
+		for (const cast of casts) {
+			if (filter.time !== undefined) {
+				const castDate = new Date(
+					cast.value.date.slice(0, 4),
+					cast.value.date.slice(5, 6),
+					cast.value.date.slice(7, 8),
+				);
+				if (castDate < filter.time.min || castDate > filter.time.max) {
+					continue;
+				}
+			}
+			all.push(cast);
 		}
 		return all;
 	};
@@ -324,6 +395,20 @@ export class Casts {
 		if (!skip) {
 			return row;
 		}
+	};
+
+	private getCastIds = (filter: ICastFilter, level) => {
+		const ids = [];
+		if (filter.provider && filter.provider.length > 0) {
+			for (const provider of filter.provider) {
+				ids.push(this.constants2().sequence.prefix[level].replace("{provider}", provider));
+			}
+		} else {
+			for (const provider of ["auv", "wod"]) {
+				ids.push(this.constants2().sequence.prefix[level].replace("{provider}", provider));
+			}
+		}
+		return ids;
 	};
 
 	private getSequenceQueryResult = async (query, columns?, start = 0, end = undefined, stream?, converter?) => {
@@ -408,18 +493,40 @@ export class Casts {
 		};
 	};
 
-	private sequenceQueryBuilder = (level: number, year?: number) => {
-		const sequenceFilter: SequenceListScope = {
-			filter: {
-				externalIdPrefix: this.constants().sequence.prefix[level],
-				metadata: {},
+	private constants2 = () => {
+		return {
+			sequence: {
+				prefix: {
+					0: "cast_{provider}_0",
+					1: "cast_{provider}_1",
+					2: "cast_{provider}_2",
+					3: "cast_{provider}_3",
+				},
+				rowNames: ["Oxygen", "Temperature", "Salinity", "Chlorophyll", "Pressure", "Nitrate", "pH"],
 			},
-			limit: 1000,
 		};
-		if (year) {
-			sequenceFilter.filter.externalIdPrefix += "_" + year;
+	};
+
+	private sequenceQueryBuilder = (level: number, year?: number, provider?: Array<string>) => {
+		const sequenceFilters: Array<SequenceListScope> = [];
+		if (!provider || provider.length === 0) {
+			provider = Object.values(Provider);
 		}
-		return sequenceFilter;
+		for (const prov of provider) {
+			const sequenceFilter = {
+				filter: {
+					externalIdPrefix: this.constants2().sequence.prefix[level].replace("{provider}", prov),
+					metadata: {},
+				},
+				limit: 1000,
+			};
+			if (year) {
+				sequenceFilter.filter.externalIdPrefix += "_" + year;
+			}
+			sequenceFilters.push(sequenceFilter);
+		}
+
+		return sequenceFilters;
 	};
 
 	/**
@@ -498,8 +605,8 @@ export class Casts {
 			const value = this.castValues(item, columnIndex);
 			returnValue.push({
 				location: {
-					lat: parseFloat(value.lat),
-					long: parseFloat(value.lon),
+					lat: parseFloat(value.lat ? value.lat : value.geo_lat),
+					long: parseFloat(value.lon ? value.lon : value.geo_lon),
 				},
 				id: sequences[0].id,
 				rowNumber: item.rowNumber,
@@ -557,6 +664,21 @@ export class Casts {
 		}
 
 		return values;
+	};
+
+	private getYears = (filter: ICastFilter) => {
+		const years = [];
+		if (!filter.year && !filter.time) {
+			throw new Error("Need a given year or time filter when castId is missing");
+		}
+		if (filter.year) {
+			years.push(filter.year);
+		} else {
+			for (let year = filter.time.min.getFullYear(); year <= filter.time.max.getFullYear(); year++) {
+				years.push(year);
+			}
+		}
+		return years;
 	};
 
 	private castValues = (item, columnIndex) => {
