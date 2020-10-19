@@ -3,8 +3,8 @@ import { Aggregate, GetAggregateDatapoint, GetStringDatapoint, GetDoubleDatapoin
 export { GetStringDatapoint, GetDoubleDatapoint, GetAggregateDatapoint };
 
 export interface ITimeSeries {
-	type: TimeSeriesType;
-	unit: UnitType;
+	type: TimeSeriesTypeEnum;
+	unit: UnitTypeEnum;
 	id: number;
 	externalId: string;
 	assetId: number;
@@ -136,20 +136,20 @@ export interface IDataPoints {
 	timestamp: Date;
 }
 
-export enum TimeSeriesType {
+export enum TimeSeriesTypeEnum {
 	TEMPERATURE = "temperature",
 }
 
-export enum CastType {
+export enum CastTypeEnum {
 	ALL = "all",
 	COUNT = "count",
 }
 
-export enum UnitType {
+export enum UnitTypeEnum {
 	CELSIUS = "celsius",
 }
 
-export enum CastColumnType {
+export enum CastColumnTypeEnum {
 	TEMPERATURE = "temperature",
 	COUNT = "cast_count",
 	NAME = "name",
@@ -167,7 +167,7 @@ export enum CastColumnType {
 	LONGITUDE = "longitude",
 }
 
-export enum ObservedLevelFlag {
+export enum ObservedLevelFlagEnum {
 	ACCEPTED_VALUE = 0,
 	RANGE_OUTLIER = 1,
 	FAILED_INVERSION_CHECK = 2,
@@ -180,7 +180,7 @@ export enum ObservedLevelFlag {
 	FAILED_RANGE_AND_COMBINED_GRADIENT_AND_INVERSION_CHECKS = 9,
 }
 
-export enum StandardLevelFlag {
+export enum StandardLevelFlagEnum {
 	ACCEPTED_VALUE = 0,
 	BULLSEYE_MARKER = 1,
 	DENSITY_INVERSION = 2,
@@ -193,7 +193,7 @@ export enum StandardLevelFlag {
 	FAILED_ANNUAL_SEASONAL_AND_MONTHLY_STANDARD_DEVIATION_CHECK_ = 9,
 }
 
-export enum Unit {
+export enum UnitEnum {
 	TEMPERATURE = "degree_C",
 	COUNT = "",
 	DEPTH = "m",
@@ -210,18 +210,10 @@ export enum Unit {
 	LONGITUDE = "degrees_east",
 }
 
-export enum Provider {
+export enum ProviderEnum {
 	WOD = "wod",
 	AUV_NTNU = "auv_ntnu",
 	AUV_SINTEF = "auv_sintef",
-}
-
-export enum ZoomLevel {
-	_1 = 1,
-	_2 = 2,
-	_3 = 3,
-	_4 = 4,
-	_5 = 5,
 }
 
 export interface IBoundingBox {
@@ -264,10 +256,10 @@ export interface IDatapointFilter {
 }
 
 export interface ITimeSeriesFilter extends IDatapointFilter {
-	unit: UnitType;
+	unit: UnitTypeEnum;
 	geoFilter?: IGeoFilter;
 	depth?: INumberFilter;
-	zoomLevel?: ZoomLevel; // mapbox zoom levels 0 (the earth) - 22 (very close)
+	zoomLevel?: number; // mapbox zoom levels 0 (the earth) - 22 (very close)
 	provider?: Array<string>;
 }
 
@@ -276,10 +268,10 @@ export interface ICastFilter {
 	year?: number;
 	geoFilter?: IGeoFilter;
 	depth?: INumberFilter;
-	columns?: Array<CastColumnType>;
+	columns?: Array<CastColumnTypeEnum>;
 	castId?: string;
-	provider?: Array<Provider>;
-	quality?: ObservedLevelFlag | Array<ObservedLevelFlag>;
+	provider?: Array<ProviderEnum>;
+	quality?: ObservedLevelFlagEnum | Array<ObservedLevelFlagEnum>;
 }
 
 export interface IAssetsFilter {

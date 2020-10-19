@@ -1,4 +1,4 @@
-import { ODPClient, CastColumnType, ObservedLevelFlag, Provider } from "../source";
+import { ODPClient, CastColumnTypeEnum, ObservedLevelFlagEnum, ProviderEnum } from "../source";
 
 describe("sequences", () => {
 	let odp: ODPClient;
@@ -59,7 +59,7 @@ describe("sequences", () => {
 		const values = await odp.casts.getCasts({
 			year: 2018,
 			geoFilter: { polygon },
-			columns: [CastColumnType.TEMPERATURE],
+			columns: [CastColumnTypeEnum.TEMPERATURE],
 		});
 		expect(values.length).toBe(370);
 	});
@@ -91,7 +91,7 @@ describe("sequences", () => {
 		const values = await odp.casts.getCasts({
 			time: { max: new Date(2018, 4, 1), min: new Date(2016, 6, 10) },
 			geoFilter: { polygon },
-			columns: [CastColumnType.TEMPERATURE],
+			columns: [CastColumnTypeEnum.TEMPERATURE],
 		});
 		expect(values.length).toBe(771);
 	});
@@ -99,7 +99,7 @@ describe("sequences", () => {
 	test("get casts count for ntnu", async () => {
 		const values = await odp.casts.getCastsCount({
 			year: 2019,
-			provider: [Provider.AUV_NTNU],
+			provider: [ProviderEnum.AUV_NTNU],
 		});
 		expect(values.length).toBe(1);
 	});
@@ -107,7 +107,7 @@ describe("sequences", () => {
 	test("get casts count for sintef", async () => {
 		const values = await odp.casts.getCastsCount({
 			year: 2020,
-			provider: [Provider.AUV_SINTEF],
+			provider: [ProviderEnum.AUV_SINTEF],
 		});
 		expect(values.length).toBe(1);
 	});
@@ -123,8 +123,8 @@ describe("sequences", () => {
 		const values = await odp.casts.getCasts({
 			year: 2019,
 			geoFilter: { polygon },
-			columns: [CastColumnType.TEMPERATURE],
-			provider: [Provider.AUV_NTNU],
+			columns: [CastColumnTypeEnum.TEMPERATURE],
+			provider: [ProviderEnum.AUV_NTNU],
 		});
 		expect(values.length).toBe(4);
 	});
@@ -140,7 +140,7 @@ describe("sequences", () => {
 		const values = await odp.casts.getCastRows({
 			year: 2018,
 			geoFilter: { polygon },
-			columns: [CastColumnType.TEMPERATURE],
+			columns: [CastColumnTypeEnum.TEMPERATURE],
 		});
 		expect(values.length > 15500).toBeTruthy();
 		expect(values[0].value.temperature).toBeTruthy();
@@ -158,7 +158,7 @@ describe("sequences", () => {
 		const values = await odp.casts.getCastRows({
 			time: { min: new Date(2018, 6, 1), max: new Date(2018, 10, 10) },
 			geoFilter: { polygon },
-			columns: [CastColumnType.TEMPERATURE, CastColumnType.DATE],
+			columns: [CastColumnTypeEnum.TEMPERATURE, CastColumnTypeEnum.DATE],
 		});
 		expect(values.length > 1000).toBeTruthy();
 		expect(values[0].value.temperature).toBeTruthy();
@@ -184,12 +184,12 @@ describe("sequences", () => {
 		const values = await odp.casts.getCastRows({
 			year: 2018,
 			geoFilter: { polygon },
-			quality: ObservedLevelFlag.FAILED_GRADIENT_CHECK,
-			columns: [CastColumnType.TEMPERATURE],
+			quality: ObservedLevelFlagEnum.FAILED_GRADIENT_CHECK,
+			columns: [CastColumnTypeEnum.TEMPERATURE],
 		});
 		expect(values.length).toBe(543);
 		expect(values[0].value.temperature).toBeTruthy();
-		expect(values[0].value.temperature.flags.wod).toBe(ObservedLevelFlag.FAILED_GRADIENT_CHECK);
+		expect(values[0].value.temperature.flags.wod).toBe(ObservedLevelFlagEnum.FAILED_GRADIENT_CHECK);
 		expect(values[0].value.nitrate).toBeFalsy();
 	});
 });

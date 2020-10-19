@@ -1,4 +1,4 @@
-import { IGeoLocation, CastColumnType } from "../..";
+import { IGeoLocation, CastColumnTypeEnum } from "../..";
 
 const start = 1;
 
@@ -69,35 +69,35 @@ export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	return [boxCoords, boxIndexes];
 };
 */
-export const getColumnsFromEnum = (cols: Array<CastColumnType>, available) => {
+export const getColumnsFromEnum = (cols: Array<CastColumnTypeEnum>, available) => {
 	const columns = ["date", "lat", "lon", "Latitude", "Longitude", "z"];
 
 	for (const col of cols) {
-		if (col === CastColumnType.NITRATE && available.includes("Nitrate")) {
+		if (col === CastColumnTypeEnum.NITRATE && available.includes("Nitrate")) {
 			columns.push("Nitrate");
 			columns.push("Nitrate_WODflag");
 			columns.push("Nitrate_origflag");
-		} else if (col === CastColumnType.TEMPERATURE && available.includes("Temperature")) {
+		} else if (col === CastColumnTypeEnum.TEMPERATURE && available.includes("Temperature")) {
 			columns.push("Temperature");
 			columns.push("Temperature_WODflag");
 			columns.push("Temperature_origflag");
-		} else if (col === CastColumnType.OXYGEN && available.includes("Oxygen")) {
+		} else if (col === CastColumnTypeEnum.OXYGEN && available.includes("Oxygen")) {
 			columns.push("Oxygen");
 			columns.push("Oxygen_WODflag");
 			columns.push("Oxygen_origflag");
-		} else if (col === CastColumnType.SALINITY && available.includes("Salinity")) {
+		} else if (col === CastColumnTypeEnum.SALINITY && available.includes("Salinity")) {
 			columns.push("Salinity");
 			columns.push("Salinity_WODflag");
 			columns.push("Salinity_origflag");
-		} else if (col === CastColumnType.CHLOROPHYLL && available.includes("Chlorophyll")) {
+		} else if (col === CastColumnTypeEnum.CHLOROPHYLL && available.includes("Chlorophyll")) {
 			columns.push("Chlorophyll");
 			columns.push("Chlorophyll_WODflag");
 			columns.push("Chlorophyll_origflag");
-		} else if (col === CastColumnType.PRESSURE && available.includes("Pressure")) {
+		} else if (col === CastColumnTypeEnum.PRESSURE && available.includes("Pressure")) {
 			columns.push("Pressure");
 			columns.push("Pressure_WODflag");
 			columns.push("Pressure_origflag");
-		} else if (col === CastColumnType.PRESSURE && available.includes("pH")) {
+		} else if (col === CastColumnTypeEnum.PRESSURE && available.includes("pH")) {
 			columns.push("pH");
 			columns.push("pH_WODflag");
 			columns.push("pH_origflag");
