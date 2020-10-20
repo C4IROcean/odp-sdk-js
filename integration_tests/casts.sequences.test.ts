@@ -93,7 +93,7 @@ describe("sequences", () => {
 			geoFilter: { polygon },
 			columns: [CastColumnTypeEnum.TEMPERATURE],
 		});
-		expect(values.length).toBe(771);
+		expect(values.length).toBe(764);
 	});
 
 	test("get casts count for ntnu", async () => {

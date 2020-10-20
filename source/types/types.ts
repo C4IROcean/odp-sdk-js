@@ -32,7 +32,7 @@ export interface ICast {
 	};
 	id: number;
 	externalId: string;
-	time?: number;
+	time?: Date;
 	metadata?: {
 		date?: string;
 		country?: string;

@@ -1,5 +1,5 @@
 import { Sequences } from "../utils/sequences";
-import { mapCoordinateToIndex, getColumnsFromEnum } from "./utils";
+import { mapCoordinateToIndex, getColumnsFromEnum, convertStringToDate } from "./utils";
 import { boundingBoxToPolygon, throttleActions } from "../utils/geoUtils";
 import { Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
@@ -360,12 +360,7 @@ export class Casts {
 		const all = [];
 		for (const cast of casts) {
 			if (filter.time !== undefined) {
-				const castDate = new Date(
-					cast.value.date.slice(0, 4),
-					cast.value.date.slice(5, 6),
-					cast.value.date.slice(7, 8),
-				);
-				if (castDate < filter.time.min || castDate > filter.time.max) {
+				if (cast.time < filter.time.min || cast.time > filter.time.max) {
 					continue;
 				}
 			}
@@ -603,7 +598,7 @@ export class Casts {
 				rowNumber: item.rowNumber,
 				externalId: sequences[0].externalId,
 				value,
-				time: item[columnIndex.date],
+				time: convertStringToDate(item[columnIndex.date]),
 			});
 		}
 		return returnValue;
@@ -624,7 +619,8 @@ export class Casts {
 					lat: parseFloat(sequence.metadata.lat),
 					long: parseFloat(sequence.metadata.lon),
 				},
-				time: parseInt(sequence.metadata.date, 10),
+				time: convertStringToDate(sequence.metadata.date),
+
 				metadata: {},
 			};
 			for (const item of Object.keys(sequence.metadata)) {

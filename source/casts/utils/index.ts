@@ -40,6 +40,15 @@ export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
 	const latitude = -90 + (location.y - 0.5) / resolution;
 	return { longitude, latitude };
 };
+
+// Handle date strings on the format YYYYMMDD
+export const convertStringToDate = (dateString: string): Date => {
+	return new Date(
+		parseInt(dateString.slice(0, 4), 10),
+		parseInt(dateString.slice(5, 6), 10) - 1,
+		parseInt(dateString.slice(7, 8), 10),
+	);
+};
 /*
 export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	// ***needs verification***
