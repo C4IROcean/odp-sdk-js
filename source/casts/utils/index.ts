@@ -43,11 +43,29 @@ export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
 
 // Handle date strings on the format YYYYMMDD
 export const convertStringToDate = (dateString: string): Date => {
-	return new Date(
-		parseInt(dateString.slice(0, 4), 10),
-		parseInt(dateString.slice(5, 6), 10) - 1,
-		parseInt(dateString.slice(7, 8), 10),
-	);
+	let date;
+
+	if (dateString.length < 4) {
+		throw new Error("Unknown date format");
+	}
+	try {
+		if (dateString.length === 4) {
+			// only year
+			date = new Date(dateString);
+		} else if (dateString.length < 8) {
+			date = new Date(parseInt(dateString.slice(0, 4), 10), parseInt(dateString.slice(5, 6), 10) - 1);
+		} else {
+			date = new Date(
+				parseInt(dateString.slice(0, 4), 10),
+				parseInt(dateString.slice(5, 6), 10) - 1,
+				parseInt(dateString.slice(7, 8), 10),
+			);
+		}
+	} catch (e) {
+		throw new Error("Unknown date format " + e);
+	}
+
+	return date;
 };
 /*
 export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
