@@ -73,12 +73,12 @@ export class Casts {
 		const promises = [];
 		if (years.length > 0) {
 			for (const year of years) {
-				for (const query of this.sequenceQueryBuilder(level, year, filter.provider)) {
+				for (const query of this.sequenceQueryBuilder(level, year, filter.providers)) {
 					promises.push(() => this.getSequenceQueryResult(query, null, start, end, stream));
 				}
 			}
 		} else {
-			for (const query of this.sequenceQueryBuilder(level, undefined, filter.provider)) {
+			for (const query of this.sequenceQueryBuilder(level, undefined, filter.providers)) {
 				promises.push(() => this.getSequenceQueryResult(query, null, start, end, stream));
 			}
 		}
@@ -315,7 +315,7 @@ export class Casts {
 					year: filter.year,
 					geoFilter: { location: { latitude, longitude } },
 					columns: filter.columns,
-					provider: filter.provider,
+					providers: filter.providers,
 				};
 				if (filter.year) {
 					newFilter.year = filter.year;
@@ -390,8 +390,8 @@ export class Casts {
 
 	private getCastIds = (filter: ICastFilter, level: CastLevelEnum) => {
 		const ids = [];
-		if (filter.provider && filter.provider.length > 0) {
-			for (const provider of filter.provider) {
+		if (filter.providers && filter.providers.length > 0) {
+			for (const provider of filter.providers) {
 				ids.push(this.getSequencePrefix(provider, level));
 			}
 		} else {
@@ -493,12 +493,12 @@ export class Casts {
 		return `cast_${provider}_${level}`;
 	};
 
-	private sequenceQueryBuilder = (level: CastLevelEnum, year?: number, provider?: Array<ProviderEnum>) => {
+	private sequenceQueryBuilder = (level: CastLevelEnum, year?: number, providers?: Array<ProviderEnum>) => {
 		const sequenceFilters: Array<SequenceListScope> = [];
-		if (!provider || provider.length === 0) {
-			provider = Object.values(ProviderEnum);
+		if (!providers || providers.length === 0) {
+			providers = Object.values(ProviderEnum);
 		}
-		for (const prov of provider) {
+		for (const prov of providers) {
 			const sequenceFilter = {
 				filter: {
 					externalIdPrefix: this.getSequencePrefix(prov, level),

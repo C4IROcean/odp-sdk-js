@@ -99,7 +99,7 @@ describe("sequences", () => {
 	test("get casts count for ntnu", async () => {
 		const values = await odp.casts.getCastsCount({
 			year: 2019,
-			provider: [ProviderEnum.AUV_NTNU],
+			providers: [ProviderEnum.AUV_NTNU],
 		});
 		expect(values.length).toBe(1);
 	});
@@ -107,7 +107,7 @@ describe("sequences", () => {
 	test("get casts count for sintef", async () => {
 		const values = await odp.casts.getCastsCount({
 			year: 2020,
-			provider: [ProviderEnum.AUV_SINTEF],
+			providers: [ProviderEnum.AUV_SINTEF],
 		});
 		expect(values.length).toBe(1);
 	});
@@ -124,7 +124,7 @@ describe("sequences", () => {
 			year: 2019,
 			geoFilter: { polygon },
 			columns: [CastColumnTypeEnum.TEMPERATURE],
-			provider: [ProviderEnum.AUV_NTNU],
+			providers: [ProviderEnum.AUV_NTNU],
 		});
 		expect(values.length).toBe(4);
 	});

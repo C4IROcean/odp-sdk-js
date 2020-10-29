@@ -270,7 +270,7 @@ export interface ICastFilter {
 	depth?: INumberFilter;
 	columns?: Array<CastColumnTypeEnum>;
 	castId?: string;
-	provider?: Array<ProviderEnum>;
+	providers?: Array<ProviderEnum>;
 	quality?: ObservedLevelFlagEnum | Array<ObservedLevelFlagEnum>;
 }
 

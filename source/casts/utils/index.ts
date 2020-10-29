@@ -57,6 +57,7 @@ export const convertStringToDate = (dateString: string): Date => {
 		} else {
 			date = new Date(
 				parseInt(dateString.slice(0, 4), 10),
+				// the date string contains months that start on 01, while Date have months that start on 0
 				parseInt(dateString.slice(5, 6), 10) - 1,
 				parseInt(dateString.slice(7, 8), 10),
 			);
