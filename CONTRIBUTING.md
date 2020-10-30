@@ -9,8 +9,6 @@ The issue tracker is the preferred channel for [bug reports](#bug-reports),
 [features requests](#feature-requests) and [submitting pull
 requests](#pull-requests).
 
-<a name="bugs"></a>
-
 ## Bug reports
 
 A bug is a _demonstrable problem_ that is caused by the code in the repository.
@@ -48,14 +46,10 @@ Example:
 > causing the bug, and potential solutions (and your opinions on their
 > merits).
 
-<a name="features"></a>
-
 ## Feature requests
 
 Feature requests are welcome. Please
 provide as much detail and context as possible.
-
-<a name="pull-requests"></a>
 
 ## Pull requests
 
