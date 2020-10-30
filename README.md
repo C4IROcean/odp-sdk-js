@@ -103,7 +103,7 @@ The library follow [Semantic Versioning](https://semver.org/).
 
 ## Contributing
 
-Contributions welcome! See the [code of conduct](./CODE_OF_CONDUCT.md).
+Contributions welcome! See [more details](./CONTRIBUTING.md) and the [code of conduct](./CODE_OF_CONDUCT.md).
 
 ## Release
 
