@@ -97,8 +97,8 @@ export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	return [boxCoords, boxIndexes];
 };
 */
-export const getColumnsFromEnum = (cols: Array<CastColumnTypeEnum>, available) => {
-	const columns = ["date", "lat", "lon", "Latitude", "Longitude", "z"];
+export const getColumnsFromEnum = (cols: Array<CastColumnType>, available) => {
+	const columns = ["date", "lat", "lon", "z"];
 
 	for (const col of cols) {
 		if (col === CastColumnTypeEnum.NITRATE && available.includes("Nitrate")) {
