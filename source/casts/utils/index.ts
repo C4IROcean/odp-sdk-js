@@ -97,7 +97,7 @@ export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	return [boxCoords, boxIndexes];
 };
 */
-export const getColumnsFromEnum = (cols: Array<CastColumnType>, available) => {
+export const getColumnsFromEnum = (cols: Array<CastColumnTypeEnum>, available) => {
 	const columns = ["date", "lat", "lon", "z"];
 
 	for (const col of cols) {
@@ -129,6 +129,14 @@ export const getColumnsFromEnum = (cols: Array<CastColumnType>, available) => {
 			columns.push("pH");
 			columns.push("pH_WODflag");
 			columns.push("pH_origflag");
+		} else if (col === CastColumnTypeEnum.ALKALINITY && available.includes("Alkalinity")) {
+			columns.push("Alkalinity");
+			columns.push("Alkalinity_WODflag");
+			columns.push("Alkalinity_origflag");
+		} else if (col === CastColumnTypeEnum.PRESSURE && available.includes("plankton")) {
+			columns.push("plankton");
+			columns.push("plankton_WODflag");
+			columns.push("plankton_origflag");
 		}
 	}
 	return columns;

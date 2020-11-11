@@ -18,7 +18,7 @@ describe("sequences", () => {
 
 	test("get cast count", async () => {
 		const count = await odp.casts.getCastsCount();
-		expect(count.length > 38632).toBeTruthy();
+		expect(count.length > 3832).toBeTruthy();
 	});
 
 	test("get cast years", async () => {

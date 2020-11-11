@@ -163,8 +163,11 @@ export enum CastColumnTypeEnum {
 	CHLOROPHYLL = "chlorophyll",
 	PRESSURE = "pressure",
 	DATE = "date",
-	LATITUDE = "latitude",
-	LONGITUDE = "longitude",
+	LAT = "lat",
+	LON = "lon",
+	Z = "z",
+	ALKALINITY = "alkalinity",
+	PLANKTON = "plankton",
 }
 
 export enum ObservedLevelFlagEnum {
