@@ -43,27 +43,32 @@ export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
 
 // Handle date strings on the format YYYYMMDD
 export const convertStringToDate = (dateString: string): Date => {
-	let date;
+	const dateComponents: Array<number> = [];
 
-	if (dateString.length < 4) {
-		throw new Error("Unknown date format");
+	// parse year
+	if (dateString.length >= 4) {
+		dateComponents.push(parseInt(dateString.slice(0, 4), 10));
 	}
-	try {
-		if (dateString.length === 4) {
-			// only year
-			date = new Date(dateString);
-		} else if (dateString.length < 8) {
-			date = new Date(parseInt(dateString.slice(0, 4), 10), parseInt(dateString.slice(5, 6), 10) - 1);
-		} else {
-			date = new Date(
-				parseInt(dateString.slice(0, 4), 10),
-				// the date string contains months that start on 01, while Date have months that start on 0
-				parseInt(dateString.slice(5, 6), 10) - 1,
-				parseInt(dateString.slice(7, 8), 10),
-			);
-		}
-	} catch (e) {
-		throw new Error("Unknown date format " + e);
+
+	// parse month
+	if (dateString.length >= 6) {
+		dateComponents.push(parseInt(dateString.slice(5, 6), 10) - 1);
+	}
+
+	// parse day
+	if (dateString.length >= 8) {
+		dateComponents.push(parseInt(dateString.slice(7, 8), 10));
+	}
+
+	// ensure date components were parsed correctly
+	if (dateComponents.filter(isNaN).length > 0) {
+		throw new Error(`Failed to parse "${dateString}" into a valid date`);
+	}
+
+	// create new date and validate
+	const date = new Date(...(dateComponents as [number, number, number]));
+	if (isNaN(date.getTime())) {
+		throw new Error(`Failed to parse "${dateString}" into a valid date`);
 	}
 
 	return date;
