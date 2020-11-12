@@ -44,7 +44,7 @@ export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
 // Handle date strings on the format YYYYMMDD
 export const convertStringToDate = (dateString: string): Date => {
 	const dateComponents: Array<number> = [];
-
+	dateString = dateString.replace(/-/g, "");
 	// parse year
 	if (dateString.length >= 4) {
 		dateComponents.push(parseInt(dateString.slice(0, 4), 10));
