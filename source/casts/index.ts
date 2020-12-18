@@ -1,11 +1,21 @@
 import { Sequences } from "../utils/sequences";
-import { mapCoordinateToIndex, getColumnsFromEnum } from "./utils";
+import { mapCoordinateToIndex, getColumnsFromEnum, convertStringToDate } from "./utils";
 import { boundingBoxToPolygon, throttleActions } from "../utils/geoUtils";
 import { Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
-import { ICastFilter, CastColumnType, ICast, ICastRow, ICastRowValue, Provider } from "../types/types";
+import { ICastFilter, CastColumnTypeEnum, ICast, ICastRow, ICastRowValue, ProviderEnum } from "../types/types";
 import { Files } from "../utils/files";
 import { MarineRegions } from "../marineRegions";
+
+enum CastLevelEnum {
+	_0 = 0,
+	_1 = 1,
+	_2 = 2,
+	_3 = 3,
+}
+
+type ValueOf<T> = T[keyof T] & number;
+type ValidZoomLevelsT = ValueOf<CastLevelEnum>;
 
 /**
  * Casts class. Responsible for handling the three levels of casts.
@@ -45,10 +55,10 @@ export class Casts {
 		let end;
 
 		// Default level, used if there is no time filter.
-		let level = 0;
+		let level = CastLevelEnum._0;
 		let years = [];
 		if (filter.year || filter.time) {
-			level = 1;
+			level = CastLevelEnum._1;
 			years = this.getYears(filter);
 		}
 		if (
@@ -63,21 +73,17 @@ export class Casts {
 		const promises = [];
 		if (years.length > 0) {
 			for (const year of years) {
-				for (const query of this.sequenceQueryBuilder(level, year, filter.provider)) {
+				for (const query of this.sequenceQueryBuilder(level, year, filter.providers)) {
 					promises.push(() => this.getSequenceQueryResult(query, null, start, end, stream));
 				}
 			}
 		} else {
-			for (const query of this.sequenceQueryBuilder(level, undefined, filter.provider)) {
+			for (const query of this.sequenceQueryBuilder(level, undefined, filter.providers)) {
 				promises.push(() => this.getSequenceQueryResult(query, null, start, end, stream));
 			}
 		}
 		const result = await throttleActions(promises, this._concurrency, stream);
-		const all = [];
-		for (const iterator of result) {
-			all.push(...iterator);
-		}
-		return all;
+		return result.flatMap((castCount) => castCount);
 	};
 
 	/**
@@ -100,14 +106,14 @@ export class Casts {
 	 * Get available cast columns
 	 */
 	public getCastColumns = (): Array<string> => {
-		return Object.values(CastColumnType);
+		return Object.values(CastColumnTypeEnum);
 	};
 
 	/**
 	 * Get available data providers
 	 */
 	public getCastProviders = (): Array<string> => {
-		return Object.values(Provider);
+		return Object.values(ProviderEnum);
 	};
 
 	/**
@@ -171,13 +177,8 @@ export class Casts {
 				),
 			);
 		}
-		const all = [];
 		const result = await Promise.all(promises);
-		for (const iterator of result) {
-			const filtered = this.postCastFilter(iterator, filter);
-			all.push(...filtered);
-		}
-		return all;
+		return result.flatMap((iterator) => this.postCastFilter(iterator, filter));
 	};
 
 	/**
@@ -271,9 +272,12 @@ export class Casts {
 	 * Internal methods
 	 */
 
+	private isValidCastLevel = (n: number): n is ValidZoomLevelsT => {
+		return Object.values(CastLevelEnum).includes(n);
+	};
+
 	private getCastRowsFromPolygon = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		const promises = [];
-		const all = [];
 		let casts;
 		try {
 			casts = await this.getCastsFromPolygon(filter);
@@ -288,11 +292,8 @@ export class Casts {
 			);
 		}
 
-		const allResult = await throttleActions(promises, this._concurrency, stream);
-		for (const iterator of allResult) {
-			all.push(...iterator);
-		}
-		return all;
+		const result = await throttleActions(promises, this._concurrency, stream);
+		return result.flatMap((castRows) => castRows);
 	};
 
 	private getCastsFromPolygon = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
@@ -303,7 +304,6 @@ export class Casts {
 			throw new Error("Need a given year or time filter when castId is missing");
 		}
 		const geoBounds = getBounds(filter.geoFilter.polygon);
-		const all = [];
 		geoBounds.maxLat = Math.ceil(geoBounds.maxLat);
 		geoBounds.maxLng = Math.ceil(geoBounds.maxLng);
 		geoBounds.minLat = Math.floor(geoBounds.minLat);
@@ -315,7 +315,7 @@ export class Casts {
 					year: filter.year,
 					geoFilter: { location: { latitude, longitude } },
 					columns: filter.columns,
-					provider: filter.provider,
+					providers: filter.providers,
 				};
 				if (filter.year) {
 					newFilter.year = filter.year;
@@ -326,12 +326,8 @@ export class Casts {
 			}
 		}
 
-		const allResult = await throttleActions(castPromises, this._concurrency, stream);
-
-		for (const iterator of allResult) {
-			all.push(...iterator);
-		}
-		return all;
+		const result = await throttleActions(castPromises, this._concurrency, stream);
+		return result.flatMap((casts) => casts);
 	};
 
 	private filterLocationByPolygon = (row, polygon) => {
@@ -364,12 +360,7 @@ export class Casts {
 		const all = [];
 		for (const cast of casts) {
 			if (filter.time !== undefined) {
-				const castDate = new Date(
-					cast.value.date.slice(0, 4),
-					cast.value.date.slice(5, 6),
-					cast.value.date.slice(7, 8),
-				);
-				if (castDate < filter.time.min || castDate > filter.time.max) {
+				if (cast.time < filter.time.min || cast.time > filter.time.max) {
 					continue;
 				}
 			}
@@ -397,15 +388,15 @@ export class Casts {
 		}
 	};
 
-	private getCastIds = (filter: ICastFilter, level) => {
+	private getCastIds = (filter: ICastFilter, level: CastLevelEnum) => {
 		const ids = [];
-		if (filter.provider && filter.provider.length > 0) {
-			for (const provider of filter.provider) {
-				ids.push(this.constants2().sequence.prefix[level].replace("{provider}", provider));
+		if (filter.providers && filter.providers.length > 0) {
+			for (const provider of filter.providers) {
+				ids.push(this.getSequencePrefix(provider, level));
 			}
 		} else {
-			for (const provider of ["auv", "wod"]) {
-				ids.push(this.constants2().sequence.prefix[level].replace("{provider}", provider));
+			for (const provider of Object.values(ProviderEnum)) {
+				ids.push(this.getSequencePrefix(provider, level));
 			}
 		}
 		return ids;
@@ -487,35 +478,30 @@ export class Casts {
 	private constants = () => {
 		return {
 			sequence: {
-				prefix: { 0: "cast_wod_0", 1: "cast_wod_1", 2: "cast_wod_2", 3: "cast_wod_3" },
 				rowNames: ["Oxygen", "Temperature", "Salinity", "Chlorophyll", "Pressure", "Nitrate", "pH"],
 			},
 		};
 	};
 
-	private constants2 = () => {
-		return {
-			sequence: {
-				prefix: {
-					0: "cast_{provider}_0",
-					1: "cast_{provider}_1",
-					2: "cast_{provider}_2",
-					3: "cast_{provider}_3",
-				},
-				rowNames: ["Oxygen", "Temperature", "Salinity", "Chlorophyll", "Pressure", "Nitrate", "pH"],
-			},
-		};
-	};
-
-	private sequenceQueryBuilder = (level: number, year?: number, provider?: Array<string>) => {
-		const sequenceFilters: Array<SequenceListScope> = [];
-		if (!provider || provider.length === 0) {
-			provider = Object.values(Provider);
+	private getSequencePrefix = (provider: ProviderEnum, level: CastLevelEnum) => {
+		if (!Object.values(ProviderEnum).includes(provider)) {
+			throw new Error("invalid provider");
 		}
-		for (const prov of provider) {
+		if (!this.isValidCastLevel(level)) {
+			throw new Error("invalid level");
+		}
+		return `cast_${provider}_${level}`;
+	};
+
+	private sequenceQueryBuilder = (level: CastLevelEnum, year?: number, providers?: Array<ProviderEnum>) => {
+		const sequenceFilters: Array<SequenceListScope> = [];
+		if (!providers || providers.length === 0) {
+			providers = Object.values(ProviderEnum);
+		}
+		for (const prov of providers) {
 			const sequenceFilter = {
 				filter: {
-					externalIdPrefix: this.constants2().sequence.prefix[level].replace("{provider}", prov),
+					externalIdPrefix: this.getSequencePrefix(prov, level),
 					metadata: {},
 				},
 				limit: 1000,
@@ -605,14 +591,14 @@ export class Casts {
 			const value = this.castValues(item, columnIndex);
 			returnValue.push({
 				location: {
-					lat: parseFloat(value.lat ? value.lat : value.geo_lat),
-					long: parseFloat(value.lon ? value.lon : value.geo_lon),
+					lat: parseFloat(value.lat ?? value.geo_lat),
+					long: parseFloat(value.lon ?? value.geo_lon),
 				},
 				id: sequences[0].id,
 				rowNumber: item.rowNumber,
 				externalId: sequences[0].externalId,
 				value,
-				time: item[columnIndex.date],
+				time: convertStringToDate(item[columnIndex.date]),
 			});
 		}
 		return returnValue;
@@ -633,7 +619,8 @@ export class Casts {
 					lat: parseFloat(sequence.metadata.lat),
 					long: parseFloat(sequence.metadata.lon),
 				},
-				time: parseInt(sequence.metadata.date, 10),
+				time: convertStringToDate(sequence.metadata.date),
+
 				metadata: {},
 			};
 			for (const item of Object.keys(sequence.metadata)) {
