@@ -1,5 +1,8 @@
+**[Ocean Data Platform JavaScript SDK](README.md)**
 
-#  Ocean Data Platform JavaScript SDK
+> Globals
+
+# Ocean Data Platform JavaScript SDK
 
 ## Index
 
@@ -8,6 +11,7 @@
 * [CastColumnType](enums/castcolumntype.md)
 * [CastType](enums/casttype.md)
 * [ObservedLevelFlag](enums/observedlevelflag.md)
+* [Provider](enums/provider.md)
 * [StandardLevelFlag](enums/standardlevelflag.md)
 * [TimeSeriesType](enums/timeseriestype.md)
 * [Unit](enums/unit.md)
@@ -45,6 +49,3 @@
 * [ITimeFilter](interfaces/itimefilter.md)
 * [ITimeSeries](interfaces/itimeseries.md)
 * [ITimeSeriesFilter](interfaces/itimeseriesfilter.md)
-
----
-

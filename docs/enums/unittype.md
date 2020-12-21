@@ -1,4 +1,6 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [UnitType](../enums/unittype.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / UnitType
 
 # Enumeration: UnitType
 
@@ -8,17 +10,10 @@
 
 * [CELSIUS](unittype.md#celsius)
 
----
-
 ## Enumeration members
 
-<a id="celsius"></a>
+### CELSIUS
 
-###  CELSIUS
+•  **CELSIUS**:  = "celsius"
 
-**CELSIUS**:  = "celsius"
-
-*Defined in [types/types.ts:149](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L149)*
-
-___
-
+*Defined in [source/types/types.ts:149](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L149)*

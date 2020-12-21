@@ -1,12 +1,14 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IDatapointFilter](../interfaces/idatapointfilter.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IDatapointFilter
 
 # Interface: IDatapointFilter
 
 ## Hierarchy
 
-**IDatapointFilter**
+* **IDatapointFilter**
 
-↳  [ITimeSeriesFilter](itimeseriesfilter.md)
+  ↳ [ITimeSeriesFilter](itimeseriesfilter.md)
 
 ## Index
 
@@ -17,44 +19,34 @@
 * [limit](idatapointfilter.md#limit)
 * [time](idatapointfilter.md#time)
 
----
-
 ## Properties
 
-<a id="aggregation"></a>
+### aggregation
 
-### `<Optional>` aggregation
+• `Optional` **aggregation**: [IAggregation](iaggregation.md)
 
-**● aggregation**: *[IAggregation](iaggregation.md)*
-
-*Defined in [types/types.ts:255](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L255)*
-
-___
-<a id="latestvalue"></a>
-
-### `<Optional>` latestValue
-
-**● latestValue**: *`boolean`*
-
-*Defined in [types/types.ts:257](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L257)*
-
-___
-<a id="limit"></a>
-
-### `<Optional>` limit
-
-**● limit**: *`number`*
-
-*Defined in [types/types.ts:256](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L256)*
-
-___
-<a id="time"></a>
-
-### `<Optional>` time
-
-**● time**: *[ITimeFilter](itimefilter.md)*
-
-*Defined in [types/types.ts:254](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L254)*
+*Defined in [source/types/types.ts:261](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L261)*
 
 ___
 
+### latestValue
+
+• `Optional` **latestValue**: boolean
+
+*Defined in [source/types/types.ts:263](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L263)*
+
+___
+
+### limit
+
+• `Optional` **limit**: number
+
+*Defined in [source/types/types.ts:262](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L262)*
+
+___
+
+### time
+
+• `Optional` **time**: [ITimeFilter](itimefilter.md)
+
+*Defined in [source/types/types.ts:260](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L260)*

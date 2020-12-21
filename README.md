@@ -47,9 +47,7 @@ import { ODPClient, ICastFilter } from "odp-sdk";
 
 async function quickstart() {
 	const odp = new ODPClient({ appId: "YOUR APPLICATION NAME" });
-	odp.loginWithOAuth({
-		project: "odp",
-	});
+	odp.loginWithOAuth();
 	const filter: ICastFilter = {
 		year: 2018,
 	};
@@ -66,7 +64,6 @@ const { ODPClient, ICastFilter } = require("odp-sdk");
 async function quickstart() {
 	const client = new ODPClient({ appId: "YOUR APPLICATION NAME" });
 	client.loginWithApiKey({
-		project: "odp",
 		apiKey: "YOUR_SECRET_API_KEY",
 	});
 
@@ -106,7 +103,7 @@ The library follow [Semantic Versioning](https://semver.org/).
 
 ## Contributing
 
-Contributions welcome! See the [code of conduct](./CODE_OF_CONDUCT.md).
+Contributions welcome! See [more details](./CONTRIBUTING.md) and the [code of conduct](./CODE_OF_CONDUCT.md).
 
 ## Release
 

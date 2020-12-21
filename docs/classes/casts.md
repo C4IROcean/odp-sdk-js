@@ -1,10 +1,24 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [Casts](../classes/casts.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / Casts
 
 # Class: Casts
 
+Casts class. Responsible for handling the three levels of casts.
+
+Level 0 contains an overview of all 1x1 grid cast count across all years and is useful
+for for getting a globe (or large area) overview.
+
+Level 1 contains an overview of all 1x1 grid cast count for a specific year/years and is useful
+for for getting a globe (or large area) overview.
+
+Level 2 contains a list of all casts for a given 1x1 grid with some metadata
+
+Level 3 contains the raw data for a given cast
+
 ## Hierarchy
 
-**Casts**
+* **Casts**
 
 ## Index
 
@@ -16,6 +30,7 @@
 
 * [getCastColumns](casts.md#getcastcolumns)
 * [getCastMetadata](casts.md#getcastmetadata)
+* [getCastProviders](casts.md#getcastproviders)
 * [getCastRows](casts.md#getcastrows)
 * [getCastSourceFileUrl](casts.md#getcastsourcefileurl)
 * [getCastUnits](casts.md#getcastunits)
@@ -23,149 +38,159 @@
 * [getCasts](casts.md#getcasts)
 * [getCastsCount](casts.md#getcastscount)
 
----
-
 ## Constructors
 
-<a id="constructor"></a>
+### constructor
 
-###  constructor
+\+ **new Casts**(`sequences`: Sequences): [Casts](casts.md)
 
-⊕ **new Casts**(sequences: *`Sequences`*): [Casts](casts.md)
+*Defined in [source/casts/index.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L28)*
 
-*Defined in [casts/index.ts:25](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L25)*
+#### Parameters:
 
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| sequences | `Sequences` |
+Name | Type |
+------ | ------ |
+`sequences` | Sequences |
 
 **Returns:** [Casts](casts.md)
 
-___
-
 ## Methods
 
-<a id="getcastcolumns"></a>
+### getCastColumns
 
-###  getCastColumns
+▸ **getCastColumns**(): Array\<string>
 
-▸ **getCastColumns**(): `any`[]
+*Defined in [source/casts/index.ts:102](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L102)*
 
-*Defined in [casts/index.ts:82](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L82)*
+Get available cast columns
 
-**Returns:** `any`[]
-
-___
-<a id="getcastmetadata"></a>
-
-###  getCastMetadata
-
-▸ **getCastMetadata**(filter: *[ICastFilter](../interfaces/icastfilter.md)*): `Promise`<[ICast](../interfaces/icast.md)[]>
-
-*Defined in [casts/index.ts:141](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L141)*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| filter | [ICastFilter](../interfaces/icastfilter.md) |
-
-**Returns:** `Promise`<[ICast](../interfaces/icast.md)[]>
-
-___
-<a id="getcastrows"></a>
-
-###  getCastRows
-
-▸ **getCastRows**(filter: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
-
-*Defined in [casts/index.ts:162](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L162)*
-
-**Parameters:**
-
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| filter | [ICastFilter](../interfaces/icastfilter.md) |  cast filter object |
-| `Optional` stream | `any` |  Optional stream |
-
-**Returns:** `Promise`<`any`[]>
-
-___
-<a id="getcastsourcefileurl"></a>
-
-###  getCastSourceFileUrl
-
-▸ **getCastSourceFileUrl**(filter: *[ICastFilter](../interfaces/icastfilter.md)*): `Promise`<`any`>
-
-*Defined in [casts/index.ts:188](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L188)*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| filter | [ICastFilter](../interfaces/icastfilter.md) |
-
-**Returns:** `Promise`<`any`>
-
-___
-<a id="getcastunits"></a>
-
-###  getCastUnits
-
-▸ **getCastUnits**(): `never`
-
-*Defined in [casts/index.ts:89](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L89)*
-
-**Returns:** `never`
-
-___
-<a id="getcastyears"></a>
-
-###  getCastYears
-
-▸ **getCastYears**(): `Promise`<`any`>
-
-*Defined in [casts/index.ts:65](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L65)*
-
-**Returns:** `Promise`<`any`>
-
-___
-<a id="getcasts"></a>
-
-###  getCasts
-
-▸ **getCasts**(filter: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
-
-*Defined in [casts/index.ts:99](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L99)*
-
-**Parameters:**
-
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| filter | [ICastFilter](../interfaces/icastfilter.md) |  cast filter object |
-| `Optional` stream | `any` |  optional stream |
-
-**Returns:** `Promise`<`any`[]>
-
-___
-<a id="getcastscount"></a>
-
-###  getCastsCount
-
-▸ **getCastsCount**(filter?: *[ICastFilter](../interfaces/icastfilter.md)*, stream?: *`any`*): `Promise`<`any`[]>
-
-*Defined in [casts/index.ts:41](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/casts/index.ts#L41)*
-
-**Parameters:**
-
-| Name | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| `Default value` filter | [ICastFilter](../interfaces/icastfilter.md) |  {} |  cast filter object |
-| `Optional` stream | `any` | - |  optional stream<br><br> |
-
-**Returns:** `Promise`<`any`[]>
+**Returns:** Array\<string>
 
 ___
 
+### getCastMetadata
+
+▸ **getCastMetadata**(`castId`: string): Promise\<Array\<[ICast](../interfaces/icast.md)>>
+
+*Defined in [source/casts/index.ts:187](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L187)*
+
+Get metadata for a given castId
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`castId` | string | id for a given cast  |
+
+**Returns:** Promise\<Array\<[ICast](../interfaces/icast.md)>>
+
+___
+
+### getCastProviders
+
+▸ **getCastProviders**(): Array\<string>
+
+*Defined in [source/casts/index.ts:109](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L109)*
+
+Get available data providers
+
+**Returns:** Array\<string>
+
+___
+
+### getCastRows
+
+▸ **getCastRows**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
+
+*Defined in [source/casts/index.ts:209](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L209)*
+
+Get content for a given cast. Level 3
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`filter` | [ICastFilter](../interfaces/icastfilter.md) | cast filter object |
+`stream?` | any | Optional stream  |
+
+**Returns:** Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
+
+___
+
+### getCastSourceFileUrl
+
+▸ **getCastSourceFileUrl**(`castId`: string): Promise\<any>
+
+*Defined in [source/casts/index.ts:239](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L239)*
+
+Get the source file of the given cast
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`castId` | string | id of a cast  |
+
+**Returns:** Promise\<any>
+
+___
+
+### getCastUnits
+
+▸ **getCastUnits**(): never
+
+*Defined in [source/casts/index.ts:116](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L116)*
+
+Get available cast units (not implemented)
+
+**Returns:** never
+
+___
+
+### getCastYears
+
+▸ **getCastYears**(): Promise\<Array\<string>>
+
+*Defined in [source/casts/index.ts:86](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L86)*
+
+Get years that are available
+
+**Returns:** Promise\<Array\<string>>
+
+___
+
+### getCasts
+
+▸ **getCasts**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
+
+*Defined in [source/casts/index.ts:126](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L126)*
+
+Get casts and metadata for a given area. Level 2
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`filter` | [ICastFilter](../interfaces/icastfilter.md) | cast filter object |
+`stream?` | any | optional stream  |
+
+**Returns:** Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
+
+___
+
+### getCastsCount
+
+▸ **getCastsCount**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
+
+*Defined in [source/casts/index.ts:43](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L43)*
+
+Get a cast count for the globe or a specific location. Level 1/0
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`filter` | [ICastFilter](../interfaces/icastfilter.md) | {} | cast filter object |
+`stream?` | any | - | optional stream   |
+
+**Returns:** Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>

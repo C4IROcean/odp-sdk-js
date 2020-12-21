@@ -30,7 +30,6 @@ const { ODPClient } = require("odp-sdk");
 async function quickstart() {
 	const odp = new ODPClient({ appId: "odp_test" });
 	odp.loginWithApiKey({
-		project: "odp",
 		apiKey: "YOUR_API_KEY",
 	});
 	let years;

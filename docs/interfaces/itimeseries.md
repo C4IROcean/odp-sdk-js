@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [ITimeSeries](../interfaces/itimeseries.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / ITimeSeries
 
 # Interface: ITimeSeries
 
 ## Hierarchy
 
-**ITimeSeries**
+* **ITimeSeries**
 
 ## Index
 
@@ -20,91 +22,83 @@
 * [type](itimeseries.md#type)
 * [unit](itimeseries.md#unit)
 
----
-
 ## Properties
 
-<a id="assetid"></a>
+### assetId
 
-###  assetId
+•  **assetId**: number
 
-**● assetId**: *`number`*
-
-*Defined in [types/types.ts:10](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L10)*
-
-___
-<a id="datapoints"></a>
-
-###  dataPoints
-
-**● dataPoints**: *`Array`<`GetAggregateDatapoint`> \| `Array`<`GetStringDatapoint`> \| `Array`<`GetDoubleDatapoint`>*
-
-*Defined in [types/types.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L19)*
-
-___
-<a id="externalid"></a>
-
-###  externalId
-
-**● externalId**: *`string`*
-
-*Defined in [types/types.ts:9](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L9)*
-
-___
-<a id="firsttimestamp"></a>
-
-###  firstTimestamp
-
-**● firstTimestamp**: *`Date`*
-
-*Defined in [types/types.ts:18](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L18)*
-
-___
-<a id="id"></a>
-
-###  id
-
-**● id**: *`number`*
-
-*Defined in [types/types.ts:8](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L8)*
-
-___
-<a id="lasttimestamp"></a>
-
-###  lastTimestamp
-
-**● lastTimestamp**: *`Date`*
-
-*Defined in [types/types.ts:17](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L17)*
-
-___
-<a id="location"></a>
-
-###  location
-
-**● location**: *`object`*
-
-*Defined in [types/types.ts:11](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L11)*
-
-#### Type declaration
-
-___
-<a id="type"></a>
-
-###  type
-
-**● type**: *[TimeSeriesType](../enums/timeseriestype.md)*
-
-*Defined in [types/types.ts:6](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L6)*
-
-___
-<a id="unit"></a>
-
-###  unit
-
-**● unit**: *[UnitType](../enums/unittype.md)*
-
-*Defined in [types/types.ts:7](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L7)*
+*Defined in [source/types/types.ts:10](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L10)*
 
 ___
 
+### dataPoints
+
+•  **dataPoints**: Array\<GetAggregateDatapoint> \| Array\<GetStringDatapoint> \| Array\<GetDoubleDatapoint>
+
+*Defined in [source/types/types.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L19)*
+
+___
+
+### externalId
+
+•  **externalId**: string
+
+*Defined in [source/types/types.ts:9](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L9)*
+
+___
+
+### firstTimestamp
+
+•  **firstTimestamp**: Date
+
+*Defined in [source/types/types.ts:18](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L18)*
+
+___
+
+### id
+
+•  **id**: number
+
+*Defined in [source/types/types.ts:8](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L8)*
+
+___
+
+### lastTimestamp
+
+•  **lastTimestamp**: Date
+
+*Defined in [source/types/types.ts:17](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L17)*
+
+___
+
+### location
+
+•  **location**: { depth: number ; lat: number ; long: number ; zoomLevel: number  }
+
+*Defined in [source/types/types.ts:11](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L11)*
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`depth` | number |
+`lat` | number |
+`long` | number |
+`zoomLevel` | number |
+
+___
+
+### type
+
+•  **type**: [TimeSeriesType](../enums/timeseriestype.md)
+
+*Defined in [source/types/types.ts:6](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L6)*
+
+___
+
+### unit
+
+•  **unit**: [UnitType](../enums/unittype.md)
+
+*Defined in [source/types/types.ts:7](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L7)*

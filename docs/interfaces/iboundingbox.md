@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IBoundingBox](../interfaces/iboundingbox.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IBoundingBox
 
 # Interface: IBoundingBox
 
 ## Hierarchy
 
-**IBoundingBox**
+* **IBoundingBox**
 
 ## Index
 
@@ -13,26 +15,18 @@
 * [bottomLeft](iboundingbox.md#bottomleft)
 * [topRight](iboundingbox.md#topright)
 
----
-
 ## Properties
 
-<a id="bottomleft"></a>
+### bottomLeft
 
-###  bottomLeft
+•  **bottomLeft**: [IGeoLocation](igeolocation.md)
 
-**● bottomLeft**: *[IGeoLocation](igeolocation.md)*
-
-*Defined in [types/types.ts:222](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L222)*
-
-___
-<a id="topright"></a>
-
-###  topRight
-
-**● topRight**: *[IGeoLocation](igeolocation.md)*
-
-*Defined in [types/types.ts:223](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L223)*
+*Defined in [source/types/types.ts:228](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L228)*
 
 ___
 
+### topRight
+
+•  **topRight**: [IGeoLocation](igeolocation.md)
+
+*Defined in [source/types/types.ts:229](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L229)*

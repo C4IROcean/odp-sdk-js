@@ -1,9 +1,13 @@
-import { IGeoLocation, CastColumnType } from "../..";
+import { IGeoLocation, CastColumnTypeEnum } from "../..";
 
 const start = 1;
 
+/**
+ * Returns cartesian grid coordinates, given index and resolution
+ * @param index
+ * @param resolution resolution, defaults to 1
+ */
 export const indexToGridCoordinate = (index, resolution = 1) => {
-	// returns cartesian grid coordinates, given index and resolution
 	const lat_range = resolution * 180;
 	const x_loc = Math.floor((index - start) / lat_range + start);
 	const y_loc = ((index - start) % lat_range) + start;
@@ -36,6 +40,39 @@ export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
 	const latitude = -90 + (location.y - 0.5) / resolution;
 	return { longitude, latitude };
 };
+
+// Handle date strings on the format YYYYMMDD
+export const convertStringToDate = (dateString: string): Date => {
+	const dateComponents: Array<number> = [];
+	dateString = dateString.replace(/-/g, "");
+	// parse year
+	if (dateString.length >= 4) {
+		dateComponents.push(parseInt(dateString.slice(0, 4), 10));
+	}
+
+	// parse month
+	if (dateString.length >= 6) {
+		dateComponents.push(parseInt(dateString.slice(5, 6), 10) - 1);
+	}
+
+	// parse day
+	if (dateString.length >= 8) {
+		dateComponents.push(parseInt(dateString.slice(7, 8), 10));
+	}
+
+	// ensure date components were parsed correctly
+	if (dateComponents.filter(isNaN).length > 0) {
+		throw new Error(`Failed to parse "${dateString}" into a valid date`);
+	}
+
+	// create new date and validate
+	const date = new Date(...(dateComponents as [number, number, number]));
+	if (isNaN(date.getTime())) {
+		throw new Error(`Failed to parse "${dateString}" into a valid date`);
+	}
+
+	return date;
+};
 /*
 export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	// ***needs verification***
@@ -65,38 +102,46 @@ export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	return [boxCoords, boxIndexes];
 };
 */
-export const getColumnsFromEnum = (cols: Array<CastColumnType>, available) => {
-	const columns = ["date", "lat", "lon", "Latitude", "Longitude", "z"];
+export const getColumnsFromEnum = (cols: Array<CastColumnTypeEnum>, available) => {
+	const columns = ["date", "lat", "lon", "z"];
 
 	for (const col of cols) {
-		if (col === CastColumnType.NITRATE && available.includes("Nitrate")) {
+		if (col === CastColumnTypeEnum.NITRATE && available.includes("Nitrate")) {
 			columns.push("Nitrate");
 			columns.push("Nitrate_WODflag");
 			columns.push("Nitrate_origflag");
-		} else if (col === CastColumnType.TEMPERATURE && available.includes("Temperature")) {
+		} else if (col === CastColumnTypeEnum.TEMPERATURE && available.includes("Temperature")) {
 			columns.push("Temperature");
 			columns.push("Temperature_WODflag");
 			columns.push("Temperature_origflag");
-		} else if (col === CastColumnType.OXYGEN && available.includes("Oxygen")) {
+		} else if (col === CastColumnTypeEnum.OXYGEN && available.includes("Oxygen")) {
 			columns.push("Oxygen");
 			columns.push("Oxygen_WODflag");
 			columns.push("Oxygen_origflag");
-		} else if (col === CastColumnType.SALINITY && available.includes("Salinity")) {
+		} else if (col === CastColumnTypeEnum.SALINITY && available.includes("Salinity")) {
 			columns.push("Salinity");
 			columns.push("Salinity_WODflag");
 			columns.push("Salinity_origflag");
-		} else if (col === CastColumnType.CHLOROPHYLL && available.includes("Chlorophyll")) {
+		} else if (col === CastColumnTypeEnum.CHLOROPHYLL && available.includes("Chlorophyll")) {
 			columns.push("Chlorophyll");
 			columns.push("Chlorophyll_WODflag");
 			columns.push("Chlorophyll_origflag");
-		} else if (col === CastColumnType.PRESSURE && available.includes("Pressure")) {
+		} else if (col === CastColumnTypeEnum.PRESSURE && available.includes("Pressure")) {
 			columns.push("Pressure");
 			columns.push("Pressure_WODflag");
 			columns.push("Pressure_origflag");
-		} else if (col === CastColumnType.PRESSURE && available.includes("pH")) {
+		} else if (col === CastColumnTypeEnum.PRESSURE && available.includes("pH")) {
 			columns.push("pH");
 			columns.push("pH_WODflag");
 			columns.push("pH_origflag");
+		} else if (col === CastColumnTypeEnum.ALKALINITY && available.includes("Alkalinity")) {
+			columns.push("Alkalinity");
+			columns.push("Alkalinity_WODflag");
+			columns.push("Alkalinity_origflag");
+		} else if (col === CastColumnTypeEnum.PRESSURE && available.includes("plankton")) {
+			columns.push("plankton");
+			columns.push("plankton_WODflag");
+			columns.push("plankton_origflag");
 		}
 	}
 	return columns;

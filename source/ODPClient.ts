@@ -16,7 +16,7 @@ export interface IProject {
 	/**
 	 * Cognite project to login into
 	 */
-	project: string;
+	project?: string;
 }
 
 export interface IApiKeyLoginOptions extends IProject {
@@ -64,21 +64,32 @@ export default class ODPClient {
 		return this._client;
 	}
 	public loginWithApiKey = (options: IApiKeyLoginOptions) => {
-		this._client.loginWithApiKey(options);
+		if (!options.project) {
+			options.project = "odp";
+		}
+		this._client.loginWithApiKey(options as any);
 	};
 
-	public loginWithOAuth = (options: any) => {
-		this._client.loginWithOAuth(options);
+	public loginWithOAuth = (options?: IOAuthLoginOptions) => {
+		if (!options) {
+			options = {};
+		}
+		if (!options.project) {
+			options.project = "odp";
+		}
+		this._client.loginWithOAuth(options as any);
 	};
 
 	public authenticate = () => {
 		return this._client.authenticate();
 	};
+
 	/*
 	public get timeSeries() {
 		return this._timeSeries;
 	}
-*/
+	*/
+
 	public get sequences() {
 		return this._sequences;
 	}

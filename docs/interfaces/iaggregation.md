@@ -1,10 +1,12 @@
-[Ocean Data Platform JavaScript SDK](../README.md) > [IAggregation](../interfaces/iaggregation.md)
+**[Ocean Data Platform JavaScript SDK](../README.md)**
+
+> [Globals](../README.md) / IAggregation
 
 # Interface: IAggregation
 
 ## Hierarchy
 
-**IAggregation**
+* **IAggregation**
 
 ## Index
 
@@ -13,26 +15,18 @@
 * [aggregationFunctions](iaggregation.md#aggregationfunctions)
 * [granularity](iaggregation.md#granularity)
 
----
-
 ## Properties
 
-<a id="aggregationfunctions"></a>
+### aggregationFunctions
 
-###  aggregationFunctions
+•  **aggregationFunctions**: Array\<Aggregate>
 
-**● aggregationFunctions**: *`Array`<`Aggregate`>*
-
-*Defined in [types/types.ts:242](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L242)*
-
-___
-<a id="granularity"></a>
-
-###  granularity
-
-**● granularity**: *`string`*
-
-*Defined in [types/types.ts:243](https://github.com/C4IROcean/ODP-sdk-js/blob/7cb7662/source/types/types.ts#L243)*
+*Defined in [source/types/types.ts:248](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L248)*
 
 ___
 
+### granularity
+
+•  **granularity**: string
+
+*Defined in [source/types/types.ts:249](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L249)*
