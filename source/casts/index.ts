@@ -37,7 +37,7 @@ export class Casts {
 	private _sequences: Sequences;
 	private _marineRegions: MarineRegions;
 
-	constructor(sequences: Sequences) {
+	public constructor(sequences: Sequences) {
 		this._files = sequences.client.files;
 		this._marineRegions = sequences.client.marineRegions;
 		this._sequences = sequences;
@@ -105,16 +105,16 @@ export class Casts {
 	/**
 	 * Get available cast columns
 	 */
-	public getCastColumns = (): Array<string> => {
+	public getCastColumns(): Array<string> {
 		return Object.values(CastColumnTypeEnum);
-	};
+	}
 
 	/**
 	 * Get available data providers
 	 */
-	public getCastProviders = (): Array<string> => {
+	public getCastProviders(): Array<string> {
 		return Object.values(ProviderEnum);
-	};
+	}
 
 	/**
 	 * Get available cast units (not implemented)
@@ -183,6 +183,7 @@ export class Casts {
 
 	/**
 	 * Get metadata for a given castId
+	 *
 	 * @param castId id for a given cast
 	 */
 	public getCastMetadata = async (castId: string): Promise<Array<ICast>> => {
@@ -235,6 +236,7 @@ export class Casts {
 
 	/**
 	 * Get the source file of the given cast
+	 *
 	 * @param castId id of a cast
 	 */
 	public getCastSourceFileUrl = async (castId: string) => {
@@ -272,9 +274,9 @@ export class Casts {
 	 * Internal methods
 	 */
 
-	private isValidCastLevel = (n: number): n is ValidZoomLevelsT => {
+	private isValidCastLevel(n: number): n is ValidZoomLevelsT {
 		return Object.values(CastLevelEnum).includes(n);
-	};
+	}
 
 	private getCastRowsFromPolygon = async (filter: ICastFilter, stream?): Promise<Array<ICastRow>> => {
 		const promises = [];
@@ -286,9 +288,9 @@ export class Casts {
 		}
 		for (const cast of casts) {
 			promises.push(() =>
-				this.getCastRows({ castId: cast.value.extId, columns: filter.columns }, stream).then((rows) => {
-					return this.postRowFilter(rows, filter);
-				}),
+				this.getCastRows({ castId: cast.value.extId, columns: filter.columns }, stream).then((rows) =>
+					this.postRowFilter(rows, filter),
+				),
 			);
 		}
 
@@ -416,13 +418,9 @@ export class Casts {
 		sequences.sort((a, b) => (a.metadata.date > b.metadata.date ? 1 : b.metadata.date > a.metadata.date ? -1 : 0));
 
 		if (!columns) {
-			columns = sequences[0].columns.map((col) => {
-				return col.externalId;
-			});
+			columns = sequences[0].columns.map((col) => col.externalId);
 		} else {
-			const availableColumns = sequences[0].columns.map((col) => {
-				return col.externalId;
-			});
+			const availableColumns = sequences[0].columns.map((col) => col.externalId);
 
 			columns = getColumnsFromEnum(columns, availableColumns);
 		}
@@ -475,13 +473,11 @@ export class Casts {
 		return throttleActions(promises, this._concurrency);
 	};
 
-	private constants = () => {
-		return {
-			sequence: {
-				rowNames: ["Oxygen", "Temperature", "Salinity", "Chlorophyll", "Pressure", "Nitrate", "pH"],
-			},
-		};
-	};
+	private constants = () => ({
+		sequence: {
+			rowNames: ["Oxygen", "Temperature", "Salinity", "Chlorophyll", "Pressure", "Nitrate", "pH"],
+		},
+	});
 
 	private getSequencePrefix = (provider: ProviderEnum, level: CastLevelEnum) => {
 		if (!Object.values(ProviderEnum).includes(provider)) {

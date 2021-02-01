@@ -32,7 +32,7 @@ export class TimeSeries {
 	private _client: ODPClient;
 	private _temperature: Temperature;
 
-	constructor(client: ODPClient) {
+	public constructor(client: ODPClient) {
 		this._client = client;
 		this.init();
 	}
@@ -96,7 +96,7 @@ export class TimeSeries {
 
 		for (let rowIndex = 0; rowIndex < allRows[0].items.length; rowIndex++) {
 			const dataPoints = [];
-			// tslint:disable-next-line: prefer-for-of
+			// eslint-disable-next-line @typescript-eslint/prefer-for-of
 			for (let allRowIndex = 0; allRowIndex < allRows.length; allRowIndex++) {
 				dataPoints.push({
 					timestamp: allRows[allRowIndex].items[rowIndex][columnIndex.time],
@@ -207,17 +207,13 @@ export class TimeSeries {
 		return sequenceFilter;
 	};
 
-	public stringToIdExternal = (ids: Array<string>): Array<IdEither> => {
-		return ids.map((id) => {
-			return { externalId: id };
-		});
-	};
+	public stringToIdExternal(ids: Array<string>): Array<IdEither> {
+		return ids.map((id) => ({ externalId: id }));
+	}
 
-	public numberToIdInternal = (ids: Array<number>): Array<IdEither> => {
-		return ids.map((id) => {
-			return { id };
-		});
-	};
+	public numberToIdInternal(ids: Array<number>): Array<IdEither> {
+		return ids.map((id) => ({ id }));
+	}
 
 	/**
 	 * Build a Cognite datapoint filter from filter
@@ -258,9 +254,9 @@ export class TimeSeries {
 		return datapointLatestFilter;
 	};
 
-	public getSequenceColumns = () => {
+	public getSequenceColumns() {
 		return ["time", "lat", "long", "depth"];
-	};
+	}
 
 	private depthExpander = (depthFilter: INumberFilter) => {
 		const depths = [];
@@ -340,10 +336,9 @@ export class TimeSeries {
 		const a = Math.pow(10, decimals);
 		return num + 1 / a;
 	};
-	private defaultGranularity = () => {
-		// Set up some auto-magic to choose a fitting granularity
-		return "24h";
-	};
+
+	// Set up some auto-magic to choose a fitting granularity
+	private defaultGranularity = () => "24h";
 
 	private getZoomDecimals = (zoomLevel: number) => {
 		if (zoomLevel < 6) {
