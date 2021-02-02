@@ -45,15 +45,15 @@ The SDK is written in native typescript, so no extra types needs to be defined.
 Get temperatures for a given provider
 
 ```js
-import { ODPClient, ICastFilter } from "odp-sdk";
+import { ODPClient } from "odp-sdk";
 
 async function quickstart() {
-	const odp = new ODPClient({ appId: "YOUR APPLICATION NAME" });
-	odp.loginWithOAuth();
-	const filter: ICastFilter = {
+	const client = new ODPClient({ appId: "YOUR APPLICATION NAME" });
+	client.loginWithOAuth();
+
+	const casts = await client.casts.getCastsCount({
 		year: 2018,
-	};
-	const casts = await odp.casts.getCastCount(filter);
+	});
 }
 quickstart();
 ```
@@ -61,7 +61,7 @@ quickstart();
 ### Backend
 
 ```js
-const { ODPClient, ICastFilter } = require("odp-sdk");
+const { ODPClient } = require("odp-sdk");
 
 async function quickstart() {
 	const client = new ODPClient({ appId: "YOUR APPLICATION NAME" });
@@ -69,10 +69,9 @@ async function quickstart() {
 		apiKey: "YOUR_SECRET_API_KEY",
 	});
 
-	const filter: ICastFilter = {
+	const casts = await client.casts.getCastsCount({
 		year: 2018,
-	};
-	const casts = await odp.casts.getCastCount(filter);
+	});
 }
 quickstart();
 ```
