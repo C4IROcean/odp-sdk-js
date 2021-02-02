@@ -9,7 +9,7 @@
 		"build:ci": "npm run lint && tsc --sourceMap false",
 		"docs": "typedoc --options typedoc.js --tsconfig tsconfig.json ./source",
 		"lint": "npm run eslint",
-		"eslint": "eslint . --ext .ts,.d.ts",
+		"eslint": "eslint source/ tests/ integration_tests/ --ext .ts,.d.ts",
 		"format-code": "prettier package.json index.ts \"source/**/*.ts\" --write",
 		"test": "jest",
 		"compile": "tsc"

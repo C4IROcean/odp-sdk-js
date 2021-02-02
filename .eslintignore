@@ -5,6 +5,4 @@ dist
 # don't lint nyc coverage output
 coverage
 
-tests/
-integration_tests/
 samples/
