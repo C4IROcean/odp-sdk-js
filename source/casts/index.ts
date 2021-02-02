@@ -225,24 +225,24 @@ export class Casts {
 	 *
 	 * @param castId id of a cast
 	 */
-	public getCastSourceFileUrl = async (castId: string) => {
+	public getCastSourceFileUrl = async (
+		castId: string,
+	): Promise<Array<FileLink & ExternalId & { castId: string }>> => {
 		if (!castId) {
 			throw new Error("Need a castId");
 		}
 		const sequences = await this.getCastMetadata(castId);
-		const extIds = sequences.map((sequence) => sequence.metadata?.CDF_extIdFile);
-		const fileUrls = (await this._files.getFileUrl(extIds)) as Array<FileLink & ExternalId>;
+		const fileIdToSequenceMap = new Map(sequences.map((sequence) => [sequence.metadata?.CDF_extIdFile, sequence]));
+		const extFileIds = Array.from(fileIdToSequenceMap.keys());
+		const fileUrls = (await this._files.getFileUrl(extFileIds)) as Array<FileLink & ExternalId>;
 
-		for (const fileUrl of fileUrls) {
-			for (const sequence of sequences) {
-				if (fileUrl.externalId === sequence.metadata.CDF_extIdFile) {
-					// @ts-ignore:disable-next-line
-					fileUrl.castId = sequence.externalId;
-					break;
-				}
-			}
-		}
-		return fileUrls;
+		return fileUrls.map((fileUrl) => {
+			const sequence = fileIdToSequenceMap.get(fileUrl.externalId);
+			return {
+				...fileUrl,
+				castId: sequence.externalId,
+			};
+		});
 	};
 
 	/**
