@@ -12,13 +12,15 @@ The SDK supports authentication through api-keys (_for server-side applications_
 
 ## Installation
 
-Install the package with yarn:
+Install the package with yarn or npm:
 
-    $ yarn add odp-sdk
+```sh
+# Install with yarn:
+yarn add odp-sdk
 
-or npm
-
-    $ npm install odp-sdk --save
+# Install with NPM:
+npm install odp-sdk --save
+```
 
 ## Usage
 
@@ -90,7 +92,7 @@ quickstart();
 
 Run all tests:
 
-```bash
+```sh
 $ yarn
 $ yarn test
 ```

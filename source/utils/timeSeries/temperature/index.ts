@@ -16,13 +16,14 @@ export class Temperature {
 	 * @constructor
 	 * @param timeSeries
 	 */
-	constructor(timeSeries: TimeSeries) {
+	public constructor(timeSeries: TimeSeries) {
 		this._client = timeSeries.client;
 		this._timeSeries = timeSeries;
 	}
 
 	/**
 	 * Get temperature datapoints from timelines that matches the provided filter. Returns a list of ITimeSeries
+	 *
 	 * @param filter
 	 */
 	public getAll = async (filter: ITimeSeriesFilter, stream?: Readable): Promise<Array<ITimeSeries>> => {
@@ -47,6 +48,7 @@ export class Temperature {
 
 	/**
 	 * Get the latest temperature for timelines that matches the provided filter. Returns a list of ITimeSeries
+	 *
 	 * @param filter
 	 */
 	public getLatest = async (filter: ITimeSeriesFilter, stream?: Readable): Promise<Array<ITimeSeries>> => {
@@ -138,9 +140,7 @@ export class Temperature {
 		}
 
 		try {
-			const ids = sequences.map((s) => {
-				return s.assetId;
-			});
+			const ids = sequences.map((s) => s.assetId);
 			if (ids.length > 0 && ids[0] !== undefined) {
 				assets = await this._client.cognite.assets.retrieve(
 					this._timeSeries.numberToIdInternal([...new Set(ids)]),

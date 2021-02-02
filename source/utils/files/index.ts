@@ -2,7 +2,7 @@ import { ODPClient } from "../..";
 
 export class Files {
 	private _client: ODPClient;
-	constructor(client: ODPClient) {
+	public constructor(client: ODPClient) {
 		this._client = client;
 	}
 	public get client() {
