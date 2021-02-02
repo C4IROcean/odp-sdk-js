@@ -26,7 +26,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@cognite/sdk": "^2.33.0",
+		"@cognite/sdk": "3.3.2",
 		"cd": "^0.3.3",
 		"geolib": "^3.3.1",
 		"lodash": "^4.17.20",
