@@ -10,7 +10,7 @@ export const throttleActions = (listOfCallableActions, limit, stream?) => {
 	// (mostly) single-threaded, so only one completion handler will call at a
 	// given time. Because we return doNextAction, the Promise chain continues as
 	// long as there's an action left in the list.
-	function doNextAction() {
+	const doNextAction = () => {
 		if (i < listOfCallableActions.length) {
 			// Save the current value of i, so we can put the result in the right place
 			const actionIndex = i++;
@@ -27,7 +27,7 @@ export const throttleActions = (listOfCallableActions, limit, stream?) => {
 				})
 				.then(doNextAction);
 		}
-	}
+	};
 
 	// Now start up the original <limit> number of promises.
 	// i advances in calls to doNextAction.
@@ -44,8 +44,8 @@ export const throttleActions = (listOfCallableActions, limit, stream?) => {
 	});
 };
 
-export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> => {
-	return new Promise((resolve, reject) => {
+export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> =>
+	new Promise((resolve, reject) => {
 		const url = `https://marineregions.org/mrgid/${mrgid}`;
 		https
 			.get(url, (res) => {
@@ -67,26 +67,21 @@ export const getMRGIDBoundingBox = (mrgid: number): Promise<IBoundingBox> => {
 					}
 				});
 			})
-			.on("error", (error) => {
-				return reject(error);
-			});
+			.on("error", (error) => reject(error));
 	});
-};
 
 // Convert a bounding box to polygon
-export const boundingBoxToPolygon = (bb: IBoundingBox): Array<IGeoLocation> => {
-	return [
-		{ latitude: bb.bottomLeft.latitude, longitude: bb.bottomLeft.longitude },
-		{ latitude: bb.topRight.latitude, longitude: bb.bottomLeft.longitude },
-		{ latitude: bb.topRight.latitude, longitude: bb.topRight.longitude },
-		{ latitude: bb.bottomLeft.latitude, longitude: bb.topRight.longitude },
-		{ latitude: bb.bottomLeft.latitude, longitude: bb.bottomLeft.longitude },
-	];
-};
+export const boundingBoxToPolygon = (bb: IBoundingBox): Array<IGeoLocation> => [
+	{ latitude: bb.bottomLeft.latitude, longitude: bb.bottomLeft.longitude },
+	{ latitude: bb.topRight.latitude, longitude: bb.bottomLeft.longitude },
+	{ latitude: bb.topRight.latitude, longitude: bb.topRight.longitude },
+	{ latitude: bb.bottomLeft.latitude, longitude: bb.topRight.longitude },
+	{ latitude: bb.bottomLeft.latitude, longitude: bb.bottomLeft.longitude },
+];
 
 export const getMRGIDPolygon = (mrgid: number): Promise<Array<IGeoLocation>> => {
 	throw new Error("Not implemented");
-	// tslint:disable: max-line-length
+	/* eslint-disable max-len */
 	/*
 	return new Promise((resolve, reject) => {
 		const url = `https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=1.0.0&request=GetFeature&typeNames=eez&cql_filter=mrgid=${mrgid}&outputFormat=application/json`;

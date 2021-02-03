@@ -4,6 +4,7 @@ const start = 1;
 
 /**
  * Returns cartesian grid coordinates, given index and resolution
+ *
  * @param index
  * @param resolution resolution, defaults to 1
  */
@@ -14,10 +15,8 @@ export const indexToGridCoordinate = (index, resolution = 1) => {
 	return { x: x_loc, y: y_loc };
 };
 
-export const gridCoordinateToIndex = (x, y, resolution = 1): number => {
-	// returns index of specific grid-coordinate, given x and y coordinates
-	return ((x - start) * 180) / resolution + y;
-};
+// returns index of specific grid-coordinate, given x and y coordinates
+export const gridCoordinateToIndex = (x, y, resolution = 1): number => ((x - start) * 180) / resolution + y;
 
 export const mapCoordinateToIndex = (location: IGeoLocation, resolution = 1): number => {
 	// returns index of specific grid-coordinate, given lon lat

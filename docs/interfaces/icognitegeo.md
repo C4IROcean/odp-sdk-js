@@ -26,4 +26,4 @@
 
 • `Optional` **geo\_key**: string
 
-*Defined in [source/types/types.ts:290](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L290)*
+*Defined in [source/types/types.ts:285](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L285)*

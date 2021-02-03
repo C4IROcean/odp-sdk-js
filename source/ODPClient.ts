@@ -30,7 +30,8 @@ export interface IOAuthLoginOptions extends IProject {
 	onAuthenticate?: any | "REDIRECT" | "POPUP";
 	onTokens?: any;
 	/**
-	 * Provide optional cached access token to skip the authentication flow (client.authenticate will still override this).
+	 * Provide optional cached access token to skip the authentication flow
+	 * (client.authenticate will still override this).
 	 */
 	accessToken?: string;
 }
@@ -44,10 +45,17 @@ export default class ODPClient {
 	private _casts: Casts;
 	private _marineRegions: MarineRegions;
 
-	constructor(options: IClientOptions) {
+	public constructor(options: IClientOptions) {
 		this._client = new CogniteClient(options);
-		this.init();
+
+		// this._timeSeries = new TimeSeries(this);
+		this._sequences = new Sequences(this);
+		this._assets = new Assets(this);
+		this._files = new Files(this);
+		this._casts = new Casts(this._sequences);
+		this._marineRegions = new MarineRegions(this._sequences);
 	}
+
 	public get temperatures() {
 		return null;
 	}
@@ -80,9 +88,7 @@ export default class ODPClient {
 		this._client.loginWithOAuth(options as any);
 	};
 
-	public authenticate = () => {
-		return this._client.authenticate();
-	};
+	public authenticate = () => this._client.authenticate();
 
 	/*
 	public get timeSeries() {
@@ -106,13 +112,4 @@ export default class ODPClient {
 	public get marineRegions() {
 		return this._marineRegions;
 	}
-
-	private init = () => {
-		// this._timeSeries = new TimeSeries(this);
-		this._sequences = new Sequences(this);
-		this._assets = new Assets(this);
-		this._files = new Files(this);
-		this._casts = new Casts(this._sequences);
-		this._marineRegions = new MarineRegions(this._sequences);
-	};
 }

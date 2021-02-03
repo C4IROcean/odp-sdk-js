@@ -14,6 +14,6 @@
 		"skipLibCheck": true,
 		"esModuleInterop": true
 	},
-	"include": ["source/*", "source/**/*"],
+	"include": ["source/**/*"],
 	"exclude": ["node_modules", "tests", "dist"]
 }

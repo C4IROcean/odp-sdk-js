@@ -12,7 +12,8 @@ export class MarineRegions {
 	private _concurrency = 50;
 	private _sequences: Sequences;
 	private _client: ODPClient;
-	constructor(sequences: Sequences) {
+
+	public constructor(sequences: Sequences) {
 		this._sequences = sequences;
 		this._client = sequences.client;
 	}
@@ -180,7 +181,6 @@ export class MarineRegions {
 
 		return returnValue;
 	};
-	private getSequenceRows = (seqRows) => {
-		return this._sequences.retrieveRows(seqRows);
-	};
+
+	private getSequenceRows = (seqRows) => this._sequences.retrieveRows(seqRows);
 }
