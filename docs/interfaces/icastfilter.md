@@ -16,7 +16,7 @@
 * [columns](icastfilter.md#columns)
 * [depth](icastfilter.md#depth)
 * [geoFilter](icastfilter.md#geofilter)
-* [provider](icastfilter.md#provider)
+* [providers](icastfilter.md#providers)
 * [quality](icastfilter.md#quality)
 * [time](icastfilter.md#time)
 * [year](icastfilter.md#year)
@@ -27,15 +27,15 @@
 
 • `Optional` **castId**: string
 
-*Defined in [source/types/types.ts:280](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L280)*
+*Defined in [source/types/types.ts:275](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L275)*
 
 ___
 
 ### columns
 
-• `Optional` **columns**: Array\<[CastColumnType](../enums/castcolumntype.md)>
+• `Optional` **columns**: Array\<[CastColumnTypeEnum](../enums/castcolumntypeenum.md)>
 
-*Defined in [source/types/types.ts:279](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L279)*
+*Defined in [source/types/types.ts:274](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L274)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 • `Optional` **depth**: [INumberFilter](inumberfilter.md)
 
-*Defined in [source/types/types.ts:278](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L278)*
+*Defined in [source/types/types.ts:273](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L273)*
 
 ___
 
@@ -51,23 +51,23 @@ ___
 
 • `Optional` **geoFilter**: [IGeoFilter](igeofilter.md)
 
-*Defined in [source/types/types.ts:277](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L277)*
+*Defined in [source/types/types.ts:272](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L272)*
 
 ___
 
-### provider
+### providers
 
-• `Optional` **provider**: Array\<[Provider](../enums/provider.md)>
+• `Optional` **providers**: Array\<[ProviderEnum](../enums/providerenum.md)>
 
-*Defined in [source/types/types.ts:281](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L281)*
+*Defined in [source/types/types.ts:276](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L276)*
 
 ___
 
 ### quality
 
-• `Optional` **quality**: [ObservedLevelFlag](../enums/observedlevelflag.md) \| Array\<[ObservedLevelFlag](../enums/observedlevelflag.md)>
+• `Optional` **quality**: [ObservedLevelFlagEnum](../enums/observedlevelflagenum.md) \| Array\<[ObservedLevelFlagEnum](../enums/observedlevelflagenum.md)>
 
-*Defined in [source/types/types.ts:282](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L282)*
+*Defined in [source/types/types.ts:277](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L277)*
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 • `Optional` **time**: [ITimeFilter](itimefilter.md)
 
-*Defined in [source/types/types.ts:275](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L275)*
+*Defined in [source/types/types.ts:270](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L270)*
 
 ___
 
@@ -83,4 +83,4 @@ ___
 
 • `Optional` **year**: number
 
-*Defined in [source/types/types.ts:276](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L276)*
+*Defined in [source/types/types.ts:271](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L271)*

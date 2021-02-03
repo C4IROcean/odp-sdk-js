@@ -8,15 +8,15 @@
 
 ### Enumerations
 
-* [CastColumnType](enums/castcolumntype.md)
-* [CastType](enums/casttype.md)
-* [ObservedLevelFlag](enums/observedlevelflag.md)
-* [Provider](enums/provider.md)
-* [StandardLevelFlag](enums/standardlevelflag.md)
-* [TimeSeriesType](enums/timeseriestype.md)
-* [Unit](enums/unit.md)
-* [UnitType](enums/unittype.md)
-* [ZoomLevel](enums/zoomlevel.md)
+* [CastColumnTypeEnum](enums/castcolumntypeenum.md)
+* [CastLevelEnum](enums/castlevelenum.md)
+* [CastTypeEnum](enums/casttypeenum.md)
+* [ObservedLevelFlagEnum](enums/observedlevelflagenum.md)
+* [ProviderEnum](enums/providerenum.md)
+* [StandardLevelFlagEnum](enums/standardlevelflagenum.md)
+* [TimeSeriesTypeEnum](enums/timeseriestypeenum.md)
+* [UnitEnum](enums/unitenum.md)
+* [UnitTypeEnum](enums/unittypeenum.md)
 
 ### Classes
 
@@ -49,3 +49,30 @@
 * [ITimeFilter](interfaces/itimefilter.md)
 * [ITimeSeries](interfaces/itimeseries.md)
 * [ITimeSeriesFilter](interfaces/itimeseriesfilter.md)
+
+### Type aliases
+
+* [ValidZoomLevelsT](README.md#validzoomlevelst)
+* [ValueOf](README.md#valueof)
+
+## Type aliases
+
+### ValidZoomLevelsT
+
+Ƭ  **ValidZoomLevelsT**: [ValueOf](README.md#valueof)\<[CastLevelEnum](enums/castlevelenum.md)>
+
+*Defined in [source/casts/index.ts:18](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L18)*
+
+___
+
+### ValueOf
+
+Ƭ  **ValueOf**\<T>: T[keyof T] & number
+
+*Defined in [source/casts/index.ts:17](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L17)*
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
