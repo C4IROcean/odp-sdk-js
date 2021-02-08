@@ -10,11 +10,11 @@ import {
 	IGeoFilter,
 } from "../..";
 import {
-	DatapointsGetAggregateDatapoint,
-	DatapointsGetDatapoint,
-	TimeSeriesList,
-	AssetList,
-	TimeSeriesSearchDTO,
+	DatapointAggregates as DatapointsGetAggregateDatapoint,
+	Datapoints as DatapointsGetDatapoint,
+	Timeseries,
+	Asset,
+	TimeseriesSearchFilter,
 	LatestDataPropertyFilter,
 	IdEither,
 	DatapointsMultiQueryBase,
@@ -49,9 +49,9 @@ export class TimeSeries {
 	 * Convert Cognite response to a ODP response
 	 */
 	public convert = (
-		timeseries: TimeSeriesList,
+		timeseries: Array<Timeseries>,
 		dataPoints: Array<DatapointsGetAggregateDatapoint> | Array<DatapointsGetDatapoint>,
-		assets: AssetList,
+		assets: Array<Asset>,
 	): Array<ITimeSeries> => {
 		const returnValue: Array<ITimeSeries> = [];
 		for (const dp of dataPoints) {
@@ -85,7 +85,7 @@ export class TimeSeries {
 	public sequenceConvert = (
 		sequences: Array<Sequence>,
 		allRows,
-		assets: AssetList,
+		assets: Array<Asset>,
 		columns: Array<string>,
 	): Array<ITimeSeries> => {
 		const returnValue: Array<ITimeSeries> = [];
@@ -127,9 +127,9 @@ export class TimeSeries {
 	/**
 	 * Build cognite query from a ODP filter
 	 */
-	public queryBuilder = async (filter: ITimeSeriesFilter): Promise<Array<TimeSeriesSearchDTO>> => {
-		const queries: Array<TimeSeriesSearchDTO> = [];
-		const baseQuery: TimeSeriesSearchDTO = {
+	public queryBuilder = async (filter: ITimeSeriesFilter): Promise<Array<TimeseriesSearchFilter>> => {
+		const queries: Array<TimeseriesSearchFilter> = [];
+		const baseQuery: TimeseriesSearchFilter = {
 			filter: {
 				unit: filter.unit,
 				metadata: {},

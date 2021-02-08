@@ -1,7 +1,13 @@
 import { ODPClient, ITimeSeriesFilter, ITimeSeries, IDatapointFilter } from "../../../";
 import { TimeSeries } from "../";
 import { throttleActions } from "../../geoUtils";
-import { TimeSeriesList, Sequence } from "@cognite/sdk";
+import {
+	Sequence,
+	Timeseries,
+	DatapointsMultiQueryBase,
+	LatestDataPropertyFilter,
+	DatapointsMultiQuery,
+} from "@cognite/sdk";
 import { Readable } from "stream";
 
 /**
@@ -64,52 +70,56 @@ export class Temperature {
 		const dataPointFilter = this._timeSeries.datapointFilter(filter);
 
 		const [assets, dataPoints] = await Promise.all([
-			timeseries.getAllAssets(),
-			timeseries.getAllDatapoints(dataPointFilter),
+			this.getAllAssets(timeseries),
+			this.getAllDatapoints(timeseries, dataPointFilter),
 		]);
 		// Convert Cognite data to ODP data model
 		return this._timeSeries.convert(timeseries, dataPoints, assets);
 	};
 
+	private getAllAssets = async (timeseries: Array<Timeseries>) => {
+		const assetIds = timeseries.flatMap((item) => (item.assetId !== undefined ? { id: item.assetId } : []));
+		return this._client.cognite.assets.retrieve(assetIds);
+	};
+
+	// NOTE: This is practically the same as getAllDatapoints and shouldn't be used
+	private async getDatapoints(timeseries: Timeseries, options?: DatapointsMultiQuery) {
+		return this._client.cognite.datapoints.retrieve({
+			items: [{ ...options, id: timeseries.id }],
+		});
+	}
+
+	private getAllDatapoints = async (timeseries: Array<Timeseries>, options: DatapointsMultiQueryBase = {}) =>
+		this._client.cognite.datapoints.retrieve({
+			items: timeseries.map((ts) => ({ id: ts.id })),
+			...options,
+		});
+
+	// NOTE: this should take Array<Timeseries> so it matches the Array<Item> query of retrieveLatest
+	private getLatestDatapoints = async (timeseries: Timeseries, filter: LatestDataPropertyFilter) =>
+		this._client.cognite.datapoints.retrieveLatest([{ ...filter, id: timeseries.id }]);
+
 	private getSingleTimeSeriesQueryResult = async (query, filter: ITimeSeriesFilter) => {
-		let timeseries: TimeSeriesList;
-		let assets;
-		let dataPoints;
-		try {
-			timeseries = await this._client.cognite.timeseries.search(query);
-		} catch (error) {
-			throw error;
-		}
+		const timeseries = await this._client.cognite.timeseries.search(query);
 		if (timeseries.length === 0) {
 			return [];
 		}
-		// Get assets from Cognite
-		try {
-			assets = await timeseries.getAllAssets();
-		} catch (error) {
-			throw error;
-		}
-		try {
-			const promises = [];
 
+		const assets = await this.getAllAssets(timeseries);
+
+		const fetchDatapoints = () => {
 			if (filter.latestValue) {
 				const datapointFilter = this._timeSeries.datapointLatestFilter(filter);
-				for (const ts of timeseries) {
-					// Get latest datapoint from each time series
-					promises.push(() => ts.getLatestDatapoints(datapointFilter));
-				}
+				// Get latest datapoint from each time series
+				return timeseries.map((ts) => () => this.getLatestDatapoints(ts, datapointFilter));
 			} else {
-				for (const ts of timeseries) {
-					// Get all datapoint from each time series (seems to be a bug in the typings)
-					promises.push(() => ts.getDatapoints(this._timeSeries.datapointFilter(filter) as any));
-				}
+				const datapointFilter = this._timeSeries.datapointFilter(filter);
+				// Get all datapoint from each time series (seems to be a bug in the typings)
+				return timeseries.map((ts) => this.getDatapoints(ts, datapointFilter as any));
 			}
+		};
 
-			const result = await throttleActions(promises, this._concurrency);
-			dataPoints = [].concat(...result);
-		} catch (error) {
-			throw error;
-		}
+		const dataPoints = await throttleActions(fetchDatapoints(), this._concurrency);
 
 		// Convert Cognite data to ODP data model
 		return this._timeSeries.convert(timeseries, dataPoints, assets);
