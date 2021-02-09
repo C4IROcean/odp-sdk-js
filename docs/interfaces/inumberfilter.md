@@ -21,7 +21,7 @@
 
 • `Optional` **max**: number
 
-*Defined in [source/types/types.ts:234](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L234)*
+*Defined in [source/types/types.ts:240](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L240)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • `Optional` **min**: number
 
-*Defined in [source/types/types.ts:233](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L233)*
+*Defined in [source/types/types.ts:239](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L239)*

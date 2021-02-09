@@ -19,7 +19,7 @@
 
 •  **\_0**:  = 0
 
-*Defined in [source/casts/index.ts:11](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L11)*
+*Defined in [source/casts/index.ts:11](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/casts/index.ts#L11)*
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 •  **\_1**:  = 1
 
-*Defined in [source/casts/index.ts:12](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L12)*
+*Defined in [source/casts/index.ts:12](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/casts/index.ts#L12)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 •  **\_2**:  = 2
 
-*Defined in [source/casts/index.ts:13](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L13)*
+*Defined in [source/casts/index.ts:13](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/casts/index.ts#L13)*
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 •  **\_3**:  = 3
 
-*Defined in [source/casts/index.ts:14](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L14)*
+*Defined in [source/casts/index.ts:14](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/casts/index.ts#L14)*

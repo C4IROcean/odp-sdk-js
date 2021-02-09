@@ -61,7 +61,7 @@
 
 Ƭ  **ValidZoomLevelsT**: [ValueOf](README.md#valueof)\<[CastLevelEnum](enums/castlevelenum.md)>
 
-*Defined in [source/casts/index.ts:18](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L18)*
+*Defined in [source/casts/index.ts:18](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/casts/index.ts#L18)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 Ƭ  **ValueOf**\<T>: T[keyof T] & number
 
-*Defined in [source/casts/index.ts:17](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L17)*
+*Defined in [source/casts/index.ts:17](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/casts/index.ts#L17)*
 
 #### Type parameters:
 

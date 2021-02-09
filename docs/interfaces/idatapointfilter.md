@@ -25,7 +25,7 @@
 
 • `Optional` **aggregation**: [IAggregation](iaggregation.md)
 
-*Defined in [source/types/types.ts:256](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L256)*
+*Defined in [source/types/types.ts:262](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L262)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • `Optional` **latestValue**: boolean
 
-*Defined in [source/types/types.ts:258](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L258)*
+*Defined in [source/types/types.ts:264](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L264)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • `Optional` **limit**: number
 
-*Defined in [source/types/types.ts:257](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L257)*
+*Defined in [source/types/types.ts:263](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L263)*
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 • `Optional` **time**: [ITimeFilter](itimefilter.md)
 
-*Defined in [source/types/types.ts:255](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L255)*
+*Defined in [source/types/types.ts:261](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L261)*

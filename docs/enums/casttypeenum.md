@@ -17,7 +17,7 @@
 
 •  **ALL**:  = "all"
 
-*Defined in [source/types/types.ts:144](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L144)*
+*Defined in [source/types/types.ts:150](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L150)*
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 •  **COUNT**:  = "count"
 
-*Defined in [source/types/types.ts:145](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L145)*
+*Defined in [source/types/types.ts:151](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L151)*

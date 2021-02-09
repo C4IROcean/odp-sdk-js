@@ -21,7 +21,7 @@
 
 •  **timestamp**: Date
 
-*Defined in [source/types/types.ts:136](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L136)*
+*Defined in [source/types/types.ts:142](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L142)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **value**: number
 
-*Defined in [source/types/types.ts:135](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L135)*
+*Defined in [source/types/types.ts:141](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L141)*

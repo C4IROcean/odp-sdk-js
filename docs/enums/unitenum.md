@@ -29,7 +29,7 @@
 
 •  **CHLOROPHYLL**:  = "ugram/l"
 
-*Defined in [source/types/types.ts:210](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L210)*
+*Defined in [source/types/types.ts:216](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L216)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 •  **COUNT**:  = ""
 
-*Defined in [source/types/types.ts:201](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L201)*
+*Defined in [source/types/types.ts:207](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L207)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 •  **DEPTH**:  = "m"
 
-*Defined in [source/types/types.ts:202](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L202)*
+*Defined in [source/types/types.ts:208](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L208)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 •  **LATITUDE**:  = "degrees\_north"
 
-*Defined in [source/types/types.ts:212](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L212)*
+*Defined in [source/types/types.ts:218](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L218)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 •  **LONGITUDE**:  = "degrees\_east"
 
-*Defined in [source/types/types.ts:213](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L213)*
+*Defined in [source/types/types.ts:219](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L219)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 •  **NITRATE**:  = "µmol/kg"
 
-*Defined in [source/types/types.ts:207](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L207)*
+*Defined in [source/types/types.ts:213](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L213)*
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 •  **NITRITE**:  = ""
 
-*Defined in [source/types/types.ts:208](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L208)*
+*Defined in [source/types/types.ts:214](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L214)*
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 •  **OXYGEN**:  = "umol/kg"
 
-*Defined in [source/types/types.ts:204](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L204)*
+*Defined in [source/types/types.ts:210](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L210)*
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 •  **PH**:  = ""
 
-*Defined in [source/types/types.ts:209](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L209)*
+*Defined in [source/types/types.ts:215](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L215)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 •  **PHOSPHATE**:  = ""
 
-*Defined in [source/types/types.ts:205](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L205)*
+*Defined in [source/types/types.ts:211](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L211)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 •  **PRESSURE**:  = "dbar"
 
-*Defined in [source/types/types.ts:211](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L211)*
+*Defined in [source/types/types.ts:217](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L217)*
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 •  **SALINITY**:  = ""
 
-*Defined in [source/types/types.ts:203](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L203)*
+*Defined in [source/types/types.ts:209](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L209)*
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 •  **SILICATE**:  = ""
 
-*Defined in [source/types/types.ts:206](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L206)*
+*Defined in [source/types/types.ts:212](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L212)*
 
 ___
 
@@ -133,4 +133,4 @@ ___
 
 •  **TEMPERATURE**:  = "degree\_C"
 
-*Defined in [source/types/types.ts:200](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L200)*
+*Defined in [source/types/types.ts:206](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L206)*
