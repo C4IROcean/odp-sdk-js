@@ -29,7 +29,7 @@ Marine regions class.
 
 \+ **new MarineRegions**(`sequences`: Sequences): [MarineRegions](marineregions.md)
 
-*Defined in [source/marineRegions/index.ts:14](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/marineRegions/index.ts#L14)*
+*Defined in [source/marineRegions/index.ts:14](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/marineRegions/index.ts#L14)*
 
 #### Parameters:
 
@@ -45,7 +45,7 @@ Name | Type |
 
 ▸ **getMarineRegion**(`id`: any): Promise\<[IMarineRegion](../interfaces/imarineregion.md)>
 
-*Defined in [source/marineRegions/index.ts:73](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/marineRegions/index.ts#L73)*
+*Defined in [source/marineRegions/index.ts:74](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/marineRegions/index.ts#L74)*
 
 Get polygons for a given sequence id
 
@@ -63,7 +63,7 @@ ___
 
 ▸ **getMarineRegionByMRGID**(`mrgid`: any): Promise\<[IMarineRegion](../interfaces/imarineregion.md)>
 
-*Defined in [source/marineRegions/index.ts:92](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/marineRegions/index.ts#L92)*
+*Defined in [source/marineRegions/index.ts:93](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/marineRegions/index.ts#L93)*
 
 #### Parameters:
 
@@ -79,7 +79,7 @@ ___
 
 ▸ **getMarineRegions**(`regionTypeId`: any, `polygon`: boolean): Promise\<Array\<[IMarineRegion](../interfaces/imarineregion.md)>>
 
-*Defined in [source/marineRegions/index.ts:27](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/marineRegions/index.ts#L27)*
+*Defined in [source/marineRegions/index.ts:28](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/marineRegions/index.ts#L28)*
 
 Get regions within a given id
 
@@ -98,7 +98,7 @@ ___
 
 ▸ **getRegionTypes**(): Promise\<Array\<[IMarineRegionType](../interfaces/imarineregiontype.md)>>
 
-*Defined in [source/marineRegions/index.ts:58](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/marineRegions/index.ts#L58)*
+*Defined in [source/marineRegions/index.ts:59](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/marineRegions/index.ts#L59)*
 
 Get all available region types
 

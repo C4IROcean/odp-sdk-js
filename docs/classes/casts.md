@@ -44,7 +44,7 @@ Level 3 contains the raw data for a given cast
 
 \+ **new Casts**(`sequences`: Sequences): [Casts](casts.md)
 
-*Defined in [source/casts/index.ts:28](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L28)*
+*Defined in [source/casts/index.ts:38](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L38)*
 
 #### Parameters:
 
@@ -60,7 +60,7 @@ Name | Type |
 
 ▸ **getCastColumns**(): Array\<string>
 
-*Defined in [source/casts/index.ts:102](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L102)*
+*Defined in [source/casts/index.ts:100](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L100)*
 
 Get available cast columns
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **getCastMetadata**(`castId`: string): Promise\<Array\<[ICast](../interfaces/icast.md)>>
 
-*Defined in [source/casts/index.ts:187](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L187)*
+*Defined in [source/casts/index.ts:182](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L182)*
 
 Get metadata for a given castId
 
@@ -90,7 +90,7 @@ ___
 
 ▸ **getCastProviders**(): Array\<string>
 
-*Defined in [source/casts/index.ts:109](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L109)*
+*Defined in [source/casts/index.ts:107](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L107)*
 
 Get available data providers
 
@@ -102,7 +102,7 @@ ___
 
 ▸ **getCastRows**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
 
-*Defined in [source/casts/index.ts:209](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L209)*
+*Defined in [source/casts/index.ts:201](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L201)*
 
 Get content for a given cast. Level 3
 
@@ -119,9 +119,9 @@ ___
 
 ### getCastSourceFileUrl
 
-▸ **getCastSourceFileUrl**(`castId`: string): Promise\<any>
+▸ **getCastSourceFileUrl**(`castId`: string): Promise\<Array\<FileLink & ExternalId & { castId: string  }>>
 
-*Defined in [source/casts/index.ts:239](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L239)*
+*Defined in [source/casts/index.ts:228](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L228)*
 
 Get the source file of the given cast
 
@@ -131,7 +131,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `castId` | string | id of a cast  |
 
-**Returns:** Promise\<any>
+**Returns:** Promise\<Array\<FileLink & ExternalId & { castId: string  }>>
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 ▸ **getCastUnits**(): never
 
-*Defined in [source/casts/index.ts:116](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L116)*
+*Defined in [source/casts/index.ts:114](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L114)*
 
 Get available cast units (not implemented)
 
@@ -151,7 +151,7 @@ ___
 
 ▸ **getCastYears**(): Promise\<Array\<string>>
 
-*Defined in [source/casts/index.ts:86](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L86)*
+*Defined in [source/casts/index.ts:89](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L89)*
 
 Get years that are available
 
@@ -163,7 +163,7 @@ ___
 
 ▸ **getCasts**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
 
-*Defined in [source/casts/index.ts:126](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L126)*
+*Defined in [source/casts/index.ts:124](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L124)*
 
 Get casts and metadata for a given area. Level 2
 
@@ -182,7 +182,7 @@ ___
 
 ▸ **getCastsCount**(`filter`: [ICastFilter](../interfaces/icastfilter.md), `stream?`: any): Promise\<Array\<[ICastRow](../interfaces/icastrow.md)>>
 
-*Defined in [source/casts/index.ts:43](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/casts/index.ts#L43)*
+*Defined in [source/casts/index.ts:53](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/casts/index.ts#L53)*
 
 Get a cast count for the globe or a specific location. Level 1/0
 

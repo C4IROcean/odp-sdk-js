@@ -20,4 +20,4 @@
 
 • `Optional` **externalId**: Array\<string>
 
-*Defined in [source/types/types.ts:286](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/types/types.ts#L286)*
+*Defined in [source/types/types.ts:281](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L281)*

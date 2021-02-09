@@ -1,3 +1,22 @@
+## 0.8.0 (2020-10-13)
+
+### Features
+
+-   Added support time filter of casts
+-   Added support for new data providers (NTNU auv and Sintef auv)
+
+### Bug fixes and improvements
+
+-   Minor bugfixes
+-   Update packages to fix security issues
+-   Update to typings
+
+## 0.7.1 (2020-10-05)
+
+### Bug fixes and improvements
+
+-   Minor bugfixes
+
 ## 0.7.0 (2020-09-22)
 
 ### Features

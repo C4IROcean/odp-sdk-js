@@ -24,6 +24,6 @@
 
 • `Optional` **project**: string
 
-*Defined in [source/ODPClient.ts:19](https://github.com/C4IROcean/ODP-sdk-js/blob/4e3fa10/source/ODPClient.ts#L19)*
+*Defined in [source/ODPClient.ts:19](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/ODPClient.ts#L19)*
 
 Cognite project to login into
