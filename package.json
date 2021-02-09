@@ -1,7 +1,7 @@
 {
 	"name": "odp-sdk",
 	"version": "0.7.1",
-	"description": "Javascript client library for ODP SDK, built on top of Cognite SDK",
+	"description": "Ocean Data Platform JavaScript SDK",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
@@ -16,6 +16,8 @@
 	},
 	"keywords": [
 		"ODP",
+		"Ocean Data",
+		"Ocean Data Platform",
 		"sdk",
 		"typescript"
 	],
@@ -27,10 +29,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@cognite/sdk": "3.3.2",
-		"cd": "^0.3.3",
-		"geolib": "^3.3.1",
-		"lodash": "^4.17.20",
-		"ndjson": "^1.5.0"
+		"geolib": "^3.3.1"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.9.1",
