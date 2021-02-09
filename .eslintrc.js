@@ -20,10 +20,17 @@ module.exports = {
 	extends: ["prettier", "prettier/@typescript-eslint"],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
-		project: "tsconfig.json",
 		sourceType: "module",
 	},
 	plugins: ["eslint-plugin-import", "eslint-plugin-jsdoc", "eslint-plugin-prefer-arrow", "@typescript-eslint"],
+	overrides: [
+		{
+			files: ["source/**.ts"],
+			parserOptions: {
+				project: "./tsconfig.json",
+			},
+		},
+	],
 	rules: {
 		"@typescript-eslint/adjacent-overload-signatures": "error",
 		"@typescript-eslint/array-type": [
@@ -59,7 +66,6 @@ module.exports = {
 		],
 		"@typescript-eslint/consistent-type-assertions": "error",
 		"@typescript-eslint/consistent-type-definitions": "error",
-		"@typescript-eslint/dot-notation": "error",
 		"@typescript-eslint/explicit-member-accessibility": [
 			"error",
 			{
@@ -186,7 +192,6 @@ module.exports = {
 		"no-var": "error",
 		"object-shorthand": "error",
 		"one-var": ["error", "never"],
-		"prefer-arrow/prefer-arrow-functions": "error",
 		"prefer-const": "error",
 		"prefer-object-spread": "error",
 		"quote-props": ["error", "as-needed"],

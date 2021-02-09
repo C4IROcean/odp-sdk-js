@@ -22,7 +22,7 @@
 
 • `Optional` **flags**: any
 
-*Defined in [source/types/types.ts:130](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L130)*
+*Defined in [source/types/types.ts:136](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L136)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 •  **unit**: any
 
-*Defined in [source/types/types.ts:131](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L131)*
+*Defined in [source/types/types.ts:137](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L137)*
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 •  **value**: number
 
-*Defined in [source/types/types.ts:129](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L129)*
+*Defined in [source/types/types.ts:135](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L135)*

@@ -1,4 +1,10 @@
-import { Aggregate, GetAggregateDatapoint, GetStringDatapoint, GetDoubleDatapoint, Metadata } from "@cognite/sdk";
+import {
+	Aggregate,
+	DatapointAggregate as GetAggregateDatapoint,
+	StringDatapoint as GetStringDatapoint,
+	DoubleDatapoint as GetDoubleDatapoint,
+	Metadata,
+} from "@cognite/sdk";
 
 export { GetStringDatapoint, GetDoubleDatapoint, GetAggregateDatapoint };
 

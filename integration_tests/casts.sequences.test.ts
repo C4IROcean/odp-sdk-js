@@ -167,9 +167,7 @@ describe("sequences", () => {
 
 	test("get source file url for cast", async () => {
 		const url = await odp.casts.getCastSourceFileUrl("cast_wod_3_2018_32370_19272466");
-		expect(url[0].downloadUrl).toMatch(
-			/^https:\/\/api.cognitedata.com\/api\/v1\/files\/gcs_proxy\/cognite-storage/,
-		);
+		expect(url[0].downloadUrl).toMatch(/^https:\/\/api.cognitedata.com\/api\/v1\/files\//);
 		expect(url[0].castId).toBe("cast_wod_3_2018_32370_19272466");
 	});
 

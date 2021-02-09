@@ -1,5 +1,4 @@
 import { CogniteClient } from "@cognite/sdk";
-// import { TimeSeries } from "./utils/timeSeries";
 import { Assets } from "./utils/assets";
 import { Sequences } from "./utils/sequences";
 import { Files } from "./utils/files";

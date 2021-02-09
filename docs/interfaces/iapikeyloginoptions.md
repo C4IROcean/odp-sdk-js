@@ -23,7 +23,7 @@
 
 •  **apiKey**: string
 
-*Defined in [source/ODPClient.ts:26](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/ODPClient.ts#L26)*
+*Defined in [source/ODPClient.ts:25](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/ODPClient.ts#L25)*
 
 A Cognite issued api-key
 
@@ -35,6 +35,6 @@ ___
 
 *Inherited from [IProject](iproject.md).[project](iproject.md#project)*
 
-*Defined in [source/ODPClient.ts:19](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/ODPClient.ts#L19)*
+*Defined in [source/ODPClient.ts:18](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/ODPClient.ts#L18)*
 
 Cognite project to login into
