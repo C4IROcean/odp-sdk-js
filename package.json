@@ -1,7 +1,7 @@
 {
 	"name": "odp-sdk",
-	"version": "0.8.1",
-	"description": "Javascript client library for ODP SDK, built on top of Cognite SDK",
+	"version": "0.9.1",
+	"description": "Ocean Data Platform JavaScript SDK",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
@@ -9,13 +9,15 @@
 		"build:ci": "npm run lint && tsc --sourceMap false",
 		"docs": "typedoc --options typedoc.js --tsconfig tsconfig.json ./source",
 		"lint": "npm run eslint",
-		"eslint": "eslint . --ext .ts,.d.ts",
+		"eslint": "eslint source/ tests/ integration_tests/ --ext .ts,.d.ts",
 		"format-code": "prettier package.json index.ts \"source/**/*.ts\" --write",
 		"test": "jest",
 		"compile": "tsc"
 	},
 	"keywords": [
 		"ODP",
+		"Ocean Data",
+		"Ocean Data Platform",
 		"sdk",
 		"typescript"
 	],
@@ -26,11 +28,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@cognite/sdk": "^2.33.0",
-		"cd": "^0.3.3",
-		"geolib": "^3.3.1",
-		"lodash": "^4.17.20",
-		"ndjson": "^1.5.0"
+		"@cognite/sdk": "3.3.2",
+		"geolib": "^3.3.1"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.9.1",

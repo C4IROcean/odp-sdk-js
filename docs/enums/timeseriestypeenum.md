@@ -16,4 +16,4 @@
 
 •  **TEMPERATURE**:  = "temperature"
 
-*Defined in [source/types/types.ts:140](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L140)*
+*Defined in [source/types/types.ts:146](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L146)*

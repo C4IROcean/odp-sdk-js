@@ -21,7 +21,7 @@
 
 •  **appId**: string
 
-*Defined in [source/ODPClient.ts:11](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/ODPClient.ts#L11)*
+*Defined in [source/ODPClient.ts:10](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/ODPClient.ts#L10)*
 
 App identifier (ex: 'FileExtractor')
 
@@ -31,4 +31,4 @@ ___
 
 • `Optional` **baseUrl**: string
 
-*Defined in [source/ODPClient.ts:12](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/ODPClient.ts#L12)*
+*Defined in [source/ODPClient.ts:11](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/ODPClient.ts#L11)*

@@ -18,7 +18,7 @@
 
 •  **AUV\_NTNU**:  = "auv\_ntnu"
 
-*Defined in [source/types/types.ts:218](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L218)*
+*Defined in [source/types/types.ts:224](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L224)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 •  **AUV\_SINTEF**:  = "auv\_sintef"
 
-*Defined in [source/types/types.ts:219](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L219)*
+*Defined in [source/types/types.ts:225](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L225)*
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 •  **WOD**:  = "wod"
 
-*Defined in [source/types/types.ts:217](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L217)*
+*Defined in [source/types/types.ts:223](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L223)*

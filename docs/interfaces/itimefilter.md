@@ -21,7 +21,7 @@
 
 •  **max**: Date
 
-*Defined in [source/types/types.ts:239](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L239)*
+*Defined in [source/types/types.ts:245](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L245)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **min**: Date
 
-*Defined in [source/types/types.ts:238](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L238)*
+*Defined in [source/types/types.ts:244](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L244)*

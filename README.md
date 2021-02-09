@@ -5,6 +5,7 @@
 
 [![Build Status](https://dev.azure.com/oceandatafoundation/ODP/_apis/build/status/ODP-JavaScript-SDK-CI?branchName=master)](https://dev.azure.com/oceandatafoundation/ODP/_build/latest?definitionId=10&branchName=master)
 
+**This library is under active development, and the API is unstable until we publish v1.0.0**
 The ODP js library provides convenient access to Ocean Data Platform through the [Cognite API](https://doc.cognitedata.com/dev/) from
 applications written in client- or server-side JavaScript.
 

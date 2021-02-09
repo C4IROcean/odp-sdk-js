@@ -78,35 +78,3 @@ export const boundingBoxToPolygon = (bb: IBoundingBox): Array<IGeoLocation> => [
 	{ latitude: bb.bottomLeft.latitude, longitude: bb.topRight.longitude },
 	{ latitude: bb.bottomLeft.latitude, longitude: bb.bottomLeft.longitude },
 ];
-
-export const getMRGIDPolygon = (mrgid: number): Promise<Array<IGeoLocation>> => {
-	throw new Error("Not implemented");
-	/* eslint-disable max-len */
-	/*
-	return new Promise((resolve, reject) => {
-		const url = `https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=1.0.0&request=GetFeature&typeNames=eez&cql_filter=mrgid=${mrgid}&outputFormat=application/json`;
-		https
-			.get(url, (res) => {
-				let body = "";
-
-				res.on("data", (chunk) => {
-					body += chunk;
-				});
-
-				res.on("end", () => {
-					try {
-						const json = JSON.parse(body);
-						return resolve({
-							bottomLeft: { latitude: json.minLatitude, longitude: json.minLongitude },
-							topRight: { latitude: json.maxLatitude, longitude: json.maxLongitude },
-						});
-					} catch (error) {
-						return reject(error);
-					}
-				});
-			})
-			.on("error", (error) => {
-				return reject(error);
-			});
-	});*/
-};

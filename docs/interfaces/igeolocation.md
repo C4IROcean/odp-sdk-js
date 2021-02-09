@@ -21,7 +21,7 @@
 
 •  **latitude**: number
 
-*Defined in [source/types/types.ts:228](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L228)*
+*Defined in [source/types/types.ts:234](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L234)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **longitude**: number
 
-*Defined in [source/types/types.ts:229](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L229)*
+*Defined in [source/types/types.ts:235](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L235)*

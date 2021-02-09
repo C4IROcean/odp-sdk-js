@@ -21,7 +21,7 @@
 
 •  **bottomLeft**: [IGeoLocation](igeolocation.md)
 
-*Defined in [source/types/types.ts:223](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L223)*
+*Defined in [source/types/types.ts:229](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L229)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **topRight**: [IGeoLocation](igeolocation.md)
 
-*Defined in [source/types/types.ts:224](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L224)*
+*Defined in [source/types/types.ts:230](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L230)*

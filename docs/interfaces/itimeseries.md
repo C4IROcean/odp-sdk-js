@@ -28,7 +28,7 @@
 
 •  **assetId**: number
 
-*Defined in [source/types/types.ts:10](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L10)*
+*Defined in [source/types/types.ts:16](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L16)*
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 •  **dataPoints**: Array\<GetAggregateDatapoint> \| Array\<GetStringDatapoint> \| Array\<GetDoubleDatapoint>
 
-*Defined in [source/types/types.ts:19](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L19)*
+*Defined in [source/types/types.ts:25](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L25)*
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 •  **externalId**: string
 
-*Defined in [source/types/types.ts:9](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L9)*
+*Defined in [source/types/types.ts:15](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L15)*
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 •  **firstTimestamp**: Date
 
-*Defined in [source/types/types.ts:18](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L18)*
+*Defined in [source/types/types.ts:24](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L24)*
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 •  **id**: number
 
-*Defined in [source/types/types.ts:8](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L8)*
+*Defined in [source/types/types.ts:14](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L14)*
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 •  **lastTimestamp**: Date
 
-*Defined in [source/types/types.ts:17](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L17)*
+*Defined in [source/types/types.ts:23](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L23)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 •  **location**: { depth: number ; lat: number ; long: number ; zoomLevel: number  }
 
-*Defined in [source/types/types.ts:11](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L11)*
+*Defined in [source/types/types.ts:17](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L17)*
 
 #### Type declaration:
 
@@ -93,7 +93,7 @@ ___
 
 •  **type**: [TimeSeriesTypeEnum](../enums/timeseriestypeenum.md)
 
-*Defined in [source/types/types.ts:6](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L6)*
+*Defined in [source/types/types.ts:12](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L12)*
 
 ___
 
@@ -101,4 +101,4 @@ ___
 
 •  **unit**: [UnitTypeEnum](../enums/unittypeenum.md)
 
-*Defined in [source/types/types.ts:7](https://github.com/C4IROcean/odp-sdk-js/blob/0e2fd46/source/types/types.ts#L7)*
+*Defined in [source/types/types.ts:13](https://github.com/C4IROcean/odp-sdk-js/blob/c6020fb/source/types/types.ts#L13)*
