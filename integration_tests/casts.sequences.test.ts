@@ -5,29 +5,28 @@ describe("sequences", () => {
 	beforeAll(() => {
 		jest.setTimeout(60000);
 
-		odp = new ODPClient({ appId: "SDKTests" });
-		odp.loginWithApiKey({
-			project: process.env.COGNITE_PROJECT,
-			apiKey: process.env.COGNITE_KEY,
-		});
+		odp = new ODPClient(
+			{
+				appId: "SDKTests",
+				apiKeyMode: true,
+				project: process.env.COGNITE_PROJECT,
+				getToken: () => Promise.resolve(process.env.COGNITE_KEY),
+			},
+			{ clientId: "" },
+		);
 	});
 
 	test("check if we have connection to Cognite", async () => {
 		expect(odp.project).toBe(process.env.COGNITE_PROJECT);
 	});
 
-	test("get cast count", async () => {
-		const count = await odp.casts.getCastsCount();
-		expect(count.length > 3832).toBeTruthy();
-	});
-
 	test("get cast years", async () => {
-		const years = await odp.casts.getCastYears();
-		expect(years.length > 8).toBeTruthy();
+		const years = await odp.unstable.casts.getCastYears();
+		expect(years.length).toBeGreaterThan(8);
 	});
 
 	test("get cast count for a single location", async () => {
-		const count = await odp.casts.getCastsCount({
+		const count = await odp.unstable.casts.getCastsCount({
 			year: 2018,
 			geoFilter: { location: { latitude: 20, longitude: 173 } },
 		});
@@ -35,7 +34,7 @@ describe("sequences", () => {
 	});
 
 	test("get cast count for a single location for multiple years", async () => {
-		const count = await odp.casts.getCastsCount({
+		const count = await odp.unstable.casts.getCastsCount({
 			time: { max: new Date(2018, 0), min: new Date(2015, 0) },
 			geoFilter: { location: { latitude: 20, longitude: 173 } },
 		});
@@ -43,7 +42,7 @@ describe("sequences", () => {
 	});
 
 	test("get a specific cast", async () => {
-		const values = await odp.casts.getCastRows({ castId: "cast_wod_3_2018_63470_18777858" });
+		const values = await odp.unstable.casts.getCastRows({ castId: "cast_wod_3_2018_63470_18777858" });
 		expect(values.length).toBe(115);
 		expect(values[0].value.temperature.value).toBe(25.790000915527344);
 	});
@@ -56,7 +55,7 @@ describe("sequences", () => {
 			{ longitude: 180, latitude: 15 },
 			{ longitude: 170, latitude: 15 },
 		];
-		const values = await odp.casts.getCasts({
+		const values = await odp.unstable.casts.getCasts({
 			year: 2018,
 			geoFilter: { polygon },
 			columns: [CastColumnTypeEnum.TEMPERATURE],
@@ -65,7 +64,7 @@ describe("sequences", () => {
 	});
 
 	test("get casts level 2", async () => {
-		const values = await odp.casts.getCasts({
+		const values = await odp.unstable.casts.getCasts({
 			year: 2018,
 			geoFilter: { location: { latitude: 32, longitude: 131 } },
 		});
@@ -73,7 +72,7 @@ describe("sequences", () => {
 	});
 
 	test("get casts with time filter", async () => {
-		const values = await odp.casts.getCasts({
+		const values = await odp.unstable.casts.getCasts({
 			time: { max: new Date(2018, 4, 1), min: new Date(2016, 6, 10) },
 			geoFilter: { location: { latitude: 32, longitude: 131 } },
 		});
@@ -88,7 +87,7 @@ describe("sequences", () => {
 			{ longitude: 180, latitude: 15 },
 			{ longitude: 170, latitude: 15 },
 		];
-		const values = await odp.casts.getCasts({
+		const values = await odp.unstable.casts.getCasts({
 			time: { max: new Date(2018, 4, 1), min: new Date(2016, 6, 10) },
 			geoFilter: { polygon },
 			columns: [CastColumnTypeEnum.TEMPERATURE],
@@ -97,7 +96,7 @@ describe("sequences", () => {
 	});
 
 	test("get casts count for ntnu", async () => {
-		const values = await odp.casts.getCastsCount({
+		const values = await odp.unstable.casts.getCastsCount({
 			year: 2019,
 			providers: [ProviderEnum.AUV_NTNU],
 		});
@@ -105,7 +104,7 @@ describe("sequences", () => {
 	});
 
 	test("get casts count for sintef", async () => {
-		const values = await odp.casts.getCastsCount({
+		const values = await odp.unstable.casts.getCastsCount({
 			year: 2020,
 			providers: [ProviderEnum.AUV_SINTEF],
 		});
@@ -120,7 +119,7 @@ describe("sequences", () => {
 			{ longitude: 12, latitude: 62 },
 			{ longitude: 9, latitude: 62 },
 		];
-		const values = await odp.casts.getCasts({
+		const values = await odp.unstable.casts.getCasts({
 			year: 2019,
 			geoFilter: { polygon },
 			columns: [CastColumnTypeEnum.TEMPERATURE],
@@ -137,7 +136,7 @@ describe("sequences", () => {
 			{ longitude: 3, latitude: 59 },
 			{ longitude: -1, latitude: 59 },
 		];
-		const values = await odp.casts.getCastRows({
+		const values = await odp.unstable.casts.getCastRows({
 			year: 2018,
 			geoFilter: { polygon },
 			columns: [CastColumnTypeEnum.TEMPERATURE],
@@ -155,7 +154,7 @@ describe("sequences", () => {
 			{ longitude: 3, latitude: 59 },
 			{ longitude: -1, latitude: 59 },
 		];
-		const values = await odp.casts.getCastRows({
+		const values = await odp.unstable.casts.getCastRows({
 			time: { min: new Date(2018, 6, 1), max: new Date(2018, 10, 10) },
 			geoFilter: { polygon },
 			columns: [CastColumnTypeEnum.TEMPERATURE, CastColumnTypeEnum.DATE],
@@ -166,7 +165,7 @@ describe("sequences", () => {
 	});
 
 	test("get source file url for cast", async () => {
-		const url = await odp.casts.getCastSourceFileUrl("cast_wod_3_2018_32370_19272466");
+		const url = await odp.unstable.casts.getCastSourceFileUrl("cast_wod_3_2018_32370_19272466");
 		expect(url[0].downloadUrl).toMatch(/^https:\/\/api.cognitedata.com\/api\/v1\/files\//);
 		expect(url[0].castId).toBe("cast_wod_3_2018_32370_19272466");
 	});
@@ -179,7 +178,7 @@ describe("sequences", () => {
 			{ longitude: 2, latitude: 56 },
 			{ longitude: 1.8, latitude: 56 },
 		];
-		const values = await odp.casts.getCastRows({
+		const values = await odp.unstable.casts.getCastRows({
 			year: 2018,
 			geoFilter: { polygon },
 			quality: ObservedLevelFlagEnum.FAILED_GRADIENT_CHECK,
