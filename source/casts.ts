@@ -1,11 +1,11 @@
-import { Sequences } from "../utils/sequences";
-import { mapCoordinateToIndex, getColumnsFromEnum, convertStringToDate } from "./utils";
-import { boundingBoxToPolygon, throttleActions } from "../utils/geoUtils";
 import { ExternalId, FileLink, Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
-import { ICastFilter, CastColumnTypeEnum, ICast, ICastRow, ICastRowValue, ProviderEnum } from "../types/types";
-import { Files } from "../utils/files";
-import { MarineRegions } from "../marineRegions";
+
+import { MarineRegions } from "./marineRegions";
+import { CastColumnTypeEnum, ICast, ICastFilter, ICastRow, ICastRowValue, ProviderEnum } from "./types";
+import { boundingBoxToPolygon, throttleActions } from "./geoUtils";
+import { convertStringToDate, getColumnsFromEnum, mapCoordinateToIndex } from "./castUtils";
+import { ODPClient } from ".";
 
 enum CastLevelEnum {
 	_0 = 0,
@@ -33,14 +33,12 @@ type ValidZoomLevelsT = ValueOf<CastLevelEnum>;
 
 export class Casts {
 	private _concurrency = 50;
-	private _files: Files;
-	private _sequences: Sequences;
+	private odpClient: ODPClient;
 	private _marineRegions: MarineRegions;
 
-	public constructor(sequences: Sequences) {
-		this._files = sequences.client.files;
-		this._marineRegions = sequences.client.marineRegions;
-		this._sequences = sequences;
+	public constructor(client: ODPClient) {
+		this.odpClient = client;
+		this._marineRegions = new MarineRegions(client);
 	}
 
 	/**
@@ -87,7 +85,7 @@ export class Casts {
 	 * Get years that are available
 	 */
 	public getCastYears = async (): Promise<Array<string>> => {
-		const cast = await this._sequences.retrieve([{ externalId: "cast_wod_0" }]);
+		const cast = await this.odpClient.sequences.retrieve([{ externalId: "cast_wod_0" }]);
 		if (cast.length > 0 && cast[0].metadata.cast_years) {
 			return cast[0].metadata.cast_years.split(", ");
 		}
@@ -184,7 +182,7 @@ export class Casts {
 			throw new Error("castId is required");
 		}
 
-		const sequences = await this._sequences.search({ filter: { name: castId } });
+		const sequences = await this.odpClient.sequences.search({ filter: { name: castId } });
 		if (sequences.length === 0) {
 			return null;
 		}
@@ -234,7 +232,9 @@ export class Casts {
 		const sequences = await this.getCastMetadata(castId);
 		const fileIdToSequenceMap = new Map(sequences.map((sequence) => [sequence.metadata?.CDF_extIdFile, sequence]));
 		const extFileIds = Array.from(fileIdToSequenceMap.keys());
-		const fileUrls = (await this._files.getFileUrl(extFileIds)) as Array<FileLink & ExternalId>;
+
+		const externalIds = extFileIds.map((externalId) => ({ externalId }));
+		const fileUrls = (await this.odpClient.files.getDownloadUrls(externalIds)) as Array<FileLink & ExternalId>;
 
 		return fileUrls.map((fileUrl) => {
 			const sequence = fileIdToSequenceMap.get(fileUrl.externalId);
@@ -387,7 +387,7 @@ export class Casts {
 		stream?: any,
 		converter?: any,
 	) => {
-		const sequences = await this._sequences.search(query);
+		const sequences = await this.odpClient.sequences.search(query);
 		if (sequences.length === 0) {
 			return [];
 		}
@@ -443,7 +443,7 @@ export class Casts {
 	private getSequenceRows = (seqRows) => {
 		const promises = [];
 		for (const seq of seqRows) {
-			promises.push(() => this._sequences.retrieveRows(seq));
+			promises.push(() => this.odpClient.sequences.retrieveRows(seq));
 		}
 		return throttleActions(promises, this._concurrency);
 	};

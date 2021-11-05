@@ -33,6 +33,7 @@ module.exports = {
 	],
 	rules: {
 		"@typescript-eslint/adjacent-overload-signatures": "error",
+		"@typescript-eslint/explicit-member-accessibility": "off",
 		"@typescript-eslint/array-type": [
 			"error",
 			{
@@ -72,19 +73,7 @@ module.exports = {
 				accessibility: "explicit",
 			},
 		],
-		"@typescript-eslint/indent": [
-			"error",
-			"tab",
-			{
-				ObjectExpression: "first",
-				FunctionDeclaration: {
-					parameters: "first",
-				},
-				FunctionExpression: {
-					parameters: "first",
-				},
-			},
-		],
+		"@typescript-eslint/indent": "off",
 		"@typescript-eslint/member-delimiter-style": [
 			"error",
 			{
@@ -137,7 +126,7 @@ module.exports = {
 		],
 		"@typescript-eslint/type-annotation-spacing": "error",
 		"@typescript-eslint/unified-signatures": "error",
-		"arrow-body-style": "error",
+		"arrow-body-style": "off",
 		"arrow-parens": ["error", "always"],
 		"brace-style": ["error", "1tbs"],
 		"comma-dangle": ["error", "always-multiline"],
@@ -166,7 +155,7 @@ module.exports = {
 		"no-bitwise": "error",
 		"no-caller": "error",
 		"no-cond-assign": "error",
-		"no-console": "error",
+		"no-console": "off",
 		"no-debugger": "error",
 		"no-duplicate-case": "error",
 		"no-duplicate-imports": "error",
