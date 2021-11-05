@@ -310,3 +310,28 @@ export interface IMarineRegionType {
 	externalId: string;
 	source: string;
 }
+
+export interface IIdTokenClaims {
+	acr: string;
+	at_hash: string;
+	aud: string;
+	auth_time: number;
+	email: string;
+	exp: number;
+	family_name: string;
+	given_name: string;
+	groups: Array<string>;
+	grp: Array<string>;
+	iat: number;
+	idp: string;
+	iss: string;
+	name: string;
+	nbf: number;
+	nonce: string;
+	oid: string;
+	pgrest_role: string;
+	sub: string;
+	tid: string;
+	upn: string;
+	ver: string;
+}
