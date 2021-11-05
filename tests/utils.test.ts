@@ -1,4 +1,4 @@
-import * as sequenceUtils from "../source/casts/utils";
+import * as sequenceUtils from "../source/castUtils";
 import { CastColumnTypeEnum } from "../source";
 
 describe("utils", () => {
