@@ -3,6 +3,7 @@ import { ClientOptions, CogniteClient } from "@cognite/sdk";
 
 import { Auth } from "./auth";
 import { Casts } from "./casts";
+import { IIdTokenClaims } from "./types";
 
 // This client id only allows for certain auth_redirects, ideally you'll have a client id per app.
 // Contact us if this is your use case.
@@ -14,7 +15,15 @@ type OptionalConfig = Partial<Omit<ClientOptions, keyof RequiredConfig | "baseUr
 		baseUrl: "https://api.cognitedata.com" | "https://westeurope-1.cognitedata.com";
 	}>;
 
-type AuthListenersT = (token?: AuthenticationResult) => void;
+interface IAuthTokens {
+	accessToken: string;
+	idToken: string;
+	idTokenClaims: IIdTokenClaims;
+	authority: string;
+	scopes: Array<string>;
+}
+
+type AuthListenersT = (token?: IAuthTokens) => void;
 
 const defaultOptions: Pick<ClientOptions, "project" | "apiKeyMode" | "baseUrl"> = {
 	project: "odp",
@@ -23,7 +32,7 @@ const defaultOptions: Pick<ClientOptions, "project" | "apiKeyMode" | "baseUrl"> 
 };
 
 export default class ODPClient extends CogniteClient {
-	public authToken: AuthenticationResult | undefined = undefined;
+	private authResult: AuthenticationResult | undefined = undefined;
 	private listeners: Array<AuthListenersT> = [];
 
 	private _casts: Casts;
@@ -33,8 +42,8 @@ export default class ODPClient extends CogniteClient {
 		super({
 			...defaultOptions,
 			getToken: async () => {
-				const token = await this.auth.handleRedirectAuthV2();
-				if (this.authToken?.uniqueId !== token?.uniqueId) {
+				const token = await this.auth.handleRedirectAuth();
+				if (this.authResult?.uniqueId !== token?.uniqueId) {
 					this.authStateUpdated(token);
 				}
 
@@ -56,12 +65,41 @@ export default class ODPClient extends CogniteClient {
 		this._casts = new Casts(this);
 	}
 
+	/**
+	 * Get access tokens if they exist.
+	 */
+	public get authTokens(): IAuthTokens | undefined {
+		if (!this.authResult) {
+			return undefined;
+		}
+
+		return {
+			accessToken: this.authResult.accessToken,
+			idToken: this.authResult.idToken,
+			idTokenClaims: this.authResult.idTokenClaims as IIdTokenClaims,
+			authority: this.authResult.authority,
+			scopes: this.authResult.scopes,
+		};
+	}
+
+	/**
+	 * The unstable namespace exposes APIs that we are experimenting with,
+	 * and should never be relied upon in production outside the ODP team.
+	 */
 	public get unstable() {
 		return {
 			casts: this._casts,
 		};
 	}
 
+	/**
+	 * Subscribe to changes in authentication.
+	 * NOTE: Does not trigger on first login, check the authResult attribute
+	 * after resolving `odpSdk.authenticate()`.
+	 *
+	 * @param listenerFn The function that will be called with the auth state
+	 * @returns undefined
+	 */
 	public listenToAuthChanges = (listenerFn: AuthListenersT) => {
 		if (!(typeof listenerFn === "function")) {
 			throw new Error(`Listener function is not of type function, got ${typeof listenerFn}`);
@@ -76,7 +114,7 @@ export default class ODPClient extends CogniteClient {
 	private notifyListeners = () => {
 		for (const listenerFn of this.listeners) {
 			try {
-				listenerFn(this.authToken);
+				listenerFn(this.authTokens);
 			} catch (error) {
 				console.warn("Listener function threw uncaught error", listenerFn);
 			}
@@ -84,7 +122,7 @@ export default class ODPClient extends CogniteClient {
 	};
 
 	private authStateUpdated = (token?: AuthenticationResult) => {
-		this.authToken = token;
+		this.authResult = token;
 		this.notifyListeners();
 	};
 }
