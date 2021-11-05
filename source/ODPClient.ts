@@ -11,7 +11,6 @@ const ODP_SDK_CLIENT_ID = "b2a2d339-e785-4213-a773-8b289abd2199"; // B2C app reg
 type RequiredConfig = Pick<ClientOptions, "appId">;
 type OptionalConfig = Partial<Omit<ClientOptions, keyof RequiredConfig | "baseUrl">> &
 	Partial<{
-		// clientId: string;
 		baseUrl: "https://api.cognitedata.com" | "https://westeurope-1.cognitedata.com";
 	}>;
 
@@ -29,13 +28,6 @@ export default class ODPClient extends CogniteClient {
 
 	private _casts: Casts;
 	private auth: Auth;
-	//  = new Auth(
-	// 	{
-	// 		api: "https://api.cognitedata.com",
-	// 		appClientId: "5c615a6e-62c2-4bca-905e-7bc148a4ade2", // Ocean Data Explorer
-	// 	},
-	// 	{ redirectUri: "https://localhost:3000/oauth_callback" },
-	// );
 
 	public constructor(options: RequiredConfig & OptionalConfig, authConfig: BrowserAuthOptions) {
 		super({
