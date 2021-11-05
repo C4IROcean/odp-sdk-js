@@ -1,7 +1,6 @@
 import { ExternalId, FileLink, Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk";
 import { getBounds, isPointInPolygon } from "geolib";
 
-import { MarineRegions } from "./marineRegions";
 import { CastColumnTypeEnum, ICast, ICastFilter, ICastRow, ICastRowValue, ProviderEnum } from "./types";
 import { boundingBoxToPolygon, throttleActions } from "./geoUtils";
 import { convertStringToDate, getColumnsFromEnum, mapCoordinateToIndex } from "./castUtils";
@@ -34,11 +33,9 @@ type ValidZoomLevelsT = ValueOf<CastLevelEnum>;
 export class Casts {
 	private _concurrency = 50;
 	private odpClient: ODPClient;
-	private _marineRegions: MarineRegions;
 
 	public constructor(client: ODPClient) {
 		this.odpClient = client;
-		this._marineRegions = new MarineRegions(client);
 	}
 
 	/**
@@ -126,7 +123,7 @@ export class Casts {
 
 		// get polygon from mrgid
 		if (filter.geoFilter?.mrgid) {
-			const mr = await this._marineRegions.getMarineRegionByMRGID(filter.geoFilter.mrgid);
+			const mr = await this.odpClient.unstable.marineRegions.getMarineRegionByMRGID(filter.geoFilter.mrgid);
 			filter.geoFilter.polygon = mr.polygon;
 		}
 
