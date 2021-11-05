@@ -1,4 +1,4 @@
-import { IGeoLocation, CastColumnTypeEnum } from "../..";
+import { IGeoLocation, CastColumnTypeEnum } from "./types";
 
 const start = 1;
 

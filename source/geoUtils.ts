@@ -1,5 +1,5 @@
 import * as https from "https";
-import { IBoundingBox, IGeoLocation } from "../../types/types";
+import { IBoundingBox, IGeoLocation } from "./types";
 
 export const throttleActions = (listOfCallableActions, limit, stream?) => {
 	// We'll need to store which is the next promise in the list.
