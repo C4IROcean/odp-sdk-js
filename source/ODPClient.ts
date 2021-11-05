@@ -3,6 +3,7 @@ import { ClientOptions, CogniteClient } from "@cognite/sdk";
 
 import { Auth } from "./auth";
 import { Casts } from "./casts";
+import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
 
 // This client id only allows for certain auth_redirects, ideally you'll have a client id per app.
@@ -36,6 +37,7 @@ export default class ODPClient extends CogniteClient {
 	private listeners: Array<AuthListenersT> = [];
 
 	private _casts: Casts;
+	private _marineRegions: MarineRegions;
 	private auth: Auth;
 
 	public constructor(options: RequiredConfig & OptionalConfig, authConfig: BrowserAuthOptions) {
@@ -63,6 +65,7 @@ export default class ODPClient extends CogniteClient {
 		});
 
 		this._casts = new Casts(this);
+		this._marineRegions = new MarineRegions(this);
 	}
 
 	/**
@@ -89,6 +92,7 @@ export default class ODPClient extends CogniteClient {
 	public get unstable() {
 		return {
 			casts: this._casts,
+			marineRegions: this._marineRegions,
 		};
 	}
 
