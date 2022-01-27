@@ -68,6 +68,10 @@ export default class ODPClient extends CogniteClient {
 		this._marineRegions = new MarineRegions(this);
 	}
 
+	public unauthorizeUser() {
+		return this.auth.logout();
+	}
+
 	/**
 	 * Get access tokens if they exist.
 	 */
