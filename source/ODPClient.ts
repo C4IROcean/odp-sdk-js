@@ -1,10 +1,10 @@
-import { AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser";
-import { ClientOptions, CogniteClient } from "@cognite/sdk";
+import { AuthenticationResult, BrowserAuthOptions } from '@azure/msal-browser';
+import { ClientOptions, CogniteClient } from '@cognite/sdk';
 
-import { Auth } from "./auth";
-import { Casts } from "./casts";
-import { MarineRegions } from "./marineRegions";
-import { IIdTokenClaims } from "./types";
+import { Auth } from './auth';
+import { Casts } from './casts';
+import { MarineRegions } from './marineRegions';
+import { IIdTokenClaims } from './types';
 
 // This client id only allows for certain auth_redirects, ideally you'll have a client id per app.
 // Contact us if this is your use case.
@@ -66,6 +66,10 @@ export default class ODPClient extends CogniteClient {
 
 		this._casts = new Casts(this);
 		this._marineRegions = new MarineRegions(this);
+	}
+
+	public unauthorizeUser() {
+		return this.auth.logout();
 	}
 
 	/**
