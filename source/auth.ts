@@ -1,11 +1,11 @@
 import {
-	AuthenticationResult,
-	BrowserAuthOptions,
-	ILoggerCallback,
-	InteractionRequiredAuthError,
-	LogLevel,
-	PublicClientApplication,
-} from "@azure/msal-browser";
+    AuthenticationResult,
+    BrowserAuthOptions,
+    ILoggerCallback,
+    InteractionRequiredAuthError,
+    LogLevel,
+    PublicClientApplication,
+} from '@azure/msal-browser';
 
 const loggerCallback: ILoggerCallback = (level: LogLevel, message: string, containsPii: boolean): void => {
 	if (containsPii) {
