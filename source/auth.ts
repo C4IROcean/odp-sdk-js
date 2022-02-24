@@ -72,6 +72,10 @@ export class Auth {
 		});
 	}
 
+	public getMsalInstance = () => {
+		return this.msalInstance;
+	};
+
 	public logout = () => {
 		return this.msalInstance.logoutRedirect();
 	};
