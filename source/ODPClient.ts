@@ -72,6 +72,10 @@ export default class ODPClient extends CogniteClient {
 		return this.auth.logout();
 	}
 
+	public getMsalInstance() {
+		return this.auth.getMsalInstance();
+	};
+
 	/**
 	 * Get access tokens if they exist.
 	 */
