@@ -1,10 +1,11 @@
-import { AuthenticationResult, BrowserAuthOptions } from '@azure/msal-browser';
-import { ClientOptions, CogniteClient } from '@cognite/sdk';
+import { AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser";
+import { ClientOptions, CogniteClient } from "@cognite/sdk";
 
-import { Auth } from './auth';
-import { Casts } from './casts';
-import { MarineRegions } from './marineRegions';
-import { IIdTokenClaims } from './types';
+import { Auth } from "./auth";
+import { Casts } from "./casts";
+import DataHubClient from "./DataHubClient";
+import { MarineRegions } from "./marineRegions";
+import { IIdTokenClaims } from "./types";
 
 // This client id only allows for certain auth_redirects, ideally you'll have a client id per app.
 // Contact us if this is your use case.
@@ -39,6 +40,7 @@ export default class ODPClient extends CogniteClient {
 	private _casts: Casts;
 	private _marineRegions: MarineRegions;
 	private auth: Auth;
+	private datahubClient: DataHubClient;
 
 	public constructor(options: RequiredConfig & OptionalConfig, authConfig: BrowserAuthOptions) {
 		super({
@@ -63,9 +65,6 @@ export default class ODPClient extends CogniteClient {
 				"https://oceandataplatform.b2clogin.com/oceandataplatform.onmicrosoft.com/B2C_1A_signup_signin_custom",
 			...authConfig,
 		});
-
-		this._casts = new Casts(this);
-		this._marineRegions = new MarineRegions(this);
 	}
 
 	public unauthorizeUser() {
@@ -74,7 +73,14 @@ export default class ODPClient extends CogniteClient {
 
 	public getMsalInstance() {
 		return this.auth.getMsalInstance();
-	};
+	}
+
+	public getDataHubClient() {
+		if (!this.auth) {
+			throw Error("Datahub client can only be retrieved in authenticated state.");
+		}
+		return this.datahubClient ? this.datahubClient : new DataHubClient({ auth: this.auth });
+	}
 
 	/**
 	 * Get access tokens if they exist.
@@ -99,8 +105,8 @@ export default class ODPClient extends CogniteClient {
 	 */
 	public get unstable() {
 		return {
-			casts: this._casts,
-			marineRegions: this._marineRegions,
+			casts: this._casts ? this._casts : new Casts(this),
+			marineRegions: this._marineRegions ? this._marineRegions : new MarineRegions(this),
 		};
 	}
 
