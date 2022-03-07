@@ -15,7 +15,7 @@ export default class DataHubClient {
 		this._tokenScope = "https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS";
 	}
 
-	public searchFullText = async (type: "DATSET", searchString: string) => {
+	public searchFullText = async (type: "DATASET", searchString: string) => {
 		return this._getToken().then((token) => this._searchFullTextWithAuth(type, searchString, token));
 	};
 
@@ -66,11 +66,10 @@ export default class DataHubClient {
 				`,
 			}),
 		})
-			.then((r) => r.json())
-			.then((data) => data);
+			.then((r) => r.json());
 	};
 
-	private _searchFullTextWithAuth = async (type: "DATSET", searchString: string, token: string) => {
+	private _searchFullTextWithAuth = async (type: "DATASET", searchString: string, token: string) => {
 		return fetch(this._graphQlEndpoint, {
 			method: "POST",
 			headers: {
@@ -99,8 +98,7 @@ export default class DataHubClient {
 			`,
 			}),
 		})
-			.then((r) => r.json())
-			.then((data) => data);
+			.then((r) => r.json());
 	};
 
 	private _autocompleteResultsWithAuth = async (searchString: string, token: string) => {
@@ -121,8 +119,7 @@ export default class DataHubClient {
 			`,
 			}),
 		})
-			.then((r) => r.json())
-			.then((data) => data);
+			.then((r) => r.json());
 	};
 
 	private _getTagsWithUrnWithAuth = async (urn: string, token: string) => {
@@ -149,8 +146,7 @@ export default class DataHubClient {
 			`,
 			}),
 		})
-			.then((r) => r.json())
-			.then((data) => data);
+			.then((r) => r.json());
 	};
 
 	private _getToken = async () => {
