@@ -10,7 +10,7 @@ export interface IDataSourceStyling {
 }
 
 export default class DataSourceStylingClient {
-	public getStylingOfDataSource(dataSourceId: string): IDataSourceStyling | null {
+	public getDataSourceStyling(dataSourceId: string): IDataSourceStyling | null {
 		return this._fetchStyling(dataSourceId);
 	}
 

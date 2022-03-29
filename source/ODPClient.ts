@@ -4,7 +4,7 @@ import { ClientOptions, CogniteClient } from "@cognite/sdk";
 
 import { Auth } from "./auth";
 import { Casts } from "./casts";
-import DataHubClient from "./DataHubClient";
+import DataHubClient, { ISearchResult } from "./DataHubClient";
 import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
 
@@ -41,7 +41,7 @@ export default class ODPClient extends CogniteClient {
 	private _casts: Casts;
 	private _marineRegions: MarineRegions;
 	private auth: Auth;
-	private datahubClient: DataHubClient;
+	private _datahubClient: DataHubClient;
 	private _dataSourceStylingClient: DataSourceStylingClient;
 
 	public constructor(options: RequiredConfig & OptionalConfig, authConfig: BrowserAuthOptions) {
@@ -69,6 +69,7 @@ export default class ODPClient extends CogniteClient {
 		});
 
 		this._dataSourceStylingClient = new DataSourceStylingClient();
+		this._datahubClient = new DataHubClient({ auth: this.auth });
 	}
 
 	/**
@@ -107,15 +108,16 @@ export default class ODPClient extends CogniteClient {
 		return this.auth.getMsalInstance();
 	}
 
-	public getStylingOfDataSource(dataSourceId: string): IDataSourceStyling {
-		return this._dataSourceStylingClient.getStylingOfDataSource(dataSourceId);
+	public getDataSourceStyling(dataSourceId: string): IDataSourceStyling {
+		return this._dataSourceStylingClient.getDataSourceStyling(dataSourceId);
+	}
+
+	public async searchForDataSource(keyword: string): Promise<Array<ISearchResult>> {
+		return this._datahubClient.searchFullText("DATASET", keyword);
 	}
 
 	public getDataHubClient() {
-		if (!this.auth) {
-			throw Error("Datahub client can only be retrieved in authenticated state.");
-		}
-		return this.datahubClient ? this.datahubClient : new DataHubClient({ auth: this.auth });
+		return this._datahubClient;
 	}
 
 	/**
