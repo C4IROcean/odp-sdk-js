@@ -106,36 +106,36 @@ export default class DataHubClient {
 		}).then((r) => r.json());
 	};
 
-	private _searchFullTextWithAuth = async (type: "DATASET", searchString: string, token: string) => {
-		fetch(this._graphQlEndpoint, {
-			method: "POST",
-			headers: {
-				authorization: `Bearer ${token}`,
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-			body: JSON.stringify({
-				query: `
-				{
-					search(input: { type: ${type}, query: "${searchString}", start: 0, count: 10 }) {
-					start
-					count
-					total
-					searchResults {
-						entity {
-						urn
-						type
-						...on Dataset {
-							name
-						}
-						}
-					}
-					}
-				}
-			`,
-			}),
-		}).then((r) => r.json());
-	};
+	// private _searchFullTextWithAuth = async (type: "DATASET", searchString: string, token: string) => {
+	// 	fetch(this._graphQlEndpoint, {
+	// 		method: "POST",
+	// 		headers: {
+	// 			authorization: `Bearer ${token}`,
+	// 			"Content-Type": "application/json",
+	// 			Accept: "application/json",
+	// 		},
+	// 		body: JSON.stringify({
+	// 			query: `
+	// 			{
+	// 				search(input: { type: ${type}, query: "${searchString}", start: 0, count: 10 }) {
+	// 				start
+	// 				count
+	// 				total
+	// 				searchResults {
+	// 					entity {
+	// 					urn
+	// 					type
+	// 					...on Dataset {
+	// 						name
+	// 					}
+	// 					}
+	// 				}
+	// 				}
+	// 			}
+	// 		`,
+	// 		}),
+	// 	}).then((r) => r.json());
+	// };
 
 	private _autocompleteResultsWithAuth = async (searchString: string, token: string) => {
 		return fetch(this._graphQlEndpoint, {
