@@ -4,7 +4,7 @@
 		"target": "es6",
 		"noImplicitAny": false,
 		"alwaysStrict": true,
-		"noUnusedLocals": true,
+		"noUnusedLocals": false,
 		"sourceMap": true,
 		"outDir": "dist",
 		"declaration": true,
