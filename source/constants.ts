@@ -1,7 +1,18 @@
-import { DataSources, Filters, ISearchResult } from "./DataHubClient";
+/* eslint-disable max-len */
+import { DataSources, Filters, IMetadata, ISearchResult } from "./DataHubClient";
 import { IDataSourceStyling } from "./DataSourceStylingClient";
 
 export const DATA_SOURCES: Array<ISearchResult> = [
+	{
+		name: "salinity",
+		description: "this is the salinity",
+		source: "mapbox",
+		id: "wod-salinity-aggregates",
+		sourceUrl: "mapbox://oceandatafoundation.salinity_aggregates",
+		tags: ["WOD", "salinity"],
+		dataType: DataSources.MapboxVectorTile,
+		filters: [Filters.Depth, Filters.Time],
+	},
 	{
 		name: "temperature",
 		description: "this is the temp",
@@ -132,9 +143,17 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 
 export const STYLING_DATA_SOURCES: Array<IDataSourceStyling> = [
 	{
-		dataSourceId: "wod-temperature-year-aggregates",
+		dataSourceId: "wod-salinity-aggregates",
 		type: "circle",
 		color: "#58FCD4",
+		circleRadius: 3,
+		strokeWidth: 1,
+		strokeColor: "#ffffff",
+	},
+	{
+		dataSourceId: "wod-temperature-year-aggregates",
+		type: "circle",
+		color: "#ff69a2",
 		circleRadius: 3,
 		strokeWidth: 1,
 		strokeColor: "#ffffff",
@@ -217,10 +236,148 @@ export const STYLING_DATA_SOURCES: Array<IDataSourceStyling> = [
 		opacity: 0.5,
 	},
 	{
-		dataSourceId: "economic zones",
+		dataSourceId: "economic-zones",
 		type: "line",
 		color: "#16BFF4",
 		strokeWidth: 1,
 		lineStyle: "dashed",
+	},
+];
+
+export const METADATA_DATA_SOURCES: Array<IMetadata> = [
+	{
+		dataSourceId: "wod-salinity-aggregates",
+		name: "Salinity",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description:
+			"Salinity technically measures the saltiness of seawater which is a function of dissolved inorganic materials. It directly affects the density of water which in turn influences ocean circulation. Many organisms can only live within certain ranges of salinity. Salinity also reveals information about the world's freshwater cycle.",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "wod-temperature-year-aggregates",
+		name: "Temperature",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description:
+			"Temperature is direct measure of how climate is affecting the ocean. Temperature influences biological, chemical, and even meteorological processes.",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "wod-pressure-aggregates",
+		name: "Pressure",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description: "The pressure",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "wod-oxygen-aggregates",
+		name: "Oxygen",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description:
+			"Oxygen is the most important gas in the sea, as it is necessary for all higher forms of life. Surface water is usually saturated with oxygen, absorbed from the atmosphere and produced by photosynthesis from marine plants.",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "wod-nitrate-aggregates",
+		name: "Nitrate",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description:
+			"Nitrate (NO3)  in the ocean, is the end product of decomposition of organic nitrogen. It is the main nitrogenous compound utilized by primary producers in the ocean and is a major nutrient required for photosynthesis – its scarcity limits the amount of photosynthesis that can take place.",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "wod-ph-aggregates",
+		name: "Ph",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description:
+			"Ocean pH is a measure of how acidic or basic the ocean is. The pH of the ocean varies as a result of natural processes and can be influenced by temperature, fresh water run-off, upwellings, and increased carbon dioxide in the atmosphere. Many organisms are sensitive to the decline in ocean pH driven by increased atmospheric carbon dioxide. ",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "wod-chlorophyll-aggregates",
+		name: "Chlorophyll",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description: "Description Chlorophyll",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "wod-alkalinity-aggregates",
+		name: "Alkalinity",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description: "Description Alkalinity",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "wod-phosphate-aggregates",
+		name: "Phosphate",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description: "Description Phosphate",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "wod-silicate-aggregates",
+		name: "Silicate",
+		source: "NOAA",
+		tags: ["NOAA", "WOD"],
+		description: "https://en.wikipedia.org/wiki/Silicate",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: ["1770", "2020"],
+		citation: ["NOAA", "test citation"],
+	},
+	{
+		dataSourceId: "norwegian-windfarms",
+		name: "Norwegian Windfarms",
+		source: "Unknown",
+		tags: [],
+		description: "None added...",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: [],
+		citation: ["test citation"],
+	},
+	{
+		dataSourceId: "norwegian-seacables",
+		name: "Norwegian Seacables",
+		source: "Unknown",
+		tags: [],
+		description: "None added...",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: [],
+		citation: ["test citation"],
+	},
+	{
+		dataSourceId: "economic-zones",
+		name: "Economic zones",
+		source: "Unknown",
+		tags: [],
+		description: "None added...",
+		boundingBox: [-90, -180, 90, 180],
+		timeSpan: [],
+		citation: ["test citation"],
 	},
 ];

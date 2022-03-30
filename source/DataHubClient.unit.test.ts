@@ -16,6 +16,18 @@ jest.mock("./constants.ts", () => ({
 			unit: "°C",
 		},
 	],
+	METADATA_DATA_SOURCES: [
+		{
+			dataSourceId: "testTilesetId",
+			name: "Salinity",
+			source: "NOAA",
+			tags: ["NOAA", "WOD"],
+			description: "test description",
+			boundingBox: [-90, -180, 90, 180],
+			timeSpan: ["1770", "2020"],
+			citation: ["NOAA", "test citation"],
+		},
+	],
 }));
 
 beforeAll(() => {
@@ -54,4 +66,18 @@ test("data source with id that contains search keyword should be retreived", asy
 
 	const results = await odpClient.searchForDataSource(searchWord);
 	expect(results.find((result) => result.id === "testTilesetId")).toBeDefined();
+});
+
+test("retrieve metadata for existing data source", async () => {
+	const dataSourceId = "testTilesetId";
+
+	const results = odpClient.getMetadataForDataSetById(dataSourceId);
+	expect(results).toBeDefined();
+});
+
+test("retrieve no metadata for not existing data source", async () => {
+	const dataSourceId = "notExistingId";
+
+	const results = odpClient.getMetadataForDataSetById(dataSourceId);
+	expect(results).toBeUndefined();
 });

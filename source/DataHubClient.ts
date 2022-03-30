@@ -1,11 +1,12 @@
 import { Auth } from "./auth";
-import { DATA_SOURCES } from "./constants";
+import { DATA_SOURCES, METADATA_DATA_SOURCES } from "./constants";
 
 interface IDataHubClientOptions {
 	auth: Auth;
 }
 
 export interface IMetadata {
+	dataSourceId: string;
 	name: string;
 	source: string;
 	tags: Array<string>;
@@ -45,6 +46,10 @@ export default class DataHubClient {
 		this._graphQlEndpoint = "https://catalog.dev.oceandata.xyz/api/gms";
 		this._tokenScope = "https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS";
 	}
+
+	public getMetadataForDataSetById = (dataSourceId: string): IMetadata => {
+		return METADATA_DATA_SOURCES.find((source) => source.dataSourceId === dataSourceId);
+	};
 
 	public searchFullText = async (type: "DATASET", searchString: string) => {
 		// In the future we will request this from datahub instead of the hardcoded object.

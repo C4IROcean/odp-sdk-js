@@ -1,3 +1,4 @@
+import { IMetadata } from "./../dist/DataHubClient.d";
 import DataSourceStylingClient, { IDataSourceStyling } from "./DataSourceStylingClient";
 import { AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser";
 import { ClientOptions, CogniteClient } from "@cognite/sdk";
@@ -114,6 +115,10 @@ export default class ODPClient extends CogniteClient {
 
 	public async searchForDataSource(keyword: string): Promise<Array<ISearchResult>> {
 		return this._datahubClient.searchFullText("DATASET", keyword);
+	}
+
+	public getMetadataForDataSetById(dataSourceId: string): IMetadata {
+		return this._datahubClient.getMetadataForDataSetById(dataSourceId);
 	}
 
 	public getDataHubClient() {
