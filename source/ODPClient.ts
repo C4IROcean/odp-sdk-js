@@ -1,11 +1,10 @@
-import { IMetadata } from "./../dist/DataHubClient.d";
 import DataSourceStylingClient, { IDataSourceStyling } from "./DataSourceStylingClient";
 import { AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser";
 import { ClientOptions, CogniteClient } from "@cognite/sdk";
 
 import { Auth } from "./auth";
 import { Casts } from "./casts";
-import DataHubClient, { ISearchResult } from "./DataHubClient";
+import DataHubClient, { IMetadata, ISearchResult } from "./DataHubClient";
 import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
 
