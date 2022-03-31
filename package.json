@@ -7,13 +7,14 @@
 	"scripts": {
 		"build": "npm run format-code && npm run lint && tsc && npm test",
 		"build:ci": "npm run lint && tsc --sourceMap false",
-		"publish:local": "tsc && yalc publish",
+		"build:dev": "tsc",
 		"docs": "typedoc --options typedoc.js --tsconfig tsconfig.json ./source",
 		"lint": "npm run eslint",
 		"eslint": "eslint source/ tests/ --ext .ts,.d.ts",
 		"format-code": "prettier package.json index.ts \"source/**/*.ts\" --write",
 		"test": "jest",
-		"compile": "tsc"
+		"compile": "tsc",
+		"publish:local": "npm run-script build:dev && yalc publish"
 	},
 	"keywords": [
 		"ODP",
