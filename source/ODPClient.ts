@@ -1,14 +1,14 @@
 import { AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser";
-import log from "loglevel";
 import { ClientOptions, CogniteClient } from "@cognite/sdk";
+import log from "loglevel";
 import { Auth } from "./auth";
 import { Casts } from "./casts";
+import Catalog, { CatalogConnectors } from "./Catalog/Catalog";
+import { IMetadata } from "./Catalog/Connectors/DataHubClient";
 import { IDataSource } from "./constants";
-import DataHubClient, { IMetadata } from "./Catalog/Connectors/DataHubClient";
 import DataSourceStylingClient, { IDataSourceStyling } from "./DataSourceStylingClient";
 import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
-import Catalog, { CatalogConnectors } from "./Catalog/Catalog";
 
 // This client id only allows for certain auth_redirects, ideally you'll have a client id per app.
 // Contact us if this is your use case.
@@ -60,6 +60,8 @@ export default class ODPClient extends CogniteClient {
 			},
 			...options,
 		});
+
+		log.setLevel(options.logLevel ?? log.levels.SILENT);
 
 		this.auth = new Auth(options.baseUrl || defaultOptions.baseUrl, {
 			clientId: ODP_SDK_CLIENT_ID,

@@ -102,7 +102,7 @@ export class Auth {
 		try {
 			const redirectResponse = await this._msalInstance.handleRedirectPromise();
 			if (redirectResponse !== null) {
-				log.log("Auth: Got redirect token");
+				log.debug("Auth: Got redirect token");
 				// Acquire token silent success
 				return redirectResponse;
 			}
@@ -130,7 +130,7 @@ export class Auth {
 			this._msalInstance.acquireTokenRedirect(accessTokenRequest);
 		};
 
-		log.log("Auth: Acquiring access token", accessTokenRequest);
+		log.debug("Auth: Acquiring access token", accessTokenRequest);
 
 		if (!account) {
 			loginWithRedirect();
@@ -139,17 +139,17 @@ export class Auth {
 		try {
 			const accessTokenResponse = await this._msalInstance.acquireTokenSilent(accessTokenRequest);
 			// Acquire token silent success
-			log.log("Auth: Got silent token");
+			log.debug("Auth: Got silent token");
 			return accessTokenResponse;
 		} catch (error) {
 			// Acquire token silent failure, and send an interactive request
 			if (error instanceof InteractionRequiredAuthError) {
-				log.log("using fallback");
+				log.debug("using fallback");
 				loginWithRedirect();
 				return;
 			}
-			log.log("Auth: Failed to get silent token");
-			log.log(error);
+			log.error("Auth: Failed to get silent token");
+			log.error(error);
 		}
 	};
 }
