@@ -113,10 +113,6 @@ export default class ODPClient extends CogniteClient {
 		return this.auth.logout();
 	}
 
-	public getMsalInstance() {
-		return this.auth.getMsalInstance();
-	}
-
 	public async getDataSourceStyling(dataSourceId: string): Promise<IDataSourceStyling | undefined> {
 		return this._dataSourceStylingClient.getDataSourceStyling(dataSourceId);
 	}

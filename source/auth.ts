@@ -48,12 +48,12 @@ export type AuthResponseT = AuthenticatedResponseT | UnauthenticatedResponseT;
  */
 export class Auth {
 	private audience: string;
-	private msalInstance: PublicClientApplication;
+	private _msalInstance: PublicClientApplication;
 
 	public constructor(audience: string, authConfig: BrowserAuthOptions) {
 		this.audience = audience;
 
-		this.msalInstance = new PublicClientApplication({
+		this._msalInstance = new PublicClientApplication({
 			auth: authConfig,
 			cache: {
 				cacheLocation: "sessionStorage",
@@ -73,12 +73,25 @@ export class Auth {
 		});
 	}
 
-	public getMsalInstance = () => {
-		return this.msalInstance;
+	public logout = () => {
+		return this._msalInstance.logoutRedirect();
 	};
 
-	public logout = () => {
-		return this.msalInstance.logoutRedirect();
+	public getToken = async (scope: string | string[]): Promise<string> => {
+		const account = this._msalInstance.getAllAccounts()[0];
+		const request = {
+			account,
+			scopes: [...scope],
+		};
+		return new Promise<string>((resolve, reject) => {
+			this._msalInstance.acquireTokenSilent(request).then((res) => {
+				if (res.accessToken) {
+					resolve(res.accessToken);
+				} else {
+					reject(new Error("No token acquired..."));
+				}
+			});
+		});
 	};
 
 	/*
@@ -87,7 +100,7 @@ export class Auth {
 	 */
 	public handleRedirectAuth = async (): Promise<AuthenticationResult | null> => {
 		try {
-			const redirectResponse = await this.msalInstance.handleRedirectPromise();
+			const redirectResponse = await this._msalInstance.handleRedirectPromise();
 			if (redirectResponse !== null) {
 				log.log("Auth: Got redirect token");
 				// Acquire token silent success
@@ -100,7 +113,7 @@ export class Auth {
 
 		// MSAL.js v2 exposes several account APIs, logic to determine which account to use
 		// is the responsibility of the developer
-		const account = this.msalInstance.getAllAccounts()[0];
+		const account = this._msalInstance.getAllAccounts()[0];
 
 		const accessTokenRequest = {
 			account,
@@ -114,7 +127,7 @@ export class Auth {
 		};
 
 		const loginWithRedirect = () => {
-			this.msalInstance.acquireTokenRedirect(accessTokenRequest);
+			this._msalInstance.acquireTokenRedirect(accessTokenRequest);
 		};
 
 		log.log("Auth: Acquiring access token", accessTokenRequest);
@@ -124,7 +137,7 @@ export class Auth {
 		}
 
 		try {
-			const accessTokenResponse = await this.msalInstance.acquireTokenSilent(accessTokenRequest);
+			const accessTokenResponse = await this._msalInstance.acquireTokenSilent(accessTokenRequest);
 			// Acquire token silent success
 			log.log("Auth: Got silent token");
 			return accessTokenResponse;
