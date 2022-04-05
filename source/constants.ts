@@ -1,8 +1,49 @@
 /* eslint-disable max-len */
-import { DataSources, Filters, IMetadata, ISearchResult } from "./DataHubClient";
+import { IMetadata } from "./DataHubClient";
+
+export enum Filters {
+	Depth = "depth",
+	Time = "time",
+}
+
+export enum DataSources {
+	MapboxVectorTile = "vnd.mapbox-vector-tile",
+}
+
+export type IDataSource = IDataType & IDataSourcePart;
+
+// For now we only have mapbox data types, but this could be come a union if we have more types
+export type IDataType = IMapboxDataType;
+
+export type IMapboxLayerType =
+	| "fill"
+	| "line"
+	| "symbol"
+	| "circle"
+	| "heatmap"
+	| "fill-extrusion"
+	| "raster"
+	| "hillshade"
+	| "background";
+interface IDataSourcePart {
+	name: string;
+	description: string;
+	unit?: string;
+	source: string;
+	id: string;
+	sourceUrl: string;
+	tags: Array<string>;
+	filters?: Array<Filters>;
+}
+
+interface IMapboxDataType {
+	sourceType: DataSources.MapboxVectorTile;
+	layerType: IMapboxLayerType;
+}
+
 import { IDataSourceStyling } from "./DataSourceStylingClient";
 
-export const DATA_SOURCES: Array<ISearchResult> = [
+export const DATA_SOURCES: Array<IDataSource> = [
 	{
 		name: "salinity",
 		description: "this is the salinity",
@@ -10,7 +51,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-salinity-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.salinity_aggregates",
 		tags: ["WOD", "salinity"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 	},
 	{
@@ -20,7 +62,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-temperature-year-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.1nze98kc",
 		tags: ["WOD", "temperature"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth],
 		unit: "°C",
 	},
@@ -31,7 +74,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-pressure-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.pressure_aggregates",
 		tags: ["WOD", "pressure"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
 	},
@@ -42,7 +86,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-oxygen-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.oxygen_aggregates",
 		tags: ["WOD", "oxygen"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "ml/l",
 	},
@@ -53,7 +98,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-nitrate-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.nitrate_aggregates",
 		tags: ["WOD", "nitrate"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "µmol/l",
 	},
@@ -64,7 +110,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-ph-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.ph_aggregates",
 		tags: ["WOD", "ph"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "µmol/l",
 	},
@@ -75,7 +122,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-chlorophyll-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.chlorophyll_aggregates",
 		tags: ["WOD", "chlorophyll"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
 	},
@@ -86,7 +134,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-alkalinity-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.alkalinity_aggregates",
 		tags: ["WOD", "alkalinity"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
 	},
@@ -97,7 +146,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-phosphate-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.phosphate_aggregates",
 		tags: ["WOD", "phosphate"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
 	},
@@ -108,7 +158,8 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		id: "wod-silicate-aggregates",
 		sourceUrl: "mapbox://oceandatafoundation.silicate_aggregates",
 		tags: ["WOD", "silicate"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
 	},
@@ -118,8 +169,9 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		source: "mapbox",
 		id: "norwegian-windfarms",
 		sourceUrl: "mapbox://oceandatafoundation.6nk4oxtx",
+		layerType: "fill",
 		tags: ["windfarms", "norway"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
 	},
 	{
 		name: "seacables",
@@ -127,8 +179,9 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		source: "mapbox",
 		id: "norwegian-seacables",
 		sourceUrl: "mapbox://oceandatafoundation.bz79mnos",
+		layerType: "line",
 		tags: ["seacables", "norway"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
 	},
 	{
 		name: "economic zones",
@@ -136,8 +189,9 @@ export const DATA_SOURCES: Array<ISearchResult> = [
 		source: "mapbox",
 		id: "economic-zones",
 		sourceUrl: "mapbox://oceandatafoundation.382xxha1",
+		layerType: "line",
 		tags: ["economic zones", "eez"],
-		dataType: DataSources.MapboxVectorTile,
+		sourceType: DataSources.MapboxVectorTile,
 	},
 ];
 
