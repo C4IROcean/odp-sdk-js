@@ -1,10 +1,10 @@
-import DataSourceStylingClient, { IDataSourceStyling } from "./DataSourceStylingClient";
 import { AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser";
 import { ClientOptions, CogniteClient } from "@cognite/sdk";
-
 import { Auth } from "./auth";
 import { Casts } from "./casts";
-import DataHubClient, { IMetadata, ISearchResult } from "./DataHubClient";
+import { IDataSource } from "./constants";
+import DataHubClient, { IMetadata } from "./DataHubClient";
+import DataSourceStylingClient, { IDataSourceStyling } from "./DataSourceStylingClient";
 import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
 
@@ -112,7 +112,7 @@ export default class ODPClient extends CogniteClient {
 		return this._dataSourceStylingClient.getDataSourceStyling(dataSourceId);
 	}
 
-	public async searchForDataSource(keyword: string): Promise<Array<ISearchResult>> {
+	public async searchForDataSource(keyword: string): Promise<Array<IDataSource>> {
 		return this._datahubClient.searchFullText("DATASET", keyword);
 	}
 
