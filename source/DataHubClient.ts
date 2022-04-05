@@ -3,6 +3,8 @@ import { DATA_SOURCES, METADATA_DATA_SOURCES } from "./constants";
 
 interface IDataHubClientOptions {
 	auth: Auth;
+	graphQlEndpoint?: string;
+	datahubTokenScope?: string;
 }
 
 export interface IMetadata {
@@ -14,26 +16,6 @@ export interface IMetadata {
 	boundingBox: Array<number>;
 	timeSpan: Array<string>;
 	citation: Array<string>;
-}
-
-export enum Filters {
-	Depth = "depth",
-	Time = "time",
-}
-export interface ISearchResult {
-	name: string;
-	description: string;
-	unit?: string;
-	source: string;
-	id: string;
-	sourceUrl: string;
-	tags: Array<string>;
-	dataType: string;
-	filters?: Array<Filters>;
-}
-
-export enum DataSources {
-	MapboxVectorTile = "vnd.mapbox-vector-tile",
 }
 
 export default class DataHubClient {
