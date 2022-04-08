@@ -32,8 +32,8 @@ interface IDataSourcePart {
 	source: string;
 	id: string;
 	sourceUrl: string;
-	tags: Array<string>;
-	filters?: Array<Filters>;
+	tags: string[];
+	filters?: Filters[];
 }
 
 interface IMapboxDataType {
@@ -43,7 +43,7 @@ interface IMapboxDataType {
 
 import { IDataSourceStyling } from "./DataSourceStylingClient";
 
-export const DATA_SOURCES: Array<IDataSource> = [
+export const DATA_SOURCES: IDataSource[] = [
 	{
 		name: "salinity",
 		description: "this is the salinity",
@@ -195,7 +195,7 @@ export const DATA_SOURCES: Array<IDataSource> = [
 	},
 ];
 
-export const STYLING_DATA_SOURCES: Array<IDataSourceStyling> = [
+export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 	{
 		dataSourceId: "wod-salinity-aggregates",
 		type: "circle",
@@ -298,7 +298,7 @@ export const STYLING_DATA_SOURCES: Array<IDataSourceStyling> = [
 	},
 ];
 
-export const METADATA_DATA_SOURCES: Array<IMetadata> = [
+export const METADATA_DATA_SOURCES: IMetadata[] = [
 	{
 		dataSourceId: "wod-salinity-aggregates",
 		name: "Salinity",

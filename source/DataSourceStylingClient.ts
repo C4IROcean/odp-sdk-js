@@ -12,11 +12,11 @@ export interface IDataSourceStyling {
 }
 
 export default class DataSourceStylingClient {
-	public getDataSourceStyling(dataSourceId: string): IDataSourceStyling | null {
+	public async getDataSourceStyling(dataSourceId: string): Promise<IDataSourceStyling | undefined> {
 		return this._fetchStyling(dataSourceId);
 	}
 
-	private _fetchStyling(dataSourceId): IDataSourceStyling | null {
+	private async _fetchStyling(dataSourceId): Promise<IDataSourceStyling | undefined> {
 		// Filter on hardcoded object for now.
 		// Fetch styling from API when available
 		return STYLING_DATA_SOURCES.find((el) => el.dataSourceId === dataSourceId);
