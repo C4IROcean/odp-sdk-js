@@ -23,7 +23,7 @@ interface IAuthTokens {
 	idToken: string;
 	idTokenClaims: IIdTokenClaims;
 	authority: string;
-	scopes: Array<string>;
+	scopes: string[];
 }
 
 type AuthListenersT = (token?: IAuthTokens) => void;
@@ -36,7 +36,7 @@ const defaultOptions: Pick<ClientOptions, "project" | "apiKeyMode" | "baseUrl"> 
 
 export default class ODPClient extends CogniteClient {
 	private authResult: AuthenticationResult | undefined = undefined;
-	private listeners: Array<AuthListenersT> = [];
+	private listeners: AuthListenersT[] = [];
 
 	private _casts: Casts;
 	private _marineRegions: MarineRegions;
@@ -108,11 +108,11 @@ export default class ODPClient extends CogniteClient {
 		return this.auth.getMsalInstance();
 	}
 
-	public getDataSourceStyling(dataSourceId: string): IDataSourceStyling {
+	public async getDataSourceStyling(dataSourceId: string): Promise<IDataSourceStyling | undefined> {
 		return this._dataSourceStylingClient.getDataSourceStyling(dataSourceId);
 	}
 
-	public async searchForDataSource(keyword: string): Promise<Array<IDataSource>> {
+	public async searchForDataSource(keyword: string): Promise<IDataSource[]> {
 		return this._datahubClient.searchFullText("DATASET", keyword);
 	}
 
