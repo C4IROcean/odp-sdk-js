@@ -11,11 +11,11 @@ export interface IMetadata {
 	dataSourceId: string;
 	name: string;
 	source: string;
-	tags: Array<string>;
+	tags: string[];
 	description: string;
-	boundingBox: Array<number>;
-	timeSpan: Array<string>;
-	citation: Array<string>;
+	boundingBox: number[];
+	timeSpan: string[];
+	citation: string[];
 }
 
 export default class DataHubClient {
@@ -46,8 +46,15 @@ export default class DataHubClient {
 		);
 	};
 
-	public autocompleteResults = async (searchString: string) => {
-		return this._getToken().then((token) => this._autocompleteResultsWithAuth(searchString, token));
+	public autocompleteResults = async (searchString: string): Promise<string[]> => {
+		// return this._getToken().then((token) => this._autocompleteResultsWithAuth(searchString, token));
+		return DATA_SOURCES.filter(
+			(source) =>
+				source.tags.find((tag) => tag.toLowerCase().includes(searchString.toLowerCase())) ||
+				source.name.toLowerCase().includes(searchString.toLowerCase()) ||
+				source.description.toLowerCase().includes(searchString.toLowerCase()) ||
+				source.id.toLowerCase().includes(searchString.toLowerCase()),
+		).map((res) => res.name);
 	};
 
 	public getDataSetByUrn = async (urn: string) => {

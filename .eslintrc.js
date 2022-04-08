@@ -34,12 +34,6 @@ module.exports = {
 	rules: {
 		"@typescript-eslint/adjacent-overload-signatures": "error",
 		"@typescript-eslint/explicit-member-accessibility": "off",
-		"@typescript-eslint/array-type": [
-			"error",
-			{
-				default: "generic",
-			},
-		],
 		"@typescript-eslint/ban-types": [
 			"error",
 			{
