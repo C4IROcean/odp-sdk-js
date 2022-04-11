@@ -1,4 +1,5 @@
 import { AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser";
+import log from "loglevel";
 import { ClientOptions, CogniteClient } from "@cognite/sdk";
 import { Auth } from "./auth";
 import { Casts } from "./casts";
@@ -17,6 +18,7 @@ type RequiredConfig = Pick<ClientOptions, "appId">;
 type OptionalConfig = Partial<Omit<ClientOptions, keyof RequiredConfig | "baseUrl">> &
 	Partial<{
 		baseUrl: "https://api.cognitedata.com" | "https://westeurope-1.cognitedata.com";
+		logLevel: log.LogLevelDesc;
 	}>;
 
 interface IAuthTokens {
@@ -71,6 +73,12 @@ export default class ODPClient extends CogniteClient {
 
 		this._dataSourceStylingClient = new DataSourceStylingClient();
 		this._catalog = new Catalog({ auth: this.auth });
+
+		if (options.logLevel) {
+			log.setLevel(options.logLevel);
+		} else {
+			log.setLevel(log.levels.ERROR);
+		}
 	}
 
 	/**
@@ -153,7 +161,7 @@ export default class ODPClient extends CogniteClient {
 			try {
 				listenerFn(this.authTokens);
 			} catch (error) {
-				console.warn("Listener function threw uncaught error", listenerFn);
+				log.warn("Listener function threw uncaught error", listenerFn);
 			}
 		}
 	};
