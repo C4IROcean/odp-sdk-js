@@ -3,10 +3,11 @@ import { ClientOptions, CogniteClient } from "@cognite/sdk";
 import { Auth } from "./auth";
 import { Casts } from "./casts";
 import { IDataSource } from "./constants";
-import DataHubClient, { IMetadata } from "./DataHubClient";
+import DataHubClient, { IMetadata } from "./Catalog/Connectors/DataHubClient";
 import DataSourceStylingClient, { IDataSourceStyling } from "./DataSourceStylingClient";
 import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
+import Catalog, { CatalogConnectors } from "./Catalog/Catalog";
 
 // This client id only allows for certain auth_redirects, ideally you'll have a client id per app.
 // Contact us if this is your use case.
@@ -41,7 +42,7 @@ export default class ODPClient extends CogniteClient {
 	private _casts: Casts;
 	private _marineRegions: MarineRegions;
 	private auth: Auth;
-	private _datahubClient: DataHubClient;
+	private _catalog: Catalog;
 	private _dataSourceStylingClient: DataSourceStylingClient;
 
 	public constructor(options: RequiredConfig & OptionalConfig, authConfig: BrowserAuthOptions) {
@@ -69,7 +70,7 @@ export default class ODPClient extends CogniteClient {
 		});
 
 		this._dataSourceStylingClient = new DataSourceStylingClient();
-		this._datahubClient = new DataHubClient({ auth: this.auth });
+		this._catalog = new Catalog({ auth: this.auth });
 	}
 
 	/**
@@ -112,16 +113,20 @@ export default class ODPClient extends CogniteClient {
 		return this._dataSourceStylingClient.getDataSourceStyling(dataSourceId);
 	}
 
-	public async searchForDataSource(keyword: string): Promise<IDataSource[]> {
-		return this._datahubClient.searchFullText("DATASET", keyword);
+	public async searchCatalog(keyword: string): Promise<IDataSource[]> {
+		return this._catalog.searchCatalog(keyword, [CatalogConnectors.Hardcoded]);
 	}
 
-	public getMetadataForDataSetById(dataSourceId: string): IMetadata {
-		return this._datahubClient.getMetadataForDataSetById(dataSourceId);
+	public async autocompleteCatalog(keyword: string): Promise<string[]> {
+		return this._catalog.autocompleteResults(keyword, [CatalogConnectors.Hardcoded]);
 	}
 
-	public getDataHubClient() {
-		return this._datahubClient;
+	public async autocompleteDisplayableDatasources(keyword: string): Promise<IDataSource[]> {
+		return this._catalog.autocompleteDisplayableDatasources(keyword, [CatalogConnectors.Hardcoded]);
+	}
+
+	public async getMetadataForDataSourceById(dataSourceId: string): Promise<IMetadata> {
+		return this._catalog.getMetadataForDataSourceById(dataSourceId, CatalogConnectors.Hardcoded);
 	}
 
 	/**

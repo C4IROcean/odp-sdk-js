@@ -1,8 +1,8 @@
-import { ODPClient } from ".";
+import ODPClient from "../../ODPClient";
 
 let odpClient: ODPClient;
 
-jest.mock("./constants.ts", () => ({
+jest.mock("../../constants.ts", () => ({
 	DATA_SOURCES: [
 		{
 			name: "testTemperatureTilesetName",
@@ -43,41 +43,41 @@ beforeAll(() => {
 test("data source with tag that contains search keyword should be retreived", async () => {
 	const searchWord = "testTag";
 
-	const results = await odpClient.searchForDataSource(searchWord);
+	const results = await odpClient.searchCatalog(searchWord);
 	expect(results.find((result) => result.id === "testTilesetId")).toBeDefined();
 });
 
 test("data source with description that contains search keyword should be retreived", async () => {
 	const searchWord = "worlds ocean";
 
-	const results = await odpClient.searchForDataSource(searchWord);
+	const results = await odpClient.searchCatalog(searchWord);
 	expect(results.find((result) => result.id === "testTilesetId")).toBeDefined();
 });
 
 test("data source with name that contains search keyword should be retreived", async () => {
 	const searchWord = "setna";
 
-	const results = await odpClient.searchForDataSource(searchWord);
+	const results = await odpClient.searchCatalog(searchWord);
 	expect(results.find((result) => result.id === "testTilesetId")).toBeDefined();
 });
 
 test("data source with id that contains search keyword should be retreived", async () => {
 	const searchWord = "lesetId";
 
-	const results = await odpClient.searchForDataSource(searchWord);
+	const results = await odpClient.searchCatalog(searchWord);
 	expect(results.find((result) => result.id === "testTilesetId")).toBeDefined();
 });
 
 test("retrieve metadata for existing data source", async () => {
 	const dataSourceId = "testTilesetId";
 
-	const results = odpClient.getMetadataForDataSetById(dataSourceId);
+	const results = await odpClient.getMetadataForDataSourceById(dataSourceId);
 	expect(results).toBeDefined();
 });
 
 test("retrieve no metadata for not existing data source", async () => {
 	const dataSourceId = "notExistingId";
 
-	const results = odpClient.getMetadataForDataSetById(dataSourceId);
+	const results = await odpClient.getMetadataForDataSourceById(dataSourceId);
 	expect(results).toBeUndefined();
 });
