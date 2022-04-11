@@ -6,6 +6,7 @@ import {
 	LogLevel,
 	PublicClientApplication,
 } from "@azure/msal-browser";
+import log from "loglevel";
 
 const loggerCallback: ILoggerCallback = (level: LogLevel, message: string, containsPii: boolean): void => {
 	if (containsPii) {
@@ -14,16 +15,16 @@ const loggerCallback: ILoggerCallback = (level: LogLevel, message: string, conta
 
 	switch (level) {
 		case LogLevel.Error:
-			console.error(message);
+			log.error(message);
 			return;
 		case LogLevel.Info:
-			console.info(message);
+			log.info(message);
 			return;
 		case LogLevel.Verbose:
-			console.debug(message);
+			log.debug(message);
 			return;
 		case LogLevel.Warning:
-			console.warn(message);
+			log.warn(message);
 			return;
 	}
 };
@@ -88,12 +89,12 @@ export class Auth {
 		try {
 			const redirectResponse = await this.msalInstance.handleRedirectPromise();
 			if (redirectResponse !== null) {
-				console.log("Auth: Got redirect token");
+				log.log("Auth: Got redirect token");
 				// Acquire token silent success
 				return redirectResponse;
 			}
 		} catch (error) {
-			console.error(error);
+			log.error(error);
 			return;
 		}
 
@@ -116,7 +117,7 @@ export class Auth {
 			this.msalInstance.acquireTokenRedirect(accessTokenRequest);
 		};
 
-		console.log("Auth: Acquiring access token", accessTokenRequest);
+		log.log("Auth: Acquiring access token", accessTokenRequest);
 
 		if (!account) {
 			loginWithRedirect();
@@ -125,17 +126,17 @@ export class Auth {
 		try {
 			const accessTokenResponse = await this.msalInstance.acquireTokenSilent(accessTokenRequest);
 			// Acquire token silent success
-			console.log("Auth: Got silent token");
+			log.log("Auth: Got silent token");
 			return accessTokenResponse;
 		} catch (error) {
 			// Acquire token silent failure, and send an interactive request
 			if (error instanceof InteractionRequiredAuthError) {
-				console.log("using fallback");
+				log.log("using fallback");
 				loginWithRedirect();
 				return;
 			}
-			console.log("Auth: Failed to get silent token");
-			console.log(error);
+			log.log("Auth: Failed to get silent token");
+			log.log(error);
 		}
 	};
 }

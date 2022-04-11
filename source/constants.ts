@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { IMetadata } from "./DataHubClient";
+import { IMetadata } from "./Catalog/Connectors/DataHubClient";
 
 export enum Filters {
 	Depth = "depth",

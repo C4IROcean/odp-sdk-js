@@ -1,5 +1,5 @@
-import { Auth } from "./auth";
-import { DATA_SOURCES, METADATA_DATA_SOURCES } from "./constants";
+import { Auth } from "../../auth";
+import { IDataSource, DATA_SOURCES, METADATA_DATA_SOURCES } from "../../constants";
 
 interface IDataHubClientOptions {
 	auth: Auth;
@@ -29,32 +29,13 @@ export default class DataHubClient {
 		this._tokenScope = "https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS";
 	}
 
-	public getMetadataForDataSetById = (dataSourceId: string): IMetadata => {
-		return METADATA_DATA_SOURCES.find((source) => source.dataSourceId === dataSourceId);
+	public searchFullText = async (type: "DATASET", searchString: string): Promise<any> => {
+		const token = await this._getToken();
+		return this._searchFullTextWithAuth(type, searchString, token);
 	};
 
-	public searchFullText = async (type: "DATASET", searchString: string) => {
-		// In the future we will request this from datahub instead of the hardcoded object.
-		// const token = await this._getToken();
-		// this._searchFullTextWithAuth(type, searchString, token);
-		return DATA_SOURCES.filter(
-			(source) =>
-				source.tags.find((tag) => tag.toLowerCase().includes(searchString.toLowerCase())) ||
-				source.name.toLowerCase().includes(searchString.toLowerCase()) ||
-				source.description.toLowerCase().includes(searchString.toLowerCase()) ||
-				source.id.toLowerCase().includes(searchString.toLowerCase()),
-		);
-	};
-
-	public autocompleteResults = async (searchString: string): Promise<string[]> => {
-		// return this._getToken().then((token) => this._autocompleteResultsWithAuth(searchString, token));
-		return DATA_SOURCES.filter(
-			(source) =>
-				source.tags.find((tag) => tag.toLowerCase().includes(searchString.toLowerCase())) ||
-				source.name.toLowerCase().includes(searchString.toLowerCase()) ||
-				source.description.toLowerCase().includes(searchString.toLowerCase()) ||
-				source.id.toLowerCase().includes(searchString.toLowerCase()),
-		).map((res) => res.name);
+	public autocompleteResults = async (searchString: string): Promise<any> => {
+		return this._getToken().then((token) => this._autocompleteResultsWithAuth(searchString, token));
 	};
 
 	public getDataSetByUrn = async (urn: string) => {
@@ -63,6 +44,59 @@ export default class DataHubClient {
 
 	public getTagsWithUrn = async (urn: string) => {
 		return this._getToken().then((token) => this._getTagsWithUrnWithAuth(urn, token));
+	};
+
+	private _searchFullTextWithAuth = async (type: "DATASET", searchString: string, token: string): Promise<any> => {
+		const result = await fetch(this._graphQlEndpoint, {
+			method: "POST",
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify({
+				query: `
+				{
+					search(input: { type: ${type}, query: "${searchString}", start: 0, count: 10 }) {
+					start
+					count
+					total
+					searchResults {
+						entity {
+						urn
+						type
+						...on Dataset {
+							name
+						}
+						}
+					}
+					}
+				}
+			`,
+			}),
+		});
+		return result.json();
+	};
+
+	private _autocompleteResultsWithAuth = async (searchString: string, token: string): Promise<any> => {
+		const results = await fetch(this._graphQlEndpoint, {
+			method: "POST",
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify({
+				query: `
+				{
+					autoComplete(input: { type: DATASET, query: "${searchString}", limit: 10 }) {
+						suggestions
+					}
+    			}
+			`,
+			}),
+		});
+		return results.json();
 	};
 
 	private _getDatasetByUrnWithAuth = async (urn: string, token: string) => {
@@ -98,57 +132,6 @@ export default class DataHubClient {
 					}
 				  }
 				`,
-			}),
-		}).then((r) => r.json());
-	};
-
-	private _searchFullTextWithAuth = async (type: "DATASET", searchString: string, token: string) => {
-		fetch(this._graphQlEndpoint, {
-			method: "POST",
-			headers: {
-				authorization: `Bearer ${token}`,
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-			body: JSON.stringify({
-				query: `
-				{
-					search(input: { type: ${type}, query: "${searchString}", start: 0, count: 10 }) {
-					start
-					count
-					total
-					searchResults {
-						entity {
-						urn
-						type
-						...on Dataset {
-							name
-						}
-						}
-					}
-					}
-				}
-			`,
-			}),
-		}).then((r) => r.json());
-	};
-
-	private _autocompleteResultsWithAuth = async (searchString: string, token: string) => {
-		return fetch(this._graphQlEndpoint, {
-			method: "POST",
-			headers: {
-				authorization: `Bearer ${token}`,
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-			body: JSON.stringify({
-				query: `
-				{
-					autoComplete(input: { type: DATASET, query: "${searchString}", limit: 10 }) {
-						suggestions
-					}
-    			}
-			`,
 			}),
 		}).then((r) => r.json());
 	};
