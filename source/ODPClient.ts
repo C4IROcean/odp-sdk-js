@@ -75,12 +75,6 @@ export default class ODPClient extends CogniteClient {
 
 		this._dataSourceStylingClient = new DataSourceStylingClient();
 		this._catalog = new Catalog({ auth: this.auth });
-
-		if (options.logLevel) {
-			log.setLevel(options.logLevel);
-		} else {
-			log.setLevel(log.levels.ERROR);
-		}
 	}
 
 	/**
