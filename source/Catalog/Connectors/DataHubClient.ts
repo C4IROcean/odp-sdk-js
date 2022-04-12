@@ -1,5 +1,11 @@
 import { Auth } from "../../auth";
-import { IDataSource, DATA_SOURCES, METADATA_DATA_SOURCES } from "../../constants";
+import {
+	IDataSource,
+	DATA_SOURCES,
+	METADATA_DATA_SOURCES,
+	ODP_DATAHUB_GRAPHQL_ENDPOINT,
+	ODP_DATAHUB_TOKEN_SCOPE,
+} from "../../constants";
 
 interface IDataHubClientOptions {
 	auth: Auth;
@@ -25,25 +31,27 @@ export default class DataHubClient {
 
 	public constructor(options: IDataHubClientOptions) {
 		this._auth = options.auth;
-		this._graphQlEndpoint = "https://catalog.dev.oceandata.xyz/api/gms";
-		this._tokenScope = "https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS";
+		this._graphQlEndpoint = options.graphQlEndpoint ?? ODP_DATAHUB_GRAPHQL_ENDPOINT;
+		this._tokenScope = options.datahubTokenScope ?? ODP_DATAHUB_TOKEN_SCOPE;
 	}
 
 	public searchFullText = async (type: "DATASET", searchString: string): Promise<any> => {
-		const token = await this._getToken();
+		const token = await this._auth.getToken(this._tokenScope);
 		return this._searchFullTextWithAuth(type, searchString, token);
 	};
 
 	public autocompleteResults = async (searchString: string): Promise<any> => {
-		return this._getToken().then((token) => this._autocompleteResultsWithAuth(searchString, token));
+		return this._auth
+			.getToken(this._tokenScope)
+			.then((token) => this._autocompleteResultsWithAuth(searchString, token));
 	};
 
 	public getDataSetByUrn = async (urn: string) => {
-		return this._getToken().then((token) => this._getDatasetByUrnWithAuth(urn, token));
+		return this._auth.getToken(this._tokenScope).then((token) => this._getDatasetByUrnWithAuth(urn, token));
 	};
 
 	public getTagsWithUrn = async (urn: string) => {
-		return this._getToken().then((token) => this._getTagsWithUrnWithAuth(urn, token));
+		return this._auth.getToken(this._tokenScope).then((token) => this._getTagsWithUrnWithAuth(urn, token));
 	};
 
 	private _searchFullTextWithAuth = async (type: "DATASET", searchString: string, token: string): Promise<any> => {
@@ -160,27 +168,5 @@ export default class DataHubClient {
 			`,
 			}),
 		}).then((r) => r.json());
-	};
-
-	private _getToken = async () => {
-		const account = this._auth.getMsalInstance().getAllAccounts()[0];
-
-		const request = {
-			account,
-			scopes: [this._tokenScope],
-		};
-
-		return new Promise<string>((resolve, reject) => {
-			this._auth
-				.getMsalInstance()
-				.acquireTokenSilent(request)
-				.then((res) => {
-					if (res.accessToken) {
-						resolve(res.accessToken);
-					} else {
-						reject(new Error("No token acquired..."));
-					}
-				});
-		});
 	};
 }
