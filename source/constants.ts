@@ -435,3 +435,6 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["test citation"],
 	},
 ];
+
+export const ODP_DATAHUB_GRAPHQL_ENDPOINT: string = "https://catalog.dev.oceandata.xyz/api/gms";
+export const ODP_DATAHUB_TOKEN_SCOPE: string = "https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS";
