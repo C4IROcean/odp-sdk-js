@@ -25,14 +25,23 @@ export interface IMetadata {
 }
 
 export default class DataHubClient {
+	private static _dataHubClient: DataHubClient;
 	private _auth: Auth;
-	private _graphQlEndpoint: string;
 	private _tokenScope: string;
+	private _graphQlEndpoint: string;
 
-	public constructor(options: IDataHubClientOptions) {
+	private constructor(options: IDataHubClientOptions) {
 		this._auth = options.auth;
 		this._graphQlEndpoint = options.graphQlEndpoint ?? ODP_DATAHUB_GRAPHQL_ENDPOINT;
 		this._tokenScope = options.datahubTokenScope ?? ODP_DATAHUB_TOKEN_SCOPE;
+	}
+
+	public static getDatahubClient(options: IDataHubClientOptions) {
+		if (this._dataHubClient) {
+			return this._dataHubClient;
+		}
+		this._dataHubClient = new DataHubClient(options);
+		return this._dataHubClient;
 	}
 
 	public searchFullText = async (type: "DATASET", searchString: string): Promise<any> => {
