@@ -2,10 +2,12 @@ import { Auth } from "./../auth";
 import { DataSources, IDataSource, METADATA_DATA_SOURCES } from "./../constants";
 import { DATA_SOURCES } from "../constants";
 import DataHubClient, { IMetadata } from "./Connectors/DataHubClient";
+import DataMeshApiClient from "./Connectors/DataMeshApiClient";
 
 export enum CatalogConnectors {
 	Hardcoded = "hardcoded",
 	Datahub = "datahub",
+	DataMeshApi = "datameshapi",
 }
 
 interface ICatalogOptions {
@@ -14,14 +16,16 @@ interface ICatalogOptions {
 
 export default class Catalog {
 	private _datahubClient: DataHubClient;
+	private _dataMeshApiClient: DataMeshApiClient;
 
 	public constructor(options: ICatalogOptions) {
-		this._datahubClient = new DataHubClient({ auth: options.auth });
+		this._datahubClient = DataHubClient.getDatahubClient(options);
+		this._dataMeshApiClient = DataMeshApiClient.getDataMeshApiClient(options);
 	}
 
 	public searchCatalog = async (searchString: string, connectors: CatalogConnectors[]): Promise<IDataSource[]> => {
 		let results: IDataSource[] = [];
-		connectors.forEach(async (connector) => {
+		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:
 					results = [
@@ -39,14 +43,18 @@ export default class Catalog {
 					const dhResults = await this._datahubClient.searchFullText("DATASET", searchString);
 					results = [...results, ...this._mapSearchResultsToOdp(connector, dhResults)];
 					break;
+				case CatalogConnectors.DataMeshApi:
+					const psResults = await this._dataMeshApiClient.searchCatalog(searchString);
+					results = [...results, ...psResults];
+					break;
 			}
-		});
+		}
 		return results;
 	};
 
 	public autocompleteResults = async (searchString: string, connectors: CatalogConnectors[]): Promise<string[]> => {
 		let results: string[] = [];
-		connectors.forEach(async (connector) => {
+		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:
 					results = [
@@ -64,8 +72,12 @@ export default class Catalog {
 					const dhResults = await this._datahubClient.autocompleteResults(searchString);
 					results = [...results, ...this._mapAutocompleteResultsToOdp(connector, dhResults)];
 					break;
+				case CatalogConnectors.DataMeshApi:
+					const psAutocompleteResults = await this._dataMeshApiClient.autocompleteCatalog(searchString);
+					results = [...results, ...psAutocompleteResults];
+					break;
 			}
-		});
+		}
 		return results;
 	};
 
@@ -74,7 +86,7 @@ export default class Catalog {
 		connectors: CatalogConnectors[],
 	): Promise<IDataSource[]> {
 		let results: IDataSource[] = [];
-		connectors.forEach(async (connector) => {
+		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:
 					results = [
@@ -91,7 +103,7 @@ export default class Catalog {
 					break;
 				// TODO: add datahub option to find displayable datasources
 			}
-		});
+		}
 		return results;
 	}
 

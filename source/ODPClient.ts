@@ -114,11 +114,11 @@ export default class ODPClient extends CogniteClient {
 	}
 
 	public async searchCatalog(keyword: string): Promise<IDataSource[]> {
-		return this._catalog.searchCatalog(keyword, [CatalogConnectors.Hardcoded]);
+		return this._catalog.searchCatalog(keyword, [CatalogConnectors.Hardcoded, CatalogConnectors.DataMeshApi]);
 	}
 
 	public async autocompleteCatalog(keyword: string): Promise<string[]> {
-		return this._catalog.autocompleteResults(keyword, [CatalogConnectors.Hardcoded]);
+		return this._catalog.autocompleteResults(keyword, [CatalogConnectors.Hardcoded, CatalogConnectors.DataMeshApi]);
 	}
 
 	public async autocompleteDisplayableDatasources(keyword: string): Promise<IDataSource[]> {
