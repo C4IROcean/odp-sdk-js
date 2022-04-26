@@ -464,5 +464,6 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 	},
 ];
 
+export const ODP_DATAMESH_BASE_URL: string = "http://localhost:8787";
 export const ODP_DATAHUB_GRAPHQL_ENDPOINT: string = "https://catalog.dev.oceandata.xyz/api/gms";
 export const ODP_DATAHUB_TOKEN_SCOPE: string = "https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS";
