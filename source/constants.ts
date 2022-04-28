@@ -10,7 +10,7 @@ export enum DataSources {
 	MapboxVectorTile = "vnd.mapbox-vector-tile",
 }
 
-export type IDataSource = IDataType & IDataSourcePart;
+export type IDataProduct = IDataType & IDataProductPart;
 
 // For now we only have mapbox data types, but this could be come a union if we have more types
 export type IDataType = IMapboxDataType;
@@ -25,7 +25,7 @@ export type IMapboxLayerType =
 	| "raster"
 	| "hillshade"
 	| "background";
-interface IDataSourcePart {
+interface IDataProductPart {
 	name: string;
 	description: string;
 	unit?: string;
@@ -34,8 +34,8 @@ interface IDataSourcePart {
 	sourceUrl: string;
 	tags: string[];
 	filters?: Filters[];
-	domain: string;
-	owner: string;
+	provider: string;
+	providerAcronym: string;
 }
 
 interface IMapboxDataType {
@@ -43,9 +43,9 @@ interface IMapboxDataType {
 	layerType: IMapboxLayerType;
 }
 
-import { IDataSourceStyling } from "./DataSourceStylingClient";
+import { IDataProductStyling } from "./DataProductStylingClient";
 
-export const DATA_SOURCES: IDataSource[] = [
+export const DATA_PRODUCTS: IDataProduct[] = [
 	{
 		name: "salinity",
 		description: "this is the salinity",
@@ -56,8 +56,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		sourceType: DataSources.MapboxVectorTile,
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
 		name: "temperature",
@@ -70,8 +70,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth],
 		unit: "°C",
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
 		name: "pressure",
@@ -84,8 +84,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
 		name: "oxygen",
@@ -98,11 +98,11 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "ml/l",
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
-		name: "nitrage",
+		name: "nitrate",
 		description: "this is the nitrate",
 		source: "mapbox",
 		id: "wod-nitrate-aggregates",
@@ -112,8 +112,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "µmol/l",
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
 		name: "ph",
@@ -126,8 +126,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "µmol/l",
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
 		name: "chlorophyll",
@@ -140,8 +140,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
 		name: "alkalinity",
@@ -154,8 +154,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
 		name: "phosphate",
@@ -168,8 +168,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
 		name: "silicate",
@@ -182,8 +182,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
+		provider: "WOD",
+		providerAcronym: "NOAA",
 	},
 	{
 		name: "windfarms",
@@ -194,8 +194,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "fill",
 		tags: ["windfarms", "norway"],
 		sourceType: DataSources.MapboxVectorTile,
-		domain: "Havvind",
-		owner: "Windfarms owner",
+		provider: "Havvind",
+		providerAcronym: "Windfarms owner",
 	},
 	{
 		name: "seacables",
@@ -206,8 +206,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "line",
 		tags: ["seacables", "norway"],
 		sourceType: DataSources.MapboxVectorTile,
-		domain: "Seacables domain",
-		owner: "Seacables owner",
+		provider: "Seacables domain",
+		providerAcronym: "Seacables owner",
 	},
 	{
 		name: "economic zones",
@@ -218,14 +218,14 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "line",
 		tags: ["economic zones", "eez"],
 		sourceType: DataSources.MapboxVectorTile,
-		domain: "Economic zones domain",
-		owner: "EEZ owner",
+		provider: "Economic zones domain",
+		providerAcronym: "EEZ owner",
 	},
 ];
 
-export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
+export const STYLING_DATA_PRODUCTS: IDataProductStyling[] = [
 	{
-		dataSourceId: "wod-salinity-aggregates",
+		dataProductId: "wod-salinity-aggregates",
 		type: "circle",
 		color: "#58FCD4",
 		circleRadius: 3,
@@ -233,7 +233,7 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "wod-temperature-year-aggregates",
+		dataProductId: "wod-temperature-year-aggregates",
 		type: "circle",
 		color: "#ff69a2",
 		circleRadius: 3,
@@ -241,7 +241,7 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "wod-pressure-aggregates",
+		dataProductId: "wod-pressure-aggregates",
 		type: "circle",
 		color: "#EBB931",
 		circleRadius: 3,
@@ -249,7 +249,7 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "wod-oxygen-aggregates",
+		dataProductId: "wod-oxygen-aggregates",
 		type: "circle",
 		color: "#E7862E",
 		circleRadius: 3,
@@ -257,7 +257,7 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "wod-nitrate-aggregates",
+		dataProductId: "wod-nitrate-aggregates",
 		type: "circle",
 		color: "#555BE3",
 		circleRadius: 3,
@@ -265,7 +265,7 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "wod-ph-aggregates",
+		dataProductId: "wod-ph-aggregates",
 		type: "circle",
 		color: "#FE9FE4",
 		circleRadius: 3,
@@ -273,7 +273,7 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "wod-chlorophyll-aggregates",
+		dataProductId: "wod-chlorophyll-aggregates",
 		type: "circle",
 		color: "#78C35E",
 		circleRadius: 3,
@@ -281,7 +281,7 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "wod-alkalinity-aggregates",
+		dataProductId: "wod-alkalinity-aggregates",
 		type: "circle",
 		color: "#0E8484",
 		circleRadius: 3,
@@ -289,7 +289,7 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "wod-phosphate-aggregates",
+		dataProductId: "wod-phosphate-aggregates",
 		type: "circle",
 		color: "#2DB7F1",
 		circleRadius: 3,
@@ -297,7 +297,7 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "wod-silicate-aggregates",
+		dataProductId: "wod-silicate-aggregates",
 		type: "circle",
 		color: "#FB6299",
 		circleRadius: 3,
@@ -305,20 +305,20 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 		strokeColor: "#ffffff",
 	},
 	{
-		dataSourceId: "norwegian-windfarms",
+		dataProductId: "norwegian-windfarms",
 		type: "fill",
 		color: "#98D5A8",
 		opacity: 0.5,
 	},
 	{
-		dataSourceId: "norwegian-seacables",
+		dataProductId: "norwegian-seacables",
 		type: "line",
 		color: "#8CA5EC",
 		strokeWidth: 1,
 		opacity: 0.5,
 	},
 	{
-		dataSourceId: "economic-zones",
+		dataProductId: "economic-zones",
 		type: "line",
 		color: "#16BFF4",
 		strokeWidth: 1,
@@ -326,9 +326,9 @@ export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
 	},
 ];
 
-export const METADATA_DATA_SOURCES: IMetadata[] = [
+export const METADATA_DATA_PRODUCTS: IMetadata[] = [
 	{
-		dataSourceId: "wod-salinity-aggregates",
+		dataProductId: "wod-salinity-aggregates",
 		name: "Salinity",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -339,7 +339,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "wod-temperature-year-aggregates",
+		dataProductId: "wod-temperature-year-aggregates",
 		name: "Temperature",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -350,7 +350,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "wod-pressure-aggregates",
+		dataProductId: "wod-pressure-aggregates",
 		name: "Pressure",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -360,7 +360,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "wod-oxygen-aggregates",
+		dataProductId: "wod-oxygen-aggregates",
 		name: "Oxygen",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -371,7 +371,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "wod-nitrate-aggregates",
+		dataProductId: "wod-nitrate-aggregates",
 		name: "Nitrate",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -382,7 +382,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "wod-ph-aggregates",
+		dataProductId: "wod-ph-aggregates",
 		name: "Ph",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -393,7 +393,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "wod-chlorophyll-aggregates",
+		dataProductId: "wod-chlorophyll-aggregates",
 		name: "Chlorophyll",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -403,7 +403,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "wod-alkalinity-aggregates",
+		dataProductId: "wod-alkalinity-aggregates",
 		name: "Alkalinity",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -413,7 +413,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "wod-phosphate-aggregates",
+		dataProductId: "wod-phosphate-aggregates",
 		name: "Phosphate",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -423,7 +423,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "wod-silicate-aggregates",
+		dataProductId: "wod-silicate-aggregates",
 		name: "Silicate",
 		source: "NOAA",
 		tags: ["NOAA", "WOD"],
@@ -433,7 +433,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["NOAA", "test citation"],
 	},
 	{
-		dataSourceId: "norwegian-windfarms",
+		dataProductId: "norwegian-windfarms",
 		name: "Norwegian Windfarms",
 		source: "Unknown",
 		tags: [],
@@ -443,7 +443,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["test citation"],
 	},
 	{
-		dataSourceId: "norwegian-seacables",
+		dataProductId: "norwegian-seacables",
 		name: "Norwegian Seacables",
 		source: "Unknown",
 		tags: [],
@@ -453,7 +453,7 @@ export const METADATA_DATA_SOURCES: IMetadata[] = [
 		citation: ["test citation"],
 	},
 	{
-		dataSourceId: "economic-zones",
+		dataProductId: "economic-zones",
 		name: "Economic zones",
 		source: "Unknown",
 		tags: [],

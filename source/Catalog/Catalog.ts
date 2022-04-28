@@ -1,6 +1,6 @@
 import { Auth } from "./../auth";
-import { DataSources, IDataSource, METADATA_DATA_SOURCES } from "./../constants";
-import { DATA_SOURCES } from "../constants";
+import { DataSources, IDataProduct, METADATA_DATA_PRODUCTS } from "./../constants";
+import { DATA_PRODUCTS } from "../constants";
 import DataHubClient, { IMetadata } from "./Connectors/DataHubClient";
 import DataMeshApiClient from "./Connectors/DataMeshApiClient";
 
@@ -23,14 +23,14 @@ export default class Catalog {
 		this._dataMeshApiClient = DataMeshApiClient.getDataMeshApiClient(options);
 	}
 
-	public searchCatalog = async (searchString: string, connectors: CatalogConnectors[]): Promise<IDataSource[]> => {
-		let results: IDataSource[] = [];
+	public searchCatalog = async (searchString: string, connectors: CatalogConnectors[]): Promise<IDataProduct[]> => {
+		let results: IDataProduct[] = [];
 		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:
 					results = [
 						...results,
-						...DATA_SOURCES.filter(
+						...DATA_PRODUCTS.filter(
 							(source) =>
 								source.tags.find((tag) => tag.toLowerCase().includes(searchString.toLowerCase())) ||
 								source.name.toLowerCase().includes(searchString.toLowerCase()) ||
@@ -59,7 +59,7 @@ export default class Catalog {
 				case CatalogConnectors.Hardcoded:
 					results = [
 						...results,
-						...DATA_SOURCES.filter(
+						...DATA_PRODUCTS.filter(
 							(source) =>
 								source.tags.find((tag) => tag.toLowerCase().includes(searchString.toLowerCase())) ||
 								source.name.toLowerCase().includes(searchString.toLowerCase()) ||
@@ -81,17 +81,17 @@ export default class Catalog {
 		return results;
 	};
 
-	public async autocompleteDisplayableDatasources(
+	public async autocompleteDisplayableDataProducts(
 		keyword: string,
 		connectors: CatalogConnectors[],
-	): Promise<IDataSource[]> {
-		let results: IDataSource[] = [];
+	): Promise<IDataProduct[]> {
+		let results: IDataProduct[] = [];
 		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:
 					results = [
 						...results,
-						...DATA_SOURCES.filter(
+						...DATA_PRODUCTS.filter(
 							(source) =>
 								(source.tags.find((tag) => tag.toLowerCase().includes(keyword.toLowerCase())) ||
 									source.name.toLowerCase().includes(keyword.toLowerCase()) ||
@@ -101,17 +101,20 @@ export default class Catalog {
 						),
 					];
 					break;
-				// TODO: add datahub option to find displayable datasources
+				// TODO: add datahub option to find displayable dataproducts
 			}
 		}
 		return results;
 	}
 
-	public async getMetadataForDataSourceById(dataSourceId: string, connector: CatalogConnectors): Promise<IMetadata> {
+	public async getMetadataForDataProductById(
+		dataProductId: string,
+		connector: CatalogConnectors,
+	): Promise<IMetadata> {
 		let metadata: IMetadata;
 		switch (connector) {
 			case CatalogConnectors.Hardcoded:
-				metadata = METADATA_DATA_SOURCES.find((el) => el.dataSourceId === dataSourceId);
+				metadata = METADATA_DATA_PRODUCTS.find((el: IMetadata) => el.dataProductId === dataProductId);
 				break;
 			// TODO: add datahub option to get full metadata
 		}
@@ -130,7 +133,7 @@ export default class Catalog {
 		return mappedResults;
 	}
 
-	private _mapSearchResultsToOdp(connector: CatalogConnectors, searchResults: IDataSource[]) {
+	private _mapSearchResultsToOdp(connector: CatalogConnectors, searchResults: IDataProduct[]) {
 		let mappedResults;
 		switch (connector) {
 			case CatalogConnectors.Hardcoded:

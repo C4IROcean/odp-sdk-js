@@ -5,8 +5,8 @@ import { Auth } from "./auth";
 import { Casts } from "./casts";
 import Catalog, { CatalogConnectors } from "./Catalog/Catalog";
 import { IMetadata } from "./Catalog/Connectors/DataHubClient";
-import { IDataSource } from "./constants";
-import DataSourceStylingClient, { IDataSourceStyling } from "./DataSourceStylingClient";
+import { IDataProduct } from "./constants";
+import DataProductStylingClient, { IDataProductStyling } from "./DataProductStylingClient";
 import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
 
@@ -45,7 +45,7 @@ export default class ODPClient extends CogniteClient {
 	private _marineRegions: MarineRegions;
 	private auth: Auth;
 	private _catalog: Catalog;
-	private _dataSourceStylingClient: DataSourceStylingClient;
+	private _dataProductStylingClient: DataProductStylingClient;
 
 	public constructor(options: RequiredConfig & OptionalConfig, authConfig: BrowserAuthOptions) {
 		super({
@@ -73,7 +73,7 @@ export default class ODPClient extends CogniteClient {
 			...authConfig,
 		});
 
-		this._dataSourceStylingClient = new DataSourceStylingClient();
+		this._dataProductStylingClient = new DataProductStylingClient();
 		this._catalog = new Catalog({ auth: this.auth });
 	}
 
@@ -109,11 +109,11 @@ export default class ODPClient extends CogniteClient {
 		return this.auth.logout();
 	}
 
-	public async getDataSourceStyling(dataSourceId: string): Promise<IDataSourceStyling | undefined> {
-		return this._dataSourceStylingClient.getDataSourceStyling(dataSourceId);
+	public async getDataProductStyling(dataProductId: string): Promise<IDataProductStyling | undefined> {
+		return this._dataProductStylingClient.getDataProductStyling(dataProductId);
 	}
 
-	public async searchCatalog(keyword: string): Promise<IDataSource[]> {
+	public async searchCatalog(keyword: string): Promise<IDataProduct[]> {
 		return this._catalog.searchCatalog(keyword, [CatalogConnectors.Hardcoded, CatalogConnectors.DataMeshApi]);
 	}
 
@@ -121,12 +121,12 @@ export default class ODPClient extends CogniteClient {
 		return this._catalog.autocompleteResults(keyword, [CatalogConnectors.Hardcoded, CatalogConnectors.DataMeshApi]);
 	}
 
-	public async autocompleteDisplayableDatasources(keyword: string): Promise<IDataSource[]> {
-		return this._catalog.autocompleteDisplayableDatasources(keyword, [CatalogConnectors.Hardcoded]);
+	public async autocompleteDisplayableDataProducts(keyword: string): Promise<IDataProduct[]> {
+		return this._catalog.autocompleteDisplayableDataProducts(keyword, [CatalogConnectors.Hardcoded]);
 	}
 
-	public async getMetadataForDataSourceById(dataSourceId: string): Promise<IMetadata> {
-		return this._catalog.getMetadataForDataSourceById(dataSourceId, CatalogConnectors.Hardcoded);
+	public async getMetadataForDataProductById(dataProductId: string): Promise<IMetadata> {
+		return this._catalog.getMetadataForDataProductById(dataProductId, CatalogConnectors.Hardcoded);
 	}
 
 	/**

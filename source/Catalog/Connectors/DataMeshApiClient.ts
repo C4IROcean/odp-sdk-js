@@ -30,15 +30,19 @@ export default class DataMeshApiClient {
 		return this._dataMeshApiClient;
 	}
 
-	public searchCatalog = async (searchWord: string): Promise<any> => {
+	public testFunction() {
+		console.log("unmocked function run");
+	}
+
+	public async searchCatalog(searchWord: string): Promise<any[]> {
 		try {
 			const response = await axios.get(`${this._dataMeshApiBaseUrl}/catalog/v1/search?q=${searchWord}`);
 			return response.data;
 		} catch (error) {
 			log.error(error);
 		}
-	};
-	public autocompleteCatalog = async (searchWord: string): Promise<any> => {
+	}
+	public autocompleteCatalog = async (searchWord: string): Promise<any[]> => {
 		try {
 			const response = await axios.get(`${this._dataMeshApiBaseUrl}/catalog/v1/search?q=${searchWord}`);
 			return response.data;

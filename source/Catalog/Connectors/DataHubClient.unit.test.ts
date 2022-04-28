@@ -1,9 +1,10 @@
 import ODPClient from "../../ODPClient";
+import DataMeshApiClient from "./DataMeshApiClient";
 
 let odpClient: ODPClient;
 
 jest.mock("../../constants.ts", () => ({
-	DATA_SOURCES: [
+	DATA_PRODUCTS: [
 		{
 			name: "testTemperatureTilesetName",
 			description: "This describes some test institution called worlds oceans protection organization.",
@@ -16,9 +17,9 @@ jest.mock("../../constants.ts", () => ({
 			unit: "°C",
 		},
 	],
-	METADATA_DATA_SOURCES: [
+	METADATA_DATA_PRODUCTS: [
 		{
-			dataSourceId: "testTilesetId",
+			dataProductId: "testTilesetId",
 			name: "Salinity",
 			source: "NOAA",
 			tags: ["NOAA", "WOD"],
@@ -30,6 +31,14 @@ jest.mock("../../constants.ts", () => ({
 	],
 }));
 
+jest.mock("./DataMeshApiClient.ts", () => {
+	const { default: dataMeshApiClient } = jest.requireActual("./DataMeshApiClient.ts");
+
+	dataMeshApiClient.prototype.searchCatalog = () => [];
+
+	return dataMeshApiClient;
+});
+
 beforeAll(() => {
 	odpClient = new ODPClient(
 		{ appId: "Ocean Data Explorer", baseUrl: "https://api.cognitedata.com" },
@@ -40,44 +49,47 @@ beforeAll(() => {
 	);
 });
 
-test("data source with tag that contains search keyword should be retreived", async () => {
+test("data product with tag that contains search keyword should be retreived", async () => {
 	const searchWord = "testTag";
 
 	const results = await odpClient.searchCatalog(searchWord);
 	expect(results.find((result) => result.id === "testTilesetId")).toBeDefined();
 });
 
-test("data source with description that contains search keyword should be retreived", async () => {
+test("data product with description that contains search keyword should be retreived", async () => {
 	const searchWord = "worlds ocean";
 
 	const results = await odpClient.searchCatalog(searchWord);
 	expect(results.find((result) => result.id === "testTilesetId")).toBeDefined();
 });
 
-test("data source with name that contains search keyword should be retreived", async () => {
+test("data product with name that contains search keyword should be retreived", async () => {
 	const searchWord = "setna";
 
 	const results = await odpClient.searchCatalog(searchWord);
 	expect(results.find((result) => result.id === "testTilesetId")).toBeDefined();
 });
 
-test("data source with id that contains search keyword should be retreived", async () => {
+test("data product with id that contains search keyword should be retreived", async () => {
 	const searchWord = "lesetId";
 
 	const results = await odpClient.searchCatalog(searchWord);
 	expect(results.find((result) => result.id === "testTilesetId")).toBeDefined();
 });
 
-test("retrieve metadata for existing data source", async () => {
-	const dataSourceId = "testTilesetId";
+test("retrieve metadata for existing data product", async () => {
+	const dataProductId = "testTilesetId";
 
-	const results = await odpClient.getMetadataForDataSourceById(dataSourceId);
+	const results = await odpClient.getMetadataForDataProductById(dataProductId);
 	expect(results).toBeDefined();
 });
 
-test("retrieve no metadata for not existing data source", async () => {
-	const dataSourceId = "notExistingId";
+test("retrieve no metadata for not existing data product", async () => {
+	const dataProductId = "notExistingId";
 
-	const results = await odpClient.getMetadataForDataSourceById(dataSourceId);
+	const results = await odpClient.getMetadataForDataProductById(dataProductId);
 	expect(results).toBeUndefined();
 });
+function newFunction() {
+	"searchCatalog";
+}

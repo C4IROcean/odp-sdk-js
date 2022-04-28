@@ -1,8 +1,8 @@
 import { Auth } from "../../auth";
 import {
-	IDataSource,
-	DATA_SOURCES,
-	METADATA_DATA_SOURCES,
+	IDataProduct,
+	DATA_PRODUCTS,
+	METADATA_DATA_PRODUCTS,
 	ODP_DATAHUB_GRAPHQL_ENDPOINT,
 	ODP_DATAHUB_TOKEN_SCOPE,
 } from "../../constants";
@@ -14,7 +14,7 @@ interface IDataHubClientOptions {
 }
 
 export interface IMetadata {
-	dataSourceId: string;
+	dataProductId: string;
 	name: string;
 	source: string;
 	tags: string[];

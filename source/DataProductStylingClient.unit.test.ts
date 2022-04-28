@@ -3,9 +3,9 @@ import { ODPClient } from ".";
 let odpClient: ODPClient;
 
 jest.mock("./constants.ts", () => ({
-	STYLING_DATA_SOURCES: [
+	STYLING_DATA_PRODUCTS: [
 		{
-			dataSourceId: "testId",
+			dataProductId: "testId",
 			type: "circle",
 			color: "#58FCD4",
 			circleRadius: 3,
@@ -25,16 +25,16 @@ beforeAll(() => {
 	);
 });
 
-test("data source styling should be retrieved", async () => {
-	const dataSourceId = "testId";
+test("data product styling should be retrieved", async () => {
+	const dataProductId = "testId";
 
-	const result = await odpClient.getDataSourceStyling(dataSourceId);
+	const result = await odpClient.getDataProductStyling(dataProductId);
 	expect(result).toBeDefined();
 });
 
-test("non existent data source styling lookup should give undefined", async () => {
-	const dataSourceId = "undefined data source styling";
+test("non existent data product styling lookup should give undefined", async () => {
+	const dataProductId = "undefined data product styling";
 
-	const result = await odpClient.getDataSourceStyling(dataSourceId);
+	const result = await odpClient.getDataProductStyling(dataProductId);
 	expect(result).toBeUndefined();
 });
