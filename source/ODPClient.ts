@@ -5,8 +5,13 @@ import { Auth } from "./auth";
 import { Casts } from "./casts";
 import Catalog, { CatalogConnectors } from "./Catalog/Catalog";
 import { IMetadata } from "./Catalog/Connectors/DataHubClient";
-import { IDataProduct } from "./constants";
-import DataProductStylingClient, { IDataProductStyling } from "./DataProductStylingClient";
+import {
+	IDataLayer,
+	IDataProduct,
+	IDataProductExtendedMainInfo,
+	IDataProductMainInfo,
+	IDataProductMeta,
+} from "./constants";
 import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
 
@@ -45,7 +50,6 @@ export default class ODPClient extends CogniteClient {
 	private _marineRegions: MarineRegions;
 	private auth: Auth;
 	private _catalog: Catalog;
-	private _dataProductStylingClient: DataProductStylingClient;
 
 	public constructor(options: RequiredConfig & OptionalConfig, authConfig: BrowserAuthOptions) {
 		super({
@@ -73,7 +77,6 @@ export default class ODPClient extends CogniteClient {
 			...authConfig,
 		});
 
-		this._dataProductStylingClient = new DataProductStylingClient();
 		this._catalog = new Catalog({ auth: this.auth });
 	}
 
@@ -109,24 +112,20 @@ export default class ODPClient extends CogniteClient {
 		return this.auth.logout();
 	}
 
-	public async getDataProductStyling(dataProductId: string): Promise<IDataProductStyling | undefined> {
-		return this._dataProductStylingClient.getDataProductStyling(dataProductId);
+	public async searchCatalog(keyword: string): Promise<IDataProductExtendedMainInfo[]> {
+		return this._catalog.searchCatalog(keyword, [CatalogConnectors.DataMeshApi]);
 	}
 
-	public async searchCatalog(keyword: string): Promise<IDataProduct[]> {
-		return this._catalog.searchCatalog(keyword, [CatalogConnectors.Hardcoded, CatalogConnectors.DataMeshApi]);
+	public async autocompleteCatalog(keyword: string): Promise<IDataProductMainInfo[]> {
+		return this._catalog.autocompleteCatalog(keyword, [CatalogConnectors.DataMeshApi]);
 	}
 
-	public async autocompleteCatalog(keyword: string): Promise<string[]> {
-		return this._catalog.autocompleteResults(keyword, [CatalogConnectors.Hardcoded, CatalogConnectors.DataMeshApi]);
+	public async autocompleteDataLayers(keyword: string): Promise<IDataLayer[]> {
+		return this._catalog.autocompleteDataLayers(keyword, [CatalogConnectors.DataMeshApi]);
 	}
 
-	public async autocompleteDisplayableDataProducts(keyword: string): Promise<IDataProduct[]> {
-		return this._catalog.autocompleteDisplayableDataProducts(keyword, [CatalogConnectors.Hardcoded]);
-	}
-
-	public async getMetadataForDataProductById(dataProductId: string): Promise<IMetadata> {
-		return this._catalog.getMetadataForDataProductById(dataProductId, CatalogConnectors.Hardcoded);
+	public async getDataProductByUuid(dataProductUuid: string): Promise<IDataProductMeta> {
+		return this._catalog.getMetadataForDataProductById(dataProductUuid, CatalogConnectors.DataMeshApi);
 	}
 
 	/**

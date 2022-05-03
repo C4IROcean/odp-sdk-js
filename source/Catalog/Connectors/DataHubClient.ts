@@ -1,11 +1,5 @@
 import { Auth } from "../../auth";
-import {
-	IDataProduct,
-	DATA_PRODUCTS,
-	METADATA_DATA_PRODUCTS,
-	ODP_DATAHUB_GRAPHQL_ENDPOINT,
-	ODP_DATAHUB_TOKEN_SCOPE,
-} from "../../constants";
+import { ODP_DATAHUB_GRAPHQL_ENDPOINT, ODP_DATAHUB_TOKEN_SCOPE } from "../../constants";
 
 interface IDataHubClientOptions {
 	auth: Auth;

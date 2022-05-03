@@ -1,3 +1,4 @@
+import { IDataLayer, IDataProductExtendedMainInfo, IDataProductMainInfo, IDataProductMeta } from "./../../constants";
 import log from "loglevel";
 import { Auth } from "../../auth";
 import { ODP_DATAHUB_TOKEN_SCOPE, ODP_DATAMESH_BASE_URL } from "../../constants";
@@ -30,21 +31,34 @@ export default class DataMeshApiClient {
 		return this._dataMeshApiClient;
 	}
 
-	public testFunction() {
-		console.log("unmocked function run");
-	}
-
-	public async searchCatalog(searchWord: string): Promise<any[]> {
+	public async searchCatalog(searchWord: string): Promise<IDataProductExtendedMainInfo[]> {
 		try {
-			const response = await axios.get(`${this._dataMeshApiBaseUrl}/catalog/v1/search?q=${searchWord}`);
+			const response = await axios.get(`${this._dataMeshApiBaseUrl}/search?q=${searchWord}`);
+			console.log(response.data);
 			return response.data;
 		} catch (error) {
 			log.error(error);
 		}
 	}
-	public autocompleteCatalog = async (searchWord: string): Promise<any[]> => {
+	public autocompleteCatalog = async (searchWord: string): Promise<IDataProductMainInfo[]> => {
 		try {
-			const response = await axios.get(`${this._dataMeshApiBaseUrl}/catalog/v1/search?q=${searchWord}`);
+			const response = await axios.get(`${this._dataMeshApiBaseUrl}/autocomplete?q=${searchWord}`);
+			return response.data;
+		} catch (error) {
+			log.error(error);
+		}
+	};
+	public autocompleteLayers = async (searchWord: string): Promise<IDataLayer[]> => {
+		try {
+			const response = await axios.get(`${this._dataMeshApiBaseUrl}/layers?q=${searchWord}`);
+			return response.data;
+		} catch (error) {
+			log.error(error);
+		}
+	};
+	public getDataProductByUuid = async (uuid: string): Promise<IDataProductMeta> => {
+		try {
+			const response = await axios.get(`${this._dataMeshApiBaseUrl}/dataproduct?uuid=${uuid}`);
 			return response.data;
 		} catch (error) {
 			log.error(error);
