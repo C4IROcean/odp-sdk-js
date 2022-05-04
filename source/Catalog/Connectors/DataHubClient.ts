@@ -4,7 +4,7 @@ import { ODP_DATAHUB_GRAPHQL_ENDPOINT, ODP_DATAHUB_TOKEN_SCOPE } from "../../con
 interface IDataHubClientOptions {
 	auth: Auth;
 	graphQlEndpoint?: string;
-	datahubTokenScope?: string;
+	datahubTokenScope?: string[];
 }
 
 export interface IMetadata {
@@ -21,7 +21,7 @@ export interface IMetadata {
 export default class DataHubClient {
 	private static _dataHubClient: DataHubClient;
 	private _auth: Auth;
-	private _tokenScope: string;
+	private _tokenScope: string[];
 	private _graphQlEndpoint: string;
 
 	private constructor(options: IDataHubClientOptions) {

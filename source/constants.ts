@@ -85,4 +85,4 @@ export type IMapboxLayerType =
 
 export const ODP_DATAMESH_BASE_URL: string = "https://mesh.dev.oceandata.xyz/catalog/v1";
 export const ODP_DATAHUB_GRAPHQL_ENDPOINT: string = "https://catalog.dev.oceandata.xyz/api/gms";
-export const ODP_DATAHUB_TOKEN_SCOPE: string = "https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS";
+export const ODP_DATAHUB_TOKEN_SCOPE: string[] = ["https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS"];

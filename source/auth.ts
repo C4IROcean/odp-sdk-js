@@ -77,11 +77,11 @@ export class Auth {
 		return this._msalInstance.logoutRedirect();
 	};
 
-	public getToken = async (scope: string | string[]): Promise<string> => {
+	public getToken = async (scope: string[]): Promise<string> => {
 		const account = this._msalInstance.getAllAccounts()[0];
 		const request = {
 			account,
-			scopes: [...scope],
+			scopes: scope,
 		};
 		return new Promise<string>((resolve, reject) => {
 			this._msalInstance.acquireTokenSilent(request).then((res) => {

@@ -7,14 +7,14 @@ import axios from "axios";
 
 interface IDataMeshApiClientOptions {
 	auth: Auth;
-	datahubTokenScope?: string;
+	datahubTokenScope?: string[];
 	datahMeshApiBaseUrl?: string;
 }
 
 export default class DataMeshApiClient {
 	private static _dataMeshApiClient;
 	private _auth: Auth;
-	private _tokenScope: string;
+	private _tokenScope: string[];
 	private _dataMeshApiBaseUrl: string;
 
 	private constructor(options: IDataMeshApiClientOptions) {
@@ -33,9 +33,15 @@ export default class DataMeshApiClient {
 
 	public async searchCatalog(searchWord: string): Promise<IDataProductExtendedMainInfo[]> {
 		try {
-			const response = await axios.get(`${this._dataMeshApiBaseUrl}/search?q=${searchWord}`);
-			console.log(response.data);
-			return response.data;
+			const token = await this._auth.getToken(this._tokenScope);
+			const response = await fetch(`${this._dataMeshApiBaseUrl}/search?q=${searchWord}`, {
+				headers: {
+					authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+			});
+			return response.json();
 		} catch (error) {
 			log.error(error);
 		}
