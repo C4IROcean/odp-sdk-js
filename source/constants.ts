@@ -34,6 +34,8 @@ interface IDataSourcePart {
 	sourceUrl: string;
 	tags: string[];
 	filters?: Filters[];
+	domain: string;
+	owner: string;
 }
 
 interface IMapboxDataType {
@@ -54,6 +56,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		sourceType: DataSources.MapboxVectorTile,
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "temperature",
@@ -66,6 +70,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth],
 		unit: "°C",
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "pressure",
@@ -78,6 +84,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "oxygen",
@@ -90,6 +98,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "ml/l",
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "nitrage",
@@ -102,6 +112,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "µmol/l",
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "ph",
@@ -114,6 +126,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "µmol/l",
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "chlorophyll",
@@ -126,6 +140,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "alkalinity",
@@ -138,6 +154,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "phosphate",
@@ -150,6 +168,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "silicate",
@@ -162,6 +182,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "circle",
 		filters: [Filters.Depth, Filters.Time],
 		unit: "N/A",
+		domain: "WOD",
+		owner: "NOAA",
 	},
 	{
 		name: "windfarms",
@@ -172,6 +194,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "fill",
 		tags: ["windfarms", "norway"],
 		sourceType: DataSources.MapboxVectorTile,
+		domain: "Havvind",
+		owner: "Windfarms owner",
 	},
 	{
 		name: "seacables",
@@ -182,6 +206,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "line",
 		tags: ["seacables", "norway"],
 		sourceType: DataSources.MapboxVectorTile,
+		domain: "Seacables domain",
+		owner: "Seacables owner",
 	},
 	{
 		name: "economic zones",
@@ -192,6 +218,8 @@ export const DATA_SOURCES: IDataSource[] = [
 		layerType: "line",
 		tags: ["economic zones", "eez"],
 		sourceType: DataSources.MapboxVectorTile,
+		domain: "Economic zones domain",
+		owner: "EEZ owner",
 	},
 ];
 
