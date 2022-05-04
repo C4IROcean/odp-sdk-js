@@ -4,14 +4,7 @@ import log from "loglevel";
 import { Auth } from "./auth";
 import { Casts } from "./casts";
 import Catalog, { CatalogConnectors } from "./Catalog/Catalog";
-import { IMetadata } from "./Catalog/Connectors/DataHubClient";
-import {
-	IDataLayer,
-	IDataProduct,
-	IDataProductExtendedMainInfo,
-	IDataProductMainInfo,
-	IDataProductMeta,
-} from "./constants";
+import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductMainInfo, IDataProductResult } from "./constants";
 import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
 
@@ -112,7 +105,7 @@ export default class ODPClient extends CogniteClient {
 		return this.auth.logout();
 	}
 
-	public async searchCatalog(keyword: string): Promise<IDataProductExtendedMainInfo[]> {
+	public async searchCatalog(keyword: string): Promise<IDataProductResult[]> {
 		return this._catalog.searchCatalog(keyword, [CatalogConnectors.DataMeshApi]);
 	}
 
@@ -120,12 +113,16 @@ export default class ODPClient extends CogniteClient {
 		return this._catalog.autocompleteCatalog(keyword, [CatalogConnectors.DataMeshApi]);
 	}
 
-	public async autocompleteDataLayers(keyword: string): Promise<IDataLayer[]> {
+	public async autocompleteDataLayers(keyword: string): Promise<IDataLayerMain[]> {
 		return this._catalog.autocompleteDataLayers(keyword, [CatalogConnectors.DataMeshApi]);
 	}
 
-	public async getDataProductByUuid(dataProductUuid: string): Promise<IDataProductMeta> {
-		return this._catalog.getMetadataForDataProductById(dataProductUuid, CatalogConnectors.DataMeshApi);
+	public async getDataLayerById(id: number): Promise<IDataLayer> {
+		return this._catalog.getDataLayerById(id, [CatalogConnectors.DataMeshApi]);
+	}
+
+	public async getDataProductByUuid(dataProductUuid: string): Promise<IDataProduct> {
+		return this._catalog.getDataProductByUuid(dataProductUuid, CatalogConnectors.DataMeshApi);
 	}
 
 	/**

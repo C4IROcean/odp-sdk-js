@@ -1,12 +1,5 @@
 import { Auth } from "./../auth";
-import {
-	DataSources,
-	IDataLayer,
-	IDataProduct,
-	IDataProductExtendedMainInfo,
-	IDataProductMainInfo,
-	IDataProductMeta,
-} from "./../constants";
+import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductMainInfo, IDataProductResult } from "./../constants";
 import DataHubClient from "./Connectors/DataHubClient";
 import DataMeshApiClient from "./Connectors/DataMeshApiClient";
 
@@ -31,17 +24,12 @@ export default class Catalog {
 	public searchCatalog = async (
 		searchString: string,
 		connectors: CatalogConnectors[],
-	): Promise<IDataProductExtendedMainInfo[]> => {
-		let results: IDataProductExtendedMainInfo[] = [];
+	): Promise<IDataProductResult[]> => {
+		let results: IDataProductResult[] = null;
 		for (const connector of connectors) {
 			switch (connector) {
-				case CatalogConnectors.Datahub:
-					const dhResults = await this._datahubClient.searchFullText("DATASET", searchString);
-					results = [...results, ...this._mapSearchResultsToOdp(connector, dhResults)];
-					break;
 				case CatalogConnectors.DataMeshApi:
-					const psResults = await this._dataMeshApiClient.searchCatalog(searchString);
-					results = [...results, ...psResults];
+					results = await this._dataMeshApiClient.searchCatalog(searchString);
 					break;
 			}
 		}
@@ -68,24 +56,40 @@ export default class Catalog {
 		return results;
 	};
 
-	public async autocompleteDataLayers(keyword: string, connectors: CatalogConnectors[]): Promise<IDataLayer[]> {
-		let results: IDataLayer[] = [];
+	public autocompleteDataLayers = async (
+		keyword: string,
+		connectors: CatalogConnectors[],
+	): Promise<IDataLayerMain[]> => {
+		let results: IDataLayerMain[] = [];
 		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.DataMeshApi:
-					results = await this._dataMeshApiClient.autocompleteLayers(keyword);
+					results = await this._dataMeshApiClient.autocompleteDataLayers(keyword);
 					break;
 				// TODO: add datahub option to find displayable dataproducts
 			}
 		}
 		return results;
-	}
+	};
 
-	public async getMetadataForDataProductById(
+	public getDataLayerById = async (id: number, connectors: CatalogConnectors[]): Promise<IDataLayer> => {
+		let results: IDataLayer = null;
+		for (const connector of connectors) {
+			switch (connector) {
+				case CatalogConnectors.DataMeshApi:
+					results = await this._dataMeshApiClient.getLayerById(id);
+					break;
+				// TODO: add datahub option to find displayable dataproducts
+			}
+		}
+		return results;
+	};
+
+	public getDataProductByUuid = async (
 		dataProductUuid: string,
 		connector: CatalogConnectors,
-	): Promise<IDataProductMeta> {
-		let metadata: IDataProductMeta;
+	): Promise<IDataProduct> => {
+		let metadata: IDataProduct = null;
 		switch (connector) {
 			case CatalogConnectors.DataMeshApi:
 				metadata = await this._dataMeshApiClient.getDataProductByUuid(dataProductUuid);
@@ -93,7 +97,7 @@ export default class Catalog {
 			// TODO: add datahub option to get full metadata
 		}
 		return metadata;
-	}
+	};
 
 	private _mapAutocompleteResultsToOdp(connector: CatalogConnectors, autocompleteResults: any) {
 		let mappedResults;

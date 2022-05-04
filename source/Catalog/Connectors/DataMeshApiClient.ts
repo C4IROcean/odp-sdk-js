@@ -1,9 +1,14 @@
-import { IDataLayer, IDataProductExtendedMainInfo, IDataProductMainInfo, IDataProductMeta } from "./../../constants";
+import axios from "axios";
 import log from "loglevel";
 import { Auth } from "../../auth";
-import { ODP_DATAHUB_TOKEN_SCOPE, ODP_DATAMESH_BASE_URL } from "../../constants";
-import * as http from "http";
-import axios from "axios";
+import {
+	IDataLayerMain,
+	IDataProduct,
+	IDataProductResult,
+	ODP_DATAHUB_TOKEN_SCOPE,
+	ODP_DATAMESH_BASE_URL,
+} from "../../constants";
+import { IDataLayer, IDataProductMainInfo } from "./../../constants";
 
 interface IDataMeshApiClientOptions {
 	auth: Auth;
@@ -31,12 +36,13 @@ export default class DataMeshApiClient {
 		return this._dataMeshApiClient;
 	}
 
-	public async searchCatalog(searchWord: string): Promise<IDataProductExtendedMainInfo[]> {
+	public async searchCatalog(searchWord: string): Promise<IDataProductResult[]> {
 		try {
 			const token = await this._auth.getToken(this._tokenScope);
 			const response = await fetch(`${this._dataMeshApiBaseUrl}/search?q=${searchWord}`, {
+				method: "GET",
 				headers: {
-					authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${token}`,
 					"Content-Type": "application/json",
 					Accept: "application/json",
 				},
@@ -54,15 +60,23 @@ export default class DataMeshApiClient {
 			log.error(error);
 		}
 	};
-	public autocompleteLayers = async (searchWord: string): Promise<IDataLayer[]> => {
+	public autocompleteDataLayers = async (searchWord: string): Promise<IDataLayerMain[]> => {
 		try {
-			const response = await axios.get(`${this._dataMeshApiBaseUrl}/layers?q=${searchWord}`);
+			const response = await axios.get(`${this._dataMeshApiBaseUrl}/autocompletelayers?q=${searchWord}`);
 			return response.data;
 		} catch (error) {
 			log.error(error);
 		}
 	};
-	public getDataProductByUuid = async (uuid: string): Promise<IDataProductMeta> => {
+	public getLayerById = async (id: number): Promise<IDataLayer> => {
+		try {
+			const response = await axios.get(`${this._dataMeshApiBaseUrl}/layer?id=${id}`);
+			return response.data;
+		} catch (error) {
+			log.error(error);
+		}
+	};
+	public getDataProductByUuid = async (uuid: string): Promise<IDataProduct> => {
 		try {
 			const response = await axios.get(`${this._dataMeshApiBaseUrl}/dataproduct?uuid=${uuid}`);
 			return response.data;

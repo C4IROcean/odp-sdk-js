@@ -1,6 +1,7 @@
-/* eslint-disable max-len */
-import { IMetadata } from "./Catalog/Connectors/DataHubClient";
-
+enum OdpDataAccessSolutions {
+	ODP = "ODP",
+	ODC = "ODC",
+}
 export interface IDataProductMainInfo {
 	uuid: string;
 	name: string;
@@ -11,9 +12,10 @@ export interface IDataProductExtendedMainInfo extends IDataProductMainInfo {
 	providerAcronym: string[];
 	creator: string;
 	databaseDescription: string;
-	accessType: string;
+	accessType: "public" | "private";
 	timespan: string[];
-	availableIn: string;
+	availableIn: OdpDataAccessSolutions[];
+	layers: IDataLayerMain[];
 }
 export interface IDataProductMeta extends IDataProductExtendedMainInfo {
 	citaton: string;
@@ -35,9 +37,17 @@ export interface IDataProductMeta extends IDataProductExtendedMainInfo {
 	doi: string;
 }
 
-export interface IDataLayer {
+export interface IDataProductResult {
+	dataProductResult: IDataProductExtendedMainInfo;
+	dataLayers: IDataLayerMain[];
+}
+
+export interface IDataLayerMain {
+	id: number;
 	name: string;
 	dataProductUuid: string;
+}
+export interface IDataLayer extends IDataLayerMain {
 	dateCreated: string;
 	dateUpdated: string;
 	sourceUrl: string;
