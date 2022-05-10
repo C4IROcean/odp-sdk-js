@@ -1,9 +1,12 @@
+import { IDataProductMeta } from "./../../dist/constants.d";
 import { Auth } from "./../auth";
 import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductMainInfo, IDataProductResult } from "./../constants";
 import DataHubClient from "./Connectors/DataHubClient";
 import DataMeshApiClient from "./Connectors/DataMeshApiClient";
+import HardcodedClient from "./Connectors/HardcodedClient";
 
 export enum CatalogConnectors {
+	Hardcoded = "hardcoded",
 	Datahub = "datahub",
 	DataMeshApi = "datameshapi",
 }
@@ -28,8 +31,14 @@ export default class Catalog {
 		let results: IDataProductResult[] = null;
 		for (const connector of connectors) {
 			switch (connector) {
+				case CatalogConnectors.Hardcoded:
+					results = [...results, ...HardcodedClient.searchCatalog(searchString)];
+					break;
 				case CatalogConnectors.DataMeshApi:
 					results = await this._dataMeshApiClient.searchCatalog(searchString);
+					break;
+				case CatalogConnectors.Datahub:
+					results = await this._datahubClient.searchFullText("DATASET", searchString);
 					break;
 			}
 		}
@@ -43,6 +52,9 @@ export default class Catalog {
 		let results: IDataProductMainInfo[] = [];
 		for (const connector of connectors) {
 			switch (connector) {
+				case CatalogConnectors.Hardcoded:
+					results = [...results, ...HardcodedClient.autocompleteCatalog(searchString)];
+					break;
 				case CatalogConnectors.Datahub:
 					const dhResults = await this._datahubClient.autocompleteResults(searchString);
 					results = [...results, ...this._mapAutocompleteResultsToOdp(connector, dhResults)];
@@ -63,6 +75,9 @@ export default class Catalog {
 		let results: IDataLayerMain[] = [];
 		for (const connector of connectors) {
 			switch (connector) {
+				case CatalogConnectors.Hardcoded:
+					results = [...results, ...HardcodedClient.autocompleteDataLayers(keyword)];
+					break;
 				case CatalogConnectors.DataMeshApi:
 					results = await this._dataMeshApiClient.autocompleteDataLayers(keyword);
 					break;
@@ -72,31 +87,35 @@ export default class Catalog {
 		return results;
 	};
 
-	public getDataLayerById = async (id: number, connectors: CatalogConnectors[]): Promise<IDataLayer> => {
-		let results: IDataLayer = null;
-		for (const connector of connectors) {
-			switch (connector) {
-				case CatalogConnectors.DataMeshApi:
-					results = await this._dataMeshApiClient.getLayerById(id);
-					break;
-				// TODO: add datahub option to find displayable dataproducts
-			}
+	public getDataLayerById = async (id: number, connector: CatalogConnectors): Promise<IDataLayer> => {
+		let result: IDataLayer = null;
+		switch (connector) {
+			case CatalogConnectors.Hardcoded:
+				result = HardcodedClient.getLayerById(id);
+				break;
+			case CatalogConnectors.DataMeshApi:
+				result = await this._dataMeshApiClient.getLayerById(id);
+				break;
+			// TODO: add datahub option to find displayable dataproducts
 		}
-		return results;
+		return result;
 	};
 
 	public getDataProductByUuid = async (
 		dataProductUuid: string,
 		connector: CatalogConnectors,
 	): Promise<IDataProduct> => {
-		let metadata: IDataProduct = null;
+		let dataProduct: IDataProduct = null;
 		switch (connector) {
+			case CatalogConnectors.Hardcoded:
+				dataProduct = HardcodedClient.getDataProductByUuid(dataProductUuid);
+				break;
 			case CatalogConnectors.DataMeshApi:
-				metadata = await this._dataMeshApiClient.getDataProductByUuid(dataProductUuid);
+				dataProduct = await this._dataMeshApiClient.getDataProductByUuid(dataProductUuid);
 				break;
 			// TODO: add datahub option to get full metadata
 		}
-		return metadata;
+		return dataProduct;
 	};
 
 	private _mapAutocompleteResultsToOdp(connector: CatalogConnectors, autocompleteResults: any) {

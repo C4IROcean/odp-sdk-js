@@ -106,23 +106,23 @@ export default class ODPClient extends CogniteClient {
 	}
 
 	public async searchCatalog(keyword: string): Promise<IDataProductResult[]> {
-		return this._catalog.searchCatalog(keyword, [CatalogConnectors.DataMeshApi]);
+		return this._catalog.searchCatalog(keyword, [CatalogConnectors.Hardcoded]);
 	}
 
 	public async autocompleteCatalog(keyword: string): Promise<IDataProductMainInfo[]> {
-		return this._catalog.autocompleteCatalog(keyword, [CatalogConnectors.DataMeshApi]);
+		return this._catalog.autocompleteCatalog(keyword, [CatalogConnectors.Hardcoded]);
 	}
 
 	public async autocompleteDataLayers(keyword: string): Promise<IDataLayerMain[]> {
-		return this._catalog.autocompleteDataLayers(keyword, [CatalogConnectors.DataMeshApi]);
+		return this._catalog.autocompleteDataLayers(keyword, [CatalogConnectors.Hardcoded]);
 	}
 
 	public async getDataLayerById(id: number): Promise<IDataLayer> {
-		return this._catalog.getDataLayerById(id, [CatalogConnectors.DataMeshApi]);
+		return this._catalog.getDataLayerById(id, CatalogConnectors.Hardcoded);
 	}
 
 	public async getDataProductByUuid(dataProductUuid: string): Promise<IDataProduct> {
-		return this._catalog.getDataProductByUuid(dataProductUuid, CatalogConnectors.DataMeshApi);
+		return this._catalog.getDataProductByUuid(dataProductUuid, CatalogConnectors.Hardcoded);
 	}
 
 	/**
