@@ -4,15 +4,16 @@ import { Auth } from "../../auth";
 import {
 	IDataLayerMain,
 	IDataProduct,
+	IDataProductMeta,
 	IDataProductResult,
-	ODP_DATAHUB_TOKEN_SCOPE,
+	ODP_BACKEND_TOKEN_SCOPE,
 	ODP_DATAMESH_BASE_URL,
 } from "../../constants";
 import { IDataLayer, IDataProductMainInfo } from "./../../constants";
 
 interface IDataMeshApiClientOptions {
 	auth: Auth;
-	datahubTokenScope?: string[];
+	backendTokenScope?: string[];
 	datahMeshApiBaseUrl?: string;
 }
 
@@ -24,8 +25,8 @@ export default class DataMeshApiClient {
 
 	private constructor(options: IDataMeshApiClientOptions) {
 		this._auth = options.auth;
-		this._tokenScope = options.datahubTokenScope ?? ODP_DATAHUB_TOKEN_SCOPE;
 		this._dataMeshApiBaseUrl = options.datahMeshApiBaseUrl ?? ODP_DATAMESH_BASE_URL;
+		this._tokenScope = options.backendTokenScope ?? ODP_BACKEND_TOKEN_SCOPE;
 	}
 
 	public static getDataMeshApiClient(options: IDataMeshApiClientOptions) {

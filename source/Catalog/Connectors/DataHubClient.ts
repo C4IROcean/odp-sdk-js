@@ -1,10 +1,10 @@
 import { Auth } from "../../auth";
-import { ODP_DATAHUB_GRAPHQL_ENDPOINT, ODP_DATAHUB_TOKEN_SCOPE } from "../../constants";
+import { ODP_BACKEND_TOKEN_SCOPE, ODP_DATAHUB_GRAPHQL_ENDPOINT } from "../../constants";
 
 interface IDataHubClientOptions {
 	auth: Auth;
 	graphQlEndpoint?: string;
-	datahubTokenScope?: string[];
+	backendTokenScope?: string[];
 }
 
 export interface IMetadata {
@@ -27,7 +27,7 @@ export default class DataHubClient {
 	private constructor(options: IDataHubClientOptions) {
 		this._auth = options.auth;
 		this._graphQlEndpoint = options.graphQlEndpoint ?? ODP_DATAHUB_GRAPHQL_ENDPOINT;
-		this._tokenScope = options.datahubTokenScope ?? ODP_DATAHUB_TOKEN_SCOPE;
+		this._tokenScope = options.backendTokenScope ?? ODP_BACKEND_TOKEN_SCOPE;
 	}
 
 	public static getDatahubClient(options: IDataHubClientOptions) {
