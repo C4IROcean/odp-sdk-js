@@ -18,12 +18,14 @@ export const DATA_PRODUCTS_META: IDataProductMeta[] = [
 		provider: ["National Oceanic and Atmospheric Administration", "National Centers for Environmental Information"],
 		providerAcronym: ["NOAA", "NCEI"],
 		citation:
+			// eslint-disable-next-line max-len
 			"Boyer, T.P., O.K. Baranova, C. Coleman, H.E. Garcia, A. Grodsky, R.A. Locarnini, A.V. Mishonov, C.R. Paver, J.R. Reagan, D. Seidov, I.V. Smolyar, K. Weathers, M.M. Zweng,(2018): World Ocean Database 2018. A.V. Mishonov, Technical Ed., NOAA Atlas NESDIS 87.",
 		contact: "NCEI.Info@noaa.gov",
 		creator: "NOAA National Centers for Enfvironmental Information",
 		dateCreated: null,
 		dateUpdated: null,
 		databaseDescription:
+			// eslint-disable-next-line max-len
 			"The World Ocean Database (WOD) is world's largest collection of uniformly formatted, quality controlled, publicly available ocean profile data. It is a powerful tool for oceanographic, climatic, and environmental research, and the end result of more than 20 years of coordinated efforts to incorporate data from institutions, agencies, individual researchers, and data recovery initiatives into a single database.",
 		tableDescription: null,
 		format: null,
