@@ -1,4 +1,3 @@
-import { IDataProductMeta } from "./../../dist/constants.d";
 import { Auth } from "./../auth";
 import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductMainInfo, IDataProductResult } from "./../constants";
 import DataHubClient from "./Connectors/DataHubClient";
@@ -28,11 +27,12 @@ export default class Catalog {
 		searchString: string,
 		connectors: CatalogConnectors[],
 	): Promise<IDataProductResult[]> => {
-		let results: IDataProductResult[] = null;
+		let results: IDataProductResult[] = [];
 		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:
-					results = [...results, ...HardcodedClient.searchCatalog(searchString)];
+					const hardcodedResult: IDataProductResult[] = HardcodedClient.searchCatalog(searchString);
+					results = [...results, ...hardcodedResult];
 					break;
 				case CatalogConnectors.DataMeshApi:
 					results = await this._dataMeshApiClient.searchCatalog(searchString);
