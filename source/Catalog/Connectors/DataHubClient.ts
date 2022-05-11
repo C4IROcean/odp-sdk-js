@@ -1,20 +1,14 @@
 import { Auth } from "../../auth";
-import {
-	IDataSource,
-	DATA_SOURCES,
-	METADATA_DATA_SOURCES,
-	ODP_DATAHUB_GRAPHQL_ENDPOINT,
-	ODP_DATAHUB_TOKEN_SCOPE,
-} from "../../constants";
+import { ODP_BACKEND_TOKEN_SCOPE, ODP_DATAHUB_GRAPHQL_ENDPOINT } from "../../constants";
 
 interface IDataHubClientOptions {
 	auth: Auth;
 	graphQlEndpoint?: string;
-	datahubTokenScope?: string;
+	backendTokenScope?: string[];
 }
 
 export interface IMetadata {
-	dataSourceId: string;
+	dataProductId: string;
 	name: string;
 	source: string;
 	tags: string[];
@@ -25,14 +19,23 @@ export interface IMetadata {
 }
 
 export default class DataHubClient {
+	private static _dataHubClient: DataHubClient;
 	private _auth: Auth;
+	private _tokenScope: string[];
 	private _graphQlEndpoint: string;
-	private _tokenScope: string;
 
-	public constructor(options: IDataHubClientOptions) {
+	private constructor(options: IDataHubClientOptions) {
 		this._auth = options.auth;
 		this._graphQlEndpoint = options.graphQlEndpoint ?? ODP_DATAHUB_GRAPHQL_ENDPOINT;
-		this._tokenScope = options.datahubTokenScope ?? ODP_DATAHUB_TOKEN_SCOPE;
+		this._tokenScope = options.backendTokenScope ?? ODP_BACKEND_TOKEN_SCOPE;
+	}
+
+	public static getDatahubClient(options: IDataHubClientOptions) {
+		if (this._dataHubClient) {
+			return this._dataHubClient;
+		}
+		this._dataHubClient = new DataHubClient(options);
+		return this._dataHubClient;
 	}
 
 	public searchFullText = async (type: "DATASET", searchString: string): Promise<any> => {
