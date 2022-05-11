@@ -1,11 +1,13 @@
 import { Auth } from "./../auth";
-import { DataSources, IDataSource, METADATA_DATA_SOURCES } from "./../constants";
-import { DATA_SOURCES } from "../constants";
-import DataHubClient, { IMetadata } from "./Connectors/DataHubClient";
+import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductMainInfo, IDataProductResult } from "./../constants";
+import DataHubClient from "./Connectors/DataHubClient";
+import DataMeshApiClient from "./Connectors/DataMeshApiClient";
+import HardcodedClient from "./Connectors/HardcodedClient";
 
 export enum CatalogConnectors {
 	Hardcoded = "hardcoded",
 	Datahub = "datahub",
+	DataMeshApi = "datameshapi",
 }
 
 interface ICatalogOptions {
@@ -14,103 +16,111 @@ interface ICatalogOptions {
 
 export default class Catalog {
 	private _datahubClient: DataHubClient;
+	private _dataMeshApiClient: DataMeshApiClient;
 
 	public constructor(options: ICatalogOptions) {
-		this._datahubClient = new DataHubClient({ auth: options.auth });
+		this._datahubClient = DataHubClient.getDatahubClient(options);
+		this._dataMeshApiClient = DataMeshApiClient.getDataMeshApiClient(options);
 	}
 
-	public searchCatalog = async (searchString: string, connectors: CatalogConnectors[]): Promise<IDataSource[]> => {
-		let results: IDataSource[] = [];
-		connectors.forEach(async (connector) => {
+	public searchCatalog = async (
+		searchString: string,
+		connectors: CatalogConnectors[],
+	): Promise<IDataProductResult[]> => {
+		let results: IDataProductResult[] = [];
+		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:
-					results = [
-						...results,
-						...DATA_SOURCES.filter(
-							(source) =>
-								source.tags.find((tag) => tag.toLowerCase().includes(searchString.toLowerCase())) ||
-								source.name.toLowerCase().includes(searchString.toLowerCase()) ||
-								source.description.toLowerCase().includes(searchString.toLowerCase()) ||
-								source.id.toLowerCase().includes(searchString.toLowerCase()),
-						),
-					];
+					const hardcodedResult: IDataProductResult[] = HardcodedClient.searchCatalog(searchString);
+					results = [...results, ...hardcodedResult];
+					break;
+				case CatalogConnectors.DataMeshApi:
+					results = await this._dataMeshApiClient.searchCatalog(searchString);
 					break;
 				case CatalogConnectors.Datahub:
-					const dhResults = await this._datahubClient.searchFullText("DATASET", searchString);
-					results = [...results, ...this._mapSearchResultsToOdp(connector, dhResults)];
+					results = await this._datahubClient.searchFullText("DATASET", searchString);
 					break;
 			}
-		});
+		}
 		return results;
 	};
 
-	public autocompleteResults = async (searchString: string, connectors: CatalogConnectors[]): Promise<string[]> => {
-		let results: string[] = [];
-		connectors.forEach(async (connector) => {
+	public autocompleteCatalog = async (
+		searchString: string,
+		connectors: CatalogConnectors[],
+	): Promise<IDataProductMainInfo[]> => {
+		let results: IDataProductMainInfo[] = [];
+		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:
-					results = [
-						...results,
-						...DATA_SOURCES.filter(
-							(source) =>
-								source.tags.find((tag) => tag.toLowerCase().includes(searchString.toLowerCase())) ||
-								source.name.toLowerCase().includes(searchString.toLowerCase()) ||
-								source.description.toLowerCase().includes(searchString.toLowerCase()) ||
-								source.id.toLowerCase().includes(searchString.toLowerCase()),
-						).map((res) => res.name),
-					];
+					results = [...results, ...HardcodedClient.autocompleteCatalog(searchString)];
 					break;
 				case CatalogConnectors.Datahub:
 					const dhResults = await this._datahubClient.autocompleteResults(searchString);
 					results = [...results, ...this._mapAutocompleteResultsToOdp(connector, dhResults)];
 					break;
+				case CatalogConnectors.DataMeshApi:
+					const psAutocompleteResults = await this._dataMeshApiClient.autocompleteCatalog(searchString);
+					results = [...results, ...psAutocompleteResults];
+					break;
 			}
-		});
+		}
 		return results;
 	};
 
-	public async autocompleteDisplayableDatasources(
+	public autocompleteDataLayers = async (
 		keyword: string,
 		connectors: CatalogConnectors[],
-	): Promise<IDataSource[]> {
-		let results: IDataSource[] = [];
-		connectors.forEach(async (connector) => {
+	): Promise<IDataLayerMain[]> => {
+		let results: IDataLayerMain[] = [];
+		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:
-					results = [
-						...results,
-						...DATA_SOURCES.filter(
-							(source) =>
-								(source.tags.find((tag) => tag.toLowerCase().includes(keyword.toLowerCase())) ||
-									source.name.toLowerCase().includes(keyword.toLowerCase()) ||
-									source.description.toLowerCase().includes(keyword.toLowerCase()) ||
-									source.id.toLowerCase().includes(keyword.toLowerCase())) &&
-								source.sourceType === DataSources.MapboxVectorTile,
-						),
-					];
+					results = [...results, ...HardcodedClient.autocompleteDataLayers(keyword)];
 					break;
-				// TODO: add datahub option to find displayable datasources
+				case CatalogConnectors.DataMeshApi:
+					results = await this._dataMeshApiClient.autocompleteDataLayers(keyword);
+					break;
+				// TODO: add datahub option to find displayable dataproducts
 			}
-		});
+		}
 		return results;
-	}
+	};
 
-	public async getMetadataForDataSourceById(dataSourceId: string, connector: CatalogConnectors): Promise<IMetadata> {
-		let metadata: IMetadata;
+	public getDataLayerById = async (id: number, connector: CatalogConnectors): Promise<IDataLayer> => {
+		let result: IDataLayer = null;
 		switch (connector) {
 			case CatalogConnectors.Hardcoded:
-				metadata = METADATA_DATA_SOURCES.find((el) => el.dataSourceId === dataSourceId);
+				result = HardcodedClient.getLayerById(id);
+				break;
+			case CatalogConnectors.DataMeshApi:
+				result = await this._dataMeshApiClient.getLayerById(id);
+				break;
+			// TODO: add datahub option to find displayable dataproducts
+		}
+		return result;
+	};
+
+	public getDataProductByUuid = async (
+		dataProductUuid: string,
+		connector: CatalogConnectors,
+	): Promise<IDataProduct> => {
+		let dataProduct: IDataProduct = null;
+		switch (connector) {
+			case CatalogConnectors.Hardcoded:
+				dataProduct = HardcodedClient.getDataProductByUuid(dataProductUuid);
+				break;
+			case CatalogConnectors.DataMeshApi:
+				dataProduct = await this._dataMeshApiClient.getDataProductByUuid(dataProductUuid);
 				break;
 			// TODO: add datahub option to get full metadata
 		}
-		return metadata;
-	}
+		return dataProduct;
+	};
 
 	private _mapAutocompleteResultsToOdp(connector: CatalogConnectors, autocompleteResults: any) {
 		let mappedResults;
 		switch (connector) {
-			case "hardcoded":
-				mappedResults = autocompleteResults;
 			case "datahub":
 				// TODO: map datahub structure to ODP structure ones we know it
 				mappedResults = autocompleteResults;
@@ -118,11 +128,9 @@ export default class Catalog {
 		return mappedResults;
 	}
 
-	private _mapSearchResultsToOdp(connector: CatalogConnectors, searchResults: IDataSource[]) {
+	private _mapSearchResultsToOdp(connector: CatalogConnectors, searchResults: IDataProduct[]) {
 		let mappedResults;
 		switch (connector) {
-			case CatalogConnectors.Hardcoded:
-				mappedResults = searchResults;
 			case CatalogConnectors.Datahub:
 				// TODO: map datahub structure to ODP structure ones we know it
 				mappedResults = searchResults;

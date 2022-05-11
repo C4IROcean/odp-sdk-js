@@ -1,19 +1,327 @@
-/* eslint-disable max-len */
-import { IMetadata } from "./Catalog/Connectors/DataHubClient";
+export enum DataSources {
+	MapboxVectorTile = "vnd.mapbox-vector-tile",
+}
 
 export enum Filters {
 	Depth = "depth",
 	Time = "time",
 }
 
-export enum DataSources {
-	MapboxVectorTile = "vnd.mapbox-vector-tile",
+enum OdpDataAccessSolutions {
+	ODE = "ODE",
+	ODC = "ODC",
 }
 
-export type IDataSource = IDataType & IDataSourcePart;
+export const DATA_PRODUCTS_META: IDataProductMeta[] = [
+	{
+		name: "World Ocean Database",
+		provider: ["National Oceanic and Atmospheric Administration", "National Centers for Environmental Information"],
+		providerAcronym: ["NOAA", "NCEI"],
+		citation:
+			// eslint-disable-next-line max-len
+			"Boyer, T.P., O.K. Baranova, C. Coleman, H.E. Garcia, A. Grodsky, R.A. Locarnini, A.V. Mishonov, C.R. Paver, J.R. Reagan, D. Seidov, I.V. Smolyar, K. Weathers, M.M. Zweng,(2018): World Ocean Database 2018. A.V. Mishonov, Technical Ed., NOAA Atlas NESDIS 87.",
+		contact: "NCEI.Info@noaa.gov",
+		creator: "NOAA National Centers for Enfvironmental Information",
+		dateCreated: null,
+		dateUpdated: null,
+		databaseDescription:
+			// eslint-disable-next-line max-len
+			"The World Ocean Database (WOD) is world's largest collection of uniformly formatted, quality controlled, publicly available ocean profile data. It is a powerful tool for oceanographic, climatic, and environmental research, and the end result of more than 20 years of coordinated efforts to incorporate data from institutions, agencies, individual researchers, and data recovery initiatives into a single database.",
+		tableDescription: null,
+		format: null,
+		homepage: "https://www.ncei.noaa.gov/products/world-ocean-database",
+		language: "English",
+		license: "The World Ocean Database and World Ocean Atlas are available for public use without restriction.",
+		managedBy: "NOAA National Centers for Environmental Information",
+		publisher: "NOAA National Centers for Environmental Information",
+		subject: "global ocean variables",
+		source: null,
+		accessType: "public",
+		dataType: "geospatial",
+		tags: [
+			"temperature",
+			"salinity",
+			"oxygen",
+			"nutrients",
+			"pressure",
+			"nitrate,ph",
+			"chlorophyll",
+			"alkalinity",
+			"phosphate",
+			"silicate",
+			"biogeochemistry",
+			"pressure",
+			"physical",
+			"chemistry",
+			"profile",
+			"CTD",
+			"XBT",
+			"Argo",
+		],
+		timespan: [1770, 2022],
+		usageExamples: null,
+		boundingBox: [-90, -180, 90, 180],
+		availableIn: [OdpDataAccessSolutions.ODC, OdpDataAccessSolutions.ODE],
+		doi: null,
+		uuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+	},
+];
 
-// For now we only have mapbox data types, but this could be come a union if we have more types
-export type IDataType = IMapboxDataType;
+export const DATA_LAYERS: IDataLayer[] = [
+	{
+		id: 0,
+		name: "World Ocean Database Salinity",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-01-26T00:00:00",
+		dateUpdated: "2022-01-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.salinity_aggregates",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: null,
+		unit_abbr: null,
+		explorerStyling: { color: "#58FCD4", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 1,
+		name: "World Ocean Database Temperature",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-03-10T00:00:00",
+		dateUpdated: "2022-03-10T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.1nze98kc",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: "Celsius",
+		unit_abbr: "C",
+		explorerStyling: { color: "#ff69a2", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 2,
+		name: "World Ocean Database Pressure",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-01-26T00:00:00",
+		dateUpdated: "2022-01-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.pressure_aggregates",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: "Decibar",
+		unit_abbr: null,
+		explorerStyling: { color: "#EBB931", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 3,
+		name: "World Ocean Database Oxygen",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-01-26T00:00:00",
+		dateUpdated: "2022-01-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.oxygen_aggregates",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: "Micromole per kilogram ",
+		unit_abbr: "\u00b5mol/kg",
+		explorerStyling: { color: "#E7862E", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 4,
+		name: "World Ocean Database Nitrate",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-01-26T00:00:00",
+		dateUpdated: "2022-01-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.nitrate_aggregates",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: "Micromole per kilogram ",
+		unit_abbr: "\u00b5mol/kg",
+		explorerStyling: { color: "#555BE3", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 5,
+		name: "World Ocean Database ph",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-01-26T00:00:00",
+		dateUpdated: "2022-01-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.ph_aggregates",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: null,
+		unit_abbr: null,
+		explorerStyling: { color: "#FE9FE4", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 6,
+		name: "World Ocean Database chlorophyll",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-01-26T00:00:00",
+		dateUpdated: "2022-01-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.chlorophyll_aggregates",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: "Microgram per liter",
+		unit_abbr: "\u00b5g/l",
+		explorerStyling: { color: "#78C35E", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 7,
+		name: "World Ocean Database Alkalinity",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-01-26T00:00:00",
+		dateUpdated: "2022-01-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.alkalinity_aggregates",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: "Milli-equivalent per liter",
+		unit_abbr: "meq/l",
+		explorerStyling: { color: "#0E8484", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 8,
+		name: "World Ocean Database Phosphate",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-01-26T00:00:00",
+		dateUpdated: "2022-01-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.phosphate_aggregates",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: "Micromole per kilogram ",
+		unit_abbr: "\u00b5mol/kg",
+		explorerStyling: { color: "#2DB7F1", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 9,
+		name: "World Ocean Database Silicate",
+		dataProductUuid: "3b9d00ec-2ede-4946-b105-df010d273c63",
+		dateCreated: "2022-01-26T00:00:00",
+		dateUpdated: "2022-01-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.silicate_aggregates",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "circle",
+		filter: [Filters.Time, Filters.Depth],
+		unit: "Micromole per kilogram ",
+		unit_abbr: "\u00b5mol/kg",
+		explorerStyling: { color: "#FB6299", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
+	},
+	{
+		id: 10,
+		name: "Norwegian windfarms",
+		dataProductUuid: "1bba9c89-44b3-42cf-91ad-db0f8822ff33",
+		dateCreated: "2021-12-08T00:00:00",
+		dateUpdated: "2021-12-08T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.6nk4oxtx",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "fill",
+		filter: null,
+		unit: null,
+		unit_abbr: null,
+		explorerStyling: { color: "#98D5A8", opacity: 0.5 },
+	},
+	{
+		id: 11,
+		name: "Marine regions EEZ",
+		dataProductUuid: "1da84b40-be1a-4d9c-a352-7e9cb1ccc99b",
+		dateCreated: "2021-11-26T00:00:00",
+		dateUpdated: "2021-11-26T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.382xxha1",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "line",
+		filter: null,
+		unit: null,
+		unit_abbr: null,
+		explorerStyling: { color: "#16BFF4", strokeWidth: 1, lineStyle: "dashed" },
+	},
+	{
+		id: 12,
+		name: "Seacables",
+		dataProductUuid: "c1a6d28e-b7a8-42bf-8a1f-faed97e3b5da",
+		dateCreated: "2021-12-02T00:00:00",
+		dateUpdated: "2021-12-02T00:00:00",
+		sourceUrl: "mapbox://oceandatafoundation.bz79mnos",
+		sourceType: DataSources.MapboxVectorTile,
+		layerType: "line",
+		filter: null,
+		unit: null,
+		unit_abbr: null,
+		explorerStyling: { color: "#8CA5EC", strokeWidth: 1, opacity: 0.5 },
+	},
+];
+
+export interface IDataProductMainInfo {
+	uuid: string;
+	name: string;
+	tags: string[];
+}
+export interface IDataProductExtendedMainInfo extends IDataProductMainInfo {
+	provider: string[];
+	providerAcronym: string[];
+	creator: string;
+	databaseDescription: string;
+	accessType: "public" | "private";
+	timespan: number[];
+	availableIn: OdpDataAccessSolutions[];
+}
+export interface IDataProductMeta extends IDataProductExtendedMainInfo {
+	citation: string;
+	contact: string;
+	dateCreated: string;
+	dateUpdated: string;
+	tableDescription: string;
+	format: string;
+	homepage: string;
+	language: string;
+	license: string;
+	managedBy: string;
+	publisher: string;
+	subject: string;
+	source: string;
+	dataType: string;
+	usageExamples: string;
+	boundingBox: number[];
+	doi: string;
+}
+
+export interface IDataProductResult {
+	dataProductResult: IDataProductExtendedMainInfo;
+	dataLayers: IDataLayerMain[];
+}
+
+export interface IDataLayerMain {
+	id: number;
+	name: string;
+	dataProductUuid: string;
+}
+export interface IDataLayer extends IDataLayerMain {
+	dateCreated: string;
+	dateUpdated: string;
+	sourceUrl: string;
+	sourceType: DataSources;
+	layerType: IMapboxLayerType;
+	filter: Filters[];
+	unit: string;
+	unit_abbr: string;
+	explorerStyling: IDataProductStyling;
+}
+
+export interface IDataProduct {
+	dataProduct: IDataProductMeta;
+	layers: IDataLayerMain[];
+}
+
+export interface IDataProductStyling {
+	type?: "circle" | "line" | "fill";
+	color?: string;
+	strokeColor?: string;
+	strokeWidth?: number;
+	circleRadius?: number;
+	opacity?: number;
+	lineStyle?: "dashed";
+}
 
 export type IMapboxLayerType =
 	| "fill"
@@ -25,444 +333,7 @@ export type IMapboxLayerType =
 	| "raster"
 	| "hillshade"
 	| "background";
-interface IDataSourcePart {
-	name: string;
-	description: string;
-	unit?: string;
-	source: string;
-	id: string;
-	sourceUrl: string;
-	tags: string[];
-	filters?: Filters[];
-	domain: string;
-	owner: string;
-}
 
-interface IMapboxDataType {
-	sourceType: DataSources.MapboxVectorTile;
-	layerType: IMapboxLayerType;
-}
-
-import { IDataSourceStyling } from "./DataSourceStylingClient";
-
-export const DATA_SOURCES: IDataSource[] = [
-	{
-		name: "salinity",
-		description: "this is the salinity",
-		source: "mapbox",
-		id: "wod-salinity-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.salinity_aggregates",
-		tags: ["WOD", "salinity"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth, Filters.Time],
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "temperature",
-		description: "this is the temp",
-		source: "mapbox",
-		id: "wod-temperature-year-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.1nze98kc",
-		tags: ["WOD", "temperature"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth],
-		unit: "°C",
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "pressure",
-		description: "this is the pressure",
-		source: "mapbox",
-		id: "wod-pressure-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.pressure_aggregates",
-		tags: ["WOD", "pressure"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth, Filters.Time],
-		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "oxygen",
-		description: "this is the oxygen",
-		source: "mapbox",
-		id: "wod-oxygen-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.oxygen_aggregates",
-		tags: ["WOD", "oxygen"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth, Filters.Time],
-		unit: "ml/l",
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "nitrage",
-		description: "this is the nitrate",
-		source: "mapbox",
-		id: "wod-nitrate-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.nitrate_aggregates",
-		tags: ["WOD", "nitrate"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth, Filters.Time],
-		unit: "µmol/l",
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "ph",
-		description: "this is the ph",
-		source: "mapbox",
-		id: "wod-ph-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.ph_aggregates",
-		tags: ["WOD", "ph"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth, Filters.Time],
-		unit: "µmol/l",
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "chlorophyll",
-		description: "this is the chlorophyll",
-		source: "mapbox",
-		id: "wod-chlorophyll-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.chlorophyll_aggregates",
-		tags: ["WOD", "chlorophyll"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth, Filters.Time],
-		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "alkalinity",
-		description: "this is the alkalinity",
-		source: "mapbox",
-		id: "wod-alkalinity-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.alkalinity_aggregates",
-		tags: ["WOD", "alkalinity"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth, Filters.Time],
-		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "phosphate",
-		description: "this is the phosphate",
-		source: "mapbox",
-		id: "wod-phosphate-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.phosphate_aggregates",
-		tags: ["WOD", "phosphate"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth, Filters.Time],
-		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "silicate",
-		description: "this is the silicate",
-		source: "mapbox",
-		id: "wod-silicate-aggregates",
-		sourceUrl: "mapbox://oceandatafoundation.silicate_aggregates",
-		tags: ["WOD", "silicate"],
-		sourceType: DataSources.MapboxVectorTile,
-		layerType: "circle",
-		filters: [Filters.Depth, Filters.Time],
-		unit: "N/A",
-		domain: "WOD",
-		owner: "NOAA",
-	},
-	{
-		name: "windfarms",
-		description: "these are the windfarms",
-		source: "mapbox",
-		id: "norwegian-windfarms",
-		sourceUrl: "mapbox://oceandatafoundation.6nk4oxtx",
-		layerType: "fill",
-		tags: ["windfarms", "norway"],
-		sourceType: DataSources.MapboxVectorTile,
-		domain: "Havvind",
-		owner: "Windfarms owner",
-	},
-	{
-		name: "seacables",
-		description: "these are the seacables",
-		source: "mapbox",
-		id: "norwegian-seacables",
-		sourceUrl: "mapbox://oceandatafoundation.bz79mnos",
-		layerType: "line",
-		tags: ["seacables", "norway"],
-		sourceType: DataSources.MapboxVectorTile,
-		domain: "Seacables domain",
-		owner: "Seacables owner",
-	},
-	{
-		name: "economic zones",
-		description: "these are the economic zones",
-		source: "mapbox",
-		id: "economic-zones",
-		sourceUrl: "mapbox://oceandatafoundation.382xxha1",
-		layerType: "line",
-		tags: ["economic zones", "eez"],
-		sourceType: DataSources.MapboxVectorTile,
-		domain: "Economic zones domain",
-		owner: "EEZ owner",
-	},
-];
-
-export const STYLING_DATA_SOURCES: IDataSourceStyling[] = [
-	{
-		dataSourceId: "wod-salinity-aggregates",
-		type: "circle",
-		color: "#58FCD4",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "wod-temperature-year-aggregates",
-		type: "circle",
-		color: "#ff69a2",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "wod-pressure-aggregates",
-		type: "circle",
-		color: "#EBB931",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "wod-oxygen-aggregates",
-		type: "circle",
-		color: "#E7862E",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "wod-nitrate-aggregates",
-		type: "circle",
-		color: "#555BE3",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "wod-ph-aggregates",
-		type: "circle",
-		color: "#FE9FE4",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "wod-chlorophyll-aggregates",
-		type: "circle",
-		color: "#78C35E",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "wod-alkalinity-aggregates",
-		type: "circle",
-		color: "#0E8484",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "wod-phosphate-aggregates",
-		type: "circle",
-		color: "#2DB7F1",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "wod-silicate-aggregates",
-		type: "circle",
-		color: "#FB6299",
-		circleRadius: 3,
-		strokeWidth: 1,
-		strokeColor: "#ffffff",
-	},
-	{
-		dataSourceId: "norwegian-windfarms",
-		type: "fill",
-		color: "#98D5A8",
-		opacity: 0.5,
-	},
-	{
-		dataSourceId: "norwegian-seacables",
-		type: "line",
-		color: "#8CA5EC",
-		strokeWidth: 1,
-		opacity: 0.5,
-	},
-	{
-		dataSourceId: "economic-zones",
-		type: "line",
-		color: "#16BFF4",
-		strokeWidth: 1,
-		lineStyle: "dashed",
-	},
-];
-
-export const METADATA_DATA_SOURCES: IMetadata[] = [
-	{
-		dataSourceId: "wod-salinity-aggregates",
-		name: "Salinity",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description:
-			"Salinity technically measures the saltiness of seawater which is a function of dissolved inorganic materials. It directly affects the density of water which in turn influences ocean circulation. Many organisms can only live within certain ranges of salinity. Salinity also reveals information about the world's freshwater cycle.",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "wod-temperature-year-aggregates",
-		name: "Temperature",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description:
-			"Temperature is direct measure of how climate is affecting the ocean. Temperature influences biological, chemical, and even meteorological processes.",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "wod-pressure-aggregates",
-		name: "Pressure",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description: "The pressure",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "wod-oxygen-aggregates",
-		name: "Oxygen",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description:
-			"Oxygen is the most important gas in the sea, as it is necessary for all higher forms of life. Surface water is usually saturated with oxygen, absorbed from the atmosphere and produced by photosynthesis from marine plants.",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "wod-nitrate-aggregates",
-		name: "Nitrate",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description:
-			"Nitrate (NO3)  in the ocean, is the end product of decomposition of organic nitrogen. It is the main nitrogenous compound utilized by primary producers in the ocean and is a major nutrient required for photosynthesis – its scarcity limits the amount of photosynthesis that can take place.",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "wod-ph-aggregates",
-		name: "Ph",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description:
-			"Ocean pH is a measure of how acidic or basic the ocean is. The pH of the ocean varies as a result of natural processes and can be influenced by temperature, fresh water run-off, upwellings, and increased carbon dioxide in the atmosphere. Many organisms are sensitive to the decline in ocean pH driven by increased atmospheric carbon dioxide. ",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "wod-chlorophyll-aggregates",
-		name: "Chlorophyll",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description: "Description Chlorophyll",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "wod-alkalinity-aggregates",
-		name: "Alkalinity",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description: "Description Alkalinity",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "wod-phosphate-aggregates",
-		name: "Phosphate",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description: "Description Phosphate",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "wod-silicate-aggregates",
-		name: "Silicate",
-		source: "NOAA",
-		tags: ["NOAA", "WOD"],
-		description: "https://en.wikipedia.org/wiki/Silicate",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: ["1770", "2020"],
-		citation: ["NOAA", "test citation"],
-	},
-	{
-		dataSourceId: "norwegian-windfarms",
-		name: "Norwegian Windfarms",
-		source: "Unknown",
-		tags: [],
-		description: "None added...",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: [],
-		citation: ["test citation"],
-	},
-	{
-		dataSourceId: "norwegian-seacables",
-		name: "Norwegian Seacables",
-		source: "Unknown",
-		tags: [],
-		description: "None added...",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: [],
-		citation: ["test citation"],
-	},
-	{
-		dataSourceId: "economic-zones",
-		name: "Economic zones",
-		source: "Unknown",
-		tags: [],
-		description: "None added...",
-		boundingBox: [-90, -180, 90, 180],
-		timeSpan: [],
-		citation: ["test citation"],
-	},
-];
-
+export const ODP_DATAMESH_BASE_URL: string = "https://mesh.dev.oceandata.xyz/catalog/v1";
 export const ODP_DATAHUB_GRAPHQL_ENDPOINT: string = "https://catalog.dev.oceandata.xyz/api/gms";
-export const ODP_DATAHUB_TOKEN_SCOPE: string = "https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS";
+export const ODP_BACKEND_TOKEN_SCOPE: string[] = ["https://oceandataplatform.onmicrosoft.com/odp-backend/ODP_ACCESS"];

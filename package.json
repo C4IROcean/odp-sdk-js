@@ -1,6 +1,6 @@
 {
 	"name": "odp-sdk",
-	"version": "0.1.5",
+	"version": "0.1.7",
 	"description": "Ocean Data Platform JavaScript SDK",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -32,6 +32,7 @@
 	"dependencies": {
 		"@azure/msal-browser": "2.18.0",
 		"@cognite/sdk": "6.1.1",
+		"axios": "^0.27.1",
 		"geolib": "^3.3.1",
 		"loglevel": "^1.8.0"
 	},
@@ -45,9 +46,9 @@
 		"eslint-plugin-import": "2.22.1",
 		"eslint-plugin-jsdoc": "31.6.0",
 		"eslint-plugin-prefer-arrow": "1.2.3",
-		"jest": "^26.5.2",
+		"jest": "^27.0.0",
 		"prettier": "^1.19.1",
-		"ts-jest": "^26.4.1",
+		"ts-jest": "^27.1.4",
 		"ts-node": "^8.10.2",
 		"typedoc": "^0.22.12",
 		"typedoc-plugin-markdown": "^3.0.8",
