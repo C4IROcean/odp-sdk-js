@@ -4,12 +4,11 @@ import { Auth } from "../../auth";
 import {
 	IDataLayerMain,
 	IDataProduct,
-	IDataProductMeta,
 	IDataProductResult,
 	ODP_BACKEND_TOKEN_SCOPE,
 	ODP_DATAMESH_BASE_URL,
 } from "../../constants";
-import { IDataLayer, IDataProductMainInfo } from "./../../constants";
+import { IDataLayer } from "./../../constants";
 
 interface IDataMeshApiClientOptions {
 	auth: Auth;
@@ -53,7 +52,7 @@ export default class DataMeshApiClient {
 			log.error(error);
 		}
 	}
-	public autocompleteCatalog = async (searchWord: string): Promise<IDataProductMainInfo[]> => {
+	public autocompleteCatalog = async (searchWord: string): Promise<string[]> => {
 		try {
 			const response = await axios.get(`${this._dataMeshApiBaseUrl}/autocomplete?q=${searchWord}`);
 			return response.data;
