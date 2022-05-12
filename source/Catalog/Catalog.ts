@@ -1,5 +1,5 @@
 import { Auth } from "./../auth";
-import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductMainInfo, IDataProductResult } from "./../constants";
+import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult } from "./../constants";
 import DataHubClient from "./Connectors/DataHubClient";
 import DataMeshApiClient from "./Connectors/DataMeshApiClient";
 import HardcodedClient from "./Connectors/HardcodedClient";
@@ -45,11 +45,8 @@ export default class Catalog {
 		return results;
 	};
 
-	public autocompleteCatalog = async (
-		searchString: string,
-		connectors: CatalogConnectors[],
-	): Promise<IDataProductMainInfo[]> => {
-		let results: IDataProductMainInfo[] = [];
+	public autocompleteCatalog = async (searchString: string, connectors: CatalogConnectors[]): Promise<string[]> => {
+		let results: string[] = [];
 		for (const connector of connectors) {
 			switch (connector) {
 				case CatalogConnectors.Hardcoded:

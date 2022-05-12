@@ -252,12 +252,72 @@ export const DATA_LAYERS: IDataLayer[] = [
 	},
 ];
 
-export interface IDataProductMainInfo {
+export const DATA_PRODUCTS_TAGS_INDEX: string[] = [
+	"iho sea",
+	"bathymetry",
+	"biodiversity",
+	"world register of marine species",
+	"marine regions - world marine heritage sites",
+	"salinity",
+	"ocean biodiversity information system",
+	"gridded",
+	"summaries",
+	"ctd",
+	"marine species",
+	"atlas",
+	"ocean salinity",
+	"climatological distributions",
+	"alkalinity",
+	"world ocean atlas 2018 temperature",
+	"gebco gridded bathymetry data",
+	"offshore wind - proposals for study areas",
+	"ocean",
+	"norway power lines",
+	"world ocean atlas 2018 nutrients",
+	"phosphate",
+	"marine regions - world eez",
+	"world ocean database",
+	"study areas",
+	"offshore wind power",
+	"taxa",
+	"analyses",
+	"ocean oxygen",
+	"world ocean atlas 2018 oxygen",
+	"energy",
+	"network system",
+	"eez",
+	"species",
+	"profile",
+	"biogeochemistry",
+	"nitrate",
+	"xbt",
+	"global",
+	"boundaries",
+	"argo",
+	"region",
+	"ocean nutrients",
+	"terrain",
+	"nutrients",
+	"temperature",
+	"seabed",
+	"ocean temperature",
+	"marine regions - intersect eez iho sea",
+	"pressure",
+	"ph",
+	"overhead lines",
+	"chemistry",
+	"physical",
+	"marine regions - iho sea areas",
+	"world ocean atlas 2018 salinity",
+	"marine regions - eez land union",
+	"silicate",
+	"oxygen",
+	"chlorophyll",
+];
+export interface IDataProductExtendedMainInfo {
 	uuid: string;
 	name: string;
 	tags: string[];
-}
-export interface IDataProductExtendedMainInfo extends IDataProductMainInfo {
 	provider: string[];
 	providerAcronym: string[];
 	creator: string;

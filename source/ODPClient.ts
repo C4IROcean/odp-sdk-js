@@ -4,7 +4,7 @@ import log from "loglevel";
 import { Auth } from "./auth";
 import { Casts } from "./casts";
 import Catalog, { CatalogConnectors } from "./Catalog/Catalog";
-import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductMainInfo, IDataProductResult } from "./constants";
+import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult } from "./constants";
 import { MarineRegions } from "./marineRegions";
 import { IIdTokenClaims } from "./types";
 
@@ -109,7 +109,7 @@ export default class ODPClient extends CogniteClient {
 		return this._catalog.searchCatalog(keyword, [CatalogConnectors.Hardcoded]);
 	}
 
-	public async autocompleteCatalog(keyword: string): Promise<IDataProductMainInfo[]> {
+	public async autocompleteCatalog(keyword: string): Promise<string[]> {
 		return this._catalog.autocompleteCatalog(keyword, [CatalogConnectors.Hardcoded]);
 	}
 
