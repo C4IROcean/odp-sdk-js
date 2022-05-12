@@ -7,7 +7,7 @@ export enum Filters {
 	Time = "time",
 }
 
-enum OdpDataAccessSolutions {
+export enum OdpDataAccessSolutions {
 	ODE = "ODE",
 	ODC = "ODC",
 }
