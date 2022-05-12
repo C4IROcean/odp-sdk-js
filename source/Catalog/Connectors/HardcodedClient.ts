@@ -1,12 +1,13 @@
 import {
 	DATA_LAYERS,
 	DATA_PRODUCTS_META,
+	DATA_PRODUCTS_TAGS_INDEX,
 	IDataLayerMain,
 	IDataProduct,
 	IDataProductExtendedMainInfo,
 	IDataProductResult,
 } from "../../constants";
-import { IDataLayer, IDataProductMainInfo } from "./../../constants";
+import { IDataLayer } from "./../../constants";
 
 export default class HardcodedClient {
 	public static searchCatalog(searchWord: string): IDataProductResult[] {
@@ -37,19 +38,8 @@ export default class HardcodedClient {
 			};
 		});
 	}
-	public static autocompleteCatalog(searchWord: string): IDataProductMainInfo[] {
-		return DATA_PRODUCTS_META.filter((el) => {
-			return (
-				el.name.toLowerCase().includes(searchWord.toLowerCase()) ||
-				el.tags.find((tag) => tag.toLowerCase().includes(searchWord.toLowerCase()))
-			);
-		}).map((el) => {
-			return {
-				name: el.name,
-				tags: el.tags,
-				uuid: el.uuid,
-			};
-		});
+	public static autocompleteCatalog(searchWord: string): string[] {
+		return DATA_PRODUCTS_TAGS_INDEX.filter((el) => el.includes(searchWord));
 	}
 	public static autocompleteDataLayers(searchWord: string): IDataLayerMain[] {
 		return DATA_LAYERS.filter((el) => {
