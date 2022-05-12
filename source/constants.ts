@@ -91,7 +91,7 @@ export const DATA_LAYERS: IDataLayer[] = [
 		sourceUrl: "mapbox://oceandatafoundation.1nze98kc",
 		sourceType: DataSources.MapboxVectorTile,
 		layerType: "circle",
-		filter: [Filters.Time, Filters.Depth],
+		filter: [Filters.Depth],
 		unit: "Celsius",
 		unit_abbr: "C",
 		explorerStyling: { color: "#ff69a2", circleRadius: 3, strokeWidth: 1, strokeColor: "#ffffff" },
