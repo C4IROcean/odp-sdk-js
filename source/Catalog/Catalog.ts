@@ -35,7 +35,10 @@ export default class Catalog {
 					results = [...results, ...hardcodedResult];
 					break;
 				case CatalogConnectors.DataMeshApi:
-					results = await this._dataMeshApiClient.searchCatalog(searchString);
+					const meshApiResults: IDataProductResult[] = await this._dataMeshApiClient.searchCatalog(
+						searchString,
+					);
+					results = [...results, ...meshApiResults];
 					break;
 				case CatalogConnectors.Datahub:
 					results = await this._datahubClient.searchFullText("DATASET", searchString);
@@ -76,7 +79,10 @@ export default class Catalog {
 					results = [...results, ...HardcodedClient.autocompleteDataLayers(keyword)];
 					break;
 				case CatalogConnectors.DataMeshApi:
-					results = await this._dataMeshApiClient.autocompleteDataLayers(keyword);
+					const meshAutocompleteDataLayersResults = await this._dataMeshApiClient.autocompleteDataLayers(
+						keyword,
+					);
+					results = [...results, ...meshAutocompleteDataLayersResults];
 					break;
 				// TODO: add datahub option to find displayable dataproducts
 			}
