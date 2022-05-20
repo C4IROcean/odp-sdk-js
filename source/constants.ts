@@ -16,98 +16,37 @@ export const DATA_PRODUCTS_META: IDataProductMeta[] = [];
 
 export const DATA_LAYERS: IDataLayer[] = [];
 
-export const DATA_PRODUCTS_TAGS_INDEX: string[] = [
-	"iho sea",
-	"bathymetry",
-	"biodiversity",
-	"world register of marine species",
-	"marine regions - world marine heritage sites",
-	"salinity",
-	"ocean biodiversity information system",
-	"gridded",
-	"summaries",
-	"ctd",
-	"marine species",
-	"atlas",
-	"ocean salinity",
-	"climatological distributions",
-	"alkalinity",
-	"world ocean atlas 2018 temperature",
-	"gebco gridded bathymetry data",
-	"offshore wind - proposals for study areas",
-	"ocean",
-	"norway power lines",
-	"world ocean atlas 2018 nutrients",
-	"phosphate",
-	"marine regions - world eez",
-	"world ocean database",
-	"study areas",
-	"offshore wind power",
-	"taxa",
-	"analyses",
-	"ocean oxygen",
-	"world ocean atlas 2018 oxygen",
-	"energy",
-	"network system",
-	"eez",
-	"species",
-	"profile",
-	"biogeochemistry",
-	"nitrate",
-	"xbt",
-	"global",
-	"boundaries",
-	"argo",
-	"region",
-	"ocean nutrients",
-	"terrain",
-	"nutrients",
-	"temperature",
-	"seabed",
-	"ocean temperature",
-	"marine regions - intersect eez iho sea",
-	"pressure",
-	"ph",
-	"overhead lines",
-	"chemistry",
-	"physical",
-	"marine regions - iho sea areas",
-	"world ocean atlas 2018 salinity",
-	"marine regions - eez land union",
-	"silicate",
-	"oxygen",
-	"chlorophyll",
-];
+export const DATA_PRODUCTS_TAGS_INDEX: string[] = [];
 export interface IDataProductExtendedMainInfo {
 	uuid: string;
 	name: string;
 	tags: string[];
 	provider: string[];
-	providerAcronym: string[];
+	providerAcronym: string[] | null;
 	creator: string;
-	databaseDescription: string;
+	databaseDescription: string | null;
 	accessType: "public" | "private";
-	timespan: number[];
+	timespan: number[] | null;
 	availableIn: OdpDataAccessSolutions[];
 }
 export interface IDataProductMeta extends IDataProductExtendedMainInfo {
-	citation: string;
+	citation: string | null;
 	contact: string;
-	dateCreated: string;
-	dateUpdated: string;
-	tableDescription: string;
-	format: string;
+	dateCreated: string | null;
+	dateUpdated: string | null;
+	tableDescription: string | null;
+	format: string | null;
 	homepage: string;
 	language: string;
 	license: string;
 	managedBy: string;
 	publisher: string;
 	subject: string;
-	source: string;
+	source: string | null;
 	dataType: string;
-	usageExamples: string;
+	usageExamples: string | null;
 	boundingBox: number[];
-	doi: string;
+	doi: string | null;
 }
 
 export interface IDataProductResult {
@@ -122,13 +61,13 @@ export interface IDataLayerMain {
 }
 export interface IDataLayer extends IDataLayerMain {
 	dateCreated: string;
-	dateUpdated: string;
+	dateUpdated: string | null;
 	sourceUrl: string;
 	sourceType: DataSources;
 	layerType: IMapboxLayerType;
-	filter: Filters[];
-	unit: string;
-	unit_abbr: string;
+	filter: Filters[] | null;
+	unit: string | null;
+	unit_abbr: string | null;
 	explorerStyling: IDataProductStyling;
 }
 
