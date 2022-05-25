@@ -10,7 +10,7 @@
 		"build:dev": "tsc",
 		"lint": "npm run eslint",
 		"eslint": "eslint source/ tests/ --ext .ts,.d.ts",
-		"format-code": "prettier package.json index.ts \"source/**/*.ts\" --write",
+		"format-code": "prettier package.json \"source/**/*.ts\" --write",
 		"test": "jest",
 		"compile": "tsc",
 		"publish:local": "npm run-script build:dev && yalc publish"
