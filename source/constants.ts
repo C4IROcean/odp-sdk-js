@@ -51,7 +51,7 @@ export interface IDataProductMeta extends IDataProductExtendedMainInfo {
 
 export interface IDataProductResult {
 	dataProductResult: IDataProductExtendedMainInfo;
-	dataLayers: IDataLayerMain[];
+	dataLayersMain: IDataLayerMain[];
 }
 
 export interface IDataLayerMain {
