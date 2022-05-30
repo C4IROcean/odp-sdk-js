@@ -34,7 +34,7 @@ export default class HardcodedClient {
 		return dataProductResults.map((el) => {
 			return {
 				dataProductResult: el,
-				dataLayers: DATA_LAYERS.filter((val) => val.dataProductUuid === el.uuid),
+				dataLayersMain: DATA_LAYERS.filter((val) => val.dataProductUuid === el.uuid),
 			};
 		});
 	}
