@@ -17,12 +17,12 @@ module.exports = {
 		es6: true,
 		node: true,
 	},
-	extends: ["prettier", "prettier/@typescript-eslint"],
+	extends: ["prettier"],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		sourceType: "module",
 	},
-	plugins: ["eslint-plugin-import", "eslint-plugin-jsdoc", "eslint-plugin-prefer-arrow", "@typescript-eslint"],
+	plugins: ["eslint-plugin-import", "eslint-plugin-prefer-arrow", "@typescript-eslint"],
 	overrides: [
 		{
 			files: ["source/**.ts"],
@@ -135,9 +135,6 @@ module.exports = {
 		"import/no-extraneous-dependencies": "error",
 		"import/no-internal-modules": "error",
 		"import/order": "off",
-		"jsdoc/check-alignment": "error",
-		"jsdoc/check-indentation": "error",
-		"jsdoc/newline-after-description": "error",
 		"max-classes-per-file": ["error", 1],
 		"max-len": [
 			"error",
