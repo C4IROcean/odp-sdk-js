@@ -73,7 +73,7 @@ export interface IDataLayer extends IDataLayerMain {
 
 export interface IDataProduct {
 	dataProduct: IDataProductMeta;
-	layers: IDataLayerMain[];
+	layersMain: IDataLayerMain[];
 }
 
 export interface IDataProductStyling {

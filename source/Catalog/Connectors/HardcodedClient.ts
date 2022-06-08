@@ -59,7 +59,7 @@ export default class HardcodedClient {
 		const dataProductResult = DATA_PRODUCTS_META.filter((val) => val.uuid === uuid)[0];
 		return {
 			dataProduct: dataProductResult,
-			layers: DATA_LAYERS.filter((val) => val.dataProductUuid === dataProductResult.uuid).map((el) => {
+			layersMain: DATA_LAYERS.filter((val) => val.dataProductUuid === dataProductResult.uuid).map((el) => {
 				return {
 					id: el.id,
 					name: el.name,
