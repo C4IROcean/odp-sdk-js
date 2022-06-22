@@ -1,5 +1,5 @@
 import { Auth } from "./../auth";
-import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult } from "./../constants";
+import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult } from "./../types";
 import DataHubClient from "./Connectors/DataHubClient";
 import DataMeshApiClient from "./Connectors/DataMeshApiClient";
 import HardcodedClient from "./Connectors/HardcodedClient";

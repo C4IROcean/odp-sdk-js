@@ -1,13 +1,7 @@
 import log from "loglevel";
 import { Auth } from "../../auth";
-import {
-	IDataLayerMain,
-	IDataProduct,
-	IDataProductResult,
-	ODP_BACKEND_TOKEN_SCOPE,
-	ODP_DATAMESH_BASE_URL,
-} from "../../constants";
-import { IDataLayer } from "./../../constants";
+import { IDataLayerMain, IDataProduct, IDataProductResult, IDataLayer } from "../../types";
+import { ODP_BACKEND_TOKEN_SCOPE, ODP_DATAMESH_BASE_URL } from "./../../constants";
 
 interface IDataMeshApiClientOptions {
 	auth: Auth;
