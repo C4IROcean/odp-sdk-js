@@ -99,7 +99,7 @@ export default class DataMeshApiClient {
 		}
 	};
 
-	public getAllDataProducts = async (): Promise<IDataProduct[]> => {
+	public getAllDataProducts = async (): Promise<IDataProductResult[]> => {
 		try {
 			const token = await this._auth.getToken(this._tokenScope);
 			const dataProducts = await (

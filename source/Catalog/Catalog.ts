@@ -121,8 +121,8 @@ export default class Catalog {
 		return dataProduct;
 	};
 
-	public getAllDataProducts = async (connector: CatalogConnectors): Promise<IDataProduct[]> => {
-		let dataProducts: IDataProduct[] = null;
+	public getAllDataProducts = async (connector: CatalogConnectors): Promise<IDataProductResult[]> => {
+		let dataProducts: IDataProductResult[] = null;
 		switch (connector) {
 			case CatalogConnectors.DataMeshApi:
 				dataProducts = await this._dataMeshApiClient.getAllDataProducts();

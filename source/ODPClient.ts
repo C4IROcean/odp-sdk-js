@@ -124,7 +124,7 @@ export default class ODPClient extends CogniteClient {
 		return this._catalog.getDataProductByUuid(dataProductUuid, CatalogConnectors.DataMeshApi);
 	}
 
-	public async getAllDataProducts(): Promise<IDataProduct[]> {
+	public async getAllDataProducts(): Promise<IDataProductResult[]> {
 		return this._catalog.getAllDataProducts(CatalogConnectors.DataMeshApi);
 	}
 
