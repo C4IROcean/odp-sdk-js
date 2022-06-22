@@ -104,4 +104,20 @@ export default class DataMeshApiClient {
 			log.error(error);
 		}
 	};
+
+	public getAllDataProducts = async (): Promise<IDataProduct[]> => {
+		try {
+			const token = await this._auth.getToken(this._tokenScope);
+			const dataProducts = await (
+				await fetch(`${this._dataMeshApiBaseUrl}/dataproducts`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
+			).json();
+			return dataProducts;
+		} catch (error) {
+			log.error(error);
+		}
+	};
 }

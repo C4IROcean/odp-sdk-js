@@ -125,6 +125,10 @@ export default class ODPClient extends CogniteClient {
 		return this._catalog.getDataProductByUuid(dataProductUuid, CatalogConnectors.DataMeshApi);
 	}
 
+	public async getAllDataProducts(): Promise<IDataProduct[]> {
+		return this._catalog.getAllDataProducts(CatalogConnectors.DataMeshApi);
+	}
+
 	/**
 	 * Subscribe to changes in authentication.
 	 * NOTE: Does not trigger on first login, check the authResult attribute

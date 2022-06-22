@@ -121,6 +121,17 @@ export default class Catalog {
 		return dataProduct;
 	};
 
+	public getAllDataProducts = async (connector: CatalogConnectors): Promise<IDataProduct[]> => {
+		let dataProducts: IDataProduct[] = null;
+		switch (connector) {
+			case CatalogConnectors.DataMeshApi:
+				dataProducts = await this._dataMeshApiClient.getAllDataProducts();
+				break;
+			// TODO: add datahub option to get full metadata
+		}
+		return dataProducts;
+	};
+
 	private _mapAutocompleteResultsToOdp(connector: CatalogConnectors, autocompleteResults: any) {
 		let mappedResults;
 		switch (connector) {
