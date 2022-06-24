@@ -6,8 +6,8 @@ import {
 	IDataProduct,
 	IDataProductExtendedMainInfo,
 	IDataProductResult,
-} from "../../constants";
-import { IDataLayer } from "./../../constants";
+	IDataLayer,
+} from "../../types";
 
 export default class HardcodedClient {
 	public static searchCatalog(searchWord: string): IDataProductResult[] {

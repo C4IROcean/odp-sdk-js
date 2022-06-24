@@ -4,9 +4,8 @@ import log from "loglevel";
 import { Auth } from "./auth";
 import { Casts } from "./casts";
 import Catalog, { CatalogConnectors } from "./Catalog/Catalog";
-import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult } from "./constants";
+import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult, IIdTokenClaims } from "./types";
 import { MarineRegions } from "./marineRegions";
-import { IIdTokenClaims } from "./types";
 
 // This client id only allows for certain auth_redirects, ideally you'll have a client id per app.
 // Contact us if this is your use case.
@@ -123,6 +122,10 @@ export default class ODPClient extends CogniteClient {
 
 	public async getDataProductByUuid(dataProductUuid: string): Promise<IDataProduct> {
 		return this._catalog.getDataProductByUuid(dataProductUuid, CatalogConnectors.DataMeshApi);
+	}
+
+	public async getAllDataProducts(): Promise<IDataProductResult[]> {
+		return this._catalog.getAllDataProducts(CatalogConnectors.DataMeshApi);
 	}
 
 	/**

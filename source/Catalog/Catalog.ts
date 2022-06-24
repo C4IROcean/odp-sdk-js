@@ -1,5 +1,5 @@
 import { Auth } from "./../auth";
-import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult } from "./../constants";
+import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult } from "./../types";
 import DataHubClient from "./Connectors/DataHubClient";
 import DataMeshApiClient from "./Connectors/DataMeshApiClient";
 import HardcodedClient from "./Connectors/HardcodedClient";
@@ -119,6 +119,17 @@ export default class Catalog {
 			// TODO: add datahub option to get full metadata
 		}
 		return dataProduct;
+	};
+
+	public getAllDataProducts = async (connector: CatalogConnectors): Promise<IDataProductResult[]> => {
+		let dataProducts: IDataProductResult[] = null;
+		switch (connector) {
+			case CatalogConnectors.DataMeshApi:
+				dataProducts = await this._dataMeshApiClient.getAllDataProducts();
+				break;
+			// TODO: add datahub option to get full metadata
+		}
+		return dataProducts;
 	};
 
 	private _mapAutocompleteResultsToOdp(connector: CatalogConnectors, autocompleteResults: any) {

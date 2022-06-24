@@ -1,13 +1,7 @@
 import log from "loglevel";
 import { Auth } from "../../auth";
-import {
-	IDataLayerMain,
-	IDataProduct,
-	IDataProductResult,
-	ODP_BACKEND_TOKEN_SCOPE,
-	ODP_DATAMESH_BASE_URL,
-} from "../../constants";
-import { IDataLayer } from "./../../constants";
+import { IDataLayerMain, IDataProduct, IDataProductResult, IDataLayer } from "../../types";
+import { ODP_BACKEND_TOKEN_SCOPE, ODP_DATAMESH_BASE_URL } from "./../../constants";
 
 interface IDataMeshApiClientOptions {
 	auth: Auth;
@@ -100,6 +94,22 @@ export default class DataMeshApiClient {
 				})
 			).json();
 			return dataProduct;
+		} catch (error) {
+			log.error(error);
+		}
+	};
+
+	public getAllDataProducts = async (): Promise<IDataProductResult[]> => {
+		try {
+			const token = await this._auth.getToken(this._tokenScope);
+			const dataProducts = await (
+				await fetch(`${this._dataMeshApiBaseUrl}/dataproducts`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
+			).json();
+			return dataProducts;
 		} catch (error) {
 			log.error(error);
 		}
