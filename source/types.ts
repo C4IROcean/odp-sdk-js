@@ -355,6 +355,7 @@ export const DATA_PRODUCTS_META: IDataProductMeta[] = [];
 export const DATA_LAYERS: IDataLayer[] = [];
 
 export const DATA_PRODUCTS_TAGS_INDEX: string[] = [];
+
 export interface IDataProductExtendedMainInfo {
 	uuid: string;
 	name: string;
@@ -385,6 +386,7 @@ export interface IDataProductMeta extends IDataProductExtendedMainInfo {
 	usageExamples: string | null;
 	boundingBox: number[];
 	doi: string | null;
+	odcNotebookLink: string;
 }
 
 export interface IDataProductResult {
