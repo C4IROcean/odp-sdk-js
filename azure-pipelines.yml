@@ -4,43 +4,39 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-    - master
-    - refs/tags/*
+  - master
+  - refs/tags/*
 
 pool:
-    vmImage: "ubuntu-latest"
+  vmImage: "ubuntu-latest"
 
 steps:
-    - task: NodeTool@0
-      inputs:
-          versionSpec: "12.x"
-      displayName: "Install Node.js"
-    - task: npmAuthenticate@0
-      inputs:
-          workingFile: ".npmrc"
-      displayName: "Npm authenticate"
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "12.x"
+    displayName: "Install Node.js"
 
-    - script: |
-          npm install
-          npm run build
-      displayName: "npm install and build"
+  - script: |
+      npm install
+      npm run build
+    displayName: "npm install and build"
 
-    - task: CmdLine@2
-      inputs:
-          script: "rm -rf .git"
+  - task: CmdLine@2
+    inputs:
+      script: "rm -rf .git"
 
-    - task: ArchiveFiles@2
-      inputs:
-          rootFolderOrFile: "$(Build.SourcesDirectory)/"
-          includeRootFolder: false
-          archiveType: "zip"
-          archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip"
-          replaceExistingArchive: true
-      displayName: "Create zip file"
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: "$(Build.SourcesDirectory)/"
+      includeRootFolder: false
+      archiveType: "zip"
+      archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip"
+      replaceExistingArchive: true
+    displayName: "Create zip file"
 
-    - task: PublishBuildArtifacts@1
-      inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-          ArtifactName: "drop"
-          publishLocation: "Container"
-      displayName: "Publish build"
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+      ArtifactName: "drop"
+      publishLocation: "Container"
+    displayName: "Publish build"
