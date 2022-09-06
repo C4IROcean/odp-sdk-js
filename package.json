@@ -1,52 +1,53 @@
 {
-	"name": "odp-sdk",
-	"version": "0.2.7",
-	"description": "Ocean Data Platform JavaScript SDK",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"scripts": {
-		"build": "npm run lint && tsc && npm test",
-		"build:ci": "npm run lint && tsc --sourceMap false",
-		"lint": "npm run eslint",
-		"eslint": "eslint source/ tests/ --ext .ts,.d.ts",
-		"test": "jest",
-		"compile": "tsc",
-		"publish:local": "npm run-script build:dev && yalc publish"
-	},
-	"keywords": [
-		"ODP",
-		"Ocean Data",
-		"Ocean Data Platform",
-		"sdk",
-		"typescript"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/C4IROcean/odp-sdk-js.git"
-	},
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"@azure/msal-browser": "^2.24.0",
-		"@cognite/sdk": "^7.3.4",
-		"geolib": "^3.3.1",
-		"loglevel": "^1.8.0"
-	},
-	"devDependencies": {
-		"@types/jest": "^27.4.1",
-		"@types/node": "^13.13.23",
-		"@typescript-eslint/eslint-plugin": "^5.26.0",
-		"@typescript-eslint/eslint-plugin-tslint": "^5.36.2",
-		"@typescript-eslint/parser": "^5.26.0",
-		"eslint": "^8.16.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-import": "^2.26.0",
-		"eslint-plugin-jsdoc": "^39.3.6",
-		"eslint-plugin-prefer-arrow": "^1.2.3",
-		"eslint-plugin-unicorn": "^43.0.2",
-		"jest": "^27.0.0",
-		"prettier": "^2.6.2",
-		"ts-jest": "^27.1.4",
-		"typescript": "^4.7.2"
-	}
+  "name": "odp-sdk",
+  "version": "0.2.7",
+  "description": "Ocean Data Platform JavaScript SDK",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "npm run lint && tsc && npm test",
+    "build:ci": "npm run lint && tsc --sourceMap false",
+    "lint": "npm run eslint",
+    "eslint": "eslint source/ --ext .ts,.d.ts",
+    "format-code": "prettier package.json \"source/**/*.ts\" --write",
+    "test": "jest --passWithNoTests",
+    "compile": "tsc",
+    "publish:local": "npm run-script build:dev && yalc publish"
+  },
+  "keywords": [
+    "ODP",
+    "Ocean Data",
+    "Ocean Data Platform",
+    "sdk",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/C4IROcean/odp-sdk-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/msal-browser": "^2.24.0",
+    "@cognite/sdk": "^7.3.4",
+    "geolib": "^3.3.1",
+    "loglevel": "^1.8.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "@types/node": "^13.13.23",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^5.36.2",
+    "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsdoc": "^39.3.6",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-unicorn": "^43.0.2",
+    "jest": "^27.0.0",
+    "prettier": "^2.6.2",
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.7.2"
+  }
 }
