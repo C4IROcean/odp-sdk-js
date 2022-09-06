@@ -7,10 +7,8 @@
 	"scripts": {
 		"build": "npm run format-code && npm run lint && tsc && npm test",
 		"build:ci": "npm run lint && tsc --sourceMap false",
-		"build:dev": "tsc",
 		"lint": "npm run eslint",
 		"eslint": "eslint source/ tests/ --ext .ts,.d.ts",
-		"format-code": "prettier package.json \"source/**/*.ts\" --write",
 		"test": "jest",
 		"compile": "tsc",
 		"publish:local": "npm run-script build:dev && yalc publish"
