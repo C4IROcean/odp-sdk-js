@@ -12,7 +12,7 @@
     "format-code": "prettier package.json \"source/**/*.ts\" --write",
     "test": "jest --passWithNoTests",
     "compile": "tsc",
-    "publish:local": "npm run-script build:dev && yalc publish"
+    "publish:local": "npm run build && yalc publish"
   },
   "keywords": [
     "ODP",
@@ -31,7 +31,8 @@
     "@azure/msal-browser": "^2.24.0",
     "@cognite/sdk": "^7.3.4",
     "geolib": "^3.3.1",
-    "loglevel": "^1.8.0"
+    "loglevel": "^1.8.0",
+    "eslint-plugin-unicorn": "^43.0.2"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
@@ -44,7 +45,6 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsdoc": "^39.3.6",
     "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-unicorn": "^43.0.2",
     "jest": "^27.0.0",
     "prettier": "^2.6.2",
     "ts-jest": "^27.1.4",
