@@ -98,7 +98,7 @@ export class Auth {
    * When using redirect APIs, handleRedirectPromise must be invoked when returning from the redirect. This ensures
    * that the token response from the server is properly handled and temporary cache entries are cleaned up.
    */
-  public handleRedirectAuth = async (): Promise<AuthenticationResult | null> => {
+  public handleRedirectAuth = async (): Promise<AuthenticationResult | undefined> => {
     try {
       const redirectResponse = await this._msalInstance.handleRedirectPromise()
       if (redirectResponse !== null) {
