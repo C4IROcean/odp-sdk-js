@@ -104,6 +104,7 @@ export interface ICastRow extends ICast {
 }
 
 export interface ICastRowValue {
+  extId?: string
   temperature?: INumberValue
   count?: number
   name?: string
@@ -134,7 +135,7 @@ export interface ICastRowValue {
 export interface INumberValue {
   value: number
   flags?: any
-  unit
+  unit: UnitTypeEnum
 }
 
 export interface IDataPoints {

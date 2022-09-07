@@ -5,6 +5,7 @@ import { CastColumnTypeEnum, ICast, ICastFilter, ICastRow, ICastRowValue, Provid
 import { boundingBoxToPolygon, throttleActions } from "./geoUtils"
 import { convertStringToDate, getColumnsFromEnum, mapCoordinateToIndex } from "./castUtils"
 import { ODPClient } from "."
+import { GeolibInputCoordinates } from "geolib/es/types"
 
 enum CastLevelEnum {
   _0 = 0,
@@ -45,13 +46,13 @@ export class Casts {
    * @param stream optional stream
    *
    */
-  public getCastsCount = async (filter: ICastFilter = {}, stream?): Promise<ICastRow[]> => {
-    let start = 0
-    let end
+  public getCastsCount = async (filter: ICastFilter = {}, stream?: any): Promise<ICastRow[]> => {
+    let start: number = 0
+    let end: number | undefined
 
     // Default level, used if there is no time filter.
     let level = CastLevelEnum._0
-    let years = []
+    let years: number[] = []
     if (filter.year || filter.time) {
       level = CastLevelEnum._1
       years = this.getYears(filter)
@@ -59,7 +60,7 @@ export class Casts {
 
     const location = filter.geoFilter?.location
     if (location?.longitude && location?.latitude) {
-      start = mapCoordinateToIndex(filter.geoFilter.location, 1)
+      start = mapCoordinateToIndex(location, 1)
       end = start + 1
     }
     const promises = []
@@ -82,8 +83,8 @@ export class Casts {
    * Get years that are available
    */
   public getCastYears = async (): Promise<string[]> => {
-    const cast = await this.odpClient.sequences.retrieve([{ externalId: "cast_wod_0" }])
-    if (cast.length > 0 && cast[0].metadata.cast_years) {
+    const cast: Sequence[] = await this.odpClient.sequences.retrieve([{ externalId: "cast_wod_0" }])
+    if (cast.length > 0 && cast[0].metadata?.cast_years) {
       return cast[0].metadata.cast_years.split(", ")
     }
     return []
@@ -116,7 +117,7 @@ export class Casts {
    * @param filter cast filter object
    * @param stream optional stream
    */
-  public getCasts = async (filter: ICastFilter, stream?): Promise<ICastRow[]> => {
+  public getCasts = async (filter: ICastFilter, stream?: any): Promise<ICastRow[]> => {
     if (filter.geoFilter?.boundingBox) {
       filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox)
     }
@@ -124,14 +125,14 @@ export class Casts {
     // get polygon from mrgid
     if (filter.geoFilter?.mrgid) {
       const mr = await this.odpClient.unstable.marineRegions.getMarineRegionByMRGID(filter.geoFilter.mrgid)
-      filter.geoFilter.polygon = mr.polygon
+      filter.geoFilter.polygon = mr?.polygon
     }
 
     // get casts using a polygon, minimum length 2 to validate
     if ((filter.geoFilter?.polygon?.length ?? 0) > 0) {
-      const polygon = filter.geoFilter.polygon
-      if (polygon.length < 3) {
-        throw new Error(`Invlid polygon provided to "getCasts", expected at least 3 points, got ${polygon.length}`)
+      const polygon = filter.geoFilter?.polygon
+      if (polygon?.length && polygon.length < 3) {
+        throw new Error(`Invalid polygon provided to "getCasts", expected at least 3 points, got ${polygon.length}`)
       }
       return this.getCastsFromPolygon(filter, stream)
     }
@@ -144,7 +145,9 @@ export class Casts {
     if (!filter.castId) {
       for (const year of this.getYears(filter)) {
         for (const ids of this.getCastIds(filter, 2)) {
-          castIds.push(ids + "_" + year + "_" + mapCoordinateToIndex(filter.geoFilter.location))
+          if (!!filter.geoFilter?.location) {
+            castIds.push(ids + "_" + year + "_" + mapCoordinateToIndex(filter.geoFilter.location))
+          }
         }
       }
     } else {
@@ -172,7 +175,7 @@ export class Casts {
    *
    * @param castId id for a given cast
    */
-  public getCastMetadata = async (castId: string): Promise<ICast[]> => {
+  public getCastMetadata = async (castId: string): Promise<ICast[] | null> => {
     if (!castId) {
       throw new Error("castId is required")
     }
@@ -191,7 +194,7 @@ export class Casts {
    * @param filter cast filter object
    * @param stream Optional stream
    */
-  public getCastRows = async (filter: ICastFilter, stream?): Promise<ICastRow[]> => {
+  public getCastRows = async (filter: ICastFilter, stream?: any): Promise<ICastRow[]> => {
     if (filter.geoFilter?.boundingBox) {
       filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox)
     }
@@ -223,6 +226,9 @@ export class Casts {
       throw new Error("Need a castId")
     }
     const sequences = await this.getCastMetadata(castId)
+    if (!sequences) {
+      throw new Error("No casts available for given id.")
+    }
     const fileIdToSequenceMap = new Map(sequences.map(sequence => [sequence.metadata?.CDF_extIdFile, sequence]))
     const extFileIds = Array.from(fileIdToSequenceMap.keys())
 
@@ -231,6 +237,7 @@ export class Casts {
 
     return fileUrls.map(fileUrl => {
       const sequence = fileIdToSequenceMap.get(fileUrl.externalId)
+      if (!sequence) throw new Error(`Sequence with externalId ${fileUrl.externalId} was not found.`)
       return {
         ...fileUrl,
         castId: sequence.externalId,
@@ -246,7 +253,7 @@ export class Casts {
     return Object.values(CastLevelEnum).includes(n)
   }
 
-  private getCastRowsFromPolygon = async (filter: ICastFilter, stream?): Promise<ICastRow[]> => {
+  private getCastRowsFromPolygon = async (filter: ICastFilter, stream?: any): Promise<ICastRow[]> => {
     const promises = []
     let casts
     try {
@@ -266,8 +273,8 @@ export class Casts {
     return result.flatMap(castRows => castRows)
   }
 
-  private getCastsFromPolygon = async (filter: ICastFilter, stream?): Promise<ICastRow[]> => {
-    if ((!filter.geoFilter.polygon && !filter.geoFilter.polygon) || filter.geoFilter.polygon.length < 3) {
+  private getCastsFromPolygon = async (filter: ICastFilter, stream?: any): Promise<ICastRow[]> => {
+    if ((!filter.geoFilter?.polygon && !filter.geoFilter?.polygon) || filter.geoFilter.polygon.length < 3) {
       throw new Error("A polygon with a length > 2 is required")
     }
     if (!filter.year && !filter.time) {
@@ -300,13 +307,13 @@ export class Casts {
     return result.flatMap(casts => casts)
   }
 
-  private filterLocationByPolygon = (row, polygon) => {
+  private filterLocationByPolygon = (row: ICastRow, polygon: GeolibInputCoordinates[]) => {
     if (isPointInPolygon({ latitude: row.location.lat, longitude: row.location.long }, polygon)) {
       return row
     }
   }
 
-  private postRowFilter = (rows, filter: ICastFilter): ICastRow[] => {
+  private postRowFilter = (rows: ICastRow[], filter: ICastFilter): ICastRow[] => {
     const all = []
     for (const row of rows) {
       if (filter.quality !== undefined) {
@@ -315,7 +322,7 @@ export class Casts {
           continue
         }
       }
-      if (filter.geoFilter.polygon) {
+      if (filter.geoFilter?.polygon) {
         const pFilterResult = this.filterLocationByPolygon(row, filter.geoFilter.polygon)
         if (!pFilterResult) {
           continue
@@ -326,10 +333,10 @@ export class Casts {
     return all
   }
 
-  private postCastFilter = (casts, filter: ICastFilter): ICastRow[] => {
+  private postCastFilter = (casts: ICast[], filter: ICastFilter): ICast[] => {
     const all = []
     for (const cast of casts) {
-      if (filter.time !== undefined) {
+      if (!!filter.time && !!cast.time) {
         if (cast.time < filter.time.min || cast.time > filter.time.max) {
           continue
         }
@@ -339,7 +346,7 @@ export class Casts {
     return all
   }
 
-  private filterByQuality = (row, filter: ICastFilter) => {
+  private filterByQuality = (row: ICastRow, filter: ICastFilter) => {
     let skip = false
     for (const value of Object.keys(row.value)) {
       if (row.value[value].flags && row.value[value].flags.wod !== null) {
@@ -376,7 +383,7 @@ export class Casts {
     query: SequenceListScope,
     columns?: any,
     start = 0,
-    end = undefined,
+    end?: number,
     stream?: any,
     converter?: any
   ) => {

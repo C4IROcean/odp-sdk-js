@@ -125,7 +125,12 @@ module.exports = {
     "id-denylist": "off",
     "id-match": "off",
     "import/no-extraneous-dependencies": "error",
-    "import/no-internal-modules": "error",
+    "import/no-internal-modules": [
+      "error",
+      {
+        allow: ["**/types"],
+      },
+    ],
     "import/order": "off",
     "jsdoc/check-alignment": "error",
     "jsdoc/check-indentation": "error",
