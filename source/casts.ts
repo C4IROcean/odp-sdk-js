@@ -1,4 +1,4 @@
-import { ExternalId, FileLink, Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk"
+import { ExternalId, FileLink, IdEither, Sequence, SequenceListScope, SequenceRowsRetrieve } from "@cognite/sdk"
 import { getBounds, isPointInPolygon } from "geolib"
 
 import { CastColumnTypeEnum, ICast, ICastFilter, ICastRow, ICastRowValue, ProviderEnum } from "./types"
@@ -117,7 +117,7 @@ export class Casts {
    * @param filter cast filter object
    * @param stream optional stream
    */
-  public getCasts = async (filter: ICastFilter, stream?: any): Promise<ICastRow[]> => {
+  public getCasts = async (filter: ICastFilter, stream?: any): Promise<ICast[]> => {
     if (filter.geoFilter?.boundingBox) {
       filter.geoFilter.polygon = boundingBoxToPolygon(filter.geoFilter.boundingBox)
     }
@@ -221,7 +221,9 @@ export class Casts {
    *
    * @param castId id of a cast
    */
-  public getCastSourceFileUrl = async (castId: string): Promise<(FileLink & ExternalId & { castId: string })[]> => {
+  public getCastSourceFileUrl = async (
+    castId: string
+  ): Promise<(FileLink & ExternalId & { castId: string | undefined })[]> => {
     if (!castId) {
       throw new Error("Need a castId")
     }
@@ -233,7 +235,8 @@ export class Casts {
     const extFileIds = Array.from(fileIdToSequenceMap.keys())
 
     const externalIds = extFileIds.map(externalId => ({ externalId }))
-    const fileUrls = (await this.odpClient.files.getDownloadUrls(externalIds)) as (FileLink & ExternalId)[]
+    const fileUrls = (await this.odpClient.files.getDownloadUrls(externalIds as IdEither[])) as (FileLink &
+      ExternalId)[]
 
     return fileUrls.map(fileUrl => {
       const sequence = fileIdToSequenceMap.get(fileUrl.externalId)
@@ -392,7 +395,10 @@ export class Casts {
       return []
     }
 
-    sequences.sort((a, b) => (a.metadata.date > b.metadata.date ? 1 : b.metadata.date > a.metadata.date ? -1 : 0))
+    sequences.sort((a, b) => {
+      if (!a.metadata || !b.metadata) return 0
+      return a.metadata.date > b.metadata.date ? 1 : b.metadata.date > a.metadata.date ? -1 : 0
+    })
 
     if (!columns) {
       columns = sequences[0].columns.map(col => col.externalId)
@@ -440,7 +446,7 @@ export class Casts {
     return all
   }
 
-  private getSequenceRows = seqRows => {
+  private getSequenceRows = (seqRows: SequenceRowsRetrieve[]) => {
     const promises = []
     for (const seq of seqRows) {
       promises.push(() => this.odpClient.sequences.retrieveRows(seq))
@@ -490,7 +496,7 @@ export class Casts {
   /**
    * Convert Cognite response to a ODP response
    */
-  private sequenceConvert = (sequences: Sequence[], allRows, columns): ICastRow[] => {
+  private sequenceConvert = (sequences: Sequence[], allRows: any, columns: any): ICastRow[] => {
     const returnValue: ICastRow[] = []
     const columnIndex: any = this.arrayIndex(columns)
 
@@ -524,13 +530,13 @@ export class Casts {
    * Convert a cast sequence
    */
 
-  private castSequenceConvert = (sequences: Sequence[], allRows, columns): ICastRow[] => {
+  private castSequenceConvert = (sequences: Sequence[], allRows: any, columns: any): ICastRow[] => {
     const returnValue: ICastRow[] = []
     const columnIndex: any = this.arrayIndex(columns)
     const cruise = {
-      country: sequences[0].metadata.country,
-      id: sequences[0].metadata.WOD_cruise_identifier,
-      vesselName: sequences[0].metadata.WOD_cruise_name,
+      country: sequences[0].metadata?.country,
+      id: sequences[0].metadata?.WOD_cruise_identifier,
+      vesselName: sequences[0].metadata?.WOD_cruise_name,
     }
 
     for (const item of allRows[0].items) {
@@ -555,7 +561,7 @@ export class Casts {
    * Convert a cast sequence
    */
 
-  private castSequenceLv2Convert = (sequences: Sequence[], allRows, columns): ICastRow[] => {
+  private castSequenceLv2Convert = (sequences: Sequence[], allRows: any, columns: any): ICastRow[] => {
     const returnValue: ICastRow[] = []
     const columnIndex: any = this.arrayIndex(columns)
 
@@ -581,23 +587,28 @@ export class Casts {
     for (const sequence of sequences) {
       const seqMeta: ICast = {
         cruise: {
-          country: sequence.metadata.country,
-          id: sequence.metadata.WOD_cruise_identifier,
-          vesselName: sequence.metadata.WOD_cruise_name,
+          country: sequence.metadata?.country,
+          id: sequence.metadata?.WOD_cruise_identifier,
+          vesselName: sequence.metadata?.WOD_cruise_name,
         },
         externalId: sequence.externalId,
         id: sequence.id,
         location: {
-          lat: parseFloat(sequence.metadata.lat),
-          long: parseFloat(sequence.metadata.lon),
+          lat: sequence.metadata ? parseFloat(sequence.metadata.lat) : 0,
+          long: sequence.metadata ? parseFloat(sequence.metadata.lon) : 0,
         },
-        time: convertStringToDate(sequence.metadata.date),
+        time: sequence.metadata ? convertStringToDate(sequence.metadata.date) : undefined,
 
         metadata: {},
       }
-      for (const item of Object.keys(sequence.metadata)) {
-        if (!["country", "WOD_cruise_identifier", "WOD_cruise_name", "lat", "lon", "date"].includes(item)) {
-          seqMeta.metadata[item] = sequence.metadata[item]
+      if (sequence.metadata) {
+        for (const item of Object.keys(sequence.metadata)) {
+          if (
+            !["country", "WOD_cruise_identifier", "WOD_cruise_name", "lat", "lon", "date"].includes(item) &&
+            typeof seqMeta.metadata !== "undefined"
+          ) {
+            seqMeta.metadata[item] = sequence.metadata[item]
+          }
         }
       }
       returnValue.push(seqMeta)
@@ -606,7 +617,7 @@ export class Casts {
     return returnValue
   }
 
-  private castRowValues = (item, columnIndex) => {
+  private castRowValues = (item: any, columnIndex: any) => {
     const values: ICastRowValue = {}
 
     for (const rowName of this.constants().sequence.rowNames) {
@@ -633,7 +644,7 @@ export class Casts {
     const years: number[] = []
     if (filter.year) {
       years.push(filter.year)
-    } else {
+    } else if (filter.time) {
       for (let year = filter.time.min.getFullYear(); year <= filter.time.max.getFullYear(); year++) {
         years.push(year)
       }
@@ -641,7 +652,7 @@ export class Casts {
     return years
   }
 
-  private castValues = (item, columnIndex) => {
+  private castValues = (item: any, columnIndex: any) => {
     const values: any = {}
 
     for (const iterator of Object.keys(columnIndex)) {
@@ -687,8 +698,8 @@ export class Casts {
     return values
   }
 
-  private arrayIndex = array => {
-    const ret = {}
+  private arrayIndex = (array: any) => {
+    const ret: any = {}
     for (let index = 0; index < array.length; index++) {
       ret[array[index]] = index
     }

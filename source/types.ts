@@ -1,9 +1,9 @@
 import {
   Aggregate,
+  CogniteExternalId,
   DatapointAggregate as GetAggregateDatapoint,
-  StringDatapoint as GetStringDatapoint,
   DoubleDatapoint as GetDoubleDatapoint,
-  Metadata,
+  StringDatapoint as GetStringDatapoint,
 } from "@cognite/sdk"
 
 export { GetStringDatapoint, GetDoubleDatapoint, GetAggregateDatapoint }
@@ -37,9 +37,10 @@ export interface ICast {
     vesselName?: string
   }
   id: number
-  externalId: string
+  externalId: CogniteExternalId | undefined
   time?: Date
   metadata?: {
+    [key: string]: any
     date?: string
     country?: string
     Conventions?: string
@@ -104,6 +105,7 @@ export interface ICastRow extends ICast {
 }
 
 export interface ICastRowValue {
+  [key: string]: any
   extId?: string
   temperature?: INumberValue
   count?: number
@@ -117,7 +119,7 @@ export interface ICastRowValue {
   ph?: number
   chlorophyll?: number
   pressure?: number
-  externalId?: string
+  externalId?: string | undefined
   castId?: number
   cruiseId?: string
   countryCode?: string
@@ -287,11 +289,6 @@ export interface ICastFilter {
 export interface IAssetsFilter {
   externalId?: string[]
 }
-
-export interface ICogniteGeo extends Metadata {
-  geo_key?: string
-}
-
 export interface IMarineRegion {
   name?: string
   parentId?: number
