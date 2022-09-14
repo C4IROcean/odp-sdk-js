@@ -28,18 +28,18 @@ interface IAuthTokens {
 
 type AuthListenersT = (token?: IAuthTokens) => void
 
-const defaultOptions: Pick<ClientOptions, "project" | "apiKeyMode" | "baseUrl"> = {
+const defaultOptions: { project: string; apiKeyMode: boolean; baseUrl: string } = {
   project: "odp",
   apiKeyMode: false,
   baseUrl: "https://api.cognitedata.com",
 }
 
 export default class ODPClient extends CogniteClient {
-  private authResult: AuthenticationResult | undefined = undefined
+  private authResult: AuthenticationResult | undefined
   private listeners: AuthListenersT[] = []
 
-  private _casts: Casts
-  private _marineRegions: MarineRegions
+  private _casts: Casts | undefined
+  private _marineRegions: MarineRegions | undefined
   private auth: Auth
   private _catalog: Catalog
 
@@ -48,11 +48,11 @@ export default class ODPClient extends CogniteClient {
       ...defaultOptions,
       getToken: async () => {
         const token = await this.auth.handleRedirectAuth()
+        if (!token) throw new Error("Could not retrieve token.")
         if (this.authResult?.uniqueId !== token?.uniqueId) {
           this.authStateUpdated(token)
         }
-
-        return token?.accessToken
+        return token.accessToken
       },
       ...options,
     })
@@ -60,7 +60,6 @@ export default class ODPClient extends CogniteClient {
     log.setLevel(options.logLevel ?? log.levels.SILENT)
 
     this.auth = new Auth(options.baseUrl || defaultOptions.baseUrl, {
-      clientId: ODP_SDK_CLIENT_ID,
       redirectUri: "http://localhost:3000/", // This should be overwritten!
       knownAuthorities: ["oceandataplatform.b2clogin.com"],
       authority:
@@ -116,11 +115,11 @@ export default class ODPClient extends CogniteClient {
     return this._catalog.autocompleteDataLayers(keyword, [CatalogConnectors.DataMeshApi])
   }
 
-  public async getDataLayerById(id: number): Promise<IDataLayer> {
+  public async getDataLayerById(id: number): Promise<IDataLayer | null> {
     return this._catalog.getDataLayerById(id, CatalogConnectors.DataMeshApi)
   }
 
-  public async getDataProductByUuid(dataProductUuid: string): Promise<IDataProduct> {
+  public async getDataProductByUuid(dataProductUuid: string): Promise<IDataProduct | null> {
     return this._catalog.getDataProductByUuid(dataProductUuid, CatalogConnectors.DataMeshApi)
   }
 

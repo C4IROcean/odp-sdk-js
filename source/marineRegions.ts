@@ -1,8 +1,9 @@
-import { Sequence } from "@cognite/sdk"
+import { Asset, CogniteInternalId, CursorAndAsyncIterator, Sequence, SequenceRowsRetrieve } from "@cognite/sdk"
+import { SequenceRow } from "@cognite/sdk/dist/src/api/sequences/sequenceRow"
 
+import { IGeoLocation, ODPClient } from "."
 import { throttleActions } from "./geoUtils"
 import { IMarineRegion, IMarineRegionType } from "./types"
-import { IGeoLocation, ODPClient } from "."
 
 export class MarineRegions {
   private _concurrency = 50
@@ -19,9 +20,9 @@ export class MarineRegions {
    * @param polygon If set to true, fetch polygons for each marine regions
    */
 
-  public getMarineRegions = async (regionTypeId, polygon = false): Promise<IMarineRegion[]> => {
+  public getMarineRegions = async (regionTypeId: CogniteInternalId, polygon = false): Promise<IMarineRegion[]> => {
     let sequences = []
-    let asset
+    let asset: Asset
     try {
       const result = await Promise.all([
         this._client.sequences.list({ filter: { assetIds: [regionTypeId] }, limit: 1000 }),
@@ -33,7 +34,7 @@ export class MarineRegions {
       throw error
     }
     if (sequences.length === 0) {
-      return null
+      return []
     }
     if (polygon) {
       const promises = []
@@ -69,26 +70,26 @@ export class MarineRegions {
    *
    * @param id
    */
-  public getMarineRegion = async id => {
-    let sequences
+  public getMarineRegion = async (id: CogniteInternalId) => {
+    let sequences: Sequence[]
     try {
       sequences = await this._client.sequences.retrieve([{ id }])
     } catch (e) {
       throw e
     }
-    if (sequences.length === 0) {
+    if (sequences.length === 0 || !sequences[0].assetId) {
       return null
     }
-    let asset
+    let assets: Asset[]
     try {
-      asset = await this._client.assets.retrieve([{ id: sequences[0].assetId }])
+      assets = await this._client.assets.retrieve([{ id: sequences[0].assetId }])
     } catch (e) {
       throw e
     }
-    return this.getPolygonRows(sequences[0], asset[0])
+    return this.getPolygonRows(sequences[0], assets[0])
   }
 
-  public getMarineRegionByMRGID = async mrgid => {
+  public getMarineRegionByMRGID = async (mrgid: any) => {
     let sequences
     try {
       // @ts-ignore
@@ -96,7 +97,7 @@ export class MarineRegions {
     } catch (e) {
       throw e
     }
-    if (sequences.length === 0) {
+    if (sequences.length === 0 || !sequences[0].assetId) {
       return null
     }
     let asset
@@ -111,7 +112,7 @@ export class MarineRegions {
    * Private methods
    */
 
-  private getPolygonRows = async (sequence, asset?) => {
+  private getPolygonRows = async (sequence: Sequence, asset?: Asset) => {
     const all: IGeoLocation[] = []
     if (!asset && sequence.assetId) {
       try {
@@ -128,13 +129,15 @@ export class MarineRegions {
           response = await this.getSequenceRows({
             id: sequence.id,
             limit: 10000,
-            cursor: response ? response.nextCursor : null,
+            cursor: response ? response.nextCursor : undefined,
           })
         } catch (e) {
           throw e
         }
         for (const item of response.items) {
-          all.push({ latitude: item[1], longitude: item[2] })
+          if (item[1] && item[2]) {
+            all.push({ latitude: Number(item[1]), longitude: Number(item[2]) })
+          }
         }
         if (!response.nextCursor) {
           break
@@ -148,11 +151,11 @@ export class MarineRegions {
     return seq[0]
   }
 
-  private MRSequenceConvert = (sequences: Sequence[], asset?): IMarineRegion[] => {
+  private MRSequenceConvert = (sequences: Sequence[], asset?: Asset): IMarineRegion[] => {
     const returnValue: IMarineRegion[] = []
     for (const sequence of sequences) {
       const seqMeta: IMarineRegion = {
-        externalId: sequence.externalId,
+        externalId: sequence.externalId ?? "",
         parentId: asset ? asset.id : undefined,
         parentExternalId: asset ? asset.externalId : undefined,
         id: sequence.id,
@@ -164,16 +167,16 @@ export class MarineRegions {
     return returnValue
   }
 
-  private MRTypeConvert = (assets): IMarineRegionType[] => {
+  private MRTypeConvert = (assets: Asset[]): IMarineRegionType[] => {
     const returnValue: IMarineRegionType[] = []
     for (const asset of assets) {
       const seqMeta: IMarineRegionType = {
-        externalId: asset.externalId,
+        externalId: asset.externalId ?? "",
         parentId: asset.parentId,
         parentExternalId: asset.parentExternalId,
         id: asset.id,
         name: asset.name,
-        source: asset.source,
+        source: asset.source ?? "",
       }
       returnValue.push(seqMeta)
     }
@@ -181,5 +184,6 @@ export class MarineRegions {
     return returnValue
   }
 
-  private getSequenceRows = seqRows => this._client.sequences.retrieveRows(seqRows)
+  private getSequenceRows = (seqRows: SequenceRowsRetrieve): CursorAndAsyncIterator<SequenceRow> =>
+    this._client.sequences.retrieveRows(seqRows)
 }

@@ -86,8 +86,8 @@ export default class Catalog {
     return results
   }
 
-  public getDataLayerById = async (id: number, connector: CatalogConnectors): Promise<IDataLayer> => {
-    let result: IDataLayer = null
+  public getDataLayerById = async (id: number, connector: CatalogConnectors): Promise<IDataLayer | null> => {
+    let result: IDataLayer | null = null
     switch (connector) {
       case CatalogConnectors.Hardcoded:
         result = HardcodedClient.getLayerById(id)
@@ -103,8 +103,8 @@ export default class Catalog {
   public getDataProductByUuid = async (
     dataProductUuid: string,
     connector: CatalogConnectors
-  ): Promise<IDataProduct> => {
-    let dataProduct: IDataProduct = null
+  ): Promise<IDataProduct | null> => {
+    let dataProduct: IDataProduct | null = null
     switch (connector) {
       case CatalogConnectors.Hardcoded:
         dataProduct = HardcodedClient.getDataProductByUuid(dataProductUuid)
@@ -118,7 +118,7 @@ export default class Catalog {
   }
 
   public getAllDataProducts = async (connector: CatalogConnectors): Promise<IDataProductResult[]> => {
-    let dataProducts: IDataProductResult[] = null
+    let dataProducts: IDataProductResult[] = []
     switch (connector) {
       case CatalogConnectors.DataMeshApi:
         dataProducts = await this._dataMeshApiClient.getAllDataProducts()

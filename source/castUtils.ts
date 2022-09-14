@@ -8,7 +8,7 @@ const start = 1
  * @param index
  * @param resolution resolution, defaults to 1
  */
-export const indexToGridCoordinate = (index, resolution = 1) => {
+export const indexToGridCoordinate = (index: number, resolution = 1) => {
   const lat_range = resolution * 180
   const x_loc = Math.floor((index - start) / lat_range + start)
   const y_loc = ((index - start) % lat_range) + start
@@ -16,7 +16,8 @@ export const indexToGridCoordinate = (index, resolution = 1) => {
 }
 
 // returns index of specific grid-coordinate, given x and y coordinates
-export const gridCoordinateToIndex = (x, y, resolution = 1): number => ((x - start) * 180) / resolution + y
+export const gridCoordinateToIndex = (x: number, y: number, resolution = 1): number =>
+  ((x - start) * 180) / resolution + y
 
 export const mapCoordinateToIndex = (location: IGeoLocation, resolution = 1): number => {
   // returns index of specific grid-coordinate, given lon lat
@@ -32,7 +33,7 @@ export const mapCoordinateToIndex = (location: IGeoLocation, resolution = 1): nu
   return ((x - start) * 180) / resolution + y
 }
 
-export const indexToMapCoordinate = (index, resolution = 1): IGeoLocation => {
+export const indexToMapCoordinate = (index: number, resolution = 1): IGeoLocation => {
   // Index to longitude and latitude
   const location = indexToGridCoordinate(index, resolution)
   const longitude = -180 + (location.x - 0.5) / resolution // +0.5 is to put location to center of grid tile
@@ -101,7 +102,7 @@ export const cornerCoordinatesToAllCoordinates = (corners, resolution = 1) => {
 	return [boxCoords, boxIndexes];
 };
 */
-export const getColumnsFromEnum = (cols: CastColumnTypeEnum[], available) => {
+export const getColumnsFromEnum = (cols: CastColumnTypeEnum[], available: (string | undefined)[]) => {
   const columns = ["date", "lat", "lon", "z"]
 
   for (const col of cols) {

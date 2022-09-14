@@ -14,7 +14,7 @@ export default class HardcodedClient {
     const dataProductResults: IDataProductExtendedMainInfo[] = DATA_PRODUCTS_META.filter(value => {
       return (
         value.name.toLowerCase().includes(searchWord.toLowerCase()) ||
-        value.databaseDescription.includes(searchWord.toLowerCase()) ||
+        value.databaseDescription?.includes(searchWord.toLowerCase()) ||
         value.tags.find(tag => tag.toLowerCase().includes(searchWord.toLowerCase()))
       )
     }).map(el => {

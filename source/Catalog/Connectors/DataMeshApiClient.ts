@@ -10,7 +10,7 @@ interface IDataMeshApiClientOptions {
 }
 
 export default class DataMeshApiClient {
-  private static _dataMeshApiClient
+  private static _dataMeshApiClient: DataMeshApiClient
   private _auth: Auth
   private _tokenScope: string[]
   private _dataMeshApiBaseUrl: string
@@ -39,7 +39,7 @@ export default class DataMeshApiClient {
       })
       return response.json()
     } catch (error) {
-      log.error(error)
+      throw new Error(`Searching the catalog failed with the following error: ${error}`)
     }
   }
   public autocompleteCatalog = async (searchWord: string): Promise<string[]> => {
@@ -52,7 +52,7 @@ export default class DataMeshApiClient {
       })
       return response.json()
     } catch (error) {
-      log.error(error)
+      throw new Error(`Autocompleting the catalog failed with the following error: ${error}`)
     }
   }
   public autocompleteDataLayers = async (searchWord: string): Promise<IDataLayerMain[]> => {
@@ -65,7 +65,7 @@ export default class DataMeshApiClient {
       })
       return response.json()
     } catch (error) {
-      log.error(error)
+      throw new Error(`Autocompleting the data layers failed with the following error: ${error}`)
     }
   }
   public getLayerById = async (id: number): Promise<IDataLayer> => {
@@ -80,7 +80,7 @@ export default class DataMeshApiClient {
       ).json()
       return { ...result, explorerStyling: JSON.parse(result.explorerStyling) }
     } catch (error) {
-      log.error(error)
+      throw new Error(`Fetching the data layer with id ${id} has failed with the following error: ${error}`)
     }
   }
   public getDataProductByUuid = async (uuid: string): Promise<IDataProduct> => {
@@ -95,7 +95,7 @@ export default class DataMeshApiClient {
       ).json()
       return dataProduct
     } catch (error) {
-      log.error(error)
+      throw new Error(`Fetching the data product with uuid ${uuid} has failed with the following error: ${error}`)
     }
   }
 
@@ -111,7 +111,7 @@ export default class DataMeshApiClient {
       ).json()
       return dataProducts
     } catch (error) {
-      log.error(error)
+      throw new Error(`Fetching all data products has failed with the following error: ${error}`)
     }
   }
 }

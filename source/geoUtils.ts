@@ -1,7 +1,7 @@
 import * as https from "https"
 import { IBoundingBox, IGeoLocation } from "./types"
 
-export const throttleActions = (listOfCallableActions, limit, stream?) => {
+export const throttleActions = (listOfCallableActions: any, limit: any, stream?: any) => {
   // We'll need to store which is the next promise in the list.
   let i = 0
   const resultArray = new Array(listOfCallableActions.length)
@@ -10,7 +10,7 @@ export const throttleActions = (listOfCallableActions, limit, stream?) => {
   // (mostly) single-threaded, so only one completion handler will call at a
   // given time. Because we return doNextAction, the Promise chain continues as
   // long as there's an action left in the list.
-  const doNextAction = () => {
+  const doNextAction = (): any => {
     if (i < listOfCallableActions.length) {
       // Save the current value of i, so we can put the result in the right place
       const actionIndex = i++
