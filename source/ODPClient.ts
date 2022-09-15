@@ -2,7 +2,7 @@ import { AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser"
 import { ClientOptions, CogniteClient } from "@cognite/sdk"
 import log from "loglevel"
 import { Auth } from "./auth"
-import Catalog, { CatalogConnectors } from "./Catalog/Catalog"
+import Catalog from "./Catalog/Catalog"
 import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult, IIdTokenClaims } from "./types"
 
 // This client id only allows for certain auth_redirects, ideally you'll have a client id per app.
@@ -89,27 +89,27 @@ export default class ODPClient extends CogniteClient {
   }
 
   public async searchCatalog(keyword: string): Promise<IDataProductResult[]> {
-    return this._catalog.searchCatalog(keyword, [CatalogConnectors.DataMeshApi])
+    return this._catalog.searchCatalog(keyword)
   }
 
   public async autocompleteCatalog(keyword: string): Promise<string[]> {
-    return this._catalog.autocompleteCatalog(keyword, [CatalogConnectors.DataMeshApi])
+    return this._catalog.autocompleteCatalog(keyword)
   }
 
   public async autocompleteDataLayers(keyword: string): Promise<IDataLayerMain[]> {
-    return this._catalog.autocompleteDataLayers(keyword, [CatalogConnectors.DataMeshApi])
+    return this._catalog.autocompleteDataLayers(keyword)
   }
 
   public async getDataLayerById(id: number): Promise<IDataLayer | null> {
-    return this._catalog.getDataLayerById(id, CatalogConnectors.DataMeshApi)
+    return this._catalog.getDataLayerById(id)
   }
 
   public async getDataProductByUuid(dataProductUuid: string): Promise<IDataProduct | null> {
-    return this._catalog.getDataProductByUuid(dataProductUuid, CatalogConnectors.DataMeshApi)
+    return this._catalog.getDataProductByUuid(dataProductUuid)
   }
 
   public async getAllDataProducts(): Promise<IDataProductResult[]> {
-    return this._catalog.getAllDataProducts(CatalogConnectors.DataMeshApi)
+    return this._catalog.getAllDataProducts()
   }
 
   /**
