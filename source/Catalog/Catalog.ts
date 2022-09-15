@@ -2,10 +2,8 @@ import { Auth } from "./../auth"
 import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult } from "./../types"
 import DataHubClient from "./Connectors/DataHubClient"
 import DataMeshApiClient from "./Connectors/DataMeshApiClient"
-import HardcodedClient from "./Connectors/HardcodedClient"
 
 export enum CatalogConnectors {
-  Hardcoded = "hardcoded",
   Datahub = "datahub",
   DataMeshApi = "datameshapi",
 }
@@ -30,10 +28,6 @@ export default class Catalog {
     let results: IDataProductResult[] = []
     for (const connector of connectors) {
       switch (connector) {
-        case CatalogConnectors.Hardcoded:
-          const hardcodedResult: IDataProductResult[] = HardcodedClient.searchCatalog(searchString)
-          results = [...results, ...hardcodedResult]
-          break
         case CatalogConnectors.DataMeshApi:
           const meshApiResults: IDataProductResult[] = await this._dataMeshApiClient.searchCatalog(searchString)
           results = [...results, ...meshApiResults]
@@ -50,9 +44,6 @@ export default class Catalog {
     let results: string[] = []
     for (const connector of connectors) {
       switch (connector) {
-        case CatalogConnectors.Hardcoded:
-          results = [...results, ...HardcodedClient.autocompleteCatalog(searchString)]
-          break
         case CatalogConnectors.Datahub:
           const dhResults = await this._datahubClient.autocompleteResults(searchString)
           results = [...results, ...this._mapAutocompleteResultsToOdp(connector, dhResults)]
@@ -73,9 +64,6 @@ export default class Catalog {
     let results: IDataLayerMain[] = []
     for (const connector of connectors) {
       switch (connector) {
-        case CatalogConnectors.Hardcoded:
-          results = [...results, ...HardcodedClient.autocompleteDataLayers(keyword)]
-          break
         case CatalogConnectors.DataMeshApi:
           const meshAutocompleteDataLayersResults = await this._dataMeshApiClient.autocompleteDataLayers(keyword)
           results = [...results, ...meshAutocompleteDataLayersResults]
@@ -89,9 +77,6 @@ export default class Catalog {
   public getDataLayerById = async (id: number, connector: CatalogConnectors): Promise<IDataLayer | null> => {
     let result: IDataLayer | null = null
     switch (connector) {
-      case CatalogConnectors.Hardcoded:
-        result = HardcodedClient.getLayerById(id)
-        break
       case CatalogConnectors.DataMeshApi:
         result = await this._dataMeshApiClient.getLayerById(id)
         break
@@ -106,9 +91,6 @@ export default class Catalog {
   ): Promise<IDataProduct | null> => {
     let dataProduct: IDataProduct | null = null
     switch (connector) {
-      case CatalogConnectors.Hardcoded:
-        dataProduct = HardcodedClient.getDataProductByUuid(dataProductUuid)
-        break
       case CatalogConnectors.DataMeshApi:
         dataProduct = await this._dataMeshApiClient.getDataProductByUuid(dataProductUuid)
         break
@@ -134,16 +116,6 @@ export default class Catalog {
       case "datahub":
         // TODO: map datahub structure to ODP structure ones we know it
         mappedResults = autocompleteResults
-    }
-    return mappedResults
-  }
-
-  private _mapSearchResultsToOdp(connector: CatalogConnectors, searchResults: IDataProduct[]) {
-    let mappedResults
-    switch (connector) {
-      case CatalogConnectors.Datahub:
-        // TODO: map datahub structure to ODP structure ones we know it
-        mappedResults = searchResults
     }
     return mappedResults
   }

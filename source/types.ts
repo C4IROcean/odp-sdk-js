@@ -1,8 +1,3 @@
-export const DATA_PRODUCTS_META: IDataProductMeta[] = []
-
-export const DATA_LAYERS: IDataLayer[] = []
-
-export const DATA_PRODUCTS_TAGS_INDEX: string[] = []
 export interface IIdTokenClaims {
   acr: string
   at_hash: string
