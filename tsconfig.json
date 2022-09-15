@@ -1,19 +1,18 @@
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"target": "es6",
-		"noImplicitAny": false,
-		"alwaysStrict": true,
-		"noUnusedLocals": false,
-		"sourceMap": true,
-		"outDir": "dist",
-		"declaration": true,
-		"typeRoots": ["node_modules/@types/"],
-		"lib": ["es2019", "dom"],
-		"resolveJsonModule": true,
-		"skipLibCheck": true,
-		"esModuleInterop": true
-	},
-	"include": ["source/**/*"],
-	"exclude": ["node_modules", "tests", "dist"]
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "target": "es6",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "lib": ["es2019", "dom"],
+    "typeRoots": ["node_modules/@types/"]
+  },
+  "include": ["source/**/*"],
+  "exclude": ["node_modules", "tests", "dist"]
 }
