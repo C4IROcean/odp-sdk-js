@@ -5,11 +5,12 @@
 
 [![Build Status](https://dev.azure.com/oceandatafoundation/ODP/_apis/build/status/ODP-JavaScript-SDK-CI?branchName=master)](https://dev.azure.com/oceandatafoundation/ODP/_build/latest?definitionId=10&branchName=master)
 
-**This library is under active development, and the API is unstable until we publish v1.0.0**
-The ODP js library provides convenient access to Ocean Data Platform through the [Cognite API](https://doc.cognitedata.com/dev/) from
+**This library is under active development, and the API is unstable until we publish v1.0.0** The ODP js library
+provides convenient access to Ocean Data Platform through the [Cognite API](https://doc.cognitedata.com/dev/) from
 applications written in client- or server-side JavaScript.
 
-The SDK supports authentication through api-keys (_for server-side applications_) and bearer tokens (for web applications).
+The SDK supports authentication through api-keys (_for server-side applications_) and bearer tokens (for web
+applications).
 
 ## Installation
 
@@ -26,13 +27,13 @@ npm install odp-sdk --save
 ## Usage
 
 ```js
-const { ODPClient } = require("odp-sdk");
+const { ODPClient } = require("odp-sdk")
 ```
 
 ### Using ES modules
 
 ```js
-import { ODPClient } from "odp-sdk";
+import { ODPClient } from "odp-sdk"
 ```
 
 ### Using typescript
@@ -43,50 +44,17 @@ The SDK is written in native typescript, so no extra types needs to be defined.
 
 ### Web
 
-Get temperatures for a given provider
-
-```js
-import { ODPClient } from "odp-sdk";
-
-async function quickstart() {
-	const client = new ODPClient({ appId: "YOUR APPLICATION NAME" });
-	client.loginWithOAuth();
-
-	const casts = await client.casts.getCastsCount({
-		year: 2018,
-	});
-}
-quickstart();
-```
-
 ### Backend
-
-```js
-const { ODPClient } = require("odp-sdk");
-
-async function quickstart() {
-	const client = new ODPClient({ appId: "YOUR APPLICATION NAME" });
-	client.loginWithApiKey({
-		apiKey: "YOUR_SECRET_API_KEY",
-	});
-
-	const casts = await client.casts.getCastsCount({
-		year: 2018,
-	});
-}
-quickstart();
-```
 
 ## Documentation
 
--   [SDK documentation](./docs/README.md)
--   [API documentation](https://doc.cognitedata.com)
--   [API reference documentation](https://doc.cognitedata.com/api/v1)
+- [SDK documentation](./docs/README.md)
+- [API documentation](https://doc.cognitedata.com)
+- [API reference documentation](https://doc.cognitedata.com/api/v1)
 
 ## Samples
 
--   [Casts](./samples/casts.ts)
--   [Marine regions](./samples/marineRegions.ts)
+- [Marine regions](./samples/marineRegions.ts)
 
 ## Development
 
