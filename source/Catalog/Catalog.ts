@@ -1,23 +1,17 @@
 import { Auth } from "./../auth"
 import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult } from "./../types"
-import DataHubClient from "./Connectors/DataHubClient"
 import DataMeshApiClient from "./Connectors/DataMeshApiClient"
 
 export enum CatalogConnectors {
-  Datahub = "datahub",
   DataMeshApi = "datameshapi",
 }
-
 interface ICatalogOptions {
   auth: Auth
 }
-
 export default class Catalog {
-  private _datahubClient: DataHubClient
   private _dataMeshApiClient: DataMeshApiClient
 
   public constructor(options: ICatalogOptions) {
-    this._datahubClient = DataHubClient.getDatahubClient(options)
     this._dataMeshApiClient = DataMeshApiClient.getDataMeshApiClient(options)
   }
 
@@ -32,9 +26,6 @@ export default class Catalog {
           const meshApiResults: IDataProductResult[] = await this._dataMeshApiClient.searchCatalog(searchString)
           results = [...results, ...meshApiResults]
           break
-        case CatalogConnectors.Datahub:
-          results = await this._datahubClient.searchFullText("DATASET", searchString)
-          break
       }
     }
     return results
@@ -44,10 +35,6 @@ export default class Catalog {
     let results: string[] = []
     for (const connector of connectors) {
       switch (connector) {
-        case CatalogConnectors.Datahub:
-          const dhResults = await this._datahubClient.autocompleteResults(searchString)
-          results = [...results, ...this._mapAutocompleteResultsToOdp(connector, dhResults)]
-          break
         case CatalogConnectors.DataMeshApi:
           const psAutocompleteResults = await this._dataMeshApiClient.autocompleteCatalog(searchString)
           results = [...results, ...psAutocompleteResults]
@@ -68,7 +55,6 @@ export default class Catalog {
           const meshAutocompleteDataLayersResults = await this._dataMeshApiClient.autocompleteDataLayers(keyword)
           results = [...results, ...meshAutocompleteDataLayersResults]
           break
-        // TODO: add datahub option to find displayable dataproducts
       }
     }
     return results
@@ -80,7 +66,6 @@ export default class Catalog {
       case CatalogConnectors.DataMeshApi:
         result = await this._dataMeshApiClient.getLayerById(id)
         break
-      // TODO: add datahub option to find displayable dataproducts
     }
     return result
   }
@@ -94,7 +79,6 @@ export default class Catalog {
       case CatalogConnectors.DataMeshApi:
         dataProduct = await this._dataMeshApiClient.getDataProductByUuid(dataProductUuid)
         break
-      // TODO: add datahub option to get full metadata
     }
     return dataProduct
   }
@@ -105,18 +89,7 @@ export default class Catalog {
       case CatalogConnectors.DataMeshApi:
         dataProducts = await this._dataMeshApiClient.getAllDataProducts()
         break
-      // TODO: add datahub option to get full metadata
     }
     return dataProducts
-  }
-
-  private _mapAutocompleteResultsToOdp(connector: CatalogConnectors, autocompleteResults: any) {
-    let mappedResults
-    switch (connector) {
-      case "datahub":
-        // TODO: map datahub structure to ODP structure ones we know it
-        mappedResults = autocompleteResults
-    }
-    return mappedResults
   }
 }
