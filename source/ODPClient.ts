@@ -1,61 +1,26 @@
 import { AuthenticationResult, BrowserAuthOptions } from "@azure/msal-browser"
-import { ClientOptions, CogniteClient } from "@cognite/sdk"
 import log from "loglevel"
 import { Auth } from "./auth"
 import Catalog from "./Catalog/Catalog"
-import { IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult, IIdTokenClaims } from "./types"
+import { IAuthTokens, IDataLayer, IDataLayerMain, IDataProduct, IDataProductResult, IIdTokenClaims } from "./types"
 
-// This client id only allows for certain auth_redirects, ideally you'll have a client id per app.
-// Contact us if this is your use case.
-const ODP_SDK_CLIENT_ID = "b2a2d339-e785-4213-a773-8b289abd2199" // B2C app reg: ODP SDKs
-
-type RequiredConfig = Pick<ClientOptions, "appId">
-type OptionalConfig = Partial<Omit<ClientOptions, keyof RequiredConfig | "baseUrl">> &
-  Partial<{
-    baseUrl: "https://api.cognitedata.com" | "https://westeurope-1.cognitedata.com"
-    logLevel: log.LogLevelDesc
-  }>
-
-interface IAuthTokens {
-  accessToken: string
-  idToken: string
-  idTokenClaims: IIdTokenClaims
-  authority: string
-  scopes: string[]
+type OdpClientConfig = {
+  logLevel: log.LogLevelDesc
 }
 
 type AuthListenersT = (token?: IAuthTokens) => void
 
-const defaultOptions: { project: string; apiKeyMode: boolean; baseUrl: string } = {
-  project: "odp",
-  apiKeyMode: false,
-  baseUrl: "https://api.cognitedata.com",
-}
-
-export default class ODPClient extends CogniteClient {
+export default class ODPClient {
   private authResult: AuthenticationResult | undefined
   private listeners: AuthListenersT[] = []
 
   private auth: Auth
   private _catalog: Catalog
 
-  public constructor(options: RequiredConfig & OptionalConfig, authConfig: BrowserAuthOptions) {
-    super({
-      ...defaultOptions,
-      getToken: async () => {
-        const token = await this.auth.handleRedirectAuth()
-        if (!token) throw new Error("Could not retrieve token.")
-        if (this.authResult?.uniqueId !== token?.uniqueId) {
-          this.authStateUpdated(token)
-        }
-        return token.accessToken
-      },
-      ...options,
-    })
-
+  public constructor(options: OdpClientConfig, authConfig: BrowserAuthOptions) {
     log.setLevel(options.logLevel ?? log.levels.SILENT)
 
-    this.auth = new Auth(options.baseUrl || defaultOptions.baseUrl, {
+    this.auth = new Auth({
       redirectUri: "http://localhost:3000/", // This should be overwritten!
       knownAuthorities: ["oceandataplatform.b2clogin.com"],
       authority:
@@ -82,6 +47,14 @@ export default class ODPClient extends CogniteClient {
       authority: this.authResult.authority,
       scopes: this.authResult.scopes,
     }
+  }
+
+  public async authenticate() {
+    if (!this.authResult) {
+      this.authResult = await this.auth.handleRedirectAuth()
+      return this.authTokens
+    }
+    return this.authTokens
   }
 
   public unauthorizeUser() {

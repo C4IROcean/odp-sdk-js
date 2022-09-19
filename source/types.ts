@@ -22,6 +22,13 @@ export interface IIdTokenClaims {
   upn: string
   ver: string
 }
+export interface IAuthTokens {
+  accessToken: string
+  idToken: string
+  idTokenClaims: IIdTokenClaims
+  authority: string
+  scopes: string[]
+}
 
 // types used in app-odp
 export enum DataSources {

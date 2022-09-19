@@ -47,12 +47,9 @@ export type AuthResponseT = AuthenticatedResponseT | UnauthenticatedResponseT
  * Auth class
  */
 export class Auth {
-  private audience: string
   private _msalInstance: PublicClientApplication
 
-  public constructor(audience: string, authConfig: BrowserAuthOptions) {
-    this.audience = audience
-
+  public constructor(authConfig: BrowserAuthOptions) {
     this._msalInstance = new PublicClientApplication({
       auth: authConfig,
       cache: {
@@ -117,13 +114,7 @@ export class Auth {
 
     const accessTokenRequest = {
       account,
-      scopes: [
-        "openid",
-        "profile",
-        "email",
-        // "offline_access",
-        `${this.audience}/user_impersonation`,
-      ],
+      scopes: ["openid", "profile", "email"],
     }
 
     const loginWithRedirect = () => {
