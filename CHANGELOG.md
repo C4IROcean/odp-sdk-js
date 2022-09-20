@@ -1,4 +1,8 @@
-## 0.2.9 (2022-02-15)
+## 0.3.0 (2022-09-19)
+
+- Remove dependency on CDF JS SDK
+
+## 0.2.9 (2022-09-15)
 
 - Deprecate and remove old and unused casts and marine regions functionalities
 
